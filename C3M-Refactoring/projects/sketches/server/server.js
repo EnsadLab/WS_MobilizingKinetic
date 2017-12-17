@@ -17,23 +17,23 @@ function SketchesServer()
     };
 
     this.onConnect = function(){
-        console.log("SketchesServer.prototype.onConnect");
+        console.log("SketchesServer.onConnect");
     };
 
     this.onClientConnect = function(){
-        console.log("SketchesServer.prototype.onClientConnect");
+        console.log("SketchesServer.onClientConnect");
     };
 
     this.start = function()
     {
-        console.log("SketchesServer.prototype.start");
+        console.log("SketchesServer.start");
     };
     /**
     * quit allows to finish every process that has been registered (listners etc.) to clean up memory when we switch to another subserver
     */
     this.quit = function()
     {
-        console.log("SketchesServer.prototype.quit");
+        console.log("SketchesServer.quit");
     };
 
 };

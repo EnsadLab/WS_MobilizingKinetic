@@ -5,7 +5,7 @@ function client()
 
     var M, R;
     var finalObject;
-   
+
 
     this.preLoad = function(loader)
     {
@@ -49,7 +49,7 @@ function client()
         //1 model mode
         //3 wireframe
         this.videoMapping.setMode(2); //2
-        
+
         //your stuff here
         EasyContext._renderer.setCurrentScene("virtual");
 
@@ -60,8 +60,8 @@ function client()
         light.setIntensity(2);
         EasyContext._renderer.addToCurrentScene(light);
 
-        
-        
+
+
         //add all video sketches that are of category "video"
         var sketches = SketchManager.GetSketches();
         for (var s in sketches)
@@ -78,6 +78,8 @@ function client()
                 sketch.setup();
             } 
         }
+
+
     };
 
     this.onConnect = function(){
@@ -87,6 +89,7 @@ function client()
 
         //we activate all sketches
         var sketches = SketchManager.GetSketches();
+        
         for (var s in sketches)
         {
             var sketch = sketches[s];
@@ -94,6 +97,12 @@ function client()
             {
                 sketch.sketch.on(); //by default all sketches are on
             }
+
+            if(sketch.onConnect){
+                console.log("forward onConnect to", sketch);
+                sketch.onConnect(this.genericClient.pubsub.getID());
+            }
+
         }
     };
 
@@ -116,9 +125,9 @@ function client()
 
     this.onNext = function()
     {
-        
+
     }
 
-    
+
 
 }
