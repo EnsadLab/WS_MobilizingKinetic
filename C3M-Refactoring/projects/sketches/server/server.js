@@ -1,18 +1,19 @@
 function SketchesServer()
 {
     this.genericServer = new GenericServer();
-
     this.genericServer.name = "Sketches";
     //WARNING! this MUST have the same name than the actual folder
     this.genericServer.folderName = "sketches";
 
-    this.setup = function(){
-
+    this.setup = function()
+    {
+        //not called yet
+        console.log("SketchesServer.setup");
     };
 
     this.update = function()
     {
- 
+        console.log("SketchesServer.update");
     };
 
     this.onConnect = function(){

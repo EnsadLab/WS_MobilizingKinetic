@@ -9,9 +9,9 @@ function SketchPersistence()
 
     this.setup = function()
     { 
+        //FIXME : use the pubsub encapsulation in this.sketch
         this.sketch.pubsub.subscribe("/tag/position",this.onTagPosition.bind(this));
         this.sketch.pubsub.subscribe("/user/profile",this.onUserProfile.bind(this));
-
     };
     
     this.update = function()

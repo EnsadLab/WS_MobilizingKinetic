@@ -11,8 +11,7 @@ function SketchEmptyVideo()
     {
         //put here all your sketch scene and logic creation 
         console.log("SketchEmptyVideo setup ");
-        //hide in underlayer :
-        this.sketch.pubsub.subscribe("/tag/position",this.onTagPosition.bind(this));
+        this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
         var R = EasyContext._renderer;
         
         //color cubes scene
@@ -32,11 +31,13 @@ function SketchEmptyVideo()
     
     this.update = function()
     {
+        //put your process in there
     };
 
+    //add your callbacks below
     this.onTagPosition = function(params)
     {
-       
+       console.log("tag position received ", params);
         //do something based on the tag position received
         //params.id
         //params.x

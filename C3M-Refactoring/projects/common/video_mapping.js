@@ -710,8 +710,8 @@ function VideoMapping(params){
         var height = warping_height;
         var lastw = width - 1;
         var lasth = height - 1;
-        let grid = [];
-        let a = 0;
+        var grid = [];
+        var a = 0;
         for (var h = 0; h < height; ++h) {
             for (var w = 0; w < width; ++w) {
                 

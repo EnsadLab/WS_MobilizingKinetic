@@ -13,6 +13,7 @@ function SketchEmptyServer()
     
     this.update = function()
     {
+        
     };
 };
 
