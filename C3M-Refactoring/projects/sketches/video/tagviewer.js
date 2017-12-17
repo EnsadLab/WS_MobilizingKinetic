@@ -11,6 +11,7 @@ function SketchTagViewer()
     {
         //put here all your sketch scene and logic creation 
         console.log("SketchTagViewer setup ");
+        //hide in underlayer :
         this.sketch.pubsub.subscribe("/tag/position",this.onTagPosition.bind(this));
         var R = EasyContext._renderer;
         
