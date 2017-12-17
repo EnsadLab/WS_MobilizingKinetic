@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+
+        <meta name="viewport" content="user-scalable=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+
+        <link rel='stylesheet' href='../../../css/style.css' />
+
+        <script src="../../../vendor/three.min.js"></script>
+        <script src="../../../vendor/opentype.min.js"></script>
+        <script src="../../../vendor/Mobilizing.js"></script>
+
+        <script src="../../common/generic_client.js"></script>
+        <script src="../../common/video_mapping.js"></script>
+        <script src="../../espace_common/espace.js"></script>
+
+        <script src="Rotate.js"></script>
+        <script src="client.js"></script>
+
+        <script>
+            var c = new Mobilizing.Context();
+            var s = new client();
+            c.addComponent(s);
+            var runner = new Mobilizing.Runner({ context: c });
+        </script>
+
+    </head>
+    <body>
+    </body>
+</html>

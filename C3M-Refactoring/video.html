@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+
+        <meta name="viewport" content="user-scalable=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+
+        <link rel='stylesheet' href='css/style.css' />
+
+        <script src="vendor/three.min.js"></script>
+        <script src="vendor/opentype.min.js"></script>
+        <script src="vendor/Mobilizing.js"></script>
+        <script src="vendor/Tween.js"></script>
+
+        <script src="projects/common/generic_client.js"></script>
+        <script src="client_video_index.js"></script>
+
+        <script>
+            //var runner = new Mobilizing.Runner(new script());
+            var c = new Mobilizing.Context(); //create a context
+            var s = new script();
+            c.addComponent(s); //add the user script
+            //run the context
+            var runner = new Mobilizing.Runner({ context: c });
+        </script>
+
+    </head>
+    <body>
+    </body>
+</html>
