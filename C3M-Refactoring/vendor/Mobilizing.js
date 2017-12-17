@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('three')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'three'], factory) :
-  (factory((global.Mobilizing = global.Mobilizing || {}),global.THREE));
-}(this, (function (exports,THREE$1) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('three')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'three'], factory) :
+	(factory((global.Mobilizing = {}),global.THREE));
+}(this, (function (exports,THREE) { 'use strict';
 
 	/**
 	 * Method to retreive a value from an object if available, or a default value
@@ -90,137 +90,15 @@
 	 * url french: http://www.philten.com/fr-xmlhttprequest-image
 	 * url english: http://www.philten.com/us-xmlhttprequest-image
 	 */
+	function noop() {
+	    return null;
+	}
 
-	var classCallCheck = function (instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	};
+	// module exports
 
-	var createClass = function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];
-	      descriptor.enumerable = descriptor.enumerable || false;
-	      descriptor.configurable = true;
-	      if ("value" in descriptor) descriptor.writable = true;
-	      Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	  return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	    if (staticProps) defineProperties(Constructor, staticProps);
-	    return Constructor;
-	  };
-	}();
-
-
-
-
-
-
-
-	var get = function get(object, property, receiver) {
-	  if (object === null) object = Function.prototype;
-	  var desc = Object.getOwnPropertyDescriptor(object, property);
-
-	  if (desc === undefined) {
-	    var parent = Object.getPrototypeOf(object);
-
-	    if (parent === null) {
-	      return undefined;
-	    } else {
-	      return get(parent, property, receiver);
-	    }
-	  } else if ("value" in desc) {
-	    return desc.value;
-	  } else {
-	    var getter = desc.get;
-
-	    if (getter === undefined) {
-	      return undefined;
-	    }
-
-	    return getter.call(receiver);
-	  }
-	};
-
-	var inherits = function (subClass, superClass) {
-	  if (typeof superClass !== "function" && superClass !== null) {
-	    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-	  }
-
-	  subClass.prototype = Object.create(superClass && superClass.prototype, {
-	    constructor: {
-	      value: subClass,
-	      enumerable: false,
-	      writable: true,
-	      configurable: true
-	    }
-	  });
-	  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	};
-
-
-
-
-
-
-
-
-
-
-
-	var possibleConstructorReturn = function (self, call) {
-	  if (!self) {
-	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	  }
-
-	  return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	};
-
-
-
-
-
-	var slicedToArray = function () {
-	  function sliceIterator(arr, i) {
-	    var _arr = [];
-	    var _n = true;
-	    var _d = false;
-	    var _e = undefined;
-
-	    try {
-	      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-	        _arr.push(_s.value);
-
-	        if (i && _arr.length === i) break;
-	      }
-	    } catch (err) {
-	      _d = true;
-	      _e = err;
-	    } finally {
-	      try {
-	        if (!_n && _i["return"]) _i["return"]();
-	      } finally {
-	        if (_d) throw _e;
-	      }
-	    }
-
-	    return _arr;
-	  }
-
-	  return function (arr, i) {
-	    if (Array.isArray(arr)) {
-	      return arr;
-	    } else if (Symbol.iterator in Object(arr)) {
-	      return sliceIterator(arr, i);
-	    } else {
-	      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-	    }
-	  };
-	}();
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var AudioBuffer = function () {
 	    /**
@@ -231,10 +109,12 @@
 	     @param {RendererAudio} params.renderer The audio renderer
 	     @param {ArrayBuffer} params.arrayBuffer the raw arraybuffer, already loaded, to give to the audio context
 	     @param {Function} params.decodedCallback the callback function to call when Audio Context has decoded the sound file's raw  arrayBuffer
-	     @example 
+	     @example
 	     */
 	    function AudioBuffer(params) {
-	        classCallCheck(this, AudioBuffer);
+	        var _this = this;
+
+	        _classCallCheck(this, AudioBuffer);
 
 	        this.renderer = getOrDefault(params, "renderer", undefined);
 	        this.arrayBuffer = getOrDefault(params, "arrayBuffer", undefined);
@@ -242,9 +122,9 @@
 
 	        if (this.arrayBuffer) {
 	            this.renderer.audioContext.decodeAudioData(this.arrayBuffer, function (buffer) {
-	                this.buffer = buffer;
-	                this.decodedCallback();
-	            }.bind(this));
+	                _this.buffer = buffer;
+	                _this.decodedCallback();
+	            });
 	        }
 	    }
 
@@ -255,16 +135,21 @@
 	    */
 
 
-	    createClass(AudioBuffer, [{
+	    _createClass(AudioBuffer, [{
 	        key: "getInternalAudioBuffer",
 	        value: function getInternalAudioBuffer() {
 	            return this.buffer;
 	        }
 	    }]);
+
 	    return AudioBuffer;
 	}();
 
 	// module exports
+
+	var _createClass$3 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$3(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Base = function () {
 
@@ -278,7 +163,7 @@
 	     * @param {Context} params.context The Mobilizing Context
 	    */
 	    function Base(params) {
-	        classCallCheck(this, Base);
+	        _classCallCheck$3(this, Base);
 
 	        /**
 	        * A reference to the Mobilizing context
@@ -300,7 +185,7 @@
 	    */
 
 
-	    createClass(Base, [{
+	    _createClass$3(Base, [{
 	        key: "setContext",
 	        value: function setContext(context) {
 	            this._context = context;
@@ -358,10 +243,15 @@
 	            return this._id;
 	        }
 	    }]);
+
 	    return Base;
 	}();
 
 	// module exports
+
+	var _createClass$4 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$4(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var EventEmitter = function () {
 	    /**
@@ -373,7 +263,7 @@
 	    * @param {Mixed} [params.scope] The scope to use for callbacks, should usually be set to the class instance using the EventEmitter. Defaults to the EventEmitter instance if not specified
 	    */
 	    function EventEmitter(params) {
-	        classCallCheck(this, EventEmitter);
+	        _classCallCheck$4(this, EventEmitter);
 
 	        this._scope = getOrDefault(params, "scope", this);
 
@@ -390,7 +280,7 @@
 	    */
 
 
-	    createClass(EventEmitter, [{
+	    _createClass$4(EventEmitter, [{
 	        key: "on",
 	        value: function on(type, callback) {
 	            if (typeof this.listeners[type] === "undefined") {
@@ -418,7 +308,7 @@
 
 	            if (this.listeners[type] instanceof Array) {
 	                if (typeof callback === 'undefined') {
-	                    this.listeners[type] = {};
+	                    this.listeners[type] = [];
 	                } else {
 	                    listeners = this.listeners[type];
 	                    for (var i = 0, len = listeners.length; i < len; i++) {
@@ -464,13 +354,22 @@
 	            return this;
 	        }
 	    }]);
+
 	    return EventEmitter;
 	}();
 
 	// module exports
 
+	var _createClass$2 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$2(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$1(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$1(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Component = function (_Base) {
-	    inherits(Component, _Base);
+	    _inherits$1(Component, _Base);
 
 	    /**
 	     * The generic componment class
@@ -483,7 +382,7 @@
 	     * @param {Context} params.context The Mobilizing Context
 	    */
 	    function Component(params) {
-	        classCallCheck(this, Component);
+	        _classCallCheck$2(this, Component);
 
 	        /**
 	        * Whether the component is active or not
@@ -491,7 +390,7 @@
 	        * @property {Boolean} _active
 	        * @private
 	        */
-	        var _this = possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this, params));
+	        var _this = _possibleConstructorReturn$1(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this, params));
 
 	        _this._active = false;
 
@@ -522,7 +421,7 @@
 
 	    /**
 	    * Calls the setup if it has not already been called
-	    * This method should not be called 
+	    * This method should not be called
 	    * This is where all the initialization (such as adding event listeners)should be done
 	    * It is called automatically by an internal Mobilizing mechanism and should thus not be called directly
 	    *
@@ -534,7 +433,7 @@
 	        if(!this._setupDone){
 	            this._setupDone = true;
 	             this.setup();
-	        }   
+	        }
 	    }
 	     */
 
@@ -548,7 +447,7 @@
 	    */
 
 
-	    createClass(Component, [{
+	    _createClass$2(Component, [{
 	        key: 'setup',
 	        value: function setup() {
 	            if (!this._setupDone) {
@@ -562,7 +461,7 @@
 	        * The preLoad is designed to be called before any other method, even setup.
 	        * In the case of user scripts, it is used to preload all needed datas before the setup (pictures, font, etc.)
 	        * It is called automatically by an internal Mobilizing mechanism and should thus not be called directly
-	        * 
+	        *
 	        * @method preLoad
 	        */
 
@@ -657,7 +556,7 @@
 
 	        /**
 	        * Adds a component to this chained component array
-	        * 
+	        *
 	        * @method chain
 	        * @param {Component} component the component to chain
 	        */
@@ -670,7 +569,7 @@
 
 	        /**
 	        * Returns the array of attached children components
-	        * 
+	        *
 	        * @method getChainedComponents
 	        * @return {Array} children arrays
 	        */
@@ -681,31 +580,42 @@
 	            return this._nexts;
 	        }
 	    }]);
+
 	    return Component;
 	}(Base);
 
 	// module exports
 
+	var _createClass$1 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$1(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var AudioSource = function (_Component) {
-	    inherits(AudioSource, _Component);
+	    _inherits(AudioSource, _Component);
 
 	    /**
-	     * 
+	     *
 	     * AudioSource Class. Encapsulates the concept of Audio source, a sound-emitting entity with a given position in space. requires the Web Audio API.
-	     *  
+	     *
 	     * @class AudioSource
 	     * @constructor
 	     * @extends Component
 	     * @param {Object} params the parameters object
-	     * @param {RendererAudio} params.renderer The AudioRenderer 
+	     * @param {RendererAudio} params.renderer The AudioRenderer
 	    */
 	    function AudioSource(params) {
-	        classCallCheck(this, AudioSource);
+	        _classCallCheck$1(this, AudioSource);
 
-	        var _this = possibleConstructorReturn(this, (AudioSource.__proto__ || Object.getPrototypeOf(AudioSource)).call(this, params));
+	        var _this = _possibleConstructorReturn(this, (AudioSource.__proto__ || Object.getPrototypeOf(AudioSource)).call(this, params));
 
 	        _this.renderer = getOrDefault(params, "renderer", undefined);
-	        _this.panner;
+	        // this.panner;
 
 	        if (_this.renderer.audioContext !== undefined) {
 	            _this.panner = _this.renderer.audioContext.createPanner();
@@ -730,7 +640,7 @@
 	    */
 
 
-	    createClass(AudioSource, [{
+	    _createClass$1(AudioSource, [{
 	        key: "setRefDistance",
 	        value: function setRefDistance(val) {
 	            this.panner.refDistance = val;
@@ -830,13 +740,13 @@
 	    }, {
 	        key: "on",
 	        value: function on() {
-	            get(AudioSource.prototype.__proto__ || Object.getPrototypeOf(AudioSource.prototype), "on", this).call(this);
+	            _get(AudioSource.prototype.__proto__ || Object.getPrototypeOf(AudioSource.prototype), "on", this).call(this);
 	            this.play();
 	        }
 	    }, {
 	        key: "off",
 	        value: function off() {
-	            get(AudioSource.prototype.__proto__ || Object.getPrototypeOf(AudioSource.prototype), "off", this).call(this);
+	            _get(AudioSource.prototype.__proto__ || Object.getPrototypeOf(AudioSource.prototype), "off", this).call(this);
 	            this.stop();
 	        }
 
@@ -901,20 +811,32 @@
 	            }
 	        }
 	    }]);
+
 	    return AudioSource;
 	}(Component);
 
 	// module exports
 
+	var _createClass$5 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$1 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$5(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$2(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$2(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Color$1 = function (_THREE$Color) {
-	  inherits(Color$$1, _THREE$Color);
+	  _inherits$2(Color$$1, _THREE$Color);
 
 	  function Color$$1() {
-	    classCallCheck(this, Color$$1);
-	    return possibleConstructorReturn(this, (Color$$1.__proto__ || Object.getPrototypeOf(Color$$1)).apply(this, arguments));
+	    _classCallCheck$5(this, Color$$1);
+
+	    return _possibleConstructorReturn$2(this, (Color$$1.__proto__ || Object.getPrototypeOf(Color$$1)).apply(this, arguments));
 	  }
 
-	  createClass(Color$$1, [{
+	  _createClass$5(Color$$1, [{
 	    key: "setTo",
 
 
@@ -985,8 +907,8 @@
 
 	  }, {
 	    key: "copy",
-	    value: function copy(color) {
-	      get(Color$$1.prototype.__proto__ || Object.getPrototypeOf(Color$$1.prototype), "copy", this).call(this);
+	    value: function copy() /*color*/{
+	      _get$1(Color$$1.prototype.__proto__ || Object.getPrototypeOf(Color$$1.prototype), "copy", this).call(this);
 	    }
 
 	    /**
@@ -1152,8 +1074,9 @@
 	      return new Color$$1(Math.random(), Math.random(), Math.random());
 	    }
 	  }]);
+
 	  return Color$$1;
-	}(THREE$1.Color);
+	}(THREE.Color);
 
 	/**
 	* Color.green, a green Color Object
@@ -1262,29 +1185,43 @@
 
 	//module exports
 
+	function _classCallCheck$6(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$3(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$3(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Euler$1 = function (_THREE$Euler) {
-	  inherits(Euler$$1, _THREE$Euler);
+	  _inherits$3(Euler$$1, _THREE$Euler);
 
 	  function Euler$$1() {
-	    classCallCheck(this, Euler$$1);
-	    return possibleConstructorReturn(this, (Euler$$1.__proto__ || Object.getPrototypeOf(Euler$$1)).apply(this, arguments));
+	    _classCallCheck$6(this, Euler$$1);
+
+	    return _possibleConstructorReturn$3(this, (Euler$$1.__proto__ || Object.getPrototypeOf(Euler$$1)).apply(this, arguments));
 	  }
 
 	  return Euler$$1;
-	}(THREE$1.Euler);
+	}(THREE.Euler);
 
 	// module exports
 
+	function _classCallCheck$7(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$4(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$4(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Matrix3$1 = function (_THREE$Matrix) {
-	  inherits(Matrix3$$1, _THREE$Matrix);
+	  _inherits$4(Matrix3$$1, _THREE$Matrix);
 
 	  function Matrix3$$1() {
-	    classCallCheck(this, Matrix3$$1);
-	    return possibleConstructorReturn(this, (Matrix3$$1.__proto__ || Object.getPrototypeOf(Matrix3$$1)).apply(this, arguments));
+	    _classCallCheck$7(this, Matrix3$$1);
+
+	    return _possibleConstructorReturn$4(this, (Matrix3$$1.__proto__ || Object.getPrototypeOf(Matrix3$$1)).apply(this, arguments));
 	  }
 
 	  return Matrix3$$1;
-	}(THREE$1.Matrix3);
+	}(THREE.Matrix3);
 
 	/**
 	@method transpose
@@ -1361,16 +1298,23 @@
 
 	// module exports
 
+	function _classCallCheck$8(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$5(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$5(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Matrix4$1 = function (_THREE$Matrix) {
-	  inherits(Matrix4$$1, _THREE$Matrix);
+	  _inherits$5(Matrix4$$1, _THREE$Matrix);
 
 	  function Matrix4$$1() {
-	    classCallCheck(this, Matrix4$$1);
-	    return possibleConstructorReturn(this, (Matrix4$$1.__proto__ || Object.getPrototypeOf(Matrix4$$1)).apply(this, arguments));
+	    _classCallCheck$8(this, Matrix4$$1);
+
+	    return _possibleConstructorReturn$5(this, (Matrix4$$1.__proto__ || Object.getPrototypeOf(Matrix4$$1)).apply(this, arguments));
 	  }
 
 	  return Matrix4$$1;
-	}(THREE$1.Matrix4);
+	}(THREE.Matrix4);
 
 	/**
 	@method set
@@ -1621,16 +1565,23 @@
 
 	// module exports
 
+	function _classCallCheck$9(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$6(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$6(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Quaternion$1 = function (_THREE$Quaternion) {
-	  inherits(Quaternion$$1, _THREE$Quaternion);
+	  _inherits$6(Quaternion$$1, _THREE$Quaternion);
 
 	  function Quaternion$$1() {
-	    classCallCheck(this, Quaternion$$1);
-	    return possibleConstructorReturn(this, (Quaternion$$1.__proto__ || Object.getPrototypeOf(Quaternion$$1)).apply(this, arguments));
+	    _classCallCheck$9(this, Quaternion$$1);
+
+	    return _possibleConstructorReturn$6(this, (Quaternion$$1.__proto__ || Object.getPrototypeOf(Quaternion$$1)).apply(this, arguments));
 	  }
 
 	  return Quaternion$$1;
-	}(THREE$1.Quaternion);
+	}(THREE.Quaternion);
 
 	/**
 	@method set
@@ -1754,6 +1705,10 @@
 
 	// module exports
 
+	var _createClass$6 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$10(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	var Rect = function () {
 	    /**
 	    * Rect hold a simple rectangle representation with x & y coordinates and width & height.
@@ -1766,7 +1721,7 @@
 	    * @param {float} height
 	    */
 	    function Rect(x, y, width, height) {
-	        classCallCheck(this, Rect);
+	        _classCallCheck$10(this, Rect);
 
 	        this.x = x;
 	        this.y = y;
@@ -1781,9 +1736,9 @@
 	    */
 
 
-	    createClass(Rect, [{
+	    _createClass$6(Rect, [{
 	        key: "toArray",
-	        value: function toArray$$1() {
+	        value: function toArray() {
 	            return [this.x, this.y, this.width, this.height];
 	        }
 
@@ -1802,20 +1757,30 @@
 	            this.height = array[3];
 	        }
 	    }]);
+
 	    return Rect;
 	}();
 
 	// module exports
 
+	var _createClass$7 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$11(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$7(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$7(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Vector2$1 = function (_THREE$Vector) {
-	  inherits(Vector2$$1, _THREE$Vector);
+	  _inherits$7(Vector2$$1, _THREE$Vector);
 
 	  function Vector2$$1() {
-	    classCallCheck(this, Vector2$$1);
-	    return possibleConstructorReturn(this, (Vector2$$1.__proto__ || Object.getPrototypeOf(Vector2$$1)).apply(this, arguments));
+	    _classCallCheck$11(this, Vector2$$1);
+
+	    return _possibleConstructorReturn$7(this, (Vector2$$1.__proto__ || Object.getPrototypeOf(Vector2$$1)).apply(this, arguments));
 	  }
 
-	  createClass(Vector2$$1, [{
+	  _createClass$7(Vector2$$1, [{
 	    key: 'rotate90CW',
 	    value: function rotate90CW() {
 	      var memX = this.x;
@@ -1832,8 +1797,9 @@
 	      this.y = memX;
 	    }
 	  }]);
+
 	  return Vector2$$1;
-	}(THREE$1.Vector2);
+	}(THREE.Vector2);
 
 	/**
 	* Vector2.one returns <i>new Mobilizing.Vector2(1, 1)</i>
@@ -2086,16 +2052,23 @@
 
 	// module exports
 
+	function _classCallCheck$12(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$8(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$8(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Vector3$1 = function (_THREE$Vector) {
-	  inherits(Vector3$$1, _THREE$Vector);
+	  _inherits$8(Vector3$$1, _THREE$Vector);
 
 	  function Vector3$$1() {
-	    classCallCheck(this, Vector3$$1);
-	    return possibleConstructorReturn(this, (Vector3$$1.__proto__ || Object.getPrototypeOf(Vector3$$1)).apply(this, arguments));
+	    _classCallCheck$12(this, Vector3$$1);
+
+	    return _possibleConstructorReturn$8(this, (Vector3$$1.__proto__ || Object.getPrototypeOf(Vector3$$1)).apply(this, arguments));
 	  }
 
 	  return Vector3$$1;
-	}(THREE$1.Vector3);
+	}(THREE.Vector3);
 
 	/**
 	* Vector3.one returns <i>new Mobilizing.Vector2(1, 1, 1)</i>
@@ -2493,6 +2466,469 @@
 
 	// module exports
 
+	var _createClass$10 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$15(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Material = function () {
+	    /**
+	     * A material will give color and some effect to the surface of the 3D object.
+	     * Mobilizing.js is heavily based on the one of Three.js http://threejs.org/docs/#Reference/Materials/Material and its variations
+	     *
+	     * @class Material
+	     * @constructor
+	     * @param {Object} params an object containing all the possible parameters for this class. Use it like in the following example. Possible parameters are lisited below.
+	     * @example
+	     *     //this is how to use a parameters object in order to instanciate a Mobilizing.js object
+	     *     var mobilizingObject = new Mobilizing.Class({paramName1: value, paramName2: value});
+	     *
+	     * @param {String} [params.type="basic"] the type of the matrial, one of "basic", "projectionmapping", "phong", "line", "sprite"
+	     */
+	    function Material(params) {
+	        _classCallCheck$15(this, Material);
+
+	        params.type = getOrDefault(params, "type", "default");
+
+	        this.texture = undefined;
+
+	        switch (params.type) {
+	            case "basic":
+
+	                this._material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false /*,overdraw: true*/ });
+	                break;
+
+	            case "custom":
+
+	                this._material = new THREE.ShaderMaterial({ fragmentShader: params.fragmentShader,
+	                    vertexShader: params.vertexShader,
+	                    uniforms: params.uniforms });
+	                //this._material.lights = true; //pass the lights uniforms
+	                break;
+
+	            case "projectionmapping":
+
+	                var shader = THREE.ShaderLib.cube;
+	                var uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+
+	                shader.vertexShader = shader.vertexShader.replace("vWorldPosition = transformDirection( position, modelMatrix );", "vWorldPosition = (modelMatrix * vec4( position, 0.0 )).xyz;");
+
+	                shader.fragmentShader = shader.fragmentShader.replace("gl_FragColor = textureCube( tCube, vec3( tFlip * vWorldPosition.x, vWorldPosition.yz ) );", "vec3 viewDir = vWorldPosition-viewPosition;  gl_FragColor = textureCube( tCube, normalize(viewDir));");
+
+	                shader.fragmentShader = shader.fragmentShader.replace("uniform samplerCube tCube;", "uniform samplerCube tCube; uniform vec3 viewPosition;");
+
+	                uniforms.viewPosition = { type: 'v3', value: new THREE.Vector3(0, 0, 0) };
+
+	                this._material = new THREE.ShaderMaterial({ fragmentShader: shader.fragmentShader,
+	                    vertexShader: shader.vertexShader,
+	                    uniforms: uniforms });
+
+	                break;
+
+	            case "lambert":
+	                //vertex lit
+
+	                this._material = new THREE.MeshLambertMaterial({ color: 0xffffff,
+	                    wireframe: false,
+	                    shading: THREE.FlatShading });
+	                //this._material = new THREE.MeshLambertMaterial({ color: 0xffffff, combine: THREE.MixOperation});
+	                break;
+
+	            case "default":
+	            case "phong":
+	                this._material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+	                this._material.shading = THREE.SmoothShading;
+	                break;
+
+	            case "line":
+
+	                this._material = new THREE.LineBasicMaterial({ color: 0xffffff });
+	                break;
+
+	            case "sprite":
+
+	                this._material = new THREE.SpriteMaterial({ color: 0xffffff });
+	                break;
+
+	            default:
+
+	                this._material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false });
+	        }
+
+	        this._material.side = THREE.DoubleSide;
+	        //this._material.transparent = true;
+	        this.type = params.type;
+	        //this._material.alphaTest = 0.1;
+	    }
+
+	    /**
+	     * set the texture
+	     *
+	     * @method setTexture
+	     * @param {Texture} texture
+	     */
+
+
+	    _createClass$10(Material, [{
+	        key: 'setTexture',
+	        value: function setTexture(texture) {
+	            this.texture = texture;
+
+	            if (this.texture._texture !== undefined) {
+	                //console.log("attach texture to material");
+	                this._material.map = this.texture._texture;
+	                //this._material.needsUpdate = true;
+	            } else if (texture.cube !== undefined) {
+	                if (this.type === "projectionmapping") {
+	                    this._material.uniforms.tCube.value = texture.cube; // textureCube has been init before
+	                } else {
+	                    this._material.envMap = texture.cube;
+	                }
+	            }
+	        }
+
+	        /**
+	        * Gets the current texture
+	        *
+	        * @method getTexture
+	        * @return {Texture}
+	        */
+
+	    }, {
+	        key: 'getTexture',
+	        value: function getTexture() {
+	            return this.texture;
+	        }
+
+	        /**
+	         * @method setUniform
+	         * @param {String} name the name of the uniform to set
+	         * @param {Object} value the value of the uniform to set
+	         */
+
+	    }, {
+	        key: 'setUniform',
+	        value: function setUniform(name, value) {
+	            this._material.uniforms[name].value = value;
+	        }
+
+	        /**
+	        * @method setTransparent
+	        * @param {Boolean} trans
+	        */
+
+	    }, {
+	        key: 'setTransparent',
+	        value: function setTransparent(trans) {
+	            this._material.transparent = trans;
+	        }
+
+	        /**
+	        * @method getTransparent
+	        * @return {Boolean}
+	        */
+
+	    }, {
+	        key: 'getTransparent',
+	        value: function getTransparent() {
+	            return this._material.transparent;
+	        }
+
+	        /**
+	        * @method setColor
+	        * @param {Color} color
+	        */
+
+	    }, {
+	        key: 'setColor',
+	        value: function setColor(color) {
+	            //debug.log("material type", this._material);
+	            this._material.color = color;
+	        }
+
+	        /**
+	        * @method getColor
+	        * @return {Color}
+	        */
+
+	    }, {
+	        key: 'getColor',
+	        value: function getColor() {
+	            return this._material.color;
+	        }
+
+	        /**
+	        * @method setWireframe
+	        * @param {Boolean} wireframe
+	        */
+
+	    }, {
+	        key: 'setWireframe',
+	        value: function setWireframe(wireframe) {
+	            this._material.wireframe = wireframe;
+	        }
+
+	        /**
+	        * @method getWireframe
+	        * @return {Boolean}
+	        */
+
+	    }, {
+	        key: 'getWireframe',
+	        value: function getWireframe() {
+	            return this._material.wireframe;
+	        }
+
+	        /**
+	        * @method setOpacity
+	        * @param {float} op between 0 and 1
+	        */
+
+	    }, {
+	        key: 'setOpacity',
+	        value: function setOpacity(op) {
+	            this._material.opacity = op;
+	        }
+
+	        /**
+	        * @method getOpacity
+	        * @return {float}
+	        */
+
+	    }, {
+	        key: 'getOpacity',
+	        value: function getOpacity() {
+	            return this._material.opacity;
+	        }
+
+	        /**
+	        * @method setDoubleSided
+	        * @param {Boolean} sided
+	        */
+
+	    }, {
+	        key: 'setDoubleSided',
+	        value: function setDoubleSided(sided) {
+	            this._material.side = sided ? THREE.DoubleSide : THREE.FrontSide;
+	        }
+
+	        /**
+	        * @method getDoubleSided
+	        * @return {Boolean}
+	        */
+
+	    }, {
+	        key: 'getDoubleSided',
+	        value: function getDoubleSided() {
+	            return this._material.side === THREE.DoubleSide;
+	        }
+
+	        /**
+	        * @method setAlphaTest
+	        * @param {Number} val between 0 and 1
+	        */
+
+	    }, {
+	        key: 'setAlphaTest',
+	        value: function setAlphaTest(val) {
+	            this._material.alphaTest = val;
+	        }
+
+	        /**
+	        * @method getAlphaTest
+	        * @return {Number}
+	        */
+
+	    }, {
+	        key: 'getAlphaTest',
+	        value: function getAlphaTest() {
+	            return this._material.alphaTest;
+	        }
+
+	        /**
+	        * @method setDepthWrite
+	        * @param {Boolean}
+	        */
+
+	    }, {
+	        key: 'setDepthWrite',
+	        value: function setDepthWrite(bool) {
+	            this._material.depthWrite = bool;
+	        }
+
+	        /**
+	        * @method setDepthTest
+	        * @param {Boolean}
+	        */
+
+	    }, {
+	        key: 'setDepthTest',
+	        value: function setDepthTest(bool) {
+	            this._material.depthTest = bool;
+	        }
+
+	        /**
+	        * @method setLineWidth
+	        * @param {Number} val
+	        */
+
+	    }, {
+	        key: 'setLineWidth',
+	        value: function setLineWidth(val) {
+	            this._material.linewidth = val;
+	        }
+
+	        /**
+	        * @method getLineWidth
+	        * @return {Number}
+	        */
+
+	    }, {
+	        key: 'getLineWidth',
+	        value: function getLineWidth() {
+	            return this._material.linewidth;
+	        }
+
+	        /**
+	         * @method setShininess
+	         * @param {Number} color
+	         */
+
+	    }, {
+	        key: 'setShininess',
+	        value: function setShininess(val) {
+	            //debug.log("material type", this._material);
+	            this._material.shininess = val;
+	        }
+
+	        /**
+	         * @method getShininess
+	         * @return {Number}
+	         */
+
+	    }, {
+	        key: 'getShininess',
+	        value: function getShininess() {
+	            return this._material.shininess;
+	        }
+
+	        /**
+	         * @method setEmissiveColor
+	         * @param {Color} color
+	         */
+
+	    }, {
+	        key: 'setEmissiveColor',
+	        value: function setEmissiveColor(color) {
+	            //debug.log("material type", this._material);
+	            this._material.emissive = color;
+	        }
+
+	        /**
+	         * @method getEmissiveColor
+	         * @return {Color}
+	         */
+
+	    }, {
+	        key: 'getEmissiveColor',
+	        value: function getEmissiveColor() {
+	            return this._material.emissive;
+	        }
+
+	        /**
+	         * @method setShading
+	         * @param {String} shading one of "smooth", "flat"
+	         */
+
+	    }, {
+	        key: 'setShading',
+	        value: function setShading(shading) {
+	            this._material.shading = shading === "smooth" ? THREE.SmoothShading : THREE.FlatShading;
+	            this._material.needsUpdate = true;
+	        }
+
+	        /**
+	         * @method setSpecularColor
+	         * @param {Color} color
+	         */
+
+	    }, {
+	        key: 'setSpecularColor',
+	        value: function setSpecularColor(color) {
+	            this._material.specular = color;
+	        }
+
+	        /**
+	         * @method getSpecularColor
+	         * @return {Color}
+	         */
+
+	    }, {
+	        key: 'getSpecularColor',
+	        value: function getSpecularColor() {
+	            return this._material.specular;
+	        }
+
+	        //cf http://blog.cjgammon.com/threejs-custom-shader-material
+	        //cf https://threejs.org/docs/index.html#Reference/Materials/ShaderMaterial
+
+	        /**
+	         * @method setProperty
+	         * @param {String} name
+	         * @param {Object} value (depending on the property)
+	         */
+
+	    }, {
+	        key: 'setProperty',
+	        value: function setProperty(name, val) {
+	            this._material.uniforms[name].value = val;
+	        }
+
+	        /**
+	         * @method setProperty
+	         * @param {String} name
+	         * @return {Object} value (depending on the property)
+	         */
+
+	    }, {
+	        key: 'getProperty',
+	        value: function getProperty(name) {
+	            return this._material.uniforms[name].value;
+	        }
+
+	        /**
+	         * @method setBlending
+	         * @param {String} name
+	         */
+
+	    }, {
+	        key: 'setBlending',
+	        value: function setBlending(blending) {
+	            this._material.blending = blending;
+	        }
+
+	        /**
+	         * @method erase
+	         */
+
+	    }, {
+	        key: 'erase',
+	        value: function erase() {
+	            if (this._material.map) {
+	                this._material.map.dispose();
+	            }
+	            this._material.dispose();
+	        }
+	    }]);
+
+	    return Material;
+	}();
+
+	// module exports
+
+	var _createClass$13 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$18(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	/**
 	 * Math class gives easy access to some basics calculations that are frequently used in interactive computer graphics
 	 *
@@ -2503,10 +2939,10 @@
 
 	var _Math = function () {
 	    function _Math() {
-	        classCallCheck(this, _Math);
+	        _classCallCheck$18(this, _Math);
 	    }
 
-	    createClass(_Math, null, [{
+	    _createClass$13(_Math, null, [{
 	        key: "randomFromTo",
 
 
@@ -2664,10 +3100,15 @@
 	            };
 	        }
 	    }]);
+
 	    return _Math;
 	}();
 
 	// module exports
+
+	var _createClass$14 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$19(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	/**
 	* Log a message into the console or redirect it to the provided label if Mobilizing.debug === true
@@ -2682,12 +3123,12 @@
 
 	var Debug = function () {
 	    function Debug(label) {
-	        classCallCheck(this, Debug);
+	        _classCallCheck$19(this, Debug);
 
 	        this.label = label;
 	    }
 
-	    createClass(Debug, [{
+	    _createClass$14(Debug, [{
 	        key: "log",
 	        value: function log() {
 	            if (this.doLog()) {
@@ -2721,6 +3162,7 @@
 	            return this.label || _debugEnabled;
 	        }
 	    }]);
+
 	    return Debug;
 	}();
 
@@ -2728,948 +3170,9 @@
 
 	// module exports
 
-	var Time = function (_Component) {
-	    inherits(Time, _Component);
+	var _createClass$12 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	    /**
-	    * The Time class provides methods to control time related operations. One instance of this Component is created internnaly by the Context. It makes it possible to access and to use a global time in Components that require it (i.e Touch, Animation, etc.). In users script, this global Time can be accessed via the context.
-	    * 
-	    * @example
-	    *    //TODO
-	    *
-	    * @class Time
-	    * @constructor
-	    */
-	    function Time(params) {
-	        classCallCheck(this, Time);
-
-	        var _this = possibleConstructorReturn(this, (Time.__proto__ || Object.getPrototypeOf(Time)).call(this, params));
-
-	        _this._startTime = getOrDefault(params, "startTime", new Date().getTime());
-	        _this._timeScale = getOrDefault(params, "scale", 1);
-
-	        _this._currentTime = new Date().getTime();
-	        _this._deltaTime = 0;
-	        return _this;
-	    }
-
-	    /*setup()
-	    {
-	        super.setup();
-	    }*/
-
-	    /**
-	    * Start the Time
-	    * @method on
-	    */
-
-
-	    createClass(Time, [{
-	        key: 'on',
-	        value: function on() {
-	            get(Time.prototype.__proto__ || Object.getPrototypeOf(Time.prototype), 'on', this).call(this);
-	            this.reset();
-	        }
-
-	        /**
-	        * Pause the Time
-	        * @method off
-	        */
-	        /*off()
-	        {
-	            super.off();
-	        }*/
-
-	        /**
-	        * resets this time instance
-	        * 
-	        * @method reset
-	        */
-
-	    }, {
-	        key: 'reset',
-	        value: function reset() {
-	            this._startTime = new Date().getTime();
-	        }
-
-	        /**
-	        * updates this time instance
-	        * 
-	        * @method update
-	        */
-
-	    }, {
-	        key: 'update',
-	        value: function update() {
-	            if (this.getStatus()) //the component must be on, else we "stop" the time
-	                {
-	                    var lastTime = this._currentTime;
-	                    this._currentTime = new Date().getTime();
-	                    this._deltaTime = (this._currentTime - lastTime) / 1000 * this._timeScale;
-	                }
-	        }
-
-	        /**
-	        * absolute Delta
-	        * 
-	        * @method getAbsoluteDelta
-	        * @return {Number} absolute Delta
-	        */
-
-	    }, {
-	        key: 'getAbsoluteDelta',
-	        value: function getAbsoluteDelta() {
-	            return this._currentTime - this._startTime;
-	        }
-	        /**
-	        * Set the current timeScale, useful to slower time down
-	        * 
-	        * @method setTimeScale
-	        * @param {Number} scale
-	        */
-
-	    }, {
-	        key: 'setTimeScale',
-	        value: function setTimeScale(scale) {
-	            this._timeScale = scale;
-	        }
-
-	        /**
-	        * Get the current timeScale
-	        * 
-	        * @method getTimeScale
-	        * @return {Number} scale
-	        */
-
-	    }, {
-	        key: 'getTimeScale',
-	        value: function getTimeScale() {
-	            return this._timeScale;
-	        }
-
-	        /**
-	        * Get the current timeDelta (difference of time between 2 frames) at the current timeScale
-	        * 
-	        * @method getDelta
-	        * @return {Number} the current timeDelta at the current timeScale
-	        */
-
-	    }, {
-	        key: 'getDelta',
-	        value: function getDelta() {
-	            return this._deltaTime;
-	        }
-
-	        /**
-	        * Gets the current Time object's time
-	        * 
-	        * @method getTime
-	        * @return {Number} the current time
-	        */
-
-	    }, {
-	        key: 'getTime',
-	        value: function getTime() {
-	            return this._currentTime;
-	        }
-	    }]);
-	    return Time;
-	}(Component);
-
-	// module exports
-
-	var EVT_START = 'start';
-
-	/**
-	 * Fired each time the animation is updated
-	 * @event update
-	 * @param {Object} target The target object
-	 */
-	var EVT_UPDATE = 'update';
-
-	/**
-	 * Fired when each time the animation is repeated once it reached the end if repeat is greater than 1
-	 * @event restart
-	 * @param {Object} target The target object
-	 * @param {Number} direction The current direction
-	 */
-	var EVT_RESTART = 'restart';
-
-	/**
-	 * Fired when the animation is stopped
-	 * @event stop
-	 * @param {Object} target The target object
-	 */
-	var EVT_STOP = 'stop';
-
-	/**
-	 * Fired when the animation is resumed
-	 * @event resume
-	 * @param {Object} target The target object
-	 */
-	var EVT_RESUME = 'resume';
-
-	/**
-	 * Fired when the animation reaches the end and no repetition is pending
-	 * @event finish
-	 * @param {Object} target The target object
-	 */
-	var EVT_FINISH = 'finish';
-
-	var Animation = function (_Component) {
-	    inherits(Animation, _Component);
-
-	    /**
-	    * The Animation class provides a simple way to tween object properties
-	    * 
-	    * @example
-	    *    //TODO
-	    *
-	    * @class Animation
-	    * @constructor
-	    * @param {Object} params The parameters object
-	    * @param {Object} params.target The object whose propoerties are to be animated
-	    * @param {Object} [params.from] An object indicating the start values of the properties to animate, defaults to the values of the target
-	    * @param {Object} params.to An object indicating the finish values of the properties to animate
-	    * @param {Number} params.duration The animation duration in milliseconds
-	    * @param {Function} [params.easing=Animation.Easing.linear] An easing function to use
-	    * @param {Number} [params.repeat=0] The number of times the animation should be repeated, set to Infinity to repeat indefinately
-	    * @param {Boolean} [params.yoyo=false] If set to true and repeat is greater than 1, the animation will play in reverse once it reached the end
-	    * @param {Number} [params.delay=0] The number of milliseconds to wait for before starting the animation
-	    * @param {Time} [params.time] The Time instance to use for this Animation Component
-	    * @param {Function} [params.onStart] A callback to be called when the animation starts
-	    * @param {Function} [params.onUpdate] A callback to be called each time the animation is updated
-	    * @param {Function} [params.onRestart] A callback to be called each time the animation is repeated once it reached the end if repeat is greater than 1
-	    * @param {Function} [params.onStop] A callback to be called when the animation is stopped
-	    * @param {Function} [params.onResume] A callback to be called when the animation is resumed
-	    * @param {Function} [params.onFinish] A callback to be called when the animation reaches the end and no repetition is pending
-	    */
-	    function Animation(params) {
-	        classCallCheck(this, Animation);
-
-	        var _this = possibleConstructorReturn(this, (Animation.__proto__ || Object.getPrototypeOf(Animation)).call(this, params));
-
-	        _this._target = params.target;
-	        _this._from = getOrDefault(params, "from", null);
-	        _this._to = params.to;
-	        _this._duration = params.duration;
-	        _this._easing = getOrDefault(params, "easing", Animation.Easing.linear);
-	        _this._repeat = getOrDefault(params, "repeat", 0);
-	        _this._yoyo = getOrDefault(params, "yoyo", false);
-	        _this._delay = getOrDefault(params, "delay", 0);
-	        _this._time = new Time();
-
-	        _this._timesPlayed = 0;
-	        _this._direction = 1;
-
-	        var onStart = getOrDefault(params, "onStart", null);
-	        var onUpdate = getOrDefault(params, "onUpdate", null);
-	        var onRestart = getOrDefault(params, "onRestart", null);
-	        var onStop = getOrDefault(params, "onStop", null);
-	        var onResume = getOrDefault(params, "onResume", null);
-	        var onFinish = getOrDefault(params, "onFinish", null);
-
-	        // bind custom callbacks to events
-	        if (onStart) {
-	            _this.events.on(EVT_START, onStart);
-	        }
-	        if (onUpdate) {
-	            _this.events.on(EVT_UPDATE, onUpdate);
-	        }
-	        if (onRestart) {
-	            _this.events.on(EVT_RESTART, onRestart);
-	        }
-	        if (onStop) {
-	            _this.events.on(EVT_STOP, onStop);
-	        }
-	        if (onResume) {
-	            _this.events.on(EVT_RESUME, onResume);
-	        }
-	        if (onFinish) {
-	            _this.events.on(EVT_FINISH, onFinish);
-	        }
-
-	        return _this;
-	    }
-
-	    /**
-	    * Setup
-	    * 
-	    * @method setup
-	    */
-
-
-	    createClass(Animation, [{
-	        key: 'setup',
-	        value: function setup() {
-	            var context = this.getContext();
-
-	            context.addComponent(this._time);
-	            this._time.setup();
-	            this._time.on();
-
-	            this._isPlaying = false;
-	        }
-
-	        /**
-	        * Play the animation
-	        *
-	        * @method play
-	        */
-
-	    }, {
-	        key: 'play',
-	        value: function play() {
-	            this._isPlaying = true;
-	            this._time.reset();
-
-	            if (!this._from) {
-	                // fill in the start values from the target
-	                this._from = {};
-	                for (var prop in this._to) {
-	                    this._from[prop] = this._target[prop];
-	                }
-	            }
-
-	            this.events.trigger(EVT_START, this._target);
-	        }
-
-	        /**
-	        * Stop the animation
-	        *
-	        * @method stop
-	        */
-
-	    }, {
-	        key: 'stop',
-	        value: function stop() {
-	            this._isPlaying = false;
-
-	            this.events.trigger(EVT_STOP, this._target);
-	        }
-
-	        /**
-	        * Resume the animation
-	        *
-	        * @method resume
-	        */
-
-	    }, {
-	        key: 'resume',
-	        value: function resume() {}
-
-	        /**
-	        * Rewind the animation back to its starting values
-	        *
-	        * @method rewind
-	        */
-
-	    }, {
-	        key: 'rewind',
-	        value: function rewind() {
-	            this.update(0);
-	        }
-
-	        /**
-	        * Update the properties according to the elapsed time
-	        * 
-	        * @method update
-	        */
-
-	    }, {
-	        key: 'update',
-	        value: function update(time) {
-	            if (!this._isPlaying) {
-	                return;
-	            }
-
-	            var t = (time !== undefined ? time : this._time.getAbsoluteDelta()) / this._duration;
-
-	            if (t >= 1) {
-	                for (var prop in this._from) {
-	                    this._target[prop] = this._to[prop];
-	                }
-
-	                if (this._timesPlayed++ < this._repeat) {
-	                    if (this._yoyo) {
-	                        this._direction *= -1;
-	                    }
-	                    this._time.reset();
-
-	                    this.events.trigger(EVT_RESTART, this._target, this._direction);
-	                } else {
-	                    this._isPlaying = false;
-	                    this.events.trigger(EVT_FINISH, this._target);
-	                }
-	            } else {
-	                for (var _prop in this._from) {
-	                    if (this._direction < 1) {
-	                        this._target[_prop] = _Math.map(this._easing(t), 0, 1, this._to[_prop], this._from[_prop]);
-	                    } else {
-	                        this._target[_prop] = _Math.map(this._easing(t), 0, 1, this._from[_prop], this._to[_prop]);
-	                    }
-	                }
-
-	                this.events.trigger(EVT_UPDATE, this._target);
-	            }
-	        }
-
-	        /**
-	        * Chain another animation once this one is finished
-	        * 
-	        * @method chain
-	        */
-
-	    }, {
-	        key: 'chain',
-	        value: function chain(animation) {
-	            this.events.on(EVT_FINISH, function () {
-	                animation.play();
-	            });
-	        }
-	    }]);
-	    return Animation;
-	}(Component);
-
-
-
-	// credit: https://gist.github.com/gre/1650294
-	Animation.Easing = {
-	    "linear": function linear(t) {
-	        return t;
-	    },
-	    "easeInQuad": function easeInQuad(t) {
-	        return Math.pow(t, 2);
-	    },
-	    "easeOutQuad": function easeOutQuad(t) {
-	        return 1 - Math.abs(Math.pow(t - 1, 2));
-	    },
-	    "easeInOutQuad": function easeInOutQuad(t) {
-	        if (t < 0.5) {
-	            return Animation.Easing.easeInQuad(t * 2) / 2;
-	        }
-	        return Animation.Easing.easeOutQuad(t * 2 - 1) / 2 + 0.5;
-	    },
-	    "easeInCubic": function easeInCubic(t) {
-	        return Math.pow(t, 3);
-	    },
-	    "easeOutCubic": function easeOutCubic(t) {
-	        return 1 - Math.abs(Math.pow(t - 1, 3));
-	    },
-	    "easeInOutCubic": function easeInOutCubic(t) {
-	        if (t < 0.5) {
-	            return Animation.Easing.easeInCubic(t * 2) / 2;
-	        }
-	        return Animation.Easing.easeOutCubic(t * 2 - 1) / 2 + 0.5;
-	    },
-	    "easeInQuart": function easeInQuart(t) {
-	        return Math.pow(t, 4);
-	    },
-	    "easeOutQuart": function easeOutQuart(t) {
-	        return 1 - Math.abs(Math.pow(t - 1, 4));
-	    },
-	    "easeInOutQuart": function easeInOutQuart(t) {
-	        if (t < 0.5) {
-	            return Animation.Easing.easeInQuart(t * 2) / 2;
-	        }
-	        return Animation.Easing.easeOutQuart(t * 2 - 1) / 2 + 0.5;
-	    },
-	    "easeInQuint": function easeInQuint(t) {
-	        return Math.pow(t, 5);
-	    },
-	    "easeOutQuint": function easeOutQuint(t) {
-	        return 1 - Math.abs(Math.pow(t - 1, 5));
-	    },
-	    "easeInOutQuint": function easeInOutQuint(t) {
-	        if (t < 0.5) {
-	            return Animation.Easing.easeInQuint(t * 2) / 2;
-	        }
-	        return Animation.Easing.easeOutQuint(t * 2 - 1) / 2 + 0.5;
-	    },
-	    "easeInSin": function easeInSin(t) {
-	        return 1 + Math.sin(Math.PI / 2 * t - Math.PI / 2);
-	    },
-	    "easeOutSin": function easeOutSin(t) {
-	        return Math.sin(Math.PI / 2 * t);
-	    },
-	    "easeInOutSin": function easeInOutSin(t) {
-	        return (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2;
-	    },
-	    "easeInElastic": function easeInElastic(t) {
-	        return (.04 - .04 / t) * Math.sin(25 * t) + 1;
-	    },
-	    "easeOutElastic": function easeOutElastic(t) {
-	        return .04 * t / --t * Math.sin(25 * t);
-	    },
-	    "easeInOutElastic": function easeInOutElastic(t) {
-	        if ((t -= .5) < 0) {
-	            return (.01 + .01 / t) * Math.sin(50 * t);
-	        } else {
-	            return (.02 - .01 / t) * Math.sin(50 * t) + 1;
-	        }
-	    },
-	    "easeInBounce": function easeInBounce(t) {
-	        return 1 - Animation.Easing.easeOutBounce(1 - t);
-	    },
-	    "easeOutBounce": function easeOutBounce(t) {
-	        if (t < 1 / 2.75) {
-	            return 7.5625 * t * t;
-	        } else if (t < 2 / 2.75) {
-	            return 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
-	        } else if (t < 2.5 / 2.75) {
-	            return 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
-	        } else {
-	            return 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
-	        }
-	    },
-	    "easeInOutBounce": function easeInOutBounce(t) {
-	        if (t < 0.5) {
-	            return Animation.Easing.easeInBounce(t * 2) * 0.5;
-	        }
-	        return Animation.Easing.easeOutBounce(t * 2 - 1) * 0.5 + 0.5;
-	    }
-
-	};
-
-	// module exports
-
-	var Material = function () {
-	    /**
-	     * A material will give color and some effect to the surface of the 3D object.
-	     * Mobilizing.js is heavily based on the one of Three.js http://threejs.org/docs/#Reference/Materials/Material and its variations
-	     *
-	     * @class Material
-	     * @constructor
-	     * @param {Object} params an object containing all the possible parameters for this class. Use it like in the following example. Possible parameters are lisited below.
-	     * @example
-	     *     //this is how to use a parameters object in order to instanciate a Mobilizing.js object
-	     *     var mobilizingObject = new Mobilizing.Class({paramName1: value, paramName2: value});
-	     *
-	     * @param {String} [params.type="basic"] the type of the matrial, one of "basic", "projectionmapping", "phong", "line", "sprite"
-	     */
-	    function Material(params) {
-	        classCallCheck(this, Material);
-
-	        params.type = getOrDefault(params, "type", "default");
-
-	        this.texture = undefined;
-
-	        switch (params.type) {
-	            case "basic":
-
-	                this._material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false /*,overdraw: true*/ });
-	                break;
-
-	            case "custom":
-
-	                this._material = new THREE.ShaderMaterial({ fragmentShader: params.fragmentShader,
-	                    vertexShader: params.vertexShader,
-	                    uniforms: params.uniforms });
-	                //this._material.lights = true; //pass the lights uniforms
-	                break;
-
-	            case "projectionmapping":
-
-	                var shader = THREE.ShaderLib["cube"];
-	                var uniforms = THREE.UniformsUtils.clone(shader.uniforms);
-
-	                shader.vertexShader = shader.vertexShader.replace("vWorldPosition = transformDirection( position, modelMatrix );", "vWorldPosition = (modelMatrix * vec4( position, 0.0 )).xyz;");
-
-	                shader.fragmentShader = shader.fragmentShader.replace("gl_FragColor = textureCube( tCube, vec3( tFlip * vWorldPosition.x, vWorldPosition.yz ) );", "vec3 viewDir = vWorldPosition-viewPosition;  gl_FragColor = textureCube( tCube, normalize(viewDir));");
-
-	                shader.fragmentShader = shader.fragmentShader.replace("uniform samplerCube tCube;", "uniform samplerCube tCube; uniform vec3 viewPosition;");
-
-	                uniforms['viewPosition'] = { type: 'v3', value: new THREE.Vector3(0, 0, 0) };
-
-	                this._material = new THREE.ShaderMaterial({ fragmentShader: shader.fragmentShader,
-	                    vertexShader: shader.vertexShader,
-	                    uniforms: uniforms });
-
-	                break;
-
-	            case "lambert":
-	                //vertex lit
-
-	                this._material = new THREE.MeshLambertMaterial({ color: 0xffffff, wireframe: false, shading: THREE.FlatShading });
-	                //this._material = new THREE.MeshLambertMaterial( { color: 0xffffff, combine: THREE.MixOperation});
-	                break;
-
-	            case "default":
-	            case "phong":
-	                this._material = new THREE.MeshPhongMaterial({ color: 0xffffff });
-	                this._material.shading = THREE.SmoothShading;
-	                break;
-
-	            case "line":
-
-	                this._material = new THREE.LineBasicMaterial({ color: 0xffffff });
-	                break;
-
-	            case "sprite":
-
-	                this._material = new THREE.SpriteMaterial({ color: 0xffffff });
-	                break;
-
-	            default:
-
-	                this._material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false });
-	        }
-
-	        this._material.side = THREE.DoubleSide;
-	        //this._material.transparent = true;
-	        this.type = params.type;
-	        //this._material.alphaTest = 0.1;
-	    }
-
-	    /**
-	     * set the texture
-	     *
-	     * @method setTexture
-	     * @param {Texture} texture
-	     */
-
-
-	    createClass(Material, [{
-	        key: 'setTexture',
-	        value: function setTexture(texture) {
-	            this.texture = texture;
-
-	            if (this.texture._texture !== undefined) {
-	                //console.log("attach texture to material");
-	                this._material.map = this.texture._texture;
-	                //this._material.needsUpdate = true;
-	            } else if (texture.cube !== undefined) {
-	                if (this.type === "projectionmapping") {
-	                    this._material.uniforms['tCube'].value = texture.cube; // textureCube has been init before
-	                } else {
-	                    this._material.envMap = texture.cube;
-	                }
-	            }
-	        }
-
-	        /**
-	        * Gets the current texture
-	        *
-	        * @method getTexture
-	        * @return {Texture}
-	        */
-
-	    }, {
-	        key: 'getTexture',
-	        value: function getTexture() {
-	            return this.texture;
-	        }
-
-	        /**
-	         * @method setUniform
-	         * @param {String} name the name of the uniform to set
-	         * @param {Object} value the value of the uniform to set
-	         */
-
-	    }, {
-	        key: 'setUniform',
-	        value: function setUniform(name, value) {
-	            this._material.uniforms[name].value = value;
-	        }
-
-	        /**
-	        * @method setTransparent
-	        * @param {Boolean} trans
-	        */
-
-	    }, {
-	        key: 'setTransparent',
-	        value: function setTransparent(trans) {
-	            this._material.transparent = trans;
-	        }
-
-	        /**
-	        * @method getTransparent
-	        * @return {Boolean}
-	        */
-
-	    }, {
-	        key: 'getTransparent',
-	        value: function getTransparent() {
-	            return this._material.transparent;
-	        }
-
-	        /**
-	        * @method setColor
-	        * @param {Color} color
-	        */
-
-	    }, {
-	        key: 'setColor',
-	        value: function setColor(color) {
-	            //debug.log("material type", this._material);
-	            this._material.color = color;
-	        }
-
-	        /**
-	        * @method getColor
-	        * @return {Color}
-	        */
-
-	    }, {
-	        key: 'getColor',
-	        value: function getColor() {
-	            return this._material.color;
-	        }
-
-	        /**
-	        * @method setWireframe
-	        * @param {Boolean} wireframe
-	        */
-
-	    }, {
-	        key: 'setWireframe',
-	        value: function setWireframe(wireframe) {
-	            this._material.wireframe = wireframe;
-	        }
-
-	        /**
-	        * @method getWireframe
-	        * @return {Boolean}
-	        */
-
-	    }, {
-	        key: 'getWireframe',
-	        value: function getWireframe() {
-	            return this._material.wireframe;
-	        }
-
-	        /**
-	        * @method setOpacity
-	        * @param {float} op
-	        */
-
-	    }, {
-	        key: 'setOpacity',
-	        value: function setOpacity(op) {
-	            this._material.opacity = op;
-	        }
-
-	        /**
-	        * @method getOpacity
-	        * @return {float}
-	        */
-
-	    }, {
-	        key: 'getOpacity',
-	        value: function getOpacity() {
-	            return this._material.opacity;
-	        }
-
-	        /**
-	        * @method setDoubleSided
-	        * @param {Boolean} sided
-	        */
-
-	    }, {
-	        key: 'setDoubleSided',
-	        value: function setDoubleSided(sided) {
-	            this._material.side = sided ? THREE.DoubleSide : THREE.FrontSide;
-	        }
-
-	        /**
-	        * @method getDoubleSided
-	        * @return {Boolean}
-	        */
-
-	    }, {
-	        key: 'getDoubleSided',
-	        value: function getDoubleSided() {
-	            if (this._material.side === THREE.DoubleSide) {
-	                return true;
-	            } else {
-	                return false;
-	            }
-	        }
-
-	        /**
-	        * @method setAlphaTest
-	        * @param {Boolean} val
-	        */
-
-	    }, {
-	        key: 'setAlphaTest',
-	        value: function setAlphaTest(val) {
-	            this._material.alphaTest = val;
-	        }
-
-	        /**
-	        * @method getAlphaTest
-	        * @return {Boolean}
-	        */
-
-	    }, {
-	        key: 'getAlphaTest',
-	        value: function getAlphaTest() {
-	            return this._material.alphaTest;
-	        }
-	    }, {
-	        key: 'setDepthWrite',
-	        value: function setDepthWrite(bool) {
-	            this._material.depthWrite = bool;
-	        }
-	    }, {
-	        key: 'setDepthTest',
-	        value: function setDepthTest(bool) {
-	            this._material.depthTest = bool;
-	        }
-
-	        /**
-	        * @method setLineWidth
-	        * @param {Number} val
-	        */
-
-	    }, {
-	        key: 'setLineWidth',
-	        value: function setLineWidth(val) {
-	            this._material.linewidth = val;
-	        }
-
-	        /**
-	        * @method getLineWidth
-	        * @return {Number}
-	        */
-
-	    }, {
-	        key: 'getLineWidth',
-	        value: function getLineWidth() {
-	            return this._material.linewidth;
-	        }
-
-	        /**
-	         * @method setShininess
-	         * @param {Number} color
-	         */
-
-	    }, {
-	        key: 'setShininess',
-	        value: function setShininess(val) {
-	            //debug.log("material type", this._material);
-	            this._material.shininess = val;
-	        }
-
-	        /**
-	         * @method getShininess
-	         * @return {Number}
-	         */
-
-	    }, {
-	        key: 'getShininess',
-	        value: function getShininess() {
-	            return this._material.shininess;
-	        }
-
-	        /**
-	         * @method setEmissiveColor
-	         * @param {Color} color
-	         */
-
-	    }, {
-	        key: 'setEmissiveColor',
-	        value: function setEmissiveColor(color) {
-	            //debug.log("material type", this._material);
-	            this._material.emissive = color;
-	        }
-
-	        /**
-	         * @method getEmissiveColor
-	         * @return {Color}
-	         */
-
-	    }, {
-	        key: 'getEmissiveColor',
-	        value: function getEmissiveColor() {
-	            return this._material.emissive;
-	        }
-
-	        /**
-	         * @method setShading
-	         * @param {String} shading one of "smooth", "flat"
-	         */
-
-	    }, {
-	        key: 'setShading',
-	        value: function setShading(shading) {
-	            this._material.shading = shading === "smooth" ? THREE.SmoothShading : THREE.FlatShading;
-	            this._material.needsUpdate = true;
-	        }
-
-	        /**
-	         * @method setSpecularColor
-	         * @param {Color} color
-	         */
-
-	    }, {
-	        key: 'setSpecularColor',
-	        value: function setSpecularColor(color) {
-	            this._material.specular = color;
-	        }
-
-	        /**
-	         * @method getSpecularColor
-	         * @return {Color}
-	         */
-
-	    }, {
-	        key: 'getSpecularColor',
-	        value: function getSpecularColor() {
-	            return this._material.specular;
-	        }
-
-	        //cf http://blog.cjgammon.com/threejs-custom-shader-material
-	        //cf https://threejs.org/docs/index.html#Reference/Materials/ShaderMaterial
-
-	        /**
-	         * @method setProperty
-	         * @param {String} name
-	         * @param {Object} value (depending on the property)
-	         */
-
-	    }, {
-	        key: 'setProperty',
-	        value: function setProperty(name, val) {
-	            this._material.uniforms[name].value = val;
-	        }
-
-	        /**
-	         * @method setProperty
-	         * @param {String} name
-	         * @return {Object} value (depending on the property)
-	         */
-
-	    }, {
-	        key: 'getProperty',
-	        value: function getProperty(name) {
-	            return this._material.uniforms[name].value;
-	        }
-	    }, {
-	        key: 'setBlending',
-	        value: function setBlending(blending) {
-	            this._material.blending = blending;
-	        }
-
-	        /**
-	         * @method erase
-	         */
-
-	    }, {
-	        key: 'erase',
-	        value: function erase() {
-	            if (this._material.map) {
-	                this._material.map.dispose();
-	            }
-	            this._material.dispose();
-	        }
-	    }]);
-	    return Material;
-	}();
-
-	// module exports
+	function _classCallCheck$17(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Camera = function () {
 	    /**
@@ -3704,7 +3207,7 @@
 	    */
 
 	    function Camera(params) {
-	        classCallCheck(this, Camera);
+	        _classCallCheck$17(this, Camera);
 
 	        this.context = getOrDefault(params, "context", null);
 	        this.type = getOrDefault(params, "type", "perspective");
@@ -3769,7 +3272,7 @@
 	     */
 
 
-	    createClass(Camera, [{
+	    _createClass$12(Camera, [{
 	        key: 'setRenderTexture',
 	        value: function setRenderTexture(renderTexture) {
 	            this.renderTexture = renderTexture;
@@ -3978,9 +3481,11 @@
 	        value: function getZoom() {
 	            if (this.type === "ortho") {
 	                return this._camera.zoom;
-	            } else {
-	                console.warn("getZoom() can't be used on perspective cams!");
 	            }
+
+	            console.warn("getZoom() can't be used on perspective cams!");
+
+	            return null;
 	        }
 	    }, {
 	        key: 'setFarPlane',
@@ -4027,7 +3532,6 @@
 	                this._camera.near = near;
 	                this.updateProjectionMatrix();
 	            } else if (this.type === "cube") {
-
 	                this._camera.children.forEach(function (cam) {
 	                    cam.near = near;
 	                    cam.updateProjectionMatrix();
@@ -4138,41 +3642,46 @@
 	        }
 	    }, {
 	        key: 'aspect',
-	        set: function set$$1(ratio) {
+	        set: function set(ratio) {
 	            this.setAspect(ratio);
 	        },
-	        get: function get$$1() {
-	            this.getAspect();
+	        get: function get() {
+	            return this.getAspect();
 	        }
 	    }, {
 	        key: 'zoom',
-	        set: function set$$1(val) {
+	        set: function set(val) {
 	            this.setZoom(val);
 	        },
-	        get: function get$$1() {
-	            this.getZoom();
+	        get: function get() {
+	            return this.getZoom();
 	        }
 	    }, {
 	        key: 'farPlane',
-	        set: function set$$1(val) {
+	        set: function set(val) {
 	            this.setFarPlane(val);
 	        },
-	        get: function get$$1() {
+	        get: function get() {
 	            return this.setFarPlane;
 	        }
 	    }, {
 	        key: 'nearPlane',
-	        set: function set$$1(val) {
+	        set: function set(val) {
 	            this.setNearPlane(val);
 	        },
-	        get: function get$$1() {
+	        get: function get() {
 	            return this.getNearPlane();
 	        }
 	    }]);
+
 	    return Camera;
 	}();
 
 	// module exports
+
+	var _createClass$15 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$20(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Light = function () {
 	    /**
@@ -4187,7 +3696,7 @@
 	     * @param {Color} [params.color=Color.white]
 	     */
 	    function Light(params) {
-	        classCallCheck(this, Light);
+	        _classCallCheck$20(this, Light);
 
 	        this.type = getOrDefault(params, "type", "point");
 
@@ -4233,7 +3742,7 @@
 	    */
 
 
-	    createClass(Light, [{
+	    _createClass$15(Light, [{
 	        key: 'setIntensity',
 	        value: function setIntensity(val) {
 	            this.light.intensity = val;
@@ -4247,7 +3756,7 @@
 
 	    }, {
 	        key: 'getIntensity',
-	        value: function getIntensity(val) {
+	        value: function getIntensity() {
 	            return this.light.intensity;
 	        }
 
@@ -4396,558 +3905,15 @@
 	            this.light.shadow.camera.far = far; //max shadow distance
 	        }
 	    }]);
+
 	    return Light;
 	}();
 
 	// module exports
 
-	var Texture$1 = function () {
-	    /**
-	     * Texture are bitmap pictures loaded in the graphic card memory so they can be mapped on a geometry surface. Usually, texture are mapped through a Material. Keep in mind that WebGL, as an impletation of OpenGL, shares the same kind of limitations : textures sources should be power of 2 (even if here, Three.js is doing the job of resizing for you if they're not).
-	     * Constants list for possible texture's mapping mode :
-	     * 
-	     * Texture.UVMapping
-	     * Texture.CubeReflectionMapping
-	     * Texture.CubeRefractionMapping
-	     * Texture.EquirectangularReflectionMapping
-	     * Texture.EquirectangularRefractionMapping
-	     * Texture.SphericalReflectionMapping
-	     * Texture.CubeUVReflectionMapping
-	     * Texture.CubeUVRefractionMapping
-	     *
-	     * @class Texture
-	     * @constructor
-	     * @param {Object} params
-	     * @param {Context} params.image the Image object.
-	     * @param {String} params.canvas the canvas object url.
-	     */
-	    function Texture$$1(params) {
-	        classCallCheck(this, Texture$$1);
+	var _createClass$11 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	        this._texture;
-	        this._image = getOrDefault(params, "image", undefined);
-	        this._canvas = getOrDefault(params, "canvas", undefined);
-
-	        if (this._image) {
-	            this.fromImage(this._image);
-	        } else if (this._canvas) {
-	            this.fromCanvas(this._canvas);
-	        }
-	    }
-
-	    /**
-	    * Create the texture from an image file
-	    *
-	    * @method fromImage
-	    * @param {Image} image tells if the loader should force the main process to wait for the end of 
-	    */
-
-
-	    createClass(Texture$$1, [{
-	        key: 'fromImage',
-	        value: function fromImage(image) {
-
-	            this._texture = new THREE$1.Texture(image);
-	            this._texture.needsUpdate = true;
-
-	            this.width = image.width;
-	            this.height = image.height;
-	        }
-
-	        /**
-	         * Create the texture from a Canvas DOM element (can be Mobilizing itself -> when we'll can catch a WebGL canvas pixels...)
-	         *
-	         * @method fromCanvas
-	         * @param {canvas} canvas canvas
-	         */
-
-	    }, {
-	        key: 'fromCanvas',
-	        value: function fromCanvas(canvas) {
-	            var _this = this;
-
-	            this._texture = new THREE$1.Texture(canvas);
-	            this._texture.needsUpdate = true;
-	            this._texture.magFilter = THREE$1.LinearFilter;
-	            //this._texture.minFilter = THREE.LinearMipMapLinearFilter;
-	            this._texture.minFilter = THREE$1.LinearFilter;
-	            this.width = this._texture.image.width;
-	            this.height = this._texture.image.height;
-
-	            //custom events management, used internally to autamatically refresh texture after drawn
-	            if (canvas.events) {
-	                canvas.events.on("drawn", function () {
-	                    _this.setNeedsUpdate(true);
-	                });
-	            }
-	        }
-
-	        /**
-	        * Clears the underlying Three.js texture object
-	        * @method dispose
-	        */
-
-	    }, {
-	        key: 'dispose',
-	        value: function dispose() {
-	            this._texture.dispose();
-	        }
-
-	        /**
-	        * Define the repetition factor of this texture. If the value is > 1, then the texture will be mapped twice on the surface and so on. NB: usage of this method automatically sets the wrapS and wrapT properties to RepeatWrapping
-	        * 
-	        * @method setRepeat
-	        * @param {float} u the new u texture coordinate repetition to use
-	        * @param {float} v the new u texture coordinate repetition to use
-	        */
-
-	    }, {
-	        key: 'setRepeat',
-	        value: function setRepeat(u, v) {
-	            if (this._texture && this._texture !== undefined) {
-	                this._texture.repeat.set(u, v);
-	                this._texture.wrapS = THREE$1.RepeatWrapping;
-	                this._texture.wrapT = THREE$1.RepeatWrapping;
-	            }
-	        }
-
-	        /**
-	        * How much a single repetition of the texture is offset from the beginning, in each direction U and V. Typical range is 0.0 to 1.0.
-	        * 
-	        * @method undefined
-	        * @param {Numbe} val offset between 0.0 to 1.0
-	        */
-
-	    }, {
-	        key: 'setOffset',
-	        value: function setOffset(val) {
-	            this._texture.offset = val;
-	        }
-
-	        //TODO : setter and getter for Three.js texture props mapping
-
-	        /**
-	        * Set this to true to trigger an update next time the texture is used. Particularly important for setting the wrap mode.
-	        * 
-	        * @method setNeedsUpdate
-	        * @param {Boolean} val
-	        */
-
-	    }, {
-	        key: 'setNeedsUpdate',
-	        value: function setNeedsUpdate() {
-	            this._texture.needsUpdate = true;
-	        }
-
-	        /**
-	        * False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.
-	        * 
-	        * @method setPremultiplyAlpha
-	        * @param {Boolean} val
-	        */
-
-	    }, {
-	        key: 'setPremultiplyAlpha',
-	        value: function setPremultiplyAlpha(val) {
-	            this._texture.premultiplyAlpha = val;
-	        }
-
-	        /**
-	        * How the image is applied to the object. An object type of Texture.UVMapping is the default, where the U,V coordinates are used to apply the map.
-	        *
-	        * @property setMapping
-	        * @param {Number} mapping 
-	        */
-
-	    }, {
-	        key: 'setMapping',
-	        value: function setMapping(mapping) {
-	            this._texture.mapping = mapping;
-	        }
-	    }]);
-	    return Texture$$1;
-	}();
-
-	Texture$1.UVMapping = THREE$1.UVMapping;
-	Texture$1.CubeReflectionMapping = THREE$1.CubeReflectionMapping;
-	Texture$1.CubeRefractionMapping = THREE$1.CubeRefractionMapping;
-	Texture$1.EquirectangularReflectionMapping = THREE$1.EquirectangularReflectionMapping;
-	Texture$1.EquirectangularRefractionMapping = THREE$1.EquirectangularRefractionMapping;
-	Texture$1.SphericalReflectionMapping = THREE$1.SphericalReflectionMapping;
-	Texture$1.CubeUVReflectionMapping = THREE$1.CubeUVReflectionMapping;
-	Texture$1.CubeUVRefractionMapping = THREE$1.CubeUVRefractionMapping;
-
-	// module exports
-
-	var Label = function (_Base) {
-	    inherits(Label, _Base);
-
-	    /*
-	    * Label class
-	    * A Label is a textured, quad shaped object to be used in Graphical User Interfaces.
-	    * A Label can contains a background (color or existing picture) and/or a prerendered text.
-	    *
-	    * @class Label
-	    * @constructor
-	    * @param {Object} params Config parameters
-	    * @param {String} params.text the String to display
-	    * @param {Font} params.font font Mobilizing.Font object
-	    * @param {Number} [params.fontSize = 72] fontSize font size
-	    * @param {Number} [params.lineMaxCharCount = 40] lineMaxCharCount the maximum number of characters a line should count
-	    * @param {Color} [params.color = Color.white] color the text color
-	    * @param {Color} params.backgroundColor backgroundColor backgroundColor of the text
-	    * @param {Texture} params.texture texture the texture to use fo this label (will cancel the text setting, only the texture will be rendered)
-	    * @param {Number} [params.width = 100] width of the label
-	    * @param {Number} [params.height = 100] height of the label
-	    * 
-	    * @example
-	    *    //TODO
-	    */
-	    function Label(params) {
-	        classCallCheck(this, Label);
-
-	        var _this /*.mesh*/ = possibleConstructorReturn(this, (Label.__proto__ || Object.getPrototypeOf(Label)).call(this, params));
-
-	        _this.setName(getOrDefault(params, "name", undefined));
-
-	        _this.font = getOrDefault(params, "font", null); //TODO default font!
-	        _this.material = getOrDefault(params, "material", "basic");
-
-	        _this._text = getOrDefault(params, "text", "");
-	        _this._lineMaxCharCount = getOrDefault(params, "lineMaxCharCount", 40);
-
-	        _this.style = new Style();
-
-	        _this._width = getOrDefault(params, "width", 100);
-	        _this._height = getOrDefault(params, "height", 100);
-	        _this.style.color = getOrDefault(params, "color", Color$1.white);
-
-	        _this.style.fontSize = getOrDefault(params, "fontSize", 72);
-	        _this.style.textAlign = getOrDefault(params, "textAlign", "center");
-
-	        /*this._geometry = new THREE.PlaneBufferGeometry(1,1);
-	        this.mesh = new THREE.Mesh( this._geometry, this.material._material );*/
-
-	        _this.mesh = new Mesh$1({ primitive: "plane", width: 1, height: 1, material: _this.material });
-
-	        if (params.backgroundColor !== undefined) {
-	            _this.style.hasBackground = true;
-	            _this.style.backgroundColor = params.backgroundColor;
-	        } else {
-	            _this.style.hasBackground = false;
-	        }
-
-	        _this.transform = new Transform(_this);
-	        _this.transform.setLocalScale(_this._width, _this._height);
-	        _this.needsComputeTextSize = true; //What's this ?
-
-	        _this.precLine = getOrDefault(params, "precLine", ""); // ajout ST
-
-	        _this._textSize = 0; //will be computed on render
-
-	        if (params.texture !== undefined) {
-	            _this.material.setTexture(params.texture);
-	            _this.transform.setLocalScale(params.width, params.height, 1);
-	        } else {
-	            _this.render();
-	        }
-	        return _this;
-	    }
-
-	    /**
-	    * set the width of this label.  Will be used by render()
-	    * @method setWidth
-	    * @param {Number} val the new width
-	    */
-
-
-	    createClass(Label, [{
-	        key: 'setWidth',
-	        value: function setWidth(val) {
-	            this._width = val;
-	        }
-
-	        /**
-	        * set the height of this label.  Will be used by render()
-	        * @method setHeight
-	        * @param {Number} val the new height
-	        */
-
-	    }, {
-	        key: 'setHeight',
-	        value: function setHeight(val) {
-	            this._height = val;
-	        }
-
-	        /**
-	        * set the Label background texture.
-	        * @method setBackgroundTexture
-	        * @param {Object} texture Texture to set as the Label background.
-	        */
-
-	    }, {
-	        key: 'setBackgroundTexture',
-	        value: function setBackgroundTexture(texture) {
-	            this.style.backgroundTexture = texture;
-	        }
-
-	        /**
-	        * set the Label text content.
-	        * @method setText
-	        * @param {String} val text to be used as the Label content.
-	        */
-
-	    }, {
-	        key: 'setText',
-	        value: function setText(val) {
-	            this._text = val;
-	            this.render();
-	        }
-
-	        /**
-	        * @deprecated
-	        * @method setNeedsComputeTextSize
-	        * @param {Object} val
-	        */
-
-	    }, {
-	        key: 'setNeedsComputeTextSize',
-	        value: function setNeedsComputeTextSize(val) {
-	            this.needsComputeTextSize = val;
-	        }
-
-	        /**
-	        * Set the current Label underlying canvas to use this color for the shadowblur effect
-	        * @method setShadowColor
-	        * @param {Color} color Mobilizing.Color object
-	        */
-
-	    }, {
-	        key: 'setShadowColor',
-	        value: function setShadowColor(color) {
-	            this.shadowColor = "rgba(" + color.r + "," + color.g + "," + color.b + ",1)";
-	        }
-	        /**
-	        * Description for undefined
-	        * @method setShadowBlur
-	        * @param {Number} val
-	        */
-
-	    }, {
-	        key: 'setShadowBlur',
-	        value: function setShadowBlur(val) {
-	            this.shadowBlur = val;
-	        }
-
-	        /**
-	        * Renders the label once all the setting are done. Should be called by the user when label properties are modified
-	        * @method render
-	        */
-
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            //debug.log("render label");
-	            if (this._text === undefined) {
-	                this._text = "";
-	            }
-	            if (this._canvas === undefined) {
-	                this._canvas = document.createElement('canvas');
-	                this._canvas.retinaResolutionEnabled = false; //to disable Retina canvas in Ejecta
-	                //document.body.appendChild(this._canvas);
-	            }
-	            if (this._width > 2048) {
-	                this._width = 2048;
-	            }
-	            if (this._height > 2048) {
-	                this._height = 2048;
-	            }
-	            this._canvas.width = this._width;
-	            this._canvas.height = this._height;
-
-	            //this.transform.setLocalScale(this._width,this._height);
-
-	            var context = this._canvas.getContext('2d');
-
-	            context.fillStyle = this.style.backgroundColor.makeRGBAStringWithAlpha(this.style.backgroundColorAlpha);
-	            context.shadowColor = this.shadowColor;
-	            context.shadowBlur = this.shadowBlur;
-
-	            if (this.style.backgroundTexture !== undefined) {
-	                //debug.log(this.style.backgroundTexture);
-	                context.drawImage(this.style.backgroundTexture.texture.image, 0, 0, this._width, this._height);
-	            } else if (this.style.hasBackground) {
-	                context.fillRect(0, 0, this._canvas.width, this._canvas.height);
-	            } else {
-	                context.clearRect(0, 0, this._canvas.width, this._canvas.height);
-	            }
-
-	            if (this.font !== undefined && this.font !== null) {
-	                debug.log("render label with font", this.font);
-	                var finaltext = ""; //this._text;
-	                //var words = this._text.split(" ");
-	                //césure automatique
-	                var l = 0;
-	                //var lastcesure = 0;
-	                var word = "";
-	                var ll = 0;
-	                var first = true;
-
-	                var SpaceLeft = this._lineMaxCharCount;
-	                for (var j = 0; j < this._text.length; ++j) {
-	                    var c = this._text[j];
-
-	                    if (c === '\n' || c === ' ') {
-	                        if (word.length + 1 > SpaceLeft) {
-	                            //debug.log("overflow detected, adding backslash then " + word);
-	                            //debug.log("BACKSLASH " + word);
-	                            finaltext += "\n";
-	                            finaltext += word + " ";
-	                            SpaceLeft = this._lineMaxCharCount - (word.length + 1);
-	                            //word = "";
-	                            if (c === '\n') {
-	                                finaltext += "\n";
-	                                SpaceLeft = this._lineMaxCharCount;
-	                            }
-	                        } else if (c === '\n') {
-	                            //debug.log("BACKSLASH detected, adding " + word + " then backslash");
-	                            finaltext += word;
-	                            //debug.log(word + " BACKSLASH");
-	                            finaltext += "\n";
-	                            SpaceLeft = this._lineMaxCharCount;
-	                            //word = "";
-	                        } else {
-	                            //debug.log("common case, adding " + word + " then space");
-	                            finaltext += word + " ";
-	                            SpaceLeft = SpaceLeft - (word.length + 1);
-	                            //word = "";
-	                        }
-	                        word = "";
-	                    } else //lettre normale
-	                        {
-	                            word += c;
-	                        }
-	                }
-
-	                if (word.length + 1 > SpaceLeft) {
-	                    //debug.log("BACKSLASH " + word);
-	                    finaltext += '\n';
-	                }
-	                finaltext += word; //last word
-
-	                var strings = finaltext.split("\n");
-
-	                var x = 0;
-	                var y = 0;
-
-	                var path;
-	                if (strings.length === 0) {
-	                    strings.push(finaltext);
-	                    // ajout sylvie
-	                    this.lastLine = finaltext;
-	                } else {
-	                    this.lastLine = strings[strings.length - 1];
-	                }
-	                this.nbLines = strings.length;
-
-	                for (var k in strings) {
-	                    var s = strings[k];
-	                    //debug.log(s);
-	                    if (this.needsComputeTextSize) {
-	                        this._textSize = this.font.getTextSize(s, this.style.fontSize);
-
-	                        if (this.style.textAlign === "center") {
-	                            x = this._width / 2 - this._textSize.width / 2;
-	                        } else if (this.style.textAlign === "end" || this.style.textAlign === "right") {
-	                            x = this._width - this._textSize.width;
-	                        } else if (this.style.textAlign === "left" || this.style.textAlign === "start") {
-	                            // ajout sylvie
-	                            if (k === 0) {
-	                                //console.log(this.precLine)
-	                                x = this.font.getTextSize(this.precLine, this.style.fontSize).width + this.style.textHorizontalMargin;
-	                                //x = 0 + this.style.textHorizontalMargin;
-	                            } else {
-	                                x = 0 + this.style.textHorizontalMargin;
-	                            }
-	                        }
-	                        var offset = 0;
-	                        if (this.style.textVerticalAlign === "center") {
-	                            if (strings.length > 1) {
-	                                offset = k - (strings.length - 1) / 2;
-	                            }
-	                            y = this._height / 2 + this._textSize.height / 2 + offset * this.style.fontSize;
-	                        } else if (this.style.textVerticalAlign === "top") {
-	                            offset = k;
-	                            y = this.style.fontSize + offset * this.style.fontSize + this.style.textVerticalMargin;
-	                        } else if (this.style.textVerticalAlign === "bottom") {
-	                            //TO DO !!!!
-	                            offset = k;
-	                            y = offset * this.style.fontSize;
-	                        }
-
-	                        //position du curseur
-	                        this.cursorx = x + this._textSize.width;
-	                        this.cursory = y; //+this._textSize.height/2;
-	                    }
-	                    path = this.font.getFont().getPath(s, x, y, this.style.fontSize);
-	                    //context.globalAlpha = this.style.colorAlpha;
-	                    path.fill = "#" + this.style.color.getHexString();
-	                    path.draw(context);
-	                }
-	            }
-	            if (!this._texture) {
-	                this._texture = new Texture$1({ canvas: this._canvas });
-	            } else {
-	                this._texture.dispose();
-	            }
-
-	            this._texture.fromCanvas(this._canvas);
-
-	            this.mesh.material.setTexture(this._texture);
-	        }
-
-	        /**
-	        Creates a text Label.
-	        @method createTextLabel
-	        @static
-	        @deprecated
-	        @param {String} text text to render on the Label.
-	        @param {Object} font Font object.
-	        @param {Number} fontSize The font Size (in pixels).
-	        @param {String} align the text alignment ("center", "end", "left", "right", "start").
-	        @param {Number} width Label width in pixels.
-	        @param {Number} height Label height in pixels.
-	        @param {Color} color the Label text color.
-	        @param {Color} backgroundColor the background color.
-	        @param {Texture} texture the background Texture.
-	         */
-
-	    }, {
-	        key: 'createTextLabel',
-	        value: function createTextLabel(text, font, fontSize, align, width, height, color, backgroundColor, texture) {
-	            var labelTest = new Label(text, font, width, height);
-	            labelTest.style.fontSize = fontSize;
-	            labelTest.style.color = color;
-	            if (backgroundColor !== undefined) {
-	                labelTest.style.hasBackground = true;
-	                labelTest.style.backgroundColor = backgroundColor;
-	            } else {
-	                labelTest.style.hasBackground = false;
-	            }
-	            labelTest.style.textAlign = align; //"center|end|left|right|start"
-	            if (texture !== undefined) {
-	                labelTest.material.setTexture(texture);
-	                labelTest.transform.setLocalScale(width, height, 1);
-	            } else {
-	                labelTest.render();
-	            }
-	            return labelTest;
-	        }
-	    }]);
-	    return Label;
-	}(Base);
-
-	// module exports
+	function _classCallCheck$16(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Transform = function () {
 
@@ -4959,7 +3925,7 @@
 	     @uses {Math}
 	    */
 	    function Transform(obj) {
-	        classCallCheck(this, Transform);
+	        _classCallCheck$16(this, Transform);
 
 	        this.mobObject = obj; //used in children array to avoid confusion between three and mob objects
 
@@ -4969,8 +3935,6 @@
 	            this.entity = obj._camera;
 	        } else if (obj instanceof Light) {
 	            this.entity = obj.light;
-	        } else if (obj instanceof Label) {
-	            this.entity = obj.mesh.mesh;
 	        }
 
 	        this.children = [];
@@ -4983,7 +3947,7 @@
 	    */
 
 
-	    createClass(Transform, [{
+	    _createClass$11(Transform, [{
 	        key: 'lookAt',
 	        value: function lookAt(vector) {
 	            this.entity.lookAt(vector);
@@ -5064,6 +4028,19 @@
 	        key: 'getLocalEulerAngles',
 	        value: function getLocalEulerAngles() {
 	            return new Vector3$1(_Math.radToDeg(this.entity.rotation.x) % 360, _Math.radToDeg(this.entity.rotation.y) % 360, _Math.radToDeg(this.entity.rotation.z) % 360);
+	        }
+
+	        /**
+	         * Defines the oreder of application for rotation axis.
+	         * Default is 'XYZ', others are'YZX', 'ZXY', 'XZY', 'YXZ' and 'ZYX'
+	         * @method setLocalRotationOrder
+	         * @param {string} order one of 'XYZ', 'YZX', 'ZXY', 'XZY', 'YXZ' and 'ZYX'
+	         */
+
+	    }, {
+	        key: 'setLocalRotationOrder',
+	        value: function setLocalRotationOrder(val) {
+	            this.entity.rotation.order = val;
 	        }
 
 	        /**
@@ -5493,7 +4470,7 @@
 	            var vector = new THREE.Vector3(nx, ny, 1);
 	            var camera = cam.transform.entity;
 
-	            var ray = raycaster.setFromCamera(vector, camera);
+	            raycaster.setFromCamera(vector, camera);
 
 	            var intersects = raycaster.intersectObjects([this.entity]);
 
@@ -5505,10 +4482,10 @@
 	                temp.uv = intersects[0].uv;
 	                temp.distance = intersects[0].distance;
 	                return temp;
-	            } else // there are no intersections
-	                {
-	                    return null;
-	                }
+	            }
+
+	            // there are no intersections
+	            return null;
 	        }
 
 	        /**
@@ -5539,6 +4516,8 @@
 	                return { x: vector.x,
 	                    y: vector.y };
 	            }
+
+	            return null;
 	        }
 
 	        /**
@@ -5625,34 +4604,19 @@
 	            return this.entity.visible;
 	        }
 	    }]);
+
 	    return Transform;
 	}();
 
 	// module exports
 
-	/**
-	 A Mesh is the aggregation of a geomtery, made of vertices (Vector3 Array), texture coordinates (or uv, Vector2 Array), vertexColor (Color Array) and various methods to create and modify 3D objects that have a material (see {{#crossLink "Material"}}{{/crossLink}}) and a transform (see {{#crossLink "Transform"}}{{/crossLink}}).
+	var _createClass$9 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	Primitive types are documented in their respective private construction methods :
-	<ul>
-	<li>plane : a 4 points defined rectangular plane, see <a href="#method_constructPlane">constructPlane</a></li>
-	<li>quad  : a 4 points defined quadrilateral shape, see <a href="#method_constructQuad">constructQuad</a></li>
-	<li>box : a 6 faces defined 3D box with width, height and depth, see <a href="#method_constructBox">constructBox</a></li>
-	<li>cube : a 3D cube, see <a href="#method_constructCube">constructCube</a></li>
-	<li>sphere : a 3D sphere, see <a href="#method_constructSphere">constructSphere</a></li>
-	<li>circle : a flat circle, see <a href="#method_constructCircle">constructCircle</a></li>
-	<li>cylinder : a 3D cylinder, see <a href="#method_constructCylinder">constructCylinder</a></li>
-	<li>icosahedron : a 3D icosahedron, see <a href="#method_constructIcosahedron">constructIcosahedron</a></li>
-	<li>octahedron : a 3D octahedron, see <a href="#method_constructOctahedron">constructOctahedron</a></li>
-	<li>text : a 3D text extruded frome a typeface, see <a href="#method_constructText">constructText</a></li>
-	<li>node : a 3D node, to create parent/child hierarchy structure, see <a href="#method_constructNode">constructNode</a></li>
-	<li>line : a 2 points defined line, see <a href="#method_constructLine">constructLine</a></li>
-	<li>sprite : a billboard textured plane, see <a href="#method_constructSprite">constructSprite</a></li>
-	<li>arc : a flat coordinates generated arc, see <a href="#method_constructArc">constructArc</a></li>
-	</u>
+	function _possibleConstructorReturn$10(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	  @class Mesh
-	 */
+	function _inherits$10(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _classCallCheck$14(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Mesh$1 = function () {
 	    /**
@@ -5665,39 +4629,39 @@
 	    *     {
 	    *         var M;
 	    *         var R;
-	    *     
+	    *
 	    *         var camera;
 	    *         var light;
 	    *         var light2;
-	    *     
+	    *
 	    *         var circle1;
 	    *         var circle2;
-	    *     
+	    *
 	    *         this.setup = function()
 	    *         {
-	    *     
+	    *
 	    *             M = this.getContext();
-	    *     
+	    *
 	    *             R = new Mobilizing.Renderer3D();
 	    *             M.addComponent(R);
-	    *     
+	    *
 	    *             var camera = new Mobilizing.Camera();
 	    *             camera.setFarPlane(100000);
 	    *             R.addCamera(camera);
-	    *     
+	    *
 	    *             light = new Mobilizing.Light();
 	    *             light.setIntensity(1.2);
 	    *             light.transform.setLocalPosition(20,20,100);
 	    *             R.addToCurrentScene(light);
-	    *     
+	    *
 	    *             light2 = new Mobilizing.Light();
 	    *             light2.transform.setLocalPosition(-20,-20,-10);
 	    *             R.addToCurrentScene(light2);
-	    *     
+	    *
 	    *             circle1 = new Mobilizing.Mesh({primitive:"circle"});
 	    *             circle1.transform.setLocalPosition(-2,0,-15);
 	    *             R.addToCurrentScene(circle1);
-	    *     
+	    *
 	    *             circle2 = new Mobilizing.Mesh({primitive:"circle",
 	    *                                            radius:2,
 	    *                                            segments:20,
@@ -5709,7 +4673,7 @@
 	    *             R.addToCurrentScene(circle2);
 	    *             console.log(circle2);
 	    *         };
-	    *     
+	    *
 	    *         var r = 0;
 	    *         this.update = function()
 	    *         {
@@ -5723,7 +4687,7 @@
 	    * @param {Object} [params.geometry=undefined] An already existing geometry
 	    */
 	    function Mesh$$1(params) {
-	        classCallCheck(this, Mesh$$1);
+	        _classCallCheck$14(this, Mesh$$1);
 
 	        this.primitive = getOrDefault(params, "primitive", "box");
 
@@ -5824,22 +4788,22 @@
 
 	    /**
 	    * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	    * 
+	    *
 	    * A node is an empty 3D object. It has no geometry, but has a tansform, therefore it can be used to create the root element for grouping objects. In Mobilizing, transforms represents a kind of invisible coordinate axis that can be tansformed in space. We use it to construct parent/child relationships, like in `object.transform.addChild(otherObject.transform)`
-	    * 
+	    *
 	    * @method constructNode
 	    */
 
 
-	    createClass(Mesh$$1, [{
+	    _createClass$9(Mesh$$1, [{
 	        key: 'constructNode',
 	        value: function constructNode() {
-	            this.mesh = new THREE$1.Object3D();
+	            this.mesh = new THREE.Object3D();
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructLine
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.point1=Vector3(0, -1, 0)] 1st point 3D coordinates
@@ -5850,23 +4814,22 @@
 	        key: 'constructLine',
 	        value: function constructLine(params) {
 	            //line have special material so we must manage it specifically
-	            this._geometry = new THREE$1.Geometry();
+	            this._geometry = new THREE.Geometry();
 	            this._geometry.dynamic = true;
 
 	            var point1 = getOrDefault(params, "point1", new Vector3$1(0, -1, 0));
 	            var point2 = getOrDefault(params, "point2", new Vector3$1(0, 1, 0));
 
-	            console.log(point1, point2);
 	            this._geometry.vertices.push(point1, point2);
 
 	            this.material = new Material({ type: "line" });
 
-	            this.mesh = new THREE$1.Line(this._geometry, this.material._material);
+	            this.mesh = new THREE.Line(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructSprite
 	        */
 
@@ -5874,12 +4837,12 @@
 	        key: 'constructSprite',
 	        value: function constructSprite() {
 	            this.material = new Material({ type: "sprite" });
-	            this.mesh = new THREE$1.Sprite(this.material._material);
+	            this.mesh = new THREE.Sprite(this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructPlane
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.width=1] the plane width in world unit
@@ -5899,17 +4862,17 @@
 	            var widthSegments = getOrDefault(params, "widthSegments", segments);
 	            var heightSegments = getOrDefault(params, "heightSegments", segments);
 
-	            this._geometry = new THREE$1.PlaneBufferGeometry(width, height, widthSegments, heightSegments);
+	            this._geometry = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructQuad
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.point1=Vector2(-1,  1)] upper left point
@@ -5926,24 +4889,24 @@
 	            var point3 = getOrDefault(params, "point3", new Vector2$1(1, -1));
 	            var point4 = getOrDefault(params, "point4", new Vector2$1(-1, -1));
 
-	            var rectShape = new THREE$1.Shape();
+	            var rectShape = new THREE.Shape();
 	            rectShape.moveTo(point1.x, point1.y);
 	            rectShape.lineTo(point2.x, point2.y);
 	            rectShape.lineTo(point3.x, point3.y);
 	            rectShape.lineTo(point4.x, point4.y);
 	            rectShape.lineTo(point1.x, point1.y);
 
-	            this._geometry = new THREE$1.ShapeGeometry(rectShape);
+	            this._geometry = new THREE.ShapeGeometry(rectShape);
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructCube
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.size=1] the cube dimensions in world unit
@@ -5962,17 +4925,17 @@
 	            var heightSegments = getOrDefault(params, "heightSegments", segments);
 	            var depthSegments = getOrDefault(params, "depthSegments", segments);
 
-	            this._geometry = new THREE$1.BoxGeometry(size, size, size, widthSegments, heightSegments, depthSegments);
+	            this._geometry = new THREE.BoxGeometry(size, size, size, widthSegments, heightSegments, depthSegments);
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructBox
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.width=1] the box width in world unit
@@ -5991,22 +4954,28 @@
 	            var width = getOrDefault(params, "width", 1);
 	            var height = getOrDefault(params, "height", 1);
 	            var depth = getOrDefault(params, "depth", 1);
-	            var segments = getOrDefault(params, "segments", 1);
+	            var segments = getOrDefault(params, "segments", undefined);
 	            var widthSegments = getOrDefault(params, "widthSegments", 1);
 	            var heightSegments = getOrDefault(params, "heightSegments", 1);
 	            var depthSegments = getOrDefault(params, "depthSegments", 1);
 
-	            this._geometry = new THREE$1.BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments);
+	            if (segments) {
+	                widthSegments = segments;
+	                heightSegments = segments;
+	                depthSegments = segments;
+	            }
+
+	            this._geometry = new THREE.BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments);
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructSphere
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.radius=1] the sphere radius in world unit
@@ -6032,18 +5001,18 @@
 	            var thetaStart = getOrDefault(params, "thetaStart", 0);
 	            var thetaLength = getOrDefault(params, "thetaLength", Math.PI);
 
-	            this._geometry = new THREE$1.SphereGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
+	            this._geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
 	            this._geometry.dynamic = true;
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructCircle
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.radius=1] the circle radius in world unit
@@ -6061,19 +5030,20 @@
 	            var thetaStart = getOrDefault(params, "thetaStart", 0);
 	            var thetaLength = getOrDefault(params, "thetaLength", Math.PI * 2);
 
-	            this._geometry = new THREE$1.CircleGeometry(radius, segments, thetaStart, thetaLength);
+	            this._geometry = new THREE.CircleGeometry(radius, segments, thetaStart, thetaLength);
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructCylinder
 	        * @param {Object} params Parameters object, given by the constructor.
+	        * @param {Number} [params.radius=1] the cylinder top and bottom radius in world unit
 	        * @param {Number} [params.radiusTop=1] the cylinder top radius in world unit
 	        * @param {Number} [params.radiusBottom=1] the cylinder bottom radius in world unit
 	        * @param {Number} [params.height=1] the cylinder height in world unit
@@ -6081,15 +5051,16 @@
 	        * @param {Number} [params.heightSegments=1] vertical tesselation size
 	        * @param {Number} [params.openEnded=false] close the ends of the shape or not
 	        * @param {Number} [params.thetaStart=0] vertical angle start of the cylinder
-	        * @param {Number} [params.thetaLength=Math.PI] vertical length of the cylinder
+	        * @param {Number} [params.thetaLength=Math.PI*2] vertical length of the cylinder
 	        */
 
 	    }, {
 	        key: 'constructCylinder',
 	        value: function constructCylinder(params) {
 	            //radiusTop radiusBottom height radiusSegments heightSegments openEnded thetaStart thetaLength
-	            var radiusTop = getOrDefault(params, "radiusTop", 1);
-	            var radiusBottom = getOrDefault(params, "radiusBottom", 1);
+	            var radius = getOrDefault(params, "radius", 1);
+	            var radiusTop = getOrDefault(params, "radiusTop", radius);
+	            var radiusBottom = getOrDefault(params, "radiusBottom", radius);
 	            var height = getOrDefault(params, "height", 1);
 	            var radiusSegments = getOrDefault(params, "radiusSegments", 32);
 	            var heightSegments = getOrDefault(params, "heightSegments", 1);
@@ -6097,17 +5068,17 @@
 	            var thetaStart = getOrDefault(params, "thetaStart", 0);
 	            var thetaLength = getOrDefault(params, "thetaLength", Math.PI * 2);
 
-	            this._geometry = new THREE$1.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded, thetaStart, thetaLength);
+	            this._geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded, thetaStart, thetaLength);
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructIcosahedron
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.radius=1] the icosahedron radius in world unit
@@ -6121,18 +5092,18 @@
 	            var radius = getOrDefault(params, "radius", 1);
 	            var detail = getOrDefault(params, "detail", 0);
 
-	            this._geometry = new THREE$1.IcosahedronGeometry(radius, detail);
+	            this._geometry = new THREE.IcosahedronGeometry(radius, detail);
 	            this._geometry.dynamic = true;
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructOctahedron
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.radius=1] the octahedron radius in world unit
@@ -6145,20 +5116,20 @@
 	            var radius = getOrDefault(params, "radius", 1);
 	            var detail = getOrDefault(params, "detail", 0);
 
-	            this._geometry = new THREE$1.OctahedronGeometry(radius, detail);
+	            this._geometry = new THREE.OctahedronGeometry(radius, detail);
 	            this._geometry.dynamic = true;
 
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * 3D Text is created from a typeface represented in JSON, please use <a href="http://gero3.github.io/facetype.js/">facetype.js</a> to generate a JSON from a font file. The generated JSON must be loader with a Loader.load.JSON() method and passed to the constructor.
-	        * 
+	        *
 	        * @method constructText
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.text="text"] the text string
@@ -6178,9 +5149,9 @@
 	            var segments = getOrDefault(params, "segments", 5);
 	            var font = getOrDefault(params, "font", undefined);
 
-	            var threeFont = new THREE$1.Font(font);
+	            var threeFont = new THREE.Font(font);
 
-	            this._geometry = new THREE$1.TextGeometry(text, { size: fontSize,
+	            this._geometry = new THREE.TextGeometry(text, { size: fontSize,
 	                height: height,
 	                curveSegments: segments,
 	                font: threeFont,
@@ -6193,12 +5164,12 @@
 	            //manage the material according to the passed params, see the attachMaterial method below
 	            this.attachMaterial(this.material);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	        }
 
 	        /**
 	        * Geometry and resulting mesh method, you should not use directly this method as it is used internally by the constructor. This documentation only aims to help you identify the possibles parameters for a particular shape.
-	        * 
+	        *
 	        * @method constructArc
 	        * @param {Object} params Parameters object, given by the constructor.
 	        * @param {Number} [params.radius=1] the arc radius in world unit
@@ -6206,14 +5177,14 @@
 	        * @param {Number} [params.segments=32] the segments number (detail level)
 	        * @param {Number} [params.startAngle=0] 0 and Math.PI*2 are at 3 o'clock, value is counter clock-wise
 	        * @param {Number} [params.endAngle=Math.PI*2] 0 and Math.PI*2 are at 3 o'clock, value is counter clock-wise
-	        * @param {Color} [params.color=Color.white] 
-	        * @param {Number} [params.center=Vector3.zero] 
+	        * @param {Color} [params.color=Color.white]
+	        * @param {Number} [params.center=Vector3.zero]
 	        */
 
 	    }, {
 	        key: 'constructArc',
 	        value: function constructArc(params) {
-	            this._geometry = new THREE$1.Geometry();
+	            this._geometry = new THREE.Geometry();
 	            this._geometry.dynamic = true;
 
 	            var radius = getOrDefault(params, "radius", 1);
@@ -6240,7 +5211,7 @@
 
 	        /**
 	         * Construct an empty and unfinished Mesh for which a geometry must be constructed. Once filled with vertices, constructMesh method must be called, or a method generating a complete Mesh must be used (i.e generateFillMesh)
-	         * 
+	         *
 	         * @method constructCustom
 	         * @param {Object} params Parameters object, given by the constructor.
 	         */
@@ -6248,7 +5219,7 @@
 	    }, {
 	        key: 'constructCustom',
 	        value: function constructCustom(params) {
-	            this._geometry = getOrDefault(params, "geometry", new THREE$1.Geometry());
+	            this._geometry = getOrDefault(params, "geometry", new THREE.Geometry());
 	            this._geometry.dynamic = true;
 	        }
 
@@ -6267,7 +5238,7 @@
 	        key: 'generateFillMesh',
 	        value: function generateFillMesh(vertices) {
 	            //main shape to hold paths
-	            var shape = new THREE$1.Shape();
+	            var shape = new THREE.Shape();
 
 	            //draw shape
 	            shape.moveTo(vertices[0].x, vertices[0].y);
@@ -6277,7 +5248,7 @@
 	            shape.closePath();
 
 	            //make a geometry from the shape
-	            var geometry = new THREE$1.ShapeGeometry(shape);
+	            var geometry = new THREE.ShapeGeometry(shape);
 	            //construct the Mob Mesh
 	            this._geometry = geometry;
 	            this.constructMesh();
@@ -6326,7 +5297,7 @@
 	        value: function updateStroke(mesh, inflateValue) {
 	            var shape = Mesh$$1.generateStrokeShape(mesh, inflateValue);
 
-	            var geometry = new THREE$1.ShapeGeometry(shape);
+	            var geometry = new THREE.ShapeGeometry(shape);
 	            this.setVertices(geometry.vertices);
 	            this.updateMesh();
 	        }
@@ -6351,7 +5322,7 @@
 
 	        /**
 	        * Compute and returns the bounding box of the current geometry  or Node, which is an object made of 2 Vector3.
-	        * 
+	        *
 	        * @method getBoundingBox
 	        * @return {Object} boundingBox object {min: new Vector3, max: new Vector3}
 	        */
@@ -6360,17 +5331,17 @@
 	                if (!this._geometry.boundingBox) {
 	                    this._geometry.computeBoundingBox();
 	                }
+
 	                return this._geometry.boundingBox;
-	            } else //no geometry, let three do the math
-	                {
-	                    var bbox = new THREE$1.Box3().setFromObject(this.mesh);
-	                    return bbox;
-	                }
+	            }
+
+	            //no geometry, let three do the math
+	            return new THREE.Box3().setFromObject(this.mesh);
 	        }
 
 	        /**
 	        * Compute and returns the bounding sphere of the current geometry or Node, which is an object with a radius :
-	        * 
+	        *
 	        * @method getBoundingSphere
 	        * @return {Object} boundingSphere object {radius: number}
 	        */
@@ -6382,12 +5353,15 @@
 	                if (!this._geometry.boundingSphere) {
 	                    this._geometry.computeBoundingSphere();
 	                }
+
 	                return this._geometry.boundingSphere;
-	            } else //no geometry, let three do the math
-	                {
-	                    var bbox = new THREE$1.Box3().setFromObject(this.mesh);
-	                    return bbox.getBoundingSphere();
-	                }
+	            }
+
+	            //no geometry, let three do the math
+
+	            var bbox = new THREE.Box3().setFromObject(this.mesh);
+
+	            return bbox.getBoundingSphere();
 	        }
 
 	        /*setIndex(val){
@@ -6423,10 +5397,10 @@
 
 	            this.transform.setLocalPosition(Vector3$1.zero.clone());
 
-	            var uv1 = new THREE$1.Vector2(0, uvScale);
-	            var uv2 = new THREE$1.Vector2(1, uvScale);
-	            var uv3 = new THREE$1.Vector2(1, 0);
-	            var uv4 = new THREE$1.Vector2(0, 0);
+	            var uv1 = new THREE.Vector2(0, uvScale);
+	            var uv2 = new THREE.Vector2(1, uvScale);
+	            var uv3 = new THREE.Vector2(1, 0);
+	            var uv4 = new THREE.Vector2(0, 0);
 
 	            this.pushQuad(p1, p2, p3, p4, uv1, uv2, uv3, uv4);
 	            this.material.setColor(color);
@@ -6451,9 +5425,9 @@
 	            var center = getOrDefault(params, "center", new Vector3$1(0, 0, 0));
 	            var radius = getOrDefault(params, "radius", 1);
 	            var segments = getOrDefault(params, "segments", 32);
-	            var color = getOrDefault(params, "color");
-	            var width = getOrDefault(params, "width");
-	            var uvScale = getOrDefault(params, "uvScale", 1);
+	            // let color  = getOrDefault(params, "color",);
+	            // let width  = getOrDefault(params, "width",);
+	            // let uvScale  = getOrDefault(params, "uvScale", 1);
 
 	            this.createArc({ "center": center,
 	                "radius": radius,
@@ -6533,7 +5507,7 @@
 	            this.material = new Material({ type: "basic" }); //basic
 	            this.material.setColor(color);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 
 	            this.transform = new Transform(this);
 	            this.transform.setLocalPosition(center);
@@ -6557,7 +5531,7 @@
 
 	        /**
 	        * createDiscSector
-	        * @method undefined
+	        * @method createDiscSector
 	        * @param {Number} center
 	        * @param {Number} radius
 	        * @param {Number} segments
@@ -6576,7 +5550,7 @@
 	            var segments = getOrDefault(params, "segments", 32);
 	            var startAngle = getOrDefault(params, "startAngle", 0);
 	            var endAngle = getOrDefault(params, "endAngle", Math.PI * 2);
-	            var color = getOrDefault(params, "color", Color$1.white.clone());
+	            // let color = getOrDefault(params,"color", Color.white.clone());
 
 	            var points = [];
 	            var interval = Math.PI * 2 / segments;
@@ -6611,7 +5585,7 @@
 	            this.material = new Material({ type: "basic" }); //basic
 	            //this.material.setColor(color);
 
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 
 	            this.transform = new Transform(this);
 	            this.transform.setLocalPosition(center);
@@ -6626,7 +5600,7 @@
 	        key: 'constructMesh',
 	        value: function constructMesh() {
 	            this.material = new Material({ type: "basic" }); //basic
-	            this.mesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            this.mesh = new THREE.Mesh(this._geometry, this.material._material);
 	            this.transform = new Transform(this);
 	            this._geometry.computeBoundingBox();
 	        }
@@ -6659,7 +5633,7 @@
 	    }, {
 	        key: 'pushFace',
 	        value: function pushFace(i1, i2, i3) {
-	            var face = new THREE$1.Face3(i1, i2, i3);
+	            var face = new THREE.Face3(i1, i2, i3);
 	            this._geometry.faces.push(face);
 	            this._geometry.elementsNeedUpdate = true;
 	            return face;
@@ -6710,14 +5684,14 @@
 	        value: function pushTriangle(v1, v2, v3) {
 	            var i = this._geometry.vertices.length;
 	            this._geometry.vertices.push(v1, v2, v3);
-	            this._geometry.faces.push(new THREE$1.Face3(i + 0, i + 1, i + 2));
+	            this._geometry.faces.push(new THREE.Face3(i + 0, i + 1, i + 2));
 	            this._geometry.verticesNeedUpdate = true;
 	            this._geometry.elementsNeedUpdate = true;
 	        }
 
 	        /**
 	        * Adds a Quad to the current geometry
-	        * 
+	        *
 	        * @method pushQuad
 	        * @param {Vector3} v1 vertex coordinates of the Quad
 	        * @param {Vector3} v2 vertex coordinates of the Quad
@@ -6736,8 +5710,8 @@
 	            //var fi = this._geometry.faces.length;
 	            this._geometry.vertices.push(v1, v2, v3, v4);
 
-	            this._geometry.faces.push(new THREE$1.Face3(i + 0, i + 1, i + 2));
-	            this._geometry.faces.push(new THREE$1.Face3(i + 0, i + 2, i + 3));
+	            this._geometry.faces.push(new THREE.Face3(i + 0, i + 1, i + 2));
+	            this._geometry.faces.push(new THREE.Face3(i + 0, i + 2, i + 3));
 
 	            this._geometry.faceVertexUvs[0].push([uv1, uv2, uv3]);
 	            this._geometry.faceVertexUvs[0].push([uv1, uv3, uv4]);
@@ -6749,7 +5723,7 @@
 
 	        /**
 	        * compute Face and Vertex Normals for the current geometry
-	        * 
+	        *
 	        * @method computeNormals
 	        */
 
@@ -6764,7 +5738,7 @@
 
 	        /**
 	        * updateMesh
-	        * 
+	        *
 	        * @method updateMesh
 	        */
 
@@ -6867,7 +5841,7 @@
 	    }, {
 	        key: 'setVertexColors',
 	        value: function setVertexColors(colors) {
-	            this.material._material.vertexColors = THREE$1.VertexColors;
+	            this.material._material.vertexColors = THREE.VertexColors;
 	            this._geometry.colors = colors;
 	            this._geometry.colorsNeedUpdate = true;
 	        }
@@ -6960,7 +5934,7 @@
 
 	        /**
 	        * Set the rotation around y axis of the vertices (not the transform!)
-	        * 
+	        *
 	        * @method setRotationY
 	        * @param {float} value Rotation value in degree
 	        */
@@ -6973,7 +5947,7 @@
 
 	        /**
 	        * Set the rotation around z axis of the vertices (not the transform!)
-	        * 
+	        *
 	        * @method setRotationZ
 	        * @param {float} value Rotation value in degree
 	        */
@@ -6986,7 +5960,7 @@
 
 	        /**
 	        * Set the visibility of this mesh
-	        * 
+	        *
 	        * @method setVisible
 	        * @param {Boolean} value visible or not
 	        */
@@ -6999,7 +5973,7 @@
 
 	        /**
 	        * Get the visibility of this mesh
-	        * 
+	        *
 	        * @method getVisible
 	        * @return {Boolean} value visible or not
 	        */
@@ -7017,7 +5991,7 @@
 
 	        /**
 	        * Updates this mesh material
-	        * 
+	        *
 	        * @method updateMaterial
 	        * @private
 	        */
@@ -7049,7 +6023,7 @@
 	            } else if (typeof material === "string") {
 	                this.material = new Material({ type: material });
 	            }
-	            var tempMesh = new THREE$1.Mesh(this._geometry, this.material._material);
+	            var tempMesh = new THREE.Mesh(this._geometry, this.material._material);
 	            var tempTransform = this.transform;
 
 	            this.mesh = tempMesh;
@@ -7082,15 +6056,174 @@
 	                this.updateMaterial();
 	            }
 	        }
+
+	        /**
+	        * setCastShadow
+	        * @method setCastShadow
+	        * @param {Boolean} enabled
+	        */
+
 	    }, {
 	        key: 'setCastShadow',
 	        value: function setCastShadow(enabled) {
 	            this.mesh.castShadow = enabled;
 	        }
+
+	        /**
+	        * setReceiveShadow
+	        * @method setReceiveShadow
+	        * @param {Boolean} enabled
+	        */
+
 	    }, {
 	        key: 'setReceiveShadow',
 	        value: function setReceiveShadow(enabled) {
 	            this.mesh.receiveShadow = enabled;
+	        }
+
+	        /**
+	        * Compute the intersection points between a plane and a mesh !Works ONLY is this mesh is "plane" primitive made!
+	        * @method getIntersectionsPoints
+	        * @param {Mesh} mesh the mesh to use for the intersections computation
+	        */
+
+	    }, {
+	        key: 'getIntersectionsPoints',
+	        value: function getIntersectionsPoints(mesh) {
+	            var _this = this;
+
+	            if (this.primitive === "plane") {
+
+	                var plane = this.mesh;
+	                var obj = mesh.mesh;
+
+	                var intersectionPoints = [];
+
+	                var a = new THREE.Vector3(),
+	                    b = new THREE.Vector3(),
+	                    c = new THREE.Vector3();
+
+	                var planePointA = new THREE.Vector3(),
+	                    planePointB = new THREE.Vector3(),
+	                    planePointC = new THREE.Vector3();
+
+	                var mathPlane = new THREE.Plane();
+
+	                plane.localToWorld(planePointA.copy(plane.geometry.vertices[plane.geometry.faces[0].a]));
+	                plane.localToWorld(planePointB.copy(plane.geometry.vertices[plane.geometry.faces[0].b]));
+	                plane.localToWorld(planePointC.copy(plane.geometry.vertices[plane.geometry.faces[0].c]));
+
+	                mathPlane.setFromCoplanarPoints(planePointA, planePointB, planePointC);
+
+	                var uvs = mesh.getUVs(0);
+
+	                obj.geometry.faces.forEach(function (face, index) {
+
+	                    //faces vertices
+	                    var fvA = obj.geometry.vertices[face.a];
+	                    var fvB = obj.geometry.vertices[face.b];
+	                    var fvC = obj.geometry.vertices[face.c];
+
+	                    //intersection management
+	                    obj.localToWorld(a.copy(fvA));
+	                    obj.localToWorld(b.copy(fvB));
+	                    obj.localToWorld(c.copy(fvC));
+
+	                    var lineAB = new THREE.Line3(a, b);
+	                    var lineBC = new THREE.Line3(b, c);
+	                    var lineCA = new THREE.Line3(c, a);
+
+	                    var lines = [lineAB, lineBC, lineCA];
+
+	                    for (var i in lines) {
+	                        //new object to fill
+	                        var intersectionPoint = {};
+
+	                        //search an intersection
+	                        _this.setPointOfIntersection(lines[i], mathPlane, intersectionPoint);
+
+	                        //if we have one, search for uvs
+	                        if (intersectionPoint.vertex) {
+	                            //uv management
+	                            var uvA = new Vector2$1();
+	                            var uvB = new Vector2$1();
+	                            var uvC = new Vector2$1();
+
+	                            var uvs_f = uvs[index];
+	                            uvA.copy(uvs_f[0]);
+	                            uvB.copy(uvs_f[1]);
+	                            uvC.copy(uvs_f[2]);
+
+	                            var wIntersectionPoint = new Vector3$1();
+
+	                            obj.worldToLocal(wIntersectionPoint.copy(intersectionPoint.vertex));
+
+	                            var uv = _this.getUVFromIntersectionPoint(wIntersectionPoint, fvA, fvB, fvC, uvA, uvB, uvC);
+	                            intersectionPoint.uv = uv;
+
+	                            intersectionPoints.push(intersectionPoint);
+	                        }
+	                    }
+	                });
+
+	                return intersectionPoints;
+	            }
+	        }
+
+	        /**
+	        * setPointOfIntersection
+	        * @private
+	        * @method setPointOfIntersection
+	        * @param {Object} line three.js line
+	        * @param {Object} plane three.js plane
+	        * @param {Object} intersectionPoint object to be used to store the resulting Vector3
+	        * @return {Object} description
+	        */
+
+	    }, {
+	        key: 'setPointOfIntersection',
+	        value: function setPointOfIntersection(line, plane, intersectionPoint) {
+
+	            var pointOfIntersection = plane.intersectLine(line);
+
+	            if (pointOfIntersection) {
+	                var v = new Vector3$1(pointOfIntersection.x, pointOfIntersection.y, pointOfIntersection.z);
+	                intersectionPoint.vertex = v;
+	            }
+	        }
+
+	        /**
+	        * getUVFromIntersectionPoint
+	        * @private
+	        * @method getUVFromIntersectionPoint
+	        * @param {Vector3} point the intersection point as a Vector3
+	        * @param {Vector3} p1 vertices of face1
+	        * @param {Vector3} p2 vertices of face2
+	        * @param {Vector3} p3 vertices of face3
+	        * @param {Vector2} uv1 uvs of face1
+	        * @param {Vector2} uv2 uvs of face2
+	        * @param {Vector2} uv3 uvs of face3
+	        * @return {Vector2} Uvs
+	        */
+
+	    }, {
+	        key: 'getUVFromIntersectionPoint',
+	        value: function getUVFromIntersectionPoint(point, p1, p2, p3, uv1, uv2, uv3) {
+
+	            var barycoord = new Vector3$1();
+
+	            THREE.Triangle.barycoordFromPoint(point, p1, p2, p3, barycoord);
+
+	            uv1.multiplyScalar(barycoord.x);
+	            uv2.multiplyScalar(barycoord.y);
+	            uv3.multiplyScalar(barycoord.z);
+
+	            uv1.add(uv2).add(uv3);
+
+	            var tempUvs = uv1.clone();
+	            var uvs = new Vector2$1(tempUvs.x, tempUvs.y);
+
+	            return uvs;
 	        }
 
 	        //============
@@ -7110,7 +6243,7 @@
 	    }], [{
 	        key: 'generateStrokeShape',
 	        value: function generateStrokeShape(mesh, inflateValue) {
-	            var points = [];
+	            // let points = [];
 	            var innerGeom = mesh._geometry.clone();
 	            var outterGeom = mesh._geometry.clone();
 
@@ -7118,7 +6251,7 @@
 
 	            /*
 	             * Expand fill of convex polygon algorithm taken from
-	             * 
+	             *
 	             * https://stackoverflow.com/questions/3749678/expand-fill-of-convex-polygon
 	             * credits to Oren Trutner
 	             * Some addition to it by Dominique Cunin
@@ -7139,8 +6272,13 @@
 	                var v01 = new Vector2$1(pt1.x - pt0.x, pt1.y - pt0.y);
 	                var v12 = new Vector2$1(pt2.x - pt1.x, pt2.y - pt1.y);
 
-	                rot === "ccw" ? v01.rotate90CCW() : v01.rotate90CW();
-	                rot === "ccw" ? v12.rotate90CCW() : v12.rotate90CW();
+	                if (rot === 'ccw') {
+	                    v01.rotate90CCW();
+	                    v12.rotate90CCW();
+	                } else {
+	                    v01.rotate90CW();
+	                    v12.rotate90CW();
+	                }
 
 	                v01.normalize();
 	                v12.normalize();
@@ -7168,8 +6306,8 @@
 	            }
 
 	            //Shape and subPath
-	            var outterPath = new THREE$1.Shape();
-	            var innerPath = new THREE$1.Path();
+	            var outterPath = new THREE.Shape();
+	            var innerPath = new THREE.Path();
 
 	            outterPath.moveTo(outterGeom.vertices[0].x, outterGeom.vertices[0].y);
 	            innerPath.moveTo(innerGeom.vertices[0].x, innerGeom.vertices[0].y);
@@ -7211,17 +6349,14 @@
 	                var dot = v1.dot(v2);
 
 	                if (dot !== 0) {
-	                    if (v1.dot(v2) > 0) {
-	                        return true;
-	                        break;
-	                    } else {
-	                        return false;
-	                        break;
-	                    }
-	                } else {
-	                    console.log("dot product is 0");
+	                    return dot > 0;
 	                }
+
+	                console.log("dot product is 0");
 	            }
+
+	            return null;
+
 	            /*return vecDot(
 	                vecRot90CW({ x: p[1].x - p[0].x, y: p[1].y - p[0].y }),
 	                { x: p[2].x - p[1].x, y: p[2].y - p[1].y }) >= 0;*/
@@ -7241,7 +6376,7 @@
 	        value: function generateStrokeMesh(mesh, inflateValue) {
 	            var shape = Mesh$$1.generateStrokeShape(mesh, inflateValue);
 
-	            var geometry = new THREE$1.ShapeGeometry(shape);
+	            var geometry = new THREE.ShapeGeometry(shape);
 
 	            var strokeMesh = new Mesh$$1({ primitive: "custom", geometry: geometry });
 	            strokeMesh.constructMesh();
@@ -7251,7 +6386,7 @@
 	    }, {
 	        key: 'generateStrokeMeshFromShape',
 	        value: function generateStrokeMeshFromShape(shape) {
-	            var geometry = new THREE$1.ShapeGeometry(shape);
+	            var geometry = new THREE.ShapeGeometry(shape);
 
 	            var strokeMesh = new Mesh$$1({ primitive: "custom", geometry: geometry });
 	            strokeMesh.constructMesh();
@@ -7261,7 +6396,7 @@
 	        }
 	    }, {
 	        key: 'CreatePlane',
-	        value: function CreatePlane(width, height, segments, material) {
+	        value: function CreatePlane(width, height, segments /*, material*/) {
 	            var obj = new Mesh$$1({ primitive: "plane",
 	                width: width,
 	                height: height,
@@ -7307,7 +6442,7 @@
 	        value: function CreateText(text, font, fontSize, material, curveSegments, height) {
 	            var obj = new Mesh$$1({ primitive: "text",
 	                text: text,
-	                font: typeface,
+	                font: font,
 	                fontSize: fontSize,
 	                height: height,
 	                segments: curveSegments,
@@ -7331,8 +6466,8 @@
 	        value: function CreateSphere(radius, widthSegments, heightSegments, material) {
 	            var obj = new Mesh$$1({ primitive: "sphere",
 	                radius: radius,
-	                widthSegments: hsegments,
-	                heightSegments: vsegments,
+	                widthSegments: widthSegments,
+	                heightSegments: heightSegments,
 	                material: material
 	            });
 	            return obj;
@@ -7357,52 +6492,621 @@
 	            return obj;
 	        }
 	    }]);
+
 	    return Mesh$$1;
 	}();
 
-	/**
-	 * EdgesMesh class creates a hiddenline fashioned Mesh from any other Mesh. "Hard" edges only will be visible. he result is different from when a Mesh material is set to wireframe, as all the segment will not be visible. All the coplanar segment are erased here in a new geometry that is rendered with a "line" type material.
-	 * @class EdgesMesh
-	 * @extends Mesh
-	 * @constructor
-	 * @param {Object} params parameters this can contains the same parameters than Mesh class
-	 * @param {Mesh} params.mesh The existing Mesh to use for generate a new edge only Mesh (geometry and material)
-	 */
-
-
 	var EdgesMesh = function (_Mesh) {
-	    inherits(EdgesMesh, _Mesh);
+	    _inherits$10(EdgesMesh, _Mesh);
 
+	    /**
+	    * EdgesMesh class creates a hiddenline fashioned Mesh from any other Mesh. "Hard" edges only will be visible. he result is different from when a Mesh material is set to wireframe, as all the segment will not be visible. All the coplanar segment are erased here in a new geometry that is rendered with a "line" type material.
+	    * @class EdgesMesh
+	    * @extends Mesh
+	    * @constructor
+	    * @param {Object} params parameters this can contains the same parameters than Mesh class
+	    * @param {Mesh} params.mesh The existing Mesh to use for generate a new edge only Mesh (geometry and material)
+	    * @param
+	    */
 	    function EdgesMesh(params) {
-	        classCallCheck(this, EdgesMesh);
+	        _classCallCheck$14(this, EdgesMesh);
 
-	        var _params = getOrDefault(params, {});
-	        _params.threshold = getOrDefault(_params.threshold, undefined);
+	        var _this2 = _possibleConstructorReturn$10(this, (EdgesMesh.__proto__ || Object.getPrototypeOf(EdgesMesh)).call(this, params));
 
-	        var _this = possibleConstructorReturn(this, (EdgesMesh.__proto__ || Object.getPrototypeOf(EdgesMesh)).call(this, _params));
+	        _this2.inputMesh = getOrDefault(params, "mesh", undefined);
+	        _this2.threshold = getOrDefault(params, "threshold", 1);
 
-	        _this.material = undefined;
+	        _this2.material = undefined;
+	        _this2.material = new Material({ type: "line" });
 
-	        //this.mesh = new THREE.EdgesHelper(this.mesh, undefined, 90);
-	        _this.material = undefined;
-	        _this.material = new Material({ type: "line" });
+	        _this2.mesh = new THREE.LineSegments(new THREE.EdgesGeometry(_this2.inputMesh._geometry, _this2.threshold), _this2.material._material);
 
-	        if (_params.mesh) {
-	            //for imported objects
-	            _this.mesh = new THREE$1.LineSegments(new THREE$1.EdgesGeometry(_params.mesh.geometry, _params.threshold), _this.material._material);
-	            //console.log("tempMesh.geometry",_params.mesh);
-	        } else {
-	            _this.mesh = new THREE$1.LineSegments(new THREE$1.EdgesGeometry(_this._geometry, _params.threshold), _this.material._material);
-	        }
-	        //this.mesh.matrix = tempMesh.matrixWorld;
-	        _this.transform = undefined;
-	        _this.transform = new Transform(_this);
-
-	        return _this;
+	        _this2.transform = undefined;
+	        _this2.transform = new Transform(_this2);
+	        return _this2;
 	    }
 
 	    return EdgesMesh;
 	}(Mesh$1);
+
+	// module exports
+
+	var _createClass$8 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$13(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$9(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$9(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * A ray that emits from an origin in a certain direction.
+	 * @class Ray
+	 */
+
+	var Ray$1 = function (_THREE$Ray) {
+	    _inherits$9(Ray$$1, _THREE$Ray);
+
+	    function Ray$$1() {
+	        _classCallCheck$13(this, Ray$$1);
+
+	        return _possibleConstructorReturn$9(this, (Ray$$1.__proto__ || Object.getPrototypeOf(Ray$$1)).apply(this, arguments));
+	    }
+
+	    _createClass$8(Ray$$1, [{
+	        key: "intersectsMeshBox",
+
+	        /**
+	        * Test intersection between this ray and a mesh bounding box
+	        * @method intersectsMeshBox
+	        * @param {Mesh} mesh the mesh to test the ray with
+	        * @return {Boolean} intersection result
+	        */
+	        value: function intersectsMeshBox(mesh) {
+
+	            var bbox = new THREE.Box3();
+	            bbox.setFromObject(mesh.mesh);
+
+	            return this.intersectsBox(bbox);
+	        }
+	    }]);
+
+	    return Ray$$1;
+	}(THREE.Ray);
+
+	var _createClass$17 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$2 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$22(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$12(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$12(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Time = function (_Component) {
+	    _inherits$12(Time, _Component);
+
+	    /**
+	    * The Time class provides methods to control time related operations. One instance of this Component is created internnaly by the Context. It makes it possible to access and to use a global time in Components that require it (i.e Touch, Animation, etc.). In users script, this global Time can be accessed via the context.
+	    *
+	    * @example
+	    *    //TODO
+	    *
+	    * @class Time
+	    * @constructor
+	    */
+	    function Time(params) {
+	        _classCallCheck$22(this, Time);
+
+	        var _this = _possibleConstructorReturn$12(this, (Time.__proto__ || Object.getPrototypeOf(Time)).call(this, params));
+
+	        _this._startTime = getOrDefault(params, "startTime", new Date().getTime());
+	        _this._timeScale = getOrDefault(params, "scale", 1);
+
+	        _this._currentTime = new Date().getTime();
+	        _this._deltaTime = 0;
+	        return _this;
+	    }
+
+	    /*setup()
+	    {
+	        super.setup();
+	    }*/
+
+	    /**
+	    * Start the Time
+	    * @method on
+	    */
+
+
+	    _createClass$17(Time, [{
+	        key: 'on',
+	        value: function on() {
+	            _get$2(Time.prototype.__proto__ || Object.getPrototypeOf(Time.prototype), 'on', this).call(this);
+	            this.reset();
+	        }
+
+	        /**
+	        * Pause the Time
+	        * @method off
+	        */
+	        /*off()
+	        {
+	            super.off();
+	        }*/
+
+	        /**
+	        * resets this time instance
+	        *
+	        * @method reset
+	        */
+
+	    }, {
+	        key: 'reset',
+	        value: function reset() {
+	            this._startTime = new Date().getTime();
+	        }
+
+	        /**
+	        * updates this time instance
+	        *
+	        * @method update
+	        */
+
+	    }, {
+	        key: 'update',
+	        value: function update() {
+	            if (this.getStatus()) //the component must be on, else we "stop" the time
+	                {
+	                    var lastTime = this._currentTime;
+	                    this._currentTime = new Date().getTime();
+	                    this._deltaTime = (this._currentTime - lastTime) / 1000 * this._timeScale;
+	                }
+	        }
+
+	        /**
+	        * absolute Delta
+	        *
+	        * @method getAbsoluteDelta
+	        * @return {Number} absolute Delta
+	        */
+
+	    }, {
+	        key: 'getAbsoluteDelta',
+	        value: function getAbsoluteDelta() {
+	            return this._currentTime - this._startTime;
+	        }
+	        /**
+	        * Set the current timeScale, useful to slower time down
+	        *
+	        * @method setTimeScale
+	        * @param {Number} scale
+	        */
+
+	    }, {
+	        key: 'setTimeScale',
+	        value: function setTimeScale(scale) {
+	            this._timeScale = scale;
+	        }
+
+	        /**
+	        * Get the current timeScale
+	        *
+	        * @method getTimeScale
+	        * @return {Number} scale
+	        */
+
+	    }, {
+	        key: 'getTimeScale',
+	        value: function getTimeScale() {
+	            return this._timeScale;
+	        }
+
+	        /**
+	        * Get the current timeDelta (difference of time between 2 frames) at the current timeScale
+	        *
+	        * @method getDelta
+	        * @return {Number} the current timeDelta at the current timeScale
+	        */
+
+	    }, {
+	        key: 'getDelta',
+	        value: function getDelta() {
+	            return this._deltaTime;
+	        }
+
+	        /**
+	        * Gets the current Time object's time
+	        *
+	        * @method getTime
+	        * @return {Number} the current time
+	        */
+
+	    }, {
+	        key: 'getTime',
+	        value: function getTime() {
+	            return this._currentTime;
+	        }
+	    }]);
+
+	    return Time;
+	}(Component);
+
+	// module exports
+
+	var _createClass$16 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$21(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$11(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$11(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EVT_START = 'start';
+
+	/**
+	 * Fired each time the animation is updated
+	 * @event update
+	 * @param {Object} target The target object
+	 */
+	var EVT_UPDATE = 'update';
+
+	/**
+	 * Fired when each time the animation is repeated once it reached the end if repeat is greater than 1
+	 * @event restart
+	 * @param {Object} target The target object
+	 * @param {Number} direction The current direction
+	 */
+	var EVT_RESTART = 'restart';
+
+	/**
+	 * Fired when the animation is stopped
+	 * @event stop
+	 * @param {Object} target The target object
+	 */
+	var EVT_STOP = 'stop';
+
+	/**
+	 * Fired when the animation is resumed
+	 * @event resume
+	 * @param {Object} target The target object
+	 */
+	var EVT_RESUME = 'resume';
+
+	/**
+	 * Fired when the animation reaches the end and no repetition is pending
+	 * @event finish
+	 * @param {Object} target The target object
+	 */
+	var EVT_FINISH = 'finish';
+
+	var Animation = function (_Component) {
+	    _inherits$11(Animation, _Component);
+
+	    /**
+	    * The Animation class provides a simple way to tween object properties
+	    *
+	    * @example
+	    *    //TODO
+	    *
+	    * @class Animation
+	    * @constructor
+	    * @param {Object} params The parameters object
+	    * @param {Object} params.target The object whose propoerties are to be animated
+	    * @param {Object} [params.from] An object indicating the start values of the properties to animate, defaults to the values of the target
+	    * @param {Object} params.to An object indicating the finish values of the properties to animate
+	    * @param {Number} params.duration The animation duration in milliseconds
+	    * @param {Function} [params.easing=Animation.Easing.linear] An easing function to use
+	    * @param {Number} [params.repeat=0] The number of times the animation should be repeated, set to Infinity to repeat indefinately
+	    * @param {Boolean} [params.yoyo=false] If set to true and repeat is greater than 1, the animation will play in reverse once it reached the end
+	    * @param {Number} [params.delay=0] The number of milliseconds to wait for before starting the animation
+	    * @param {Time} [params.time] The Time instance to use for this Animation Component
+	    * @param {Function} [params.onStart] A callback to be called when the animation starts
+	    * @param {Function} [params.onUpdate] A callback to be called each time the animation is updated
+	    * @param {Function} [params.onRestart] A callback to be called each time the animation is repeated once it reached the end if repeat is greater than 1
+	    * @param {Function} [params.onStop] A callback to be called when the animation is stopped
+	    * @param {Function} [params.onResume] A callback to be called when the animation is resumed
+	    * @param {Function} [params.onFinish] A callback to be called when the animation reaches the end and no repetition is pending
+	    */
+	    function Animation(params) {
+	        _classCallCheck$21(this, Animation);
+
+	        var _this = _possibleConstructorReturn$11(this, (Animation.__proto__ || Object.getPrototypeOf(Animation)).call(this, params));
+
+	        _this._target = params.target;
+	        _this._from = getOrDefault(params, "from", null);
+	        _this._to = params.to;
+	        _this._duration = params.duration;
+	        _this._easing = getOrDefault(params, "easing", Animation.Easing.linear);
+	        _this._repeat = getOrDefault(params, "repeat", 0);
+	        _this._yoyo = getOrDefault(params, "yoyo", false);
+	        _this._delay = getOrDefault(params, "delay", 0);
+	        _this._time = new Time();
+
+	        _this._timesPlayed = 0;
+	        _this._direction = 1;
+
+	        var onStart = getOrDefault(params, "onStart", null);
+	        var onUpdate = getOrDefault(params, "onUpdate", null);
+	        var onRestart = getOrDefault(params, "onRestart", null);
+	        var onStop = getOrDefault(params, "onStop", null);
+	        var onResume = getOrDefault(params, "onResume", null);
+	        var onFinish = getOrDefault(params, "onFinish", null);
+
+	        // bind custom callbacks to events
+	        if (onStart) {
+	            _this.events.on(EVT_START, onStart);
+	        }
+	        if (onUpdate) {
+	            _this.events.on(EVT_UPDATE, onUpdate);
+	        }
+	        if (onRestart) {
+	            _this.events.on(EVT_RESTART, onRestart);
+	        }
+	        if (onStop) {
+	            _this.events.on(EVT_STOP, onStop);
+	        }
+	        if (onResume) {
+	            _this.events.on(EVT_RESUME, onResume);
+	        }
+	        if (onFinish) {
+	            _this.events.on(EVT_FINISH, onFinish);
+	        }
+
+	        return _this;
+	    }
+
+	    /**
+	    * Setup
+	    *
+	    * @method setup
+	    */
+
+
+	    _createClass$16(Animation, [{
+	        key: 'setup',
+	        value: function setup() {
+	            var context = this.getContext();
+
+	            context.addComponent(this._time);
+	            this._time.setup();
+	            this._time.on();
+
+	            this._isPlaying = false;
+	        }
+
+	        /**
+	        * Play the animation
+	        *
+	        * @method play
+	        */
+
+	    }, {
+	        key: 'play',
+	        value: function play() {
+	            var _this2 = this;
+
+	            this._isPlaying = true;
+	            this._time.reset();
+
+	            if (!this._from) {
+	                // fill in the start values from the target
+	                this._from = {};
+
+	                Object.keys(this._to).forEach(function (prop) {
+	                    _this2._from[prop] = _this2._target[prop];
+	                });
+	            }
+
+	            this.events.trigger(EVT_START, this._target);
+	        }
+
+	        /**
+	        * Stop the animation
+	        *
+	        * @method stop
+	        */
+
+	    }, {
+	        key: 'stop',
+	        value: function stop() {
+	            this._isPlaying = false;
+
+	            this.events.trigger(EVT_STOP, this._target);
+	        }
+
+	        /**
+	        * Resume the animation
+	        *
+	        * @method resume
+	        */
+
+	    }, {
+	        key: 'resume',
+	        value: function resume() {}
+
+	        /**
+	        * Rewind the animation back to its starting values
+	        *
+	        * @method rewind
+	        */
+
+	    }, {
+	        key: 'rewind',
+	        value: function rewind() {
+	            this.update(0);
+	        }
+
+	        /**
+	        * Update the properties according to the elapsed time
+	        *
+	        * @method update
+	        */
+
+	    }, {
+	        key: 'update',
+	        value: function update(time) {
+	            var _this3 = this;
+
+	            if (!this._isPlaying) {
+	                return;
+	            }
+
+	            var t = (time !== undefined ? time : this._time.getAbsoluteDelta()) / this._duration;
+
+	            if (t >= 1) {
+	                Object.keys(this._from).forEach(function (prop) {
+	                    _this3._target[prop] = _this3._to[prop];
+	                });
+
+	                if (this._timesPlayed++ < this._repeat) {
+	                    if (this._yoyo) {
+	                        this._direction *= -1;
+	                    }
+	                    this._time.reset();
+
+	                    this.events.trigger(EVT_RESTART, this._target, this._direction);
+	                } else {
+	                    this._isPlaying = false;
+	                    this.events.trigger(EVT_FINISH, this._target);
+	                }
+	            } else {
+	                for (var prop in this._from) {
+	                    if (this._direction < 1) {
+	                        this._target[prop] = _Math.map(this._easing(t), 0, 1, this._to[prop], this._from[prop]);
+	                    } else {
+	                        this._target[prop] = _Math.map(this._easing(t), 0, 1, this._from[prop], this._to[prop]);
+	                    }
+	                }
+
+	                this.events.trigger(EVT_UPDATE, this._target);
+	            }
+	        }
+
+	        /**
+	        * Chain another animation once this one is finished
+	        *
+	        * @method chain
+	        */
+
+	    }, {
+	        key: 'chain',
+	        value: function chain(animation) {
+	            this.events.on(EVT_FINISH, function () {
+	                animation.play();
+	            });
+	        }
+	    }]);
+
+	    return Animation;
+	}(Component);
+
+	// credit: https://gist.github.com/gre/1650294
+
+
+	Animation.Easing = {
+	    "linear": function linear(t) {
+	        return t;
+	    },
+	    "easeInQuad": function easeInQuad(t) {
+	        return Math.pow(t, 2);
+	    },
+	    "easeOutQuad": function easeOutQuad(t) {
+	        return 1 - Math.abs(Math.pow(t - 1, 2));
+	    },
+	    "easeInOutQuad": function easeInOutQuad(t) {
+	        if (t < 0.5) {
+	            return Animation.Easing.easeInQuad(t * 2) / 2;
+	        }
+	        return Animation.Easing.easeOutQuad(t * 2 - 1) / 2 + 0.5;
+	    },
+	    "easeInCubic": function easeInCubic(t) {
+	        return Math.pow(t, 3);
+	    },
+	    "easeOutCubic": function easeOutCubic(t) {
+	        return 1 - Math.abs(Math.pow(t - 1, 3));
+	    },
+	    "easeInOutCubic": function easeInOutCubic(t) {
+	        if (t < 0.5) {
+	            return Animation.Easing.easeInCubic(t * 2) / 2;
+	        }
+	        return Animation.Easing.easeOutCubic(t * 2 - 1) / 2 + 0.5;
+	    },
+	    "easeInQuart": function easeInQuart(t) {
+	        return Math.pow(t, 4);
+	    },
+	    "easeOutQuart": function easeOutQuart(t) {
+	        return 1 - Math.abs(Math.pow(t - 1, 4));
+	    },
+	    "easeInOutQuart": function easeInOutQuart(t) {
+	        if (t < 0.5) {
+	            return Animation.Easing.easeInQuart(t * 2) / 2;
+	        }
+	        return Animation.Easing.easeOutQuart(t * 2 - 1) / 2 + 0.5;
+	    },
+	    "easeInQuint": function easeInQuint(t) {
+	        return Math.pow(t, 5);
+	    },
+	    "easeOutQuint": function easeOutQuint(t) {
+	        return 1 - Math.abs(Math.pow(t - 1, 5));
+	    },
+	    "easeInOutQuint": function easeInOutQuint(t) {
+	        if (t < 0.5) {
+	            return Animation.Easing.easeInQuint(t * 2) / 2;
+	        }
+	        return Animation.Easing.easeOutQuint(t * 2 - 1) / 2 + 0.5;
+	    },
+	    "easeInSin": function easeInSin(t) {
+	        return 1 + Math.sin(Math.PI / 2 * t - Math.PI / 2);
+	    },
+	    "easeOutSin": function easeOutSin(t) {
+	        return Math.sin(Math.PI / 2 * t);
+	    },
+	    "easeInOutSin": function easeInOutSin(t) {
+	        return (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2;
+	    },
+	    "easeInElastic": function easeInElastic(t) {
+	        return (0.04 - 0.04 / t) * Math.sin(25 * t) + 1;
+	    },
+	    "easeOutElastic": function easeOutElastic(t) {
+	        return 0.04 * t / --t * Math.sin(25 * t);
+	    },
+	    "easeInOutElastic": function easeInOutElastic(t) {
+	        if ((t -= 0.5) < 0) {
+	            return (0.01 + 0.01 / t) * Math.sin(50 * t);
+	        }
+
+	        return (0.02 - 0.01 / t) * Math.sin(50 * t) + 1;
+	    },
+	    "easeInBounce": function easeInBounce(t) {
+	        return 1 - Animation.Easing.easeOutBounce(1 - t);
+	    },
+	    "easeOutBounce": function easeOutBounce(t) {
+	        if (t < 1 / 2.75) {
+	            return 7.5625 * t * t;
+	        } else if (t < 2 / 2.75) {
+	            return 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
+	        } else if (t < 2.5 / 2.75) {
+	            return 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
+	        }
+
+	        return 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
+	    },
+	    "easeInOutBounce": function easeInOutBounce(t) {
+	        if (t < 0.5) {
+	            return Animation.Easing.easeInBounce(t * 2) * 0.5;
+	        }
+	        return Animation.Easing.easeOutBounce(t * 2 - 1) * 0.5 + 0.5;
+	    }
+
+	};
+
+	// module exports
+
+	var _createClass$18 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$23(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Csg = function () {
 	    /*
@@ -7414,7 +7118,7 @@
 	    @param {Context} context
 	    */
 	    function Csg(context) {
-	        classCallCheck(this, Csg);
+	        _classCallCheck$23(this, Csg);
 
 	        this.context = context;
 	    }
@@ -7428,7 +7132,7 @@
 	    */
 
 
-	    createClass(Csg, null, [{
+	    _createClass$18(Csg, null, [{
 	        key: 'substract',
 	        value: function substract(mobMesh1, mobMesh2) {
 
@@ -7492,10 +7196,17 @@
 	            return newMobMesh;
 	        }
 	    }]);
+
 	    return Csg;
 	}();
 
 	// module exports
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	var _createClass$19 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$24(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var MOBILE = "mobile";
 
@@ -7517,10 +7228,10 @@
 
 	var Device = function () {
 	    function Device() {
-	        classCallCheck(this, Device);
+	        _classCallCheck$24(this, Device);
 	    }
 
-	    createClass(Device, null, [{
+	    _createClass$19(Device, null, [{
 	        key: "parseOSData",
 
 
@@ -7542,9 +7253,12 @@
 
 	            try {
 	                for (var _iterator = OS_REGEX[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                    var _step$value = slicedToArray(_step.value, 2),
-	                        key = _step$value[0],
-	                        regex = _step$value[1];
+	                    var _ref = _step.value;
+
+	                    var _ref2 = _slicedToArray(_ref, 2);
+
+	                    var key = _ref2[0];
+	                    var regex = _ref2[1];
 
 	                    if (regex.test(navigator.userAgent)) {
 	                        os = key;
@@ -7573,11 +7287,11 @@
 
 	            switch (os) {
 	                case "Mac OS X":
-	                    osVersion = /Mac OS X (10[\.\_\d]+)/.exec(navigator.userAgent)[1];
+	                    osVersion = /Mac OS X (10[._\d]+)/.exec(navigator.userAgent)[1];
 	                    break;
 
 	                case "Android":
-	                    osVersion = /Android ([\.\_\d]+)/.exec(navigator.userAgent)[1];
+	                    osVersion = /Android ([._\d]+)/.exec(navigator.userAgent)[1];
 	                    break;
 
 	                case "iOS":
@@ -7586,8 +7300,8 @@
 	                    break;
 	            }
 
-	            _STATICS["os"] = os;
-	            _STATICS["osVersion"] = osVersion;
+	            _STATICS.os = os;
+	            _STATICS.osVersion = osVersion;
 	        }
 
 	        /**
@@ -7606,41 +7320,42 @@
 	            var version = void 0;
 	            var majorVersion = void 0;
 	            var versionOffset = void 0;
+	            var nameOffset = void 0;
 	            var ix = void 0;
 
 	            // Opera
-	            if ((versionOffset = navigator.userAgent.indexOf("Opera")) != -1) {
+	            if ((versionOffset = navigator.userAgent.indexOf("Opera")) !== -1) {
 	                browser = "Opera";
 	                version = navigator.userAgent.substring(versionOffset + 6);
-	                if ((versionOffset = navigator.userAgent.indexOf("Version")) != -1) {
+	                if ((versionOffset = navigator.userAgent.indexOf("Version")) !== -1) {
 	                    version = navigator.userAgent.substring(versionOffset + 8);
 	                }
 	            }
 	            // MSIE
-	            else if ((versionOffset = navigator.userAgent.indexOf("MSIE")) != -1) {
+	            else if ((versionOffset = navigator.userAgent.indexOf("MSIE")) !== -1) {
 	                    browser = "Microsoft Internet Explorer";
 	                    version = navigator.userAgent.substring(versionOffset + 5);
 	                }
 	                // Chrome
-	                else if ((versionOffset = navigator.userAgent.indexOf("Chrome")) != -1) {
+	                else if ((versionOffset = navigator.userAgent.indexOf("Chrome")) !== -1) {
 	                        browser = "Chrome";
 	                        version = navigator.userAgent.substring(versionOffset + 7);
 	                    }
 	                    // Safari
-	                    else if ((versionOffset = navigator.userAgent.indexOf("Safari")) != -1) {
+	                    else if ((versionOffset = navigator.userAgent.indexOf("Safari")) !== -1) {
 	                            browser = "Safari";
 	                            version = navigator.userAgent.substring(versionOffset + 7);
-	                            if ((versionOffset = navigator.userAgent.indexOf("Version")) != -1) {
+	                            if ((versionOffset = navigator.userAgent.indexOf("Version")) !== -1) {
 	                                version = navigator.userAgent.substring(versionOffset + 8);
 	                            }
 	                        }
 	                        // Firefox
-	                        else if ((versionOffset = navigator.userAgent.indexOf("Firefox")) != -1) {
+	                        else if ((versionOffset = navigator.userAgent.indexOf("Firefox")) !== -1) {
 	                                browser = "Firefox";
 	                                version = navigator.userAgent.substring(versionOffset + 8);
 	                            }
 	                            // MSIE 11+
-	                            else if (navigator.userAgent.indexOf("Trident/") != -1) {
+	                            else if (navigator.userAgent.indexOf("Trident/") !== -1) {
 	                                    browser = "Microsoft Internet Explorer";
 	                                    version = navigator.userAgent.substring(navigator.userAgent.indexOf("rv:") + 3);
 	                                }
@@ -7648,15 +7363,23 @@
 	                                else if ((nameOffset = navigator.userAgent.lastIndexOf(" ") + 1) < (versionOffset = navigator.userAgent.lastIndexOf("/"))) {
 	                                        browser = navigator.userAgent.substring(nameOffset, versionOffset);
 	                                        version = navigator.userAgent.substring(versionOffset + 1);
-	                                        if (browser.toLowerCase() == browser.toUpperCase()) {
+	                                        if (browser.toLowerCase() === browser.toUpperCase()) {
 	                                            browser = navigator.appName;
 	                                        }
 	                                    }
 
 	            // trim the version string
-	            if ((ix = version.indexOf(";")) != -1) version = version.substring(0, ix);
-	            if ((ix = version.indexOf(" ")) != -1) version = version.substring(0, ix);
-	            if ((ix = version.indexOf(")")) != -1) version = version.substring(0, ix);
+	            if ((ix = version.indexOf(";")) !== -1) {
+	                version = version.substring(0, ix);
+	            }
+
+	            if ((ix = version.indexOf(" ")) !== -1) {
+	                version = version.substring(0, ix);
+	            }
+
+	            if ((ix = version.indexOf(")")) !== -1) {
+	                version = version.substring(0, ix);
+	            }
 
 	            majorVersion = parseInt("" + version, 10);
 	            if (isNaN(majorVersion)) {
@@ -7664,9 +7387,9 @@
 	                majorVersion = parseInt(navigator.appVersion, 10);
 	            }
 
-	            _STATICS["browser"] = browser;
-	            _STATICS["browserVersion"] = version;
-	            _STATICS["browserMajorVersion"] = majorVersion;
+	            _STATICS.browser = browser;
+	            _STATICS.browserVersion = version;
+	            _STATICS.browserMajorVersion = majorVersion;
 	        }
 
 	        /**
@@ -7681,10 +7404,10 @@
 	        key: "getType",
 	        value: function getType() {
 	            if (!("type" in _STATICS)) {
-	                _STATICS["type"] = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(navigator.appVersion) ? MOBILE : DESKTOP;
+	                _STATICS.type = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(navigator.appVersion) ? MOBILE : DESKTOP;
 	            }
 
-	            return _STATICS["type"];
+	            return _STATICS.type;
 	        }
 
 	        /**
@@ -7702,7 +7425,7 @@
 	                Device.parseOSData();
 	            }
 
-	            return _STATICS["os"];
+	            return _STATICS.os;
 	        }
 
 	        /**
@@ -7720,7 +7443,7 @@
 	                Device.parseOSData();
 	            }
 
-	            return _STATICS["osVersion"];
+	            return _STATICS.osVersion;
 	        }
 
 	        /**
@@ -7728,7 +7451,7 @@
 	        *
 	        * @method getBrowser
 	        * @static
-	        * @return {String} The browser's name 
+	        * @return {String} The browser's name
 	        */
 
 	    }, {
@@ -7738,7 +7461,7 @@
 	                Device.parseBrowserData();
 	            }
 
-	            return _STATICS["browser"];
+	            return _STATICS.browser;
 	        }
 
 	        /**
@@ -7756,7 +7479,7 @@
 	                Device.parseBrowserData();
 	            }
 
-	            return _STATICS["browserVersion"];
+	            return _STATICS.browserVersion;
 	        }
 
 	        /**
@@ -7774,7 +7497,7 @@
 	                Device.parseBrowserData();
 	            }
 
-	            return _STATICS["browserMajorVersion"];
+	            return _STATICS.browserMajorVersion;
 	        }
 
 	        /**
@@ -7789,16 +7512,16 @@
 	        key: "getFramework",
 	        value: function getFramework() {
 	            if (!("framework" in _STATICS)) {
-	                _STATICS["framework"] = null;
+	                _STATICS.framework = null;
 
 	                if (navigator.userAgent.toLowerCase().indexOf("ejecta") > -1) {
-	                    _STATICS["framework"] = "ejecta";
+	                    _STATICS.framework = "ejecta";
 	                } else if (window.cordova) {
-	                    _STATICS["framework"] = "cordova";
+	                    _STATICS.framework = "cordova";
 	                }
 	            }
 
-	            return _STATICS["framework"];
+	            return _STATICS.framework;
 	        }
 
 	        /**
@@ -7850,10 +7573,21 @@
 	            };
 	        }
 	    }]);
+
 	    return Device;
 	}();
 
 	// module exports
+
+	var _createClass$20 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$3 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$25(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$13(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$13(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var EVT_CHARGING_CHANGED = 'chargingchange';
 
@@ -7882,14 +7616,15 @@
 	*/
 
 	var BatteryStatus = function (_Component) {
-	    inherits(BatteryStatus, _Component);
+	    _inherits$13(BatteryStatus, _Component);
 
 	    function BatteryStatus() {
-	        classCallCheck(this, BatteryStatus);
-	        return possibleConstructorReturn(this, (BatteryStatus.__proto__ || Object.getPrototypeOf(BatteryStatus)).apply(this, arguments));
+	        _classCallCheck$25(this, BatteryStatus);
+
+	        return _possibleConstructorReturn$13(this, (BatteryStatus.__proto__ || Object.getPrototypeOf(BatteryStatus)).apply(this, arguments));
 	    }
 
-	    createClass(BatteryStatus, [{
+	    _createClass$20(BatteryStatus, [{
 	        key: 'setup',
 
 
@@ -7912,7 +7647,7 @@
 	            var _this2 = this;
 
 	            if (this._batteryAvailable) {
-	                get(BatteryStatus.prototype.__proto__ || Object.getPrototypeOf(BatteryStatus.prototype), 'on', this).call(this);
+	                _get$3(BatteryStatus.prototype.__proto__ || Object.getPrototypeOf(BatteryStatus.prototype), 'on', this).call(this);
 	                navigator.getBattery().then(function (manager) {
 	                    return _this2.onBatteryManager(manager);
 	                });
@@ -7930,7 +7665,7 @@
 	        value: function off() {
 	            var _this3 = this;
 
-	            get(BatteryStatus.prototype.__proto__ || Object.getPrototypeOf(BatteryStatus.prototype), 'off', this).call(this);
+	            _get$3(BatteryStatus.prototype.__proto__ || Object.getPrototypeOf(BatteryStatus.prototype), 'off', this).call(this);
 
 	            if (this._manager) {
 	                this._manager.removeEventListener("chargingchange", function (event) {
@@ -8108,10 +7843,21 @@
 	            return this._manager.level;
 	        }
 	    }]);
+
 	    return BatteryStatus;
 	}(Component);
 
 	// module exports
+
+	var _createClass$21 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$4 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$26(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$14(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$14(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var EVT_KEY_DOWN = "keydown";
 
@@ -8128,33 +7874,33 @@
 	var EVT_KEY_UP = "keyup";
 
 	var Keyboard = function (_Component) {
-	    inherits(Keyboard, _Component);
+	    _inherits$14(Keyboard, _Component);
 
 	    /**
 	     * Simple mapping from HTLM keyboard events toward Mobilizing.js. Not of a big interest for now...
-	     * 
+	     *
 	     * @class Keyboard
 	     * @constructor
-	     * 
+	     *
 	     * @param {Object} params Config parameters
 	     * @param {Window} [params.target=window] The DOM element this instance is attached to
 	    */
 
 	    function Keyboard(params) {
-	        classCallCheck(this, Keyboard);
+	        _classCallCheck$26(this, Keyboard);
 
-	        var _this = possibleConstructorReturn(this, (Keyboard.__proto__ || Object.getPrototypeOf(Keyboard)).call(this, params));
+	        var _this = _possibleConstructorReturn$14(this, (Keyboard.__proto__ || Object.getPrototypeOf(Keyboard)).call(this, params));
 
 	        _this._target = getOrDefault(params, "target", window);
 	        return _this;
 	    }
 
-	    createClass(Keyboard, [{
+	    _createClass$21(Keyboard, [{
 	        key: 'on',
 	        value: function on() {
 	            var _this2 = this;
 
-	            get(Keyboard.prototype.__proto__ || Object.getPrototypeOf(Keyboard.prototype), 'on', this).call(this);
+	            _get$4(Keyboard.prototype.__proto__ || Object.getPrototypeOf(Keyboard.prototype), 'on', this).call(this);
 
 	            this._target.addEventListener("keydown", function (event) {
 	                return _this2.onKeyDown(event);
@@ -8171,7 +7917,7 @@
 	        value: function off() {
 	            var _this3 = this;
 
-	            get(Keyboard.prototype.__proto__ || Object.getPrototypeOf(Keyboard.prototype), 'off', this).call(this);
+	            _get$4(Keyboard.prototype.__proto__ || Object.getPrototypeOf(Keyboard.prototype), 'off', this).call(this);
 
 	            this._target.removeEventListener("keydown", function (event) {
 	                return _this3.onKeyDown(event);
@@ -8189,7 +7935,7 @@
 	            //note: on window, keypress events are continously called, like keydown. It's not the case of html element
 	            //we reproduce this behavior here.
 	            this._isPressed = false;
-	            this._keyDownCode;
+	            // this._keyDownCode;
 	        }
 	    }, {
 	        key: 'update',
@@ -8197,7 +7943,7 @@
 
 	        /**
 	        * Fast way to verify in an update loop if a specific key is currently down
-	        * 
+	        *
 	        * @method getKeyIsDown
 	        * @param {Object} key
 	        * @return {Boolean} is down or not
@@ -8206,16 +7952,12 @@
 	    }, {
 	        key: 'getKeyIsDown',
 	        value: function getKeyIsDown(key) {
-	            if (this._keyDownCode === key.toLowerCase()) {
-	                return true;
-	            } else {
-	                return false;
-	            }
+	            return this._keyDownCode === key.toLowerCase();
 	        }
 
 	        /**
 	        * Forward the keydown event
-	        * 
+	        *
 	        * @private
 	        * @method onKeyDown
 	        * @param {Object} event
@@ -8232,7 +7974,7 @@
 
 	        /**
 	        * Forward the keypress event
-	        * 
+	        *
 	        * @private
 	        * @method onKeyPress
 	        * @param {Object} event
@@ -8253,7 +7995,7 @@
 
 	        /**
 	        * Forward the keyup event
-	        * 
+	        *
 	        * @private
 	        * @method onKeyUp
 	        * @param {Object} event
@@ -8269,10 +8011,15 @@
 	            //event.preventDefault();
 	        }
 	    }]);
+
 	    return Keyboard;
 	}(Component);
 
 	// module exports
+
+	var _createClass$23 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$28(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	/**
 	 * DOM helper class gives easy access to some basics calculations/manipulations frequently done on DOM elements
@@ -8282,10 +8029,10 @@
 
 	var _DOM = function () {
 	    function _DOM() {
-	        classCallCheck(this, _DOM);
+	        _classCallCheck$28(this, _DOM);
 	    }
 
-	    createClass(_DOM, null, [{
+	    _createClass$23(_DOM, null, [{
 	        key: "getElementPosition",
 
 	        /**
@@ -8317,10 +8064,21 @@
 	            return { "x": x, "y": y };
 	        }
 	    }]);
+
 	    return _DOM;
 	}();
 
 	// module exports
+
+	var _createClass$22 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$5 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$27(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$15(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$15(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var EVT_MOUSE_UPDATE = "mouseupdate";
 
@@ -8385,11 +8143,11 @@
 	var EVT_MOUSE_WHEEL = 'mousewheel';
 
 	var Mouse = function (_Component) {
-	    inherits(Mouse, _Component);
+	    _inherits$15(Mouse, _Component);
 
 	    /**
 	     * Give simple access to mouse events
-	     * 
+	     *
 	     * @class Mouse
 	     * @extends Component
 	     * @constructor
@@ -8397,9 +8155,9 @@
 	     * @param {Object} [params.target=window] The DOM element this instance is attached to
 	    */
 	    function Mouse(params) {
-	        classCallCheck(this, Mouse);
+	        _classCallCheck$27(this, Mouse);
 
-	        var _this = possibleConstructorReturn(this, (Mouse.__proto__ || Object.getPrototypeOf(Mouse)).call(this, params));
+	        var _this = _possibleConstructorReturn$15(this, (Mouse.__proto__ || Object.getPrototypeOf(Mouse)).call(this, params));
 
 	        _this._target = getOrDefault(params, "target", window);
 	        return _this;
@@ -8411,7 +8169,7 @@
 	    */
 
 
-	    createClass(Mouse, [{
+	    _createClass$22(Mouse, [{
 	        key: 'setup',
 	        value: function setup() {
 	            this._x = null;
@@ -8447,7 +8205,7 @@
 	        value: function on() {
 	            var _this2 = this;
 
-	            get(Mouse.prototype.__proto__ || Object.getPrototypeOf(Mouse.prototype), 'on', this).call(this);
+	            _get$5(Mouse.prototype.__proto__ || Object.getPrototypeOf(Mouse.prototype), 'on', this).call(this);
 
 	            if (!this._target) {
 	                debug.error("Can't activate the mouse input component without a target");
@@ -8489,7 +8247,7 @@
 	        value: function off() {
 	            var _this3 = this;
 
-	            get(Mouse.prototype.__proto__ || Object.getPrototypeOf(Mouse.prototype), 'off', this).call(this);
+	            _get$5(Mouse.prototype.__proto__ || Object.getPrototypeOf(Mouse.prototype), 'off', this).call(this);
 
 	            if (!this._target) {
 	                debug.error("Can't deactivate the mouse input component without a target");
@@ -8566,7 +8324,7 @@
 	    }, {
 	        key: 'onMouseMove',
 	        value: function onMouseMove(event) {
-	            if (!this._target instanceof Window) {
+	            if (!(this._target instanceof Window)) {
 	                var position = _DOM.getElementPosition(this._target);
 
 	                this._x = event.clientX - position.x;
@@ -8938,10 +8696,21 @@
 	            };
 	        }
 	    }]);
+
 	    return Mouse;
 	}(Component);
 
 	// module exports
+
+	var _get$6 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _createClass$24 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _possibleConstructorReturn$16(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$16(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _classCallCheck$29(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var TouchObject = function () {
 	    /**
@@ -8953,7 +8722,7 @@
 	     * @param {Number} x the x coordinate of the touch
 	    */
 	    function TouchObject(x, y, index) {
-	        classCallCheck(this, TouchObject);
+	        _classCallCheck$29(this, TouchObject);
 
 	        /**
 	        * index
@@ -9024,7 +8793,7 @@
 	    */
 
 
-	    createClass(TouchObject, [{
+	    _createClass$24(TouchObject, [{
 	        key: 'setX',
 	        value: function setX(x) {
 
@@ -9064,6 +8833,7 @@
 	            this.pY = this.y;
 	        }
 	    }]);
+
 	    return TouchObject;
 	}();
 
@@ -9100,60 +8870,60 @@
 	var EVT_PRESSED_CHANGED = 'pressedchanged';
 
 	var Touch = function (_Component) {
-	    inherits(Touch, _Component);
+	    _inherits$16(Touch, _Component);
 
 	    /**
 	     * Touch give an interface to access the multitouch events of the device. It holds a list of currently active touches and various ways to access their coordinates.
-	     * 
+	     *
 	     * @example
 	     *     //this is how to use events in a user's script
 	     *     function script()
 	     *     {
-	     *        
+	     *
 	     *        var M;
 	     *        var R;
-	     *        
+	     *
 	     *        var camera;
 	     *        var cube;
 	     *        var light;
-	     *    
+	     *
 	     *        var y = 0;
 	     *        var speed = 0;
-	     *    
+	     *
 	     *        var touch;
-	     *        
+	     *
 	     *        this.setup = function()
 	     *        {
 	     *            M = this.getContext();
 	     *            R = M.addComponent( new Mobilizing.Renderer3D() );
-	     *            
+	     *
 	     *            touch = M.addComponent(new Mobilizing.input.Touch({"target": R.canvas}));
 	     *            touch.setup();//set it up
 	     *            touch.on();//active it
-	     *            
+	     *
 	     *            //construct a default perspective camera
 	     *            camera = new Mobilizing.Camera();
 	     *            camera.setFarPlane(10000);
 	     *            camera.setToPixel();
 	     *            R.addCamera(camera);
-	     *    
+	     *
 	     *            //make a light
 	     *            light = new Mobilizing.Light();
 	     *            light.transform.setLocalPosition(500,-100,500);
 	     *            light.setDistance(5000);
 	     *            R.addToCurrentScene(light);
-	     *    
+	     *
 	     *            //make a cube
 	     *            cube = new Mobilizing.Mesh({primitive:"box", width:1, height:1, depth:1});
 	     *            cube.transform.setLocalPosition(0,0,0);
 	     *            cube.transform.setLocalScale(50);
 	     *            R.addToCurrentScene(cube);
 	     *        };
-	     *    
+	     *
 	     *        this.update = function()
 	     *        {
 	     *            if(touch.pressed){
-	     *    
+	     *
 	     *                cube.transform.setLocalPosition(
 	     *                     touch.getX(0),
 	     *                    - touch.getY(0),
@@ -9161,7 +8931,7 @@
 	     *            }
 	     *        };
 	     *    };
-	     * 
+	     *
 	     * @class Touch
 	     * @constructor
 	     * @extends Component
@@ -9169,9 +8939,9 @@
 	     * @param {DOMElement} params.target The DOM element that will be used to attach touch events on
 	    */
 	    function Touch(params) {
-	        classCallCheck(this, Touch);
+	        _classCallCheck$29(this, Touch);
 
-	        var _this = possibleConstructorReturn(this, (Touch.__proto__ || Object.getPrototypeOf(Touch)).call(this, params));
+	        var _this = _possibleConstructorReturn$16(this, (Touch.__proto__ || Object.getPrototypeOf(Touch)).call(this, params));
 
 	        _this._target = getOrDefault(params, "target", window);
 	        _this._time = new Time();
@@ -9184,7 +8954,7 @@
 	    */
 
 
-	    createClass(Touch, [{
+	    _createClass$24(Touch, [{
 	        key: 'setup',
 	        value: function setup() {
 	            //!!this.getContext() is not already available in constructor as setContext() is called after creation!!
@@ -9216,16 +8986,16 @@
 	            this.pinch = 0;
 	            this.pinchActive = false;
 
-	            this.touchState;
-	            this.touchDown;
-	            this.touchUp;
+	            // this.touchState;
+	            // this.touchDown;
+	            // this.touchUp;
 	        }
 	    }, {
 	        key: 'on',
 	        value: function on() {
 	            var _this2 = this;
 
-	            get(Touch.prototype.__proto__ || Object.getPrototypeOf(Touch.prototype), 'on', this).call(this);
+	            _get$6(Touch.prototype.__proto__ || Object.getPrototypeOf(Touch.prototype), 'on', this).call(this);
 
 	            this._target.addEventListener("touchstart", function (event) {
 	                return _this2.onTouchStart(event);
@@ -9250,7 +9020,7 @@
 	        value: function off() {
 	            var _this3 = this;
 
-	            get(Touch.prototype.__proto__ || Object.getPrototypeOf(Touch.prototype), 'off', this).call(this);
+	            _get$6(Touch.prototype.__proto__ || Object.getPrototypeOf(Touch.prototype), 'off', this).call(this);
 
 	            this._target.removeEventListener("touchstart", function (event) {
 	                return _this3.onTouchStart(event);
@@ -9278,6 +9048,7 @@
 	    }, {
 	        key: 'update',
 	        value: function update() {
+	            var _this4 = this;
 
 	            if (this.pressed && !this.touchState) {
 	                this.touchDown = true;
@@ -9291,10 +9062,10 @@
 	            }
 	            this.touchState = this.pressed;
 
-	            for (var obj in this.touches) {
-	                this.touches[obj].setPX();
-	                this.touches[obj].setPY();
-	            }
+	            Object.keys(this.touches).forEach(function (identifier) {
+	                _this4.touches[identifier].setPX();
+	                _this4.touches[identifier].setPY();
+	            });
 	        }
 
 	        /**
@@ -9308,8 +9079,6 @@
 	    }, {
 	        key: 'onTouchStart',
 	        value: function onTouchStart(event) {
-	            var context = this.getContext();
-
 	            var position = _DOM.getElementPosition(this._target);
 
 	            var newTouch = null;
@@ -9318,38 +9087,38 @@
 	                //touch
 
 	                for (var i = 0; i < event.changedTouches.length; i++) {
-	                    var touch = event.changedTouches[i];
+	                    var changed = event.changedTouches[i];
 
-	                    if (!(touch.identifier in this.touches)) {
+	                    if (!(changed.identifier in this.touches)) {
 	                        //no touch in memory, build it
 
-	                        var x = touch.pageX - position.x;
-	                        var y = touch.pageY - position.x;
+	                        var x = changed.pageX - position.x;
+	                        var y = changed.pageY - position.x;
 
 	                        newTouch = new TouchObject(x, y, this.count);
 	                        debug.log("newTouch", newTouch);
 
 	                        newTouch.setX(x);
 	                        newTouch.setY(y);
-	                        newTouch.id = touch.identifier;
+	                        newTouch.id = changed.identifier;
 
 	                        newTouch.up = false; //JON
 	                        newTouch.down = true; //JON
 
 	                        //à laisser ici!
-	                        this.touches[touch.identifier] = newTouch;
+	                        this.touches[changed.identifier] = newTouch;
 
 	                        this.count += 1;
 	                    } else {
 	                        //touch is already there, update
 
-	                        var _touch = this.touches[_touch.identifier];
+	                        var touch = this.touches[changed.identifier];
 
-	                        var _x = _touch.pageX - position.x;
-	                        var _y = _touch.pageY - position.x;
+	                        var _x = touch.pageX - position.x;
+	                        var _y = touch.pageY - position.x;
 
-	                        _touch.setX(_x);
-	                        _touch.setY(_y);
+	                        touch.setX(_x);
+	                        touch.setY(_y);
 	                    }
 
 	                    //Events
@@ -9380,9 +9149,9 @@
 
 	        /**
 	         * onTouchEnd listener
-	         * 
+	         *
 	         * Manage a touch removal and organize it in the main touch list Input.touches
-	         * 
+	         *
 	         * @method onTouchEnd
 	         * @private
 	        */
@@ -9425,7 +9194,7 @@
 	            event.preventDefault();
 	        }
 
-	        /** 
+	        /**
 	         * onTouchMove listener
 	         *
 	         * Manage a touch move and organize it in the main touch list Input.touches
@@ -9523,7 +9292,7 @@
 
 	    }, {
 	        key: 'get',
-	        value: function get$$1(index) {
+	        value: function get(index) {
 	            var val = void 0;
 
 	            if (typeof index === "number") {
@@ -9548,19 +9317,18 @@
 	    }, {
 	        key: 'getDeltaX',
 	        value: function getDeltaX(index) {
+	            var _this5 = this;
+
 	            var val = void 0;
 
 	            if (typeof index === "number") {
-
-	                for (var obj in this.touches) {
-
-	                    var touch = this.touches[obj];
+	                Object.keys(this.touches).forEach(function (identifier) {
+	                    var touch = _this5.touches[identifier];
 
 	                    if (touch.index === index) {
-
 	                        val = touch.xDelta;
 	                    }
-	                }
+	                });
 	            }
 	            return val;
 	        }
@@ -9577,19 +9345,18 @@
 	    }, {
 	        key: 'getDeltaY',
 	        value: function getDeltaY(index) {
+	            var _this6 = this;
+
 	            var val = void 0;
 
 	            if (typeof index === "number") {
-
-	                for (var obj in this.touches) {
-
-	                    var touch = this.touches[obj];
+	                Object.keys(this.touches).forEach(function (identifier) {
+	                    var touch = _this6.touches[identifier];
 
 	                    if (touch.index === index) {
-
 	                        val = touch.yDelta;
 	                    }
-	                }
+	                });
 	            }
 	            return val;
 	        }
@@ -9606,19 +9373,18 @@
 	    }, {
 	        key: 'getDelta',
 	        value: function getDelta(index) {
+	            var _this7 = this;
+
 	            var val = void 0;
 
 	            if (typeof index === "number") {
-
-	                for (var obj in this.touches) {
-
-	                    var touch = this.touches[obj];
+	                Object.keys(this.touches).forEach(function (identifier) {
+	                    var touch = _this7.touches[identifier];
 
 	                    if (touch.index === index) {
-
 	                        val = { "x": touch.xDelta, "y": touch.yDelta };
 	                    }
-	                }
+	                });
 	            }
 	            return val;
 	        }
@@ -9635,16 +9401,18 @@
 	    }, {
 	        key: 'getOffsetX',
 	        value: function getOffsetX(index) {
+	            var _this8 = this;
+
 	            var val = void 0;
 
-	            for (var obj in this.touches) {
-
-	                var touch = this.touches[obj];
+	            Object.keys(this.touches).forEach(function (identifier) {
+	                var touch = _this8.touches[identifier];
 
 	                if (touch.index === index) {
 	                    val = touch.offsetX;
 	                }
-	            }
+	            });
+
 	            return val;
 	        }
 
@@ -9660,16 +9428,18 @@
 	    }, {
 	        key: 'getOffsetY',
 	        value: function getOffsetY(index) {
+	            var _this9 = this;
+
 	            var val = void 0;
 
-	            for (var obj in this.touches) {
-
-	                var touch = this.touches[obj];
+	            Object.keys(this.touches).forEach(function (identifier) {
+	                var touch = _this9.touches[identifier];
 
 	                if (touch.index === index) {
 	                    val = touch.offsetY;
 	                }
-	            }
+	            });
+
 	            return val;
 	        }
 
@@ -9685,16 +9455,18 @@
 	    }, {
 	        key: 'getOffset',
 	        value: function getOffset(index) {
+	            var _this10 = this;
+
 	            var val = void 0;
 
-	            for (var obj in this.touches) {
-
-	                var touch = this.touches[obj];
+	            Object.keys(this.touches).forEach(function (identifier) {
+	                var touch = _this10.touches[identifier];
 
 	                if (touch.index === index) {
 	                    val = { "x": touch.offsetX, "y": touch.offsetY };
 	                }
-	            }
+	            });
+
 	            return val;
 	        }
 	        /**
@@ -9748,10 +9520,21 @@
 	            return this.pinch;
 	        }
 	    }]);
+
 	    return Touch;
 	}(Component);
 
 	// module exports
+
+	var _createClass$25 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$7 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$30(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$17(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$17(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var EVT_ACC = 'acceleration';
 
@@ -9774,7 +9557,7 @@
 	var EVT_ROTATION_RATE = 'rotationrate';
 
 	var Motion = function (_Component) {
-	    inherits(Motion, _Component);
+	    _inherits$17(Motion, _Component);
 
 	    /**
 	     * @class Motion
@@ -9782,19 +9565,19 @@
 	     * Motion gives access to the embbeded accelerometers data of you device.
 	    */
 	    function Motion(param) {
-	        classCallCheck(this, Motion);
+	        _classCallCheck$30(this, Motion);
 
 	        /**
 	         * true if the acceloremeters are available on the device, false otherwise
 	         * @property {Boolean} _accAvailable
 	        */
-	        var _this = possibleConstructorReturn(this, (Motion.__proto__ || Object.getPrototypeOf(Motion)).call(this, param));
+	        var _this = _possibleConstructorReturn$17(this, (Motion.__proto__ || Object.getPrototypeOf(Motion)).call(this, param));
 
 	        _this._accAvailable = window.DeviceMotionEvent;
 	        return _this;
 	    }
 
-	    createClass(Motion, [{
+	    _createClass$25(Motion, [{
 	        key: 'setup',
 	        value: function setup() {
 
@@ -9805,6 +9588,7 @@
 	            this.smoothedAcc = new Vector3$1();
 
 	            this.accel = [0, 0, 0];
+	            this.gAccel = [0, 0, 0];
 	            this.kFilteringFactor = 0.07;
 	            this.gravityVector = new Vector3$1();
 	        }
@@ -9814,7 +9598,7 @@
 	            var _this2 = this;
 
 	            if (this._accAvailable) {
-	                get(Motion.prototype.__proto__ || Object.getPrototypeOf(Motion.prototype), 'on', this).call(this);
+	                _get$7(Motion.prototype.__proto__ || Object.getPrototypeOf(Motion.prototype), 'on', this).call(this);
 
 	                window.addEventListener('devicemotion', function (event) {
 	                    return _this2.onDeviceMotion(event);
@@ -9828,7 +9612,7 @@
 	        value: function off() {
 	            var _this3 = this;
 
-	            get(Motion.prototype.__proto__ || Object.getPrototypeOf(Motion.prototype), 'off', this).call(this);
+	            _get$7(Motion.prototype.__proto__ || Object.getPrototypeOf(Motion.prototype), 'off', this).call(this);
 
 	            window.removeEventListener('devicemotion', function (event) {
 	                return _this3.onDeviceMotion(event);
@@ -9837,7 +9621,6 @@
 	    }, {
 	        key: 'onDeviceMotion',
 	        value: function onDeviceMotion(event) {
-	            var _this4 = this;
 
 	            //Chrome manage everything reversed to Safari. We use Safari as 1, Chrome as -1
 	            var reverse = 1;
@@ -9866,11 +9649,10 @@
 	                //propagate event to user script
 	                this.events.trigger(EVT_ACC_GRAVITY, this.acc);
 
+	                this.computeGravityVector();
+
 	                //propagate custom event to user script
-	                this.events.trigger(EVT_ACC_GRAVITY_VECTOR, function () {
-	                    _this4.computeGravityVector();
-	                    return _this4.gravityVector;
-	                });
+	                this.events.trigger(EVT_ACC_GRAVITY_VECTOR, this.gravityVector);
 	            }
 
 	            if (event.rotationRate) {
@@ -9909,7 +9691,7 @@
 	        /**
 	        * Method to compute the gravity orientation vector based on accel including gravity.
 	        * The result can also be get through the event onAccelerationGravityVector
-	        * 
+	        *
 	        * @method computeGravityVector
 	        * @private
 	        */
@@ -9917,19 +9699,21 @@
 	    }, {
 	        key: 'computeGravityVector',
 	        value: function computeGravityVector() {
-	            this.accel[0] = this.acc.x * this.kFilteringFactor + this.accel[0] * (1.0 - this.kFilteringFactor);
-	            this.accel[1] = this.acc.y * this.kFilteringFactor + this.accel[1] * (1.0 - this.kFilteringFactor);
-	            this.accel[2] = this.acc.z * this.kFilteringFactor + this.accel[2] * (1.0 - this.kFilteringFactor);
+	            //console.log(this.acc);
 
-	            this.gravityVector.z = this.accel[2] * (360 / (2 * Math.PI)) * 1.1;
-	            this.gravityVector.x = this.accel[1] * (360 / (2 * Math.PI)) * 1.1;
-	            this.gravityVector.y = Math.atan2(this.accel[0], this.accel[1]) * (180.0 / Math.PI);
+	            this.gAccel[0] = this.acc.x / 10 * this.kFilteringFactor + this.gAccel[0] * (1.0 - this.kFilteringFactor);
+	            this.gAccel[1] = this.acc.y / 10 * this.kFilteringFactor + this.gAccel[1] * (1.0 - this.kFilteringFactor);
+	            this.gAccel[2] = this.acc.z / 10 * this.kFilteringFactor + this.gAccel[2] * (1.0 - this.kFilteringFactor);
+
+	            this.gravityVector.z = this.gAccel[2] * (360 / (2 * Math.PI)) * 1.1;
+	            this.gravityVector.x = this.gAccel[1] * (360 / (2 * Math.PI)) * 1.1;
+	            this.gravityVector.y = Math.atan2(this.gAccel[0], this.gAccel[1]) * (180.0 / Math.PI);
 	        }
 
 	        /**
 	         * Method to get the accel values without gravity.
 	         * The result can also be get through the event onAcceleration
-	         * 
+	         *
 	         * @method getUserAcc
 	         * @return {Object} userAcc object composed by x, y & z components
 	        */
@@ -9943,7 +9727,7 @@
 	        /**
 	         * Method to get the accel values including gravity.
 	         * The result can also be get through the event onAccelerationIncludingGravity
-	         * 
+	         *
 	         * @method getAcc
 	         * @return {Object} acc object composed by x, y & z components
 	        */
@@ -9956,8 +9740,8 @@
 
 	        /**
 	         * Method to get the gravity orientation vector based on accel including gravity.
-	         * The result can also be get through the event onAccelerationGravityVector
-	         * 
+	         * The result can also be get through the event accelerationGravityVector
+	         *
 	         * @method getGravityVector
 	         * @return {Object} gravityVector object composed by x, y & z components
 	        */
@@ -9970,7 +9754,7 @@
 
 	        /**
 	         * Method to get the filtered accel including gravity.
-	         * 
+	         *
 	         * @method getSmoothedAcc
 	         * @param {Number} factor The number to use for the filtering aglorithm (0.07 gives good results)
 	         * @return {Object} smoothedAcc object composed by x, y & z components
@@ -9985,10 +9769,21 @@
 	            return this.smoothedAcc;
 	        }
 	    }]);
+
 	    return Motion;
 	}(Component);
 
 	// module exports
+
+	var _createClass$26 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$8 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$31(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$18(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$18(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var EVT_DEVICE_ORIENTATION = "deviceorientation";
 
@@ -9999,45 +9794,40 @@
 	var EVT_COMPASS_CALIBRATION = "compassneedscalibration";
 
 	var Orientation = function (_Component) {
-	    inherits(Orientation, _Component);
+	    _inherits$18(Orientation, _Component);
 
 	    /**
 	     * Uses built-in compass and/or gyroscope to produce orientation Data. Some heplers functions are in there to generate quarternion that can be applied on a camera or a 3D object's transform.
-	     * 
+	     *
 	     * @class Orientation
 	     * @extends Component
 	     * @constructor
 	    */
 	    function Orientation(params) {
-	        classCallCheck(this, Orientation);
+	        _classCallCheck$31(this, Orientation);
 
 	        /**
 	        * true if the magnetometer/compass is available on the device, false otherwise
 	        * @property {Boolean} compassAvailable
 	        */
-	        var _this = possibleConstructorReturn(this, (Orientation.__proto__ || Object.getPrototypeOf(Orientation)).call(this, params));
+	        var _this = _possibleConstructorReturn$18(this, (Orientation.__proto__ || Object.getPrototypeOf(Orientation)).call(this, params));
 
 	        _this.compassAvailable = window.DeviceOrientationEvent;
 	        return _this;
 	    }
 
-	    createClass(Orientation, [{
+	    _createClass$26(Orientation, [{
 	        key: 'setup',
 	        value: function setup() {
 
 	            this.compass = new Vector3$1();
-
-	            this.deviceRotationMatrix = new Matrix4$1();
-	            this.deviceHeading = null;
-	            this.deviceAttitude = null;
-	            this.deviceBank = null;
 	        }
 	    }, {
 	        key: 'on',
 	        value: function on() {
 	            var _this2 = this;
 
-	            get(Orientation.prototype.__proto__ || Object.getPrototypeOf(Orientation.prototype), 'on', this).call(this);
+	            _get$8(Orientation.prototype.__proto__ || Object.getPrototypeOf(Orientation.prototype), 'on', this).call(this);
 
 	            window.addEventListener("deviceorientation", function (event) {
 	                return _this2.onDeviceOrientation(event);
@@ -10051,7 +9841,7 @@
 	        value: function off() {
 	            var _this3 = this;
 
-	            get(Orientation.prototype.__proto__ || Object.getPrototypeOf(Orientation.prototype), 'off', this).call(this);
+	            _get$8(Orientation.prototype.__proto__ || Object.getPrototypeOf(Orientation.prototype), 'off', this).call(this);
 
 	            window.removeEventListener("deviceorientation", function (event) {
 	                return _this3.onDeviceOrientation(event);
@@ -10064,7 +9854,7 @@
 	        /**
 	         * Returns the compass/gyro current raw values.
 	         * This can also be get with the onDeviceOrientation event from the user script
-	         * 
+	         *
 	         * @method getDeviceOrientation
 	         * @return {Object} compass object with x, y & z components
 	        */
@@ -10108,26 +9898,27 @@
 	                finalQuaternion.multiply(worldTransform);
 
 	                return finalQuaternion;
-	            } else {
-	                return new Quaternion$1(0, 0, 0); //we have nothing to give
 	            }
+
+	            return new Quaternion$1(0, 0, 0); // we have nothing to give
 	        }
 
 	        /**
 	         * Can be used in the transform of a perspective camera to produce a "blind camera" effect : move the screen around to frame a part of the current scene like if you were using a camera.
-	         * 
+	         *
 	         * @method getGyroQuaternion
 	         */
 
 	    }, {
 	        key: 'getGyroQuaternion',
 	        value: function getGyroQuaternion() {
-	            if (this.compassAvailable) {
-	                if (this.compass.alpha) {
-	                    var quaternion = this.createGyroQuaternion(_Math.degToRad(this.compass.alpha), _Math.degToRad(this.compass.beta), _Math.degToRad(this.compass.gamma), _Math.degToRad(window.orientation || 0));
-	                    return quaternion;
-	                }
+	            if (this.compassAvailable && this.compass.alpha) {
+	                var quaternion = this.createGyroQuaternion(_Math.degToRad(this.compass.alpha), _Math.degToRad(this.compass.beta), _Math.degToRad(this.compass.gamma), _Math.degToRad(window.orientation || 0));
+
+	                return quaternion;
 	            }
+
+	            return null;
 	        }
 
 	        /**
@@ -10146,7 +9937,7 @@
 
 	        /**
 	        * callback used to access compass event.
-	        * 
+	        *
 	        * @private
 	        * @method onDeviceorientation
 	        * @param {Object} event
@@ -10170,77 +9961,22 @@
 
 	            this.events.trigger(EVT_DEVICE_ORIENTATION, this.compass);
 	        }
-
-	        //FIXME (may be garbage code...)
-
-	    }, {
-	        key: 'computeRotationMatrix',
-	        value: function computeRotationMatrix(alpha, beta, gamma) {
-
-	            var _x = beta ? _Math.degToRad(beta) : 0; // beta value
-	            var _y = gamma ? _Math.degToRad(gamma) : 0; // gamma value
-	            var _z = alpha ? _Math.degToRad(alpha) : 0; // alpha value
-
-	            var cX = Math.cos(_x);
-	            var cY = Math.cos(_y);
-	            var cZ = Math.cos(_z);
-	            var sX = Math.sin(_x);
-	            var sY = Math.sin(_y);
-	            var sZ = Math.sin(_z);
-
-	            //
-	            // ZXY rotation matrix construction.
-	            //
-
-	            var m11 = cZ * cY - sZ * sX * sY;
-	            var m12 = -cX * sZ;
-	            var m13 = cY * sZ * sX + cZ * sY;
-
-	            var m21 = cY * sZ + cZ * sX * sY;
-	            var m22 = cZ * cX;
-	            var m23 = sZ * sY - cZ * cY * sX;
-
-	            var m31 = -cX * sY;
-	            var m32 = sX;
-	            var m33 = cX * cY;
-
-	            this.deviceRotationMatrix.set(m11, m21, m31, 0, m12, m22, m32, 0, m13, m23, m33, 0, 0, 0, 0, 1);
-
-	            if (m12 > 0.998) {
-	                // singularity at north pole
-	                this.deviceHeading = Math.atan2(m31, m33);
-	                this.deviceAttitude = Math.PI / 2;
-	                this.deviceBank = 0;
-	                return;
-	            }
-	            if (m12 < -0.998) {
-	                // singularity at south pole
-	                this.deviceHeading = Math.atan2(m31, m33);
-	                this.deviceAttitude = -Math.PI / 2;
-	                this.deviceBank = 0;
-	                return;
-	            }
-
-	            this.deviceHeading = Math.atan2(-m13, m11);
-	            this.deviceBank = Math.atan2(-m32, m22);
-	            this.deviceAttitude = Math.asin(m12);
-	        }
-	    }, {
-	        key: 'updateDeviceRotationMatrix',
-	        value: function updateDeviceRotationMatrix() {
-	            this.computeRotationMatrix(this.compass.alpha, this.compass.beta, this.compass.gamma);
-	        }
-	    }, {
-	        key: 'getDeviceRotationMatrix',
-	        value: function getDeviceRotationMatrix() {
-	            this.updateDeviceRotationMatrix();
-	            return this.deviceRotationMatrix;
-	        }
 	    }]);
+
 	    return Orientation;
 	}(Component);
 
 	// module exports
+
+	var _createClass$27 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$9 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$32(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$19(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$19(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var EVT_LOC_UPDATED = "locationupdated";
 
@@ -10251,12 +9987,12 @@
 	var EVT_LOC_ERROR = "locationerror";
 
 	var GPS = function (_Component) {
-	    inherits(GPS, _Component);
+	    _inherits$19(GPS, _Component);
 
 	    /**
 	     * @class GPS
 	     * @constructor
-	     * 
+	     *
 	     * @param {Object} params Config parameters
 	     * @param {Object} params.context the Mobilizing context this Input instance is linked to
 	     * @param {Boolean} params.enableHighAccuracy Boolean to activate accurate location (eats more battery and takes time)
@@ -10264,14 +10000,14 @@
 	     * @param {Number} params.timeout timeout of the location service in millisecond
 	     */
 	    function GPS(params) {
-	        classCallCheck(this, GPS);
+	        _classCallCheck$32(this, GPS);
 
 	        /**
 	        * Accurate location (eats more battery and takes time)
 	        * @private
 	        * @property {Boolean} _enableHighAccuracy
 	        */
-	        var _this = possibleConstructorReturn(this, (GPS.__proto__ || Object.getPrototypeOf(GPS)).call(this, params));
+	        var _this = _possibleConstructorReturn$19(this, (GPS.__proto__ || Object.getPrototypeOf(GPS)).call(this, params));
 
 	        _this._enableHighAccuracy = getOrDefault(params, "enableHighAccuracy", false);
 
@@ -10304,7 +10040,7 @@
 	    */
 
 
-	    createClass(GPS, [{
+	    _createClass$27(GPS, [{
 	        key: 'setup',
 	        value: function setup() {
 	            /**
@@ -10323,7 +10059,7 @@
 	                timestamp: null
 	            };
 
-	            this._watchID;
+	            // this._watchID;
 	        }
 
 	        /**
@@ -10337,7 +10073,7 @@
 	            var _this2 = this;
 
 	            if (this._GPSAvailable) {
-	                get(GPS.prototype.__proto__ || Object.getPrototypeOf(GPS.prototype), 'on', this).call(this);
+	                _get$9(GPS.prototype.__proto__ || Object.getPrototypeOf(GPS.prototype), 'on', this).call(this);
 
 	                var positionOptions = {
 	                    enableHighAccuracy: this._enableHighAccuracy,
@@ -10363,7 +10099,7 @@
 	    }, {
 	        key: 'off',
 	        value: function off() {
-	            get(GPS.prototype.__proto__ || Object.getPrototypeOf(GPS.prototype), 'off', this).call(this);
+	            _get$9(GPS.prototype.__proto__ || Object.getPrototypeOf(GPS.prototype), 'off', this).call(this);
 
 	            navigator.geolocation.clearWatch(this._watchID);
 	        }
@@ -10407,7 +10143,7 @@
 	        /**
 	          * returns the most recent location data. Location service MUST be activated on the device, or errors will get out from the callbacks!
 	          * The return objects contains the standard HTML5 properties for geolocation :
-	          * 
+	          *
 	          *     location.longitude
 	          *     location.latitude
 	          *     location.altitude
@@ -10416,7 +10152,7 @@
 	          *     location.heading
 	          *     location.speed
 	          *     location.timestamp
-	          * 
+	          *
 	          * @method getLocation
 	          * @return {Object} the location object updated with the most recent data.
 	          */
@@ -10426,14 +10162,16 @@
 	        value: function getLocation() {
 	            if (this._active) {
 	                return this._location;
-	            } else {
-	                debug.warn("geolocation is off, turn it on with context.input.setGeolocationStatus(true);");
 	            }
+
+	            debug.warn("geolocation is off, turn it on with context.input.setGeolocationStatus(true);");
+
+	            return null;
 	        }
 
 	        /**
 	         * Listener for the update of the location object with the most recent data.
-	         * 
+	         *
 	         * @method updateLocationCallBack
 	         * @param {Object} position the HTML5 position object to use for the Mobilizing location object's update
 	         * @private
@@ -10458,9 +10196,9 @@
 
 	        /**
 	         * Listener for the update errors of the location object with the most recent data.
-	         * 
+	         *
 	         * @method updateLocationErrorCallBack
-	         * @param error 
+	         * @param error
 	         * @private
 	        */
 
@@ -10503,10 +10241,9 @@
 	            };
 	        }
 	    }]);
+
 	    return GPS;
 	}(Component);
-
-
 
 	var _STATICS$1 = {};
 	_STATICS$1.zoom = 1;
@@ -10521,10 +10258,10 @@
 
 	var GPSUtils = function () {
 	    function GPSUtils() {
-	        classCallCheck(this, GPSUtils);
+	        _classCallCheck$32(this, GPSUtils);
 	    }
 
-	    createClass(GPSUtils, null, [{
+	    _createClass$27(GPSUtils, null, [{
 	        key: 'getPixelsCoordsFromOSMLngLat',
 
 
@@ -10575,7 +10312,7 @@
 	            var topLeft = GPSUtils.getPixelsCoordsFromOSMLngLat(leftLong, topLat);
 
 	            var bottomRight = GPSUtils.getPixelsCoordsFromOSMLngLat(rightLong, bottomLat);
-	            var bottomLeft = GPSUtils.getPixelsCoordsFromOSMLngLat(leftLong, bottomLat);
+	            // let bottomLeft = GPSUtils.getPixelsCoordsFromOSMLngLat(leftLong, bottomLat);
 
 	            var absCoord = GPSUtils.getPixelsCoordsFromOSMLngLat(longitute, latitude);
 
@@ -10590,7 +10327,7 @@
 	         * @static
 	         * @method lngX
 	         * @param {Number} lon
-	         * @returns {Number} pixel coordinate
+	         * @return {Number} pixel coordinate
 	         */
 
 	    }, {
@@ -10603,7 +10340,7 @@
 	         * @static
 	         * @method latY
 	         * @param {Number} lat
-	         * @returns {Number} pixel coordinate
+	         * @return {Number} pixel coordinate
 	         */
 
 	    }, {
@@ -10647,17 +10384,22 @@
 	            return { x: x, y: y, z: z };
 	        }
 	    }]);
+
 	    return GPSUtils;
 	}();
 
 	// module exports
 
+	var _createClass$28 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$33(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	var MeshFX = function () {
 	    function MeshFX() {
-	        classCallCheck(this, MeshFX);
+	        _classCallCheck$33(this, MeshFX);
 	    }
 
-	    createClass(MeshFX, null, [{
+	    _createClass$28(MeshFX, null, [{
 	        key: 'Noise',
 
 
@@ -10678,10 +10420,9 @@
 	        }
 	    }, {
 	        key: 'Nothing',
-	        value: function Nothing(mesh, amount) {
+	        value: function Nothing(mesh) {
 	            var vertices = mesh.getVertices();
 	            for (var i = 0; i < vertices.length; ++i) {
-	                var noise = new Vector3$1(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5);
 	                vertices[i] = new Vector3$1(vertices[i].x, vertices[i].y, vertices[i].z);
 	            }
 	            mesh.setVertices(vertices);
@@ -10723,13 +10464,22 @@
 	            mesh.setVertices(vertices);
 	        }
 	    }]);
+
 	    return MeshFX;
 	}();
 
 	// module exports
 
+	var _createClass$29 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$34(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$20(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$20(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Midi = function (_Component) {
-	    inherits(Midi, _Component);
+	    _inherits$20(Midi, _Component);
 
 	    /**
 	     Gives access to the midi devices. This class requires the Web MIDI API to operate properly.
@@ -10739,13 +10489,12 @@
 	     @param {String} params.in The Midi IN interface name we want to open.
 	     @param {String} params.out The Midi OUT interface name we want to open.
 	     @param {Function} params.onMidiIn The Midi IN callback we want to be called on a midi in event.
-	     
-	     @requires Web Midi API
+	      @requires Web Midi API
 	     */
 	    function Midi(params) {
-	        classCallCheck(this, Midi);
+	        _classCallCheck$34(this, Midi);
 
-	        var _this = possibleConstructorReturn(this, (Midi.__proto__ || Object.getPrototypeOf(Midi)).call(this, params));
+	        var _this = _possibleConstructorReturn$20(this, (Midi.__proto__ || Object.getPrototypeOf(Midi)).call(this, params));
 
 	        _this.midioutname = params.out;
 	        _this.midiinname = params.in;
@@ -10769,7 +10518,7 @@
 	     */
 
 
-	    createClass(Midi, [{
+	    _createClass$29(Midi, [{
 	        key: 'onMIDIInit',
 	        value: function onMIDIInit(midi) {
 	            this.midiAccess = midi;
@@ -10787,7 +10536,7 @@
 	    }, {
 	        key: 'onMIDIReject',
 	        value: function onMIDIReject(err) {
-	            alert("The MIDI system failed to start.  You're gonna have a bad time.");
+	            alert('\n            The MIDI system failed to start.\n            You\'re gonna have a bad time.\n            Error: ' + err.message + '\n        ');
 	        }
 
 	        /**
@@ -10804,9 +10553,9 @@
 	                debug.log("MIDI inputs on your system : ");
 	                for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
 	                    debug.log("input=", input);
-	                    var midiname = input.value.name;
-	                    if (midiname === this.midiinname) {
-	                        debug.log("found midi interface IN : " + midiname);
+
+	                    if (input.value.name === this.midiinname) {
+	                        debug.log("found midi interface IN : " + input.value.name);
 	                        input.value.onmidimessage = this.onMIDIMessage.bind(this);
 	                    }
 	                }
@@ -10816,10 +10565,9 @@
 	                debug.log("MIDI outputs on your system : ");
 	                for (var output = outputs.next(); output && !output.done; output = outputs.next()) {
 	                    debug.log("output=", output);
-	                    var midiname = output.value.name;
 
-	                    if (midiname === this.midioutname) {
-	                        debug.log("found midi interface OUT : " + midiname);
+	                    if (output.value.name === this.midioutname) {
+	                        debug.log("found midi interface OUT : " + output.value.name);
 	                        this.midioutput = output.value;
 	                    }
 	                }
@@ -10860,7 +10608,10 @@
 	    }, {
 	        key: 'ControlChange',
 	        value: function ControlChange(channel, cc, val) {
-	            if (this.midioutput === undefined) return;
+	            if (this.midioutput === undefined) {
+	                return;
+	            }
+
 	            var ccMessage;
 	            var m = 0xB0 + channel;
 	            ccMessage = [m, cc, val];
@@ -10880,7 +10631,10 @@
 	    }, {
 	        key: 'NoteOn',
 	        value: function NoteOn(channel, note, vel) {
-	            if (this.midioutput === undefined) return;
+	            if (this.midioutput === undefined) {
+	                return;
+	            }
+
 	            var ccMessage;
 	            var m = 0x90 + channel;
 	            ccMessage = [m, note, vel];
@@ -10900,46 +10654,83 @@
 	    }, {
 	        key: 'NoteOff',
 	        value: function NoteOff(channel, note, vel) {
-	            if (this.midioutput === undefined) return;
+	            if (this.midioutput === undefined) {
+	                return;
+	            }
+
 	            var ccMessage;
 	            var m = 0x80 + channel;
 	            ccMessage = [m, note, vel];
 	            this.midioutput.send(ccMessage);
 	        }
 	    }]);
+
 	    return Midi;
 	}(Component);
 	/**
-	* Note On
-	*/
+	 * Note On
+	 *
+	 * @property NoteOn
+	 * @type Number
+	 * @static
+	 * @final
+	 */
 
 
 	Midi.NoteOn = 144;
 	/**
 	 * Note Off
+	 *
+	 * @property NoteOff
+	 * @type Number
+	 * @static
+	 * @final
 	 */
 	Midi.NoteOff = 128;
 	/**
 	 * After touch
+	 *
+	 * @property Aftertouch
+	 * @type Number
+	 * @static
+	 * @final
 	 */
 	Midi.Aftertouch = 160;
 	/**
 	 * Control change
+	 *
+	 * @property ControlChange
+	 * @type Number
+	 * @static
+	 * @final
 	 */
 	Midi.ControlChange = 176;
 	/**
 	 * Program change
+	 *
+	 * @property ProgramChange
+	 * @type Number
+	 * @static
+	 * @final
 	 */
 	Midi.ProgramChange = 192;
 
 	// module exports
 
+	var _createClass$30 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$35(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$21(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$21(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Profiler = function (_Component) {
-	    inherits(Profiler, _Component);
+	    _inherits$21(Profiler, _Component);
 
 	    /**
 	     * Profiler is a Profiler component.
-	     * 
+	     *
 	     *
 	     * @example
 	     *     //to do
@@ -10950,9 +10741,9 @@
 	     * @param {Object} params Config parameters
 	    */
 	    function Profiler(params) {
-	        classCallCheck(this, Profiler);
+	        _classCallCheck$35(this, Profiler);
 
-	        var _this = possibleConstructorReturn(this, (Profiler.__proto__ || Object.getPrototypeOf(Profiler)).call(this, params));
+	        var _this = _possibleConstructorReturn$21(this, (Profiler.__proto__ || Object.getPrototypeOf(Profiler)).call(this, params));
 
 	        _this.timers = [];
 	        _this.current_frame = 0;
@@ -10961,12 +10752,10 @@
 	        return _this;
 	    }
 
-	    createClass(Profiler, [{
+	    _createClass$30(Profiler, [{
 	        key: 'initialize',
 	        value: function initialize() {
-	            var t = this.getTime();
-	            var dt = this.last_time - t;
-	            this.last_time = t;
+	            this.last_time = this.getTime();
 	        }
 	    }, {
 	        key: 'update',
@@ -10986,30 +10775,185 @@
 	        }
 	    }, {
 	        key: 'startTimer',
-	        value: function startTimer(id) {
+	        value: function startTimer() {
 	            //var t = Profiler.getTime();
 	            //Profiler.timers[Profiler.current_frame].
 	        }
 	    }, {
 	        key: 'getTime',
 	        value: function getTime() {
-	            //return Date.now().getTime();
-	            return new Date().getTime();
+	            return Date.now();
 	        }
 	    }, {
 	        key: 'logTimers',
 	        value: function logTimers() {
-	            var str = "";
-	            for (var i in this.timers) {
-	                str += this.timers[i].dt + " ";
-	            }
-	            console.log("Profiler timers : " + str);
+	            console.log("Profiler timers : " + this.timers.map(function (timer) {
+	                return timer.dt;
+	            }).join(' '));
 	        }
 	    }]);
+
 	    return Profiler;
 	}(Component);
 
 	// module exports
+
+	var _createClass$31 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$36(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Runner = function () {
+	    /**
+	     A runner is used to instanciate a Mobilizing.js user's script inside a specific context. It is requiered to use a Runner to initiate a context and to attech a script to it.
+	      @class Runner
+	     @constructor
+	     @param mobscriptinstance the Mobilizing.js script instance given by the user
+	     @param params JSON parameters to activate or not some Mobilizing.js modules when used in an other lib (i.e. CoSiMa)
+	     @param params.canvas canvas used by the engine
+	     @param params.callback a callback function that get called when the user script setup() is finished (function args are the Runner instance and the user script instance)
+	     @param params.inputEnabled enable the Mobilizing Input built-in manager
+	     @param params.audioEnabled enable the Mobilizing Audio manager
+	      @example
+	         <!DOCTYPE html>
+	            <html>
+	                <head>
+	                    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+	                    <meta charset="UTF-8">
+	                    <meta name="viewport" content="height=device-height,width=device-width" />
+	                    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+	                    <meta name="apple-mobile-web-app-capable" content="yes">
+	                    <meta name="apple-touch-fullscreen" content="yes">
+	                     <link rel='stylesheet' href='css/main.css' />
+	                     <script src="../../vendor/three/three.min.js"></script>
+	                    <script src="../../vendor/opentype/opentype.js"></script>
+	                    <script src="../../dist/Mobilizing.js"></script>
+	                    <script src="script.js"></script>
+	                    <script>
+	                        //script.js is a user written script that must be instanciate for the Runner
+	                        var runner = new Mobilizing.Runner(new script());
+	                    </script>
+	                </head>
+	            <body>
+	            </body>
+	          </html>
+	      @example
+	         function script()
+	         {
+	            this.setup = function(){
+	            //get the current context to work with
+	                var context = this.getContext();
+	            };
+	             this.update = function(){
+	             };
+	          };
+	     */
+	    function Runner(params) {
+	        _classCallCheck$36(this, Runner);
+
+	        this.callback = getOrDefault(params, "callback", undefined);
+	        this.context = params.context;
+
+	        if (document.readyState === "complete") {
+	            this.run();
+	        } else {
+	            window.addEventListener("load", this.run.bind(this));
+	        }
+	        this.frame = 0;
+	    }
+
+	    /**
+	     * Runs the runner, init the context, create the preLoader and launch it, then execute the script
+	     *
+	     * @method run
+	     * @private
+	     */
+
+
+	    _createClass$31(Runner, [{
+	        key: "run",
+	        value: function run() {
+	            var _this = this;
+
+	            this.context.init();
+	            this.context.preLoad();
+
+	            this.context.loader.events.on("complete", function () {
+	                _this.startLoop();
+	            });
+
+	            this.context.loader.consumeAll();
+	        }
+
+	        /**
+	        * Starts the loop of the user's script, that is the update function
+	        * @method startLoop
+	        * @private
+	        */
+
+	    }, {
+	        key: "startLoop",
+	        value: function startLoop() {
+	            this.context.setup(); //call all components setups
+	            this.loop(); //start the main loop
+	        }
+
+	        /**
+	        * onFrameBegin
+	        *
+	        * @method onFrameBegin
+	        */
+
+	    }, {
+	        key: "onFrameBegin",
+	        value: function onFrameBegin() {
+	            //move to a component ?
+	            this.frame++;
+
+	            if (this.context.stats !== undefined) {
+	                this.context.stats.begin();
+	            }
+	        }
+
+	        /**
+	        * onFrameEnd
+	        *
+	        * @method onFrameEnd
+	        */
+
+	    }, {
+	        key: "onFrameEnd",
+	        value: function onFrameEnd() {
+	            if (this.context.stats !== undefined) {
+	                this.context.stats.end();
+	            }
+	        }
+
+	        /**
+	         * Runner's requestAnimationFrame loop manager
+	         *
+	         * @method loop
+	         * @private
+	         */
+
+	    }, {
+	        key: "loop",
+	        value: function loop() {
+	            this.onFrameBegin();
+	            this.context.update(); //engine update
+	            //we don't need anymore user script update and 3D rendering (this is done internally by the context)
+	            this.onFrameEnd();
+	            requestAnimationFrame(this.loop.bind(this)); //schedule next
+	        }
+	    }]);
+
+	    return Runner;
+	}();
+
+	// module exports
+
+	var _createClass$33 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$38(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var EVT_READYSTATE_CHANGE = 'readystatechange';
 
@@ -11043,7 +10987,7 @@
 	var EVT_SUCCESS = 'success';
 
 	/**
-	 * Fired when the request encountered an error, or if it finished loading with an error status 
+	 * Fired when the request encountered an error, or if it finished loading with an error status
 	 * @event error
 	 * @param {Ajax} ajax The Ajax instance
 	 */
@@ -11076,7 +11020,9 @@
 	    * @param {Function} [params.onError = null] A function to be called if the request fails
 	    */
 	    function Ajax(params) {
-	        classCallCheck(this, Ajax);
+	        var _this = this;
+
+	        _classCallCheck$38(this, Ajax);
 
 	        this.url = params.url;
 	        this.method = getOrDefault(params, "method", "GET");
@@ -11124,9 +11070,9 @@
 	        if (this.method === 'GET' && data) {
 	            var url_params = [];
 
-	            for (var key in data) {
+	            Object.keys(data).forEach(function (key) {
 	                url_params.push(key + '=' + encodeURIComponent(data[key]));
-	            }
+	            });
 
 	            this.url += '?' + url_params.join('&');
 
@@ -11137,9 +11083,9 @@
 
 	        // set custom headers
 	        if (headers !== null) {
-	            for (var _key in headers) {
-	                this.setRequestHeader(_key, headers[_key]);
-	            }
+	            Object.keys(headers).forEach(function (name) {
+	                _this.setRequestHeader(name, headers[name]);
+	            });
 	        }
 
 	        if (withCredentials !== null) {
@@ -11165,7 +11111,7 @@
 	    */
 
 
-	    createClass(Ajax, [{
+	    _createClass$33(Ajax, [{
 	        key: 'onReadyStateChange',
 
 
@@ -11188,26 +11134,28 @@
 	                    break;
 
 	                case XMLHttpRequest.DONE:
-	                    var status = this.getStatus();
-	                    var success = false;
+	                    {
+	                        var status = this.getStatus();
+	                        var success = false;
 
-	                    if (status === 200 && status < 300 || status === 304) {
-	                        success = true;
-	                    }
-	                    // local requests can return a status of 0 even if no error occurs
-	                    else if (status === 0 && !this._xhr.error) {
+	                        if (status === 200 && status < 300 || status === 304) {
 	                            success = true;
 	                        }
+	                        // local requests can return a status of 0 even if no error occurs
+	                        else if (status === 0 && !this._xhr.error) {
+	                                success = true;
+	                            }
 
-	                    this.events.trigger(EVT_LOAD$1, this, success);
+	                        this.events.trigger(EVT_LOAD$1, this, success);
 
-	                    if (success) {
-	                        this.events.trigger(EVT_SUCCESS, this);
-	                    } else {
-	                        this.events.trigger(EVT_ERROR$1, this);
+	                        if (success) {
+	                            this.events.trigger(EVT_SUCCESS, this);
+	                        } else {
+	                            this.events.trigger(EVT_ERROR$1, this);
+	                        }
+
+	                        break;
 	                    }
-
-	                    break;
 	            }
 	        }
 
@@ -11408,7 +11356,7 @@
 	        }
 	    }], [{
 	        key: 'get',
-	        value: function get$$1(params) {
+	        value: function get(params) {
 	            params.method = 'GET';
 
 	            return new Ajax(params);
@@ -11446,17 +11394,205 @@
 	            return new Ajax(params);
 	        }
 	    }]);
+
 	    return Ajax;
 	}();
 
 	// module exports
 
-	var OBJ = function () {
-	    function OBJ() {
-	        classCallCheck(this, OBJ);
+	var _createClass$34 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$39(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Texture$1 = function () {
+	    /**
+	     * Texture are bitmap pictures loaded in the graphic card memory so they can be mapped on a geometry surface. Usually, texture are mapped through a Material. Keep in mind that WebGL, as an impletation of OpenGL, shares the same kind of limitations : textures sources should be power of 2 (even if here, Three.js is doing the job of resizing for you if they're not).
+	     * Constants list for possible texture's mapping mode :
+	     *
+	     * Texture.UVMapping
+	     * Texture.CubeReflectionMapping
+	     * Texture.CubeRefractionMapping
+	     * Texture.EquirectangularReflectionMapping
+	     * Texture.EquirectangularRefractionMapping
+	     * Texture.SphericalReflectionMapping
+	     * Texture.CubeUVReflectionMapping
+	     * Texture.CubeUVRefractionMapping
+	     *
+	     * @class Texture
+	     * @constructor
+	     * @param {Object} params
+	     * @param {Context} params.image the Image object.
+	     * @param {String} params.canvas the canvas object url.
+	     */
+	    function Texture$$1(params) {
+	        _classCallCheck$39(this, Texture$$1);
+
+	        // this._texture;
+	        this._image = getOrDefault(params, "image", undefined);
+	        this._canvas = getOrDefault(params, "canvas", undefined);
+
+	        if (this._image) {
+	            this.fromImage(this._image);
+	        } else if (this._canvas) {
+	            this.fromCanvas(this._canvas);
+	        }
 	    }
 
-	    createClass(OBJ, null, [{
+	    /**
+	    * Create the texture from an image file
+	    *
+	    * @method fromImage
+	    * @param {Image} image tells if the loader should force the main process to wait for the end of
+	    */
+
+
+	    _createClass$34(Texture$$1, [{
+	        key: 'fromImage',
+	        value: function fromImage(image) {
+
+	            this._texture = new THREE.Texture(image);
+	            this._texture.needsUpdate = true;
+
+	            this.width = image.width;
+	            this.height = image.height;
+	        }
+
+	        /**
+	         * Create the texture from a Canvas DOM element (can be Mobilizing itself -> when we'll can catch a WebGL canvas pixels...)
+	         *
+	         * @method fromCanvas
+	         * @param {canvas} canvas canvas
+	         */
+
+	    }, {
+	        key: 'fromCanvas',
+	        value: function fromCanvas(canvas) {
+	            var _this = this;
+
+	            this._texture = new THREE.Texture(canvas);
+	            this._texture.needsUpdate = true;
+	            this._texture.magFilter = THREE.LinearFilter;
+	            //this._texture.minFilter = THREE.LinearMipMapLinearFilter;
+	            this._texture.minFilter = THREE.LinearFilter;
+	            this.width = this._texture.image.width;
+	            this.height = this._texture.image.height;
+
+	            //custom events management, used internally to autamatically refresh texture after drawn
+	            if (canvas.events) {
+	                canvas.events.on("drawn", function () {
+	                    _this.setNeedsUpdate(true);
+	                });
+	            }
+	        }
+
+	        /**
+	        * Clears the underlying Three.js texture object
+	        * @method dispose
+	        */
+
+	    }, {
+	        key: 'dispose',
+	        value: function dispose() {
+	            this._texture.dispose();
+	        }
+
+	        /**
+	        * Define the repetition factor of this texture. If the value is > 1, then the texture will be mapped twice on the surface and so on. NB: usage of this method automatically sets the wrapS and wrapT properties to RepeatWrapping
+	        *
+	        * @method setRepeat
+	        * @param {float} u the new u texture coordinate repetition to use
+	        * @param {float} v the new u texture coordinate repetition to use
+	        */
+
+	    }, {
+	        key: 'setRepeat',
+	        value: function setRepeat(u, v) {
+	            if (this._texture && this._texture !== undefined) {
+	                this._texture.repeat.set(u, v);
+	                this._texture.wrapS = THREE.RepeatWrapping;
+	                this._texture.wrapT = THREE.RepeatWrapping;
+	            }
+	        }
+
+	        /**
+	        * How much a single repetition of the texture is offset from the beginning, in each direction U and V. Typical range is 0.0 to 1.0.
+	        *
+	        * @method undefined
+	        * @param {Numbe} val offset between 0.0 to 1.0
+	        */
+
+	    }, {
+	        key: 'setOffset',
+	        value: function setOffset(val) {
+	            this._texture.offset = val;
+	        }
+
+	        //TODO : setter and getter for Three.js texture props mapping
+
+	        /**
+	        * Set this to true to trigger an update next time the texture is used. Particularly important for setting the wrap mode.
+	        *
+	        * @method setNeedsUpdate
+	        * @param {Boolean} val
+	        */
+
+	    }, {
+	        key: 'setNeedsUpdate',
+	        value: function setNeedsUpdate() {
+	            this._texture.needsUpdate = true;
+	        }
+
+	        /**
+	        * False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.
+	        *
+	        * @method setPremultiplyAlpha
+	        * @param {Boolean} val
+	        */
+
+	    }, {
+	        key: 'setPremultiplyAlpha',
+	        value: function setPremultiplyAlpha(val) {
+	            this._texture.premultiplyAlpha = val;
+	        }
+
+	        /**
+	        * How the image is applied to the object. An object type of Texture.UVMapping is the default, where the U,V coordinates are used to apply the map.
+	        *
+	        * @property setMapping
+	        * @param {Number} mapping
+	        */
+
+	    }, {
+	        key: 'setMapping',
+	        value: function setMapping(mapping) {
+	            this._texture.mapping = mapping;
+	        }
+	    }]);
+
+	    return Texture$$1;
+	}();
+
+	Texture$1.UVMapping = THREE.UVMapping;
+	Texture$1.CubeReflectionMapping = THREE.CubeReflectionMapping;
+	Texture$1.CubeRefractionMapping = THREE.CubeRefractionMapping;
+	Texture$1.EquirectangularReflectionMapping = THREE.EquirectangularReflectionMapping;
+	Texture$1.EquirectangularRefractionMapping = THREE.EquirectangularRefractionMapping;
+	Texture$1.SphericalReflectionMapping = THREE.SphericalReflectionMapping;
+	Texture$1.CubeUVReflectionMapping = THREE.CubeUVReflectionMapping;
+	Texture$1.CubeUVRefractionMapping = THREE.CubeUVRefractionMapping;
+
+	// module exports
+
+	var _createClass$35 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$40(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var OBJ = function () {
+	    function OBJ() {
+	        _classCallCheck$40(this, OBJ);
+	    }
+
+	    _createClass$35(OBJ, null, [{
 	        key: 'load',
 
 	        /**
@@ -11558,12 +11694,15 @@
 	                        //Map diffuse
 	                        //load texture
 	                        //debug.log("load texture : " + words[1]);
-	                        var texture = loader.loadTexture({ url: words[1], onLoad: OBJ.attachTexture.bind(null, loader, model) });
-	                        model.updateMaterial();
+	                        loader.loadTexture({
+	                            url: words[1],
+	                            onLoad: OBJ.attachTexture.bind(null, loader, model)
+	                        });
 
+	                        model.updateMaterial();
 	                        break;
 	                    default:
-	                        debug.log("unknown MTL line : ", words);
+	                        debug.log("unknown MTL line : ", line);
 	                        break;
 	                }
 	            });
@@ -11638,19 +11777,16 @@
 
 	                    case "v":
 	                        //debug.log("Vertice")
-	                        var v = new Vector3$1(words[1], words[2], words[3]);
-	                        p.pushVertex(v);
+	                        p.pushVertex(new Vector3$1(words[1], words[2], words[3]));
 	                        break;
 
 	                    case "vt":
 	                        debug.log("uv " + words[1] + " " + words[2]);
-	                        var vUV = new Vector2$1(words[1], words[2]);
-	                        uvs.push(vUV);
+	                        uvs.push(new Vector2$1(words[1], words[2]));
 	                        break;
 
 	                    case "vn":
-	                        var vN = new Vector3$1(words[1], words[2], words[3]);
-	                        normals.push(vN);
+	                        normals.push(new Vector3$1(words[1], words[2], words[3]));
 	                        //debug.log("normal")
 	                        break;
 
@@ -11659,26 +11795,29 @@
 	                        break;
 
 	                    case "f":
-	                        //FACE definition
-	                        //debug.log(uvs);
-	                        //debug.log("Face")
-	                        var index1 = words[1].split("/");
-	                        var index2 = words[2].split("/");
-	                        var index3 = words[3].split("/");
-	                        var f = p.pushFace(index1[0] - 1, index2[0] - 1, index3[0] - 1);
-	                        p.pushUV(uvs[index1[1] - 1], uvs[index2[1] - 1], uvs[index3[1] - 1]);
-	                        //debug.log(index1, index2, index3);
-	                        //p.pushNormal(normals[index1[2]-1], normals[index2[2]-1], normals[index3[2]-1]); //NEW
-	                        //f.normal = new Vector3(normals[index1[2]-1], normals[index2[2]-1], normals[index3[2]-1]);
+	                        {
+	                            //FACE definition
+	                            //debug.log(uvs);
+	                            //debug.log("Face")
+	                            var index1 = words[1].split("/");
+	                            var index2 = words[2].split("/");
+	                            var index3 = words[3].split("/");
 
-	                        if (words.length > 4) {
-	                            //we have quads, we need to add an additionnal triangle
-	                            var index4 = words[4].split("/");
-	                            p.pushFace(index1[0] - 1, index3[0] - 1, index4[0] - 1);
-	                            p.pushUV(uvs[index1[1] - 1], uvs[index3[1] - 1], uvs[index4[1] - 1]);
+	                            p.pushFace(index1[0] - 1, index2[0] - 1, index3[0] - 1);
+	                            p.pushUV(uvs[index1[1] - 1], uvs[index2[1] - 1], uvs[index3[1] - 1]);
+
+	                            //debug.log(index1, index2, index3);
+	                            //p.pushNormal(normals[index1[2]-1], normals[index2[2]-1], normals[index3[2]-1]); //NEW
+	                            //f.normal = new Vector3(normals[index1[2]-1], normals[index2[2]-1], normals[index3[2]-1]);
+
+	                            if (words.length > 4) {
+	                                //we have quads, we need to add an additionnal triangle
+	                                var index4 = words[4].split("/");
+	                                p.pushFace(index1[0] - 1, index3[0] - 1, index4[0] - 1);
+	                                p.pushUV(uvs[index1[1] - 1], uvs[index3[1] - 1], uvs[index4[1] - 1]);
+	                            }
+	                            break;
 	                        }
-	                        break;
-
 	                    case "#":
 	                        //debug.log("Comment")
 	                        break;
@@ -11693,10 +11832,15 @@
 	            //p.material.setTexture(OBJ.texture);
 	        }
 	    }]);
+
 	    return OBJ;
 	}();
 
 	// module exports
+
+	var _createClass$32 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$37(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var EVT_REQUEST_START = 'start';
 
@@ -11764,7 +11908,7 @@
 
 	/**
 	 * LoadRequest object encapsulates a request of a loader
-	 * 
+	 *
 	 * @class LoadRequest
 	 * @constructor
 	 * @param {Object} params The parameters object
@@ -11776,8 +11920,7 @@
 
 	var LoadRequest = function () {
 	    function LoadRequest(params) {
-	        classCallCheck(this, LoadRequest);
-
+	        _classCallCheck$37(this, LoadRequest);
 
 	        this._consumeCallback = params.consume;
 	        this._value = undefined;
@@ -11806,7 +11949,7 @@
 	    */
 
 
-	    createClass(LoadRequest, [{
+	    _createClass$32(LoadRequest, [{
 	        key: 'consume',
 	        value: function consume() {
 	            this._consumeCallback(this);
@@ -11860,23 +12003,24 @@
 	            return this._error;
 	        }
 	    }]);
+
 	    return LoadRequest;
 	}();
 
 	var Loader = function () {
 	    /**
 	    * A loader class that manage the loading of datas from url. This is mainly used internally to manage the preLoad method in users script. Users should usually use this class methods to load datas and obtain the result encapsulated in a LoadRequest object.
-	    * 
+	    *
 	    * @class Loader
 	    * @constructor
 	    * @param {Object} params Config parameters
 	    * @param {Function} params.onLoad
 	    * @param {Function} params.onError
 	    * @param {Function} params.onComplete
-	    * 
+	    *
 	    * @example
 	    *     this.preLoad = function(loader){
-	    *     
+	    *
 	    *       logoFile = loader.loadImage({url:"logo_mobilizing.png",
 	    *                                    onStart: function(){console.log("Started loading of logo");},
 	    *                                    onLoad: function(data){console.log("Hell Yeah! Got", data);}
@@ -11890,8 +12034,7 @@
 	    *     }
 	    */
 	    function Loader(params) {
-	        classCallCheck(this, Loader);
-
+	        _classCallCheck$37(this, Loader);
 
 	        var onLoad = getOrDefault(params, "onLoad", null);
 	        var onError = getOrDefault(params, "onError", null);
@@ -11920,7 +12063,7 @@
 	    */
 
 
-	    createClass(Loader, [{
+	    _createClass$32(Loader, [{
 	        key: 'consumeAll',
 	        value: function consumeAll() {
 
@@ -12017,7 +12160,7 @@
 	            var ajax = new Ajax({ "url": url, "responseType": responseType, "autoSend": false });
 
 	            var request = new LoadRequest({
-	                "consume": function consume(request) {
+	                "consume": function consume() {
 	                    ajax.send();
 	                },
 	                "onStart": onStart,
@@ -12025,12 +12168,12 @@
 	                "onError": onError
 	            });
 
-	            ajax.events.on("start", function (ajax) {
+	            ajax.events.on("start", function () {
 	                request.events.trigger(EVT_REQUEST_START);
 	            });
 
-	            ajax.events.on("success", function (ajax) {
-	                var value = processData(ajax, _this);
+	            ajax.events.on("success", function (ajx) {
+	                var value = processData(ajx, _this);
 
 	                request.setValue(value);
 	                request.events.trigger(EVT_REQUEST_LOAD, value);
@@ -12039,13 +12182,13 @@
 
 	                _this._complete++;
 
-	                if (_this._complete == _this._requests.length) {
+	                if (_this._complete === _this._requests.length) {
 	                    _this.doComplete();
 	                }
 	            });
 
-	            ajax.events.on("error", function (ajax) {
-	                var error = ajax.getStatusText();
+	            ajax.events.on("error", function (ajx) {
+	                var error = ajx.getStatusText();
 
 	                request.setError(error);
 	                request.events.trigger(EVT_REQUEST_ERROR, error);
@@ -12054,7 +12197,7 @@
 
 	                _this._complete++;
 
-	                if (_this._complete == _this._requests.length) {
+	                if (_this._complete === _this._requests.length) {
 	                    _this.doComplete();
 	                }
 	            });
@@ -12130,9 +12273,9 @@
 	            var img = new Image();
 
 	            var request = new LoadRequest({
-	                "consume": function consume(request) {
+	                "consume": function consume(req) {
 	                    img.src = url;
-	                    request.events.trigger(EVT_REQUEST_START);
+	                    req.events.trigger(EVT_REQUEST_START);
 	                },
 	                "onStart": onStart,
 	                "onLoad": onLoad,
@@ -12147,7 +12290,7 @@
 
 	                _this2._complete++;
 
-	                if (_this2._complete == _this2._requests.length) {
+	                if (_this2._complete === _this2._requests.length) {
 	                    _this2.doComplete();
 	                }
 	            }, false);
@@ -12162,7 +12305,7 @@
 
 	                _this2._complete++;
 
-	                if (_this2._complete == _this2._requests.length) {
+	                if (_this2._complete === _this2._requests.length) {
 	                    _this2.doComplete();
 	                }
 	            });
@@ -12201,10 +12344,10 @@
 	            video.autoplay = false;
 
 	            var request = new LoadRequest({
-	                "consume": function consume(request) {
+	                "consume": function consume(req) {
 	                    video.src = url;
 	                    video.load();
-	                    request.events.trigger(EVT_REQUEST_START);
+	                    req.events.trigger(EVT_REQUEST_START);
 	                },
 	                "onStart": onStart,
 	                "onLoad": onLoad,
@@ -12219,7 +12362,7 @@
 
 	                _this3._complete++;
 
-	                if (_this3._complete == _this3._requests.length) {
+	                if (_this3._complete === _this3._requests.length) {
 	                    _this3.doComplete();
 	                }
 	            }, false);
@@ -12236,10 +12379,55 @@
 
 	                _this3._complete++;
 
-	                if (_this3._complete == _this3._requests.length) {
+	                if (_this3._complete === _this3._requests.length) {
 	                    _this3.doComplete();
 	                }
 	            });
+
+	            this._requests.push(request);
+
+	            if (this._status === STATUS_LOADING) {
+	                request.consume();
+	            }
+
+	            return request;
+	        }
+	    }, {
+	        key: 'loadScript',
+	        value: function loadScript(params) {
+	            var _this4 = this;
+
+	            var url = params.url;
+	            var onStart = getOrDefault(params, "onStart", null);
+	            var onLoad = getOrDefault(params, "onLoad", null);
+	            var onError = getOrDefault(params, "onError", null);
+
+	            var script = document.createElement("script");
+	            document.head.appendChild(script);
+	            script.src = url;
+
+	            var request = new LoadRequest({
+	                "consume": function consume(req) {
+	                    script.src = url;
+	                    req.events.trigger(EVT_REQUEST_START);
+	                },
+	                "onStart": onStart,
+	                "onLoad": onLoad,
+	                "onError": onError
+	            });
+
+	            script.addEventListener("load", function () {
+	                request.setValue(script);
+	                request.events.trigger(EVT_REQUEST_LOAD, script);
+
+	                _this4.events.trigger(EVT_LOAD, request);
+
+	                _this4._complete++;
+
+	                if (_this4._complete === _this4._requests.length) {
+	                    _this4.doComplete();
+	                }
+	            }, false);
 
 	            this._requests.push(request);
 
@@ -12304,6 +12492,14 @@
 	        value: function loadOBJ(params) {
 	            return OBJ.load(this, params);
 	        }
+
+	        /**
+	        * Load a texture, that is an image that is injected in a texture
+	        * @method loadTexture
+	        * @param {Object} params
+	        * @return {Texture} the constructed texture
+	        */
+
 	    }, {
 	        key: 'loadTexture',
 	        value: function loadTexture(params) {
@@ -12313,12 +12509,10 @@
 	                onLoad: function onLoad(img) {
 	                    t.fromImage(img);
 	                    if (params.onLoad !== undefined) {
-	                        console.log("call onLoad:", params.onLoad);
 	                        params.onLoad(t);
 	                    }
 	                }
 	            });
-	            console.log("result=", result);
 	            return t;
 	        }
 	    }], [{
@@ -12330,17 +12524,17 @@
 	                if (callback) {
 	                    Loader.Cache.addCallback(url, callback);
 	                    //console.log("adding", callback);
-	                    return;
+	                    return null;
 	                }
 	            }
 	            //check if the file is already cached (loaded)
 	            if (Loader.Cache.isCached(url)) {
 	                debug.info("ressource " + url + " is cached and won't be loaded again");
 	                return Loader.Cache.get(url);
-	            } else {
-	                //add this url to the file to cache
-	                Loader.Cache.addKey(url);
 	            }
+
+	            //add this url to the file to cache
+	            Loader.Cache.addKey(url);
 
 	            var ajax = new Ajax({
 	                "url": url,
@@ -12349,30 +12543,32 @@
 	            });
 
 	            if (processData === undefined) {
-	                processData = function processData(ajax) {
-	                    return ajax.getResponse();
+	                processData = function processData(ajx) {
+	                    return ajx.getResponse();
 	                };
 	            }
 
-	            ajax.events.on("success", function (ajax) {
-	                var result = processData(ajax);
+	            ajax.events.on("success", function (ajx) {
+	                var result = processData(ajx);
 	                callback(result);
 	                //this is the loading response whithout further process,
 	                //add it to the cache and pass the response to all other registred callback
 	                Loader.Cache.addValue(url, result);
 	            });
 
-	            ajax.events.on("error", function (ajax) {
-	                callback(undefined, ajax.getStatusText());
+	            ajax.events.on("error", function (ajx) {
+	                callback(undefined, ajx.getStatusText());
 	            });
 
 	            ajax.send();
+
+	            return null;
 	        }
 
 	        /**
 	        * Loads a text from a URL. This static method must be provided a callback method.
 	        * @method loadText
-	        * @static 
+	        * @static
 	        * @param {String} url the URL to load data from
 	        * @param {Function} callback callback function that the user wants to call on load completion
 	        * @param {Mixed} callback.result The load result if successful
@@ -12388,7 +12584,7 @@
 	        /**
 	        * Loads a JavaScript object, parsed from a JSON string from a URL. This static method must be provided a callback method.
 	        * @method loadJSON
-	        * @static 
+	        * @static
 	        * @param {String} url the URL to load data from
 	        * @param {Function} callback callback function that the user wants to call on load completion
 	        * @param {Mixed} callback.result The load result if successful
@@ -12404,7 +12600,7 @@
 	        /**
 	        * Loads an arraybuffer from a URL. This static method must be provided a callback method.
 	        * @method loadArrayBuffer
-	        * @static 
+	        * @static
 	        * @param {String} url the URL to load data from
 	        * @param {Function} callback callback function that the user wants to call on load completion
 	        * @param {Mixed} callback.result The load result if successful
@@ -12420,7 +12616,7 @@
 	        /**
 	        * Loads a blob from a URL. This static method must be provided a callback method.
 	        * @method loadBlob
-	        * @static 
+	        * @static
 	        * @param {String} url the URL to load data from
 	        * @param {Function} callback callback function that the user wants to call on load completion
 	        */
@@ -12460,7 +12656,7 @@
 	        /**
 	        * Loads a script from a URL. This static method must be provided a callback method.
 	        * @method loadScript
-	        * @static 
+	        * @static
 	        * @param {String} url the URL to load data from
 	        * @param {Function} callback callback function that the user wants to call on load completion
 	        */
@@ -12470,12 +12666,11 @@
 	        value: function loadScript(url, callback) {
 	            var script = document.createElement("script");
 	            document.head.appendChild(script);
-	            script.addEventListener("load", function () {
-	                callback();
-	            });
+	            script.addEventListener("load", callback(script));
 	            script.src = url;
 	        }
 	    }]);
+
 	    return Loader;
 	}();
 
@@ -12489,7 +12684,7 @@
 	    * @constructor
 	    */
 	    function Cache() {
-	        classCallCheck(this, Cache);
+	        _classCallCheck$37(this, Cache);
 
 	        this.enabled = true;
 	        this.files = {};
@@ -12499,14 +12694,16 @@
 	    /**
 	    * Enable or disable cache
 	    * @method enable
-	    * @param {Boolean} bool
+	    * @param {Boolean} enabled
 	    */
 
 
-	    createClass(Cache, [{
+	    _createClass$32(Cache, [{
 	        key: 'enable',
-	        value: function enable(bool) {
-	            this.enabled = false;
+	        value: function enable() {
+	            var enabled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+	            this.enabled = enabled;
 	        }
 
 	        /**
@@ -12519,11 +12716,7 @@
 	    }, {
 	        key: 'add',
 	        value: function add(key, file) {
-	            if (this.enabled === false) {
-	                return;
-	            }
-
-	            if (!this.getKey(key)) {
+	            if (this.enabled === true && !this.getKey(key)) {
 	                debug.info('Cache Adding key and file:', key, file);
 	                this.files[key] = file;
 	            }
@@ -12538,11 +12731,7 @@
 	    }, {
 	        key: 'addKey',
 	        value: function addKey(key) {
-	            if (this.enabled === false) {
-	                return;
-	            }
-
-	            if (!this.getKey(key)) {
+	            if (this.enabled === true && !this.getKey(key)) {
 	                debug.info('Cache Adding key:', key);
 	                this.files[key] = undefined;
 	            }
@@ -12562,21 +12751,23 @@
 	                return;
 	            }
 
-	            if (this.getKey(key) && this.files[key] === undefined) if (this.getKey(key) && this.files[key] === undefined) {
-	                debug.info('Cache Adding value:', file, "to key", key);
-	                this.files[key] = file;
+	            if (this.getKey(key) && this.files[key] === undefined) {
+	                if (this.getKey(key) && this.files[key] === undefined) {
+	                    debug.info('Cache Adding value:', file, "to key", key);
+	                    this.files[key] = file;
 
-	                //process then remove callback consumed
-	                for (var i = this.callbacks.length - 1; i >= 0; i--) {
-	                    //console.log("this.callbacks", this.callbacks[i]);
-	                    if (this.callbacks[i].key === key) {
-	                        var callback = this.callbacks[i].callback;
-	                        callback(file);
+	                    //process then remove callback consumed
+	                    for (var i = this.callbacks.length - 1; i >= 0; i--) {
+	                        //console.log("this.callbacks", this.callbacks[i]);
+	                        if (this.callbacks[i].key === key) {
+	                            var callback = this.callbacks[i].callback;
+	                            callback(file);
 
-	                        this.callbacks.splice(i, 1);
+	                            this.callbacks.splice(i, 1);
+	                        }
 	                    }
+	                    debug.log("this.callbacks.length", this.callbacks.length);
 	                }
-	                debug.log("this.callbacks.length", this.callbacks.length);
 	            }
 	        }
 
@@ -12589,8 +12780,10 @@
 
 	    }, {
 	        key: 'get',
-	        value: function get$$1(key) {
-	            if (this.enabled === false) return;
+	        value: function get(key) {
+	            if (this.enabled === false) {
+	                return null;
+	            }
 	            //console.log( 'Cache', 'Checking key:', key );
 	            return this.files[key];
 	        }
@@ -12617,12 +12810,7 @@
 	    }, {
 	        key: 'isCached',
 	        value: function isCached(key) {
-	            //console.log( 'Cache', 'Checking key:', key, "in", this.files[key] );
-	            if (this.files[key]) {
-	                return true;
-	            } else {
-	                return false;
-	            }
+	            return this.files.hasOwnProperty(key) && typeof this.files[key] !== 'undefined';
 	        }
 
 	        /**
@@ -12635,11 +12823,7 @@
 	    }, {
 	        key: 'isLoading',
 	        value: function isLoading(key) {
-	            if (this.getKey(key)) {
-	                return true;
-	            } else {
-	                return false;
-	            }
+	            return this.files.hasOwnProperty(key) && typeof this.files[key] === 'undefined';
 	        }
 
 	        /**
@@ -12689,6 +12873,7 @@
 	            this.callbacks.push(temp);
 	        }
 	    }]);
+
 	    return Cache;
 	}();
 
@@ -12696,354 +12881,13 @@
 
 	// module exports
 
-	var ComponentProxy = function (_Component) {
-	    inherits(ComponentProxy, _Component);
+	var _createClass$36 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	    /**
-	     * ComponentProxy is a proxy that converts (like a kind of casting) scripts into Mobilizing Components. It was designed specifically to convert users script to regular Components, so they can be used besides all the other Components used by the program. The script should implement the methods preLoad(), setup(), update(). Users can define their own Component using this class for converting their script to a regular Mobilizing Component, we call it custom behavior.
-	     *
-	     * @example
-	     *     //to do
-	     *
-	     * @class ComponentProxy
-	     * @constructor
-	     * @extends Component
-	     * 
-	     * @param {Object} params Config parameters
-	     * @param {Script} params.targetScript The Mobilizing user's script to convert in a Component
-	    */
-	    function ComponentProxy(params) {
-	        classCallCheck(this, ComponentProxy);
+	function _possibleConstructorReturn$22(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	        var _this = possibleConstructorReturn(this, (ComponentProxy.__proto__ || Object.getPrototypeOf(ComponentProxy)).call(this, params));
+	function _inherits$22(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	        _this.targetScript = params.targetScript;
-	        _this.targetScript.context = params.context;
-
-	        _this.targetScript.getContext = function () {
-	            return this.context;
-	        };
-	        return _this;
-	    }
-
-	    /**
-	     * @method preLoad
-	     */
-
-
-	    createClass(ComponentProxy, [{
-	        key: 'preLoad',
-	        value: function preLoad() {
-	            if (typeof this.targetScript.preLoad === "function") {
-	                var _targetScript;
-
-	                (_targetScript = this.targetScript).preLoad.apply(_targetScript, arguments);
-	            }
-	        }
-
-	        /**
-	        * Initialization method
-	        * @method setup Setup
-	        */
-
-	    }, {
-	        key: 'setup',
-	        value: function setup() {
-	            this.targetScript.setup();
-	        }
-	        /**
-	         * @method update
-	         */
-
-	    }, {
-	        key: 'update',
-	        value: function update() {
-	            this.targetScript.update();
-	        }
-	    }]);
-	    return ComponentProxy;
-	}(Component);
-
-	// module exports
-
-	var Context = function (_Component) {
-	    inherits(Context, _Component);
-
-	    /**
-	    * Mobilizing.js defines a context to enable the use of multiple Mobilizing.js instances in the same webpage.
-	    *
-	    * @class Context
-	    * @constructor
-	    */
-	    function Context(params) {
-	        classCallCheck(this, Context);
-
-	        var _this = possibleConstructorReturn(this, (Context.__proto__ || Object.getPrototypeOf(Context)).call(this, params));
-
-	        _this._components = []; //list of components
-	        _this.loader = new Loader(); //default loader
-	        return _this;
-	    }
-
-	    /**
-	    * Context initialization. Instanciates a Loader.
-	    *
-	    * @method init
-	    */
-
-
-	    createClass(Context, [{
-	        key: 'init',
-	        value: function init() {}
-
-	        /**
-	         * Setup for this Context instance (setup all components)
-	         *
-	         * @method setup
-	         */
-
-	    }, {
-	        key: 'setup',
-	        value: function setup() {
-	            for (var c in this._components) {
-	                //this._components[c].setup();
-	                this.chainedCall(this._components[c], "setup");
-	            }
-	        }
-
-	        /**
-	        * preLoad all components
-	        * 
-	        * @method setup
-	        */
-
-	    }, {
-	        key: 'preLoad',
-	        value: function preLoad() {
-	            for (var c in this._components) {
-	                this._components[c].preLoad(this.loader);
-	                //this.chainedCall(this._components[c], "preLoad", this.loader);
-	            }
-	        }
-
-	        /**
-	        * Update
-	        * @method update
-	        */
-
-	    }, {
-	        key: 'update',
-	        value: function update() {
-	            //new components pre-update-post
-	            for (var c in this._components) {
-	                //this._components[c].preUpdate();
-	                this.chainedCall(this._components[c], "preUpdate");
-	            }
-
-	            for (var c in this._components) {
-	                this.chainedCall(this._components[c], "update");
-	            }
-
-	            for (var c in this._components) {
-	                //this._components[c].postUpdate();
-	                this.chainedCall(this._components[c], "postUpdate");
-	            }
-	        }
-	    }, {
-	        key: 'chainedCall',
-	        value: function chainedCall(component, method, arg) {
-	            component[method](arg); //execute first
-	            var chained = component.getChainedComponents();
-	            //recurse then
-	            if (chained.length > 0) {
-	                for (var c in chained) {
-	                    this.chainedCall(chained[c], method(arg));
-	                }
-	            }
-	        }
-
-	        /**
-	        * Add a Component to this context
-	        * @method addComponent
-	        * @param {Component} component
-	        */
-
-	    }, {
-	        key: 'addComponent',
-	        value: function addComponent(component) {
-	            //encapsulate class in a component : useful for user script
-	            if (!(component instanceof Component)) {
-	                component = new ComponentProxy({ targetScript: component, context: this });
-	            }
-
-	            this._components.push(component);
-	            component.setContext(this); //add the context to the component
-	            //component.setup(); //no
-	            //component.preLoad(this.loader);
-	            return component;
-	        }
-	        /*
-	        
-	        addBehaviour(target, component)
-	        {
-	            component.context = this;
-	            component.getContext = function(){return this.context;};
-	            component.target = target;
-	            component.getTarget = function(){return this.target;};
-	            this.components.push(component);
-	            component.setup();
-	        }
-	        
-	         */
-
-	    }]);
-	    return Context;
-	}(Component);
-	// module exports
-
-	var Runner = function () {
-	    /**
-	     A runner is used to instanciate a Mobilizing.js user's script inside a specific context. It is requiered to use a Runner to initiate a context and to attech a script to it.
-	      @class Runner
-	     @constructor
-	     @param mobscriptinstance the Mobilizing.js script instance given by the user
-	     @param params JSON parameters to activate or not some Mobilizing.js modules when used in an other lib (i.e. CoSiMa)
-	     @param params.canvas canvas used by the engine
-	     @param params.callback a callback function that get called when the user script setup() is finished (function args are the Runner instance and the user script instance)
-	     @param params.inputEnabled enable the Mobilizing Input built-in manager
-	     @param params.audioEnabled enable the Mobilizing Audio manager
-	      @example
-	         <!DOCTYPE html>
-	            <html>
-	                <head>
-	                    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-	                    <meta charset="UTF-8">
-	                    <meta name="viewport" content="height=device-height,width=device-width" />
-	                    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-	                    <meta name="apple-mobile-web-app-capable" content="yes">
-	                    <meta name="apple-touch-fullscreen" content="yes">
-	                     <link rel='stylesheet' href='css/main.css' />
-	                     <script src="../../vendor/three/three.min.js"></script>
-	                    <script src="../../vendor/opentype/opentype.js"></script>
-	                    <script src="../../dist/Mobilizing.js"></script>
-	                    <script src="script.js"></script>
-	                    <script>
-	                        //script.js is a user written script that must be instanciate for the Runner
-	                        var runner = new Mobilizing.Runner(new script());
-	                    </script>
-	                </head>
-	            <body>
-	            </body>
-	          </html>
-	      @example
-	         function script()
-	         {
-	            this.setup = function(){
-	            //get the current context to work with
-	                var context = this.getContext();
-	            };
-	             this.update = function(){
-	             };
-	          };
-	     */
-	    function Runner(params) {
-	        classCallCheck(this, Runner);
-
-	        this.callback = getOrDefault(params, "callback", undefined);
-	        this.context = params.context;
-
-	        if (document.readyState === "complete") {
-	            this.run();
-	        } else {
-	            window.addEventListener("load", this.run.bind(this));
-	        }
-	        this.frame = 0;
-	    }
-
-	    /**
-	     * Runs the runner, init the context, create the preLoader and launch it, then execute the script
-	     *
-	     * @method run
-	     * @private
-	     */
-
-
-	    createClass(Runner, [{
-	        key: 'run',
-	        value: function run() {
-	            this.context.init();
-	            this.context.preLoad();
-	            this.context.loader.events.on("complete", function () {
-	                this.startLoop();
-	            }.bind(this));
-	            this.context.loader.consumeAll();
-	        }
-
-	        /**
-	        * Starts the loop of the user's script, that is the update function
-	        * @method startLoop
-	        * @private
-	        */
-
-	    }, {
-	        key: 'startLoop',
-	        value: function startLoop() {
-	            this.context.setup(); //call all components setups
-	            this.loop(); //start the main loop
-	        }
-
-	        /**
-	        * onFrameBegin
-	        * 
-	        * @method onFrameBegin
-	        */
-
-	    }, {
-	        key: 'onFrameBegin',
-	        value: function onFrameBegin() {
-	            //move to a component ?
-	            this.frame++;
-
-	            if (this.context.stats !== undefined) {
-	                this.context.stats.begin();
-	            }
-	        }
-
-	        /**
-	        * onFrameEnd
-	        * 
-	        * @method onFrameEnd
-	        */
-
-	    }, {
-	        key: 'onFrameEnd',
-	        value: function onFrameEnd() {
-	            if (this.context.stats !== undefined) {
-	                this.context.stats.end();
-	            }
-	        }
-
-	        /**
-	         * Runner's requestAnimationFrame loop manager
-	         *
-	         * @method loop
-	         * @private
-	         */
-
-	    }, {
-	        key: 'loop',
-	        value: function loop() {
-	            this.onFrameBegin();
-	            this.context.update(); //engine update
-	            //we don't need anymore user script update and 3D rendering (this is done internally by the context)
-	            this.onFrameEnd();
-	            requestAnimationFrame(this.loop.bind(this)); //schedule next
-	        }
-	    }]);
-	    return Runner;
-	}();
-
-	// module exports
+	function _classCallCheck$41(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var TOUCH_TYPE = "touch";
 	var MOUSE_TYPE = "mouse";
@@ -13051,7 +12895,7 @@
 	var PointerObject = function () {
 	    /**
 	    * PointerObject is a thin layer that unify all inputs to simplify UI interactions
-	    * 
+	    *
 	    * @class PointerObject
 	    * @constructor
 	    * @param {Number} x
@@ -13060,7 +12904,7 @@
 	    * @param {Number} type
 	    */
 	    function PointerObject(params) {
-	        classCallCheck(this, PointerObject);
+	        _classCallCheck$41(this, PointerObject);
 
 	        var x = getOrDefault(params, "x", 0);
 	        var y = getOrDefault(params, "y", 0);
@@ -13077,32 +12921,32 @@
 	    }
 	    /**
 	    * Set the component
-	    * 
+	    *
 	    * @method setComponent
 	    * @param {Object} component
 	    */
 
 
-	    createClass(PointerObject, [{
+	    _createClass$36(PointerObject, [{
 	        key: 'setComponent',
 	        value: function setComponent(component) {
 	            this._component = component;
 	        }
 	        /**
 	        * get the component
-	        * 
+	        *
 	        * @method getComponent
 	        * @return {Object} component
 	        */
 
 	    }, {
 	        key: 'getComponent',
-	        value: function getComponent(component) {
+	        value: function getComponent() {
 	            return this._component;
 	        }
 	        /**
 	        * Set the x coordinate
-	        * 
+	        *
 	        * @method setX
 	        * @param {Object} x
 	        */
@@ -13114,7 +12958,7 @@
 	        }
 	        /**
 	        * Set the y coordinate
-	        * 
+	        *
 	        * @method setY
 	        * @param {Object} y
 	        */
@@ -13126,7 +12970,7 @@
 	        }
 	        /**
 	        * Get the x coordinate
-	        * 
+	        *
 	        * @method getX
 	        * @return {Object} x
 	        */
@@ -13138,7 +12982,7 @@
 	        }
 	        /**
 	        * Get the y coordinate
-	        * 
+	        *
 	        * @method getY
 	        * @return {Object} y
 	        */
@@ -13150,7 +12994,7 @@
 	        }
 	        /**
 	        * Set the x coordinate
-	        * 
+	        *
 	        * @method setDeltaX
 	        * @param {Object} x
 	        */
@@ -13162,7 +13006,7 @@
 	        }
 	        /**
 	        * Set the y delta coordinate
-	        * 
+	        *
 	        * @method setDeltaY
 	        * @param {Object} y
 	        */
@@ -13174,7 +13018,7 @@
 	        }
 	        /**
 	        * Get the x coordinate
-	        * 
+	        *
 	        * @method getDeltaX
 	        * @return {Object} x
 	        */
@@ -13186,7 +13030,7 @@
 	        }
 	        /**
 	        * Get the y coordinate
-	        * 
+	        *
 	        * @method getDeltaY
 	        * @return {Object} y
 	        */
@@ -13198,7 +13042,7 @@
 	        }
 	        /**
 	        * Set the state
-	        * 
+	        *
 	        * @method setState
 	        * @param {Boolean} state
 	        */
@@ -13210,7 +13054,7 @@
 	        }
 	        /**
 	        * Get the state
-	        * 
+	        *
 	        * @method getState
 	        * return {Boolean} state
 	        */
@@ -13222,7 +13066,7 @@
 	        }
 	        /**
 	        * Set the type
-	        * 
+	        *
 	        * @method setType
 	        * return {String} type
 	        */
@@ -13234,7 +13078,7 @@
 	        }
 	        /**
 	        * Get the type
-	        * 
+	        *
 	        * @method getType
 	        * return {String} type
 	        */
@@ -13245,6 +13089,7 @@
 	            return this._type;
 	        }
 	    }]);
+
 	    return PointerObject;
 	}();
 
@@ -13269,11 +13114,11 @@
 	var EVT_MOVED = 'moved';
 
 	var Pointer = function (_Component) {
-	    inherits(Pointer, _Component);
+	    _inherits$22(Pointer, _Component);
 
 	    /**
 	    * Pointer is an abstraction that enables various input devices to send the same kind of events. It is designed to accumulate various type of inputs in a Map of PointerOject. Each input device is converted in a PointerOject in order to unify its interface. Usefully mainly internally for interactive UI objects like buttons.
-	    * 
+	    *
 	    * @example
 	    *    //TODO
 	    *
@@ -13283,9 +13128,9 @@
 	    * @param {Component} params.components the input components to add to this pointer (i.e. Mouse)
 	    */
 	    function Pointer(params) {
-	        classCallCheck(this, Pointer);
+	        _classCallCheck$41(this, Pointer);
 
-	        var _this = possibleConstructorReturn(this, (Pointer.__proto__ || Object.getPrototypeOf(Pointer)).call(this, params));
+	        var _this = _possibleConstructorReturn$22(this, (Pointer.__proto__ || Object.getPrototypeOf(Pointer)).call(this, params));
 
 	        var components = getOrDefault(params, "components", undefined);
 	        _this.pointers = new Map();
@@ -13294,23 +13139,22 @@
 	        _this.lastActivePointer = new PointerObject();
 	        _this.lastActivePointer.setType("lastActive");
 
-	        if (components) {
-	            for (var i in components) {
-	                var component = components[i];
+	        if (Array.isArray(components)) {
+	            components.forEach(function (component) {
 	                _this.add(component);
-	            }
+	            });
 	        }
 	        return _this;
 	    }
 
 	    /**
 	    * Remove unused Pointers
-	    * 
+	    *
 	    * @method postUpdate
 	    */
 
 
-	    createClass(Pointer, [{
+	    _createClass$36(Pointer, [{
 	        key: 'postUpdate',
 	        value: function postUpdate() {
 	            var _iteratorNormalCompletion = true;
@@ -13426,11 +13270,7 @@
 	            } else if (component instanceof Mouse) {
 	                var mouseComponent = component; //just to understand better
 
-	                var pointer = new PointerObject();
-	                pointer.setComponent(component);
-	                pointer.setType(MOUSE_TYPE);
-
-	                mouseComponent.events.on("mousepress", function (coords) {
+	                mouseComponent.events.on("mousepress", function () {
 	                    var pointer = _this2.pointers.get(component.getID());
 	                    pointer.setState(true);
 	                    _this2.events.trigger(EVT_ON, { pointer: pointer, x: pointer.getX(), y: pointer.getY() });
@@ -13438,7 +13278,7 @@
 	                    _this2.lastActivePointer.setState(true);
 	                });
 
-	                mouseComponent.events.on("mouserelease", function (coords) {
+	                mouseComponent.events.on("mouserelease", function () {
 	                    var pointer = _this2.pointers.get(component.getID());
 	                    pointer.setState(false);
 	                    _this2.events.trigger(EVT_OFF, { pointer: pointer });
@@ -13464,7 +13304,7 @@
 	                    _this2.lastActivePointer.setDeltaY(pointer.getDeltaY());
 	                });
 
-	                mouseComponent.events.on("mouseupdate", function (coords) {
+	                mouseComponent.events.on("mouseupdate", function () {
 	                    var pointer = _this2.pointers.get(component.getID());
 
 	                    pointer.setDeltaX(mouseComponent.getDeltaX());
@@ -13476,6 +13316,10 @@
 	                    _this2.lastActivePointer.setDeltaX(pointer.getDeltaX());
 	                    _this2.lastActivePointer.setDeltaY(pointer.getDeltaY());
 	                });
+
+	                var pointer = new PointerObject();
+	                pointer.setComponent(component);
+	                pointer.setType(MOUSE_TYPE);
 
 	                this.pointers.set(component.getID(), pointer);
 	            }
@@ -13490,7 +13334,7 @@
 
 	    }, {
 	        key: 'get',
-	        value: function get$$1(component) {
+	        value: function get(component) {
 	            return this.pointers.get(component.id);
 	        }
 
@@ -13586,10 +13430,10 @@
 	            if (index) // we want a specific pointer in the list
 	                {
 	                    return index === undefined ? values : values[index];
-	                } else // we want a value
-	                {
-	                    return this.lastActivePointer.getX();
 	                }
+
+	            // we want a value
+	            return this.lastActivePointer.getX();
 	        }
 
 	        /**
@@ -13631,10 +13475,10 @@
 	            if (index) // we want a specific pointer in the list
 	                {
 	                    return index === undefined ? values : values[index];
-	                } else // we want a value
-	                {
-	                    return this.lastActivePointer.getY();
 	                }
+
+	            // we want a value
+	            return this.lastActivePointer.getY();
 	        }
 
 	        /**
@@ -13676,10 +13520,10 @@
 	            if (index) // we want a specific pointer in the list
 	                {
 	                    return index === undefined ? values : values[index];
-	                } else // we want a value
-	                {
-	                    return this.lastActivePointer.getDeltaX();
 	                }
+
+	            // we want a value
+	            return this.lastActivePointer.getDeltaX();
 	        }
 
 	        /**
@@ -13721,16 +13565,21 @@
 	            if (index) // we want a specific pointer in the list
 	                {
 	                    return index === undefined ? values : values[index];
-	                } else // we want a value
-	                {
-	                    return this.lastActivePointer.getDeltaY();
 	                }
+
+	            // we want a value
+	            return this.lastActivePointer.getDeltaY();
 	        }
 	    }]);
+
 	    return Pointer;
 	}(Component);
 
 	// module exports
+
+	var _createClass$37 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$42(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var EVT_CONNECT = 'connect';
 
@@ -13762,7 +13611,7 @@
 	    * @param {Boolean} [params.autoConnect=true] Whether the connection should be automatically opened
 	    */
 	    function PubSub(params) {
-	        classCallCheck(this, PubSub);
+	        _classCallCheck$42(this, PubSub);
 
 	        var url = getOrDefault(params, "url", "");
 	        var autoConnect = getOrDefault(params, "autoConnect", true);
@@ -13772,6 +13621,8 @@
 	        if (autoConnect) {
 	            this.open(url);
 	        }
+
+	        this.id; //will be filled after connection
 	    }
 
 	    /**
@@ -13781,7 +13632,7 @@
 	    */
 
 
-	    createClass(PubSub, [{
+	    _createClass$37(PubSub, [{
 	        key: 'open',
 	        value: function open(url) {
 	            var _this = this;
@@ -13798,11 +13649,15 @@
 	                this.socket = io(url);
 
 	                this.socket.on('connect', function () {
+
+	                    //get the socket id
+	                    _this.id = _this.socket.io.engine.id;
+
 	                    _this.socket.on('disconnect', function () {
-	                        _this.events.trigger(EVT_DISCONNECT);
+	                        _this.events.trigger(EVT_DISCONNECT, _this.id);
 	                    });
 
-	                    _this.events.trigger(EVT_CONNECT);
+	                    _this.events.trigger(EVT_CONNECT, _this.id);
 	                });
 
 	                this.socket.on('error', function (error) {
@@ -13881,16 +13736,25 @@
 	    }, {
 	        key: 'getID',
 	        value: function getID() {
-	            return this.socket ? this.socket.id : null;
+	            return this.id;
 	        }
 	    }]);
+
 	    return PubSub;
 	}();
 
 	// module exports
 
+	var _createClass$38 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$43(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$23(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$23(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var PhysicsEngine = function (_Component) {
-	    inherits(PhysicsEngine, _Component);
+	    _inherits$23(PhysicsEngine, _Component);
 
 	    /**
 	     * PhysicsEngine Class
@@ -13901,9 +13765,9 @@
 	     * @param {Number} params.iterations iterations of the physic engine when constrains are calculated
 	     */
 	    function PhysicsEngine(params) {
-	        classCallCheck(this, PhysicsEngine);
+	        _classCallCheck$43(this, PhysicsEngine);
 
-	        var _this = possibleConstructorReturn(this, (PhysicsEngine.__proto__ || Object.getPrototypeOf(PhysicsEngine)).call(this, params));
+	        var _this = _possibleConstructorReturn$23(this, (PhysicsEngine.__proto__ || Object.getPrototypeOf(PhysicsEngine)).call(this, params));
 
 	        _this.joints = [];
 	        _this.bodies = [];
@@ -13921,7 +13785,7 @@
 	     */
 
 
-	    createClass(PhysicsEngine, [{
+	    _createClass$38(PhysicsEngine, [{
 	        key: 'setup',
 	        value: function setup() {
 	            this.context = this.getContext();
@@ -13947,8 +13811,6 @@
 	        key: 'update',
 	        value: function update() {
 	            if (this._active) {
-	                var i = 0;
-	                var j = 0;
 	                var body = void 0;
 	                var joint = void 0;
 	                var p1 = void 0;
@@ -13958,21 +13820,26 @@
 	                var z = void 0;
 	                var distance = void 0;
 	                var dt = this._time.getDelta(); //this.context.time.deltaTime;
-	                if (dt == 0) {
+	                //
+	                if (dt === 0) {
 	                    return;
 	                }
-	                if (dt > 1) dt = 1;
+
+	                if (dt > 1) {
+	                    dt = 1;
+	                }
+
 	                //console.log("dt="+dt);
 	                var force = void 0;
 	                //apply forces / acc / vel / pos
-	                for (var _i = 0; _i < this.bodies.length; ++_i) {
-	                    body = this.bodies[_i];
+	                for (var i = 0; i < this.bodies.length; ++i) {
+	                    body = this.bodies[i];
 	                    body.forces = new Vector3$1(0, 0, 0);
 	                }
 
 	                //springs
-	                for (var _j = 0; _j < this.joints.length; ++_j) {
-	                    joint = this.joints[_j];
+	                for (var j = 0; j < this.joints.length; ++j) {
+	                    joint = this.joints[j];
 
 	                    if (!joint.enabled) {
 	                        continue; //ignore this joint
@@ -14058,9 +13925,8 @@
 	                    }
 	                }
 
-	                for (i = 0; i < this.bodies.length; ++i) {
-	                    body = this.bodies[i];
-	                    var pos = body.position;
+	                for (var _i = 0; _i < this.bodies.length; ++_i) {
+	                    body = this.bodies[_i];
 
 	                    //quasi Verlet
 	                    if (body.speed !== undefined) {
@@ -14109,8 +13975,8 @@
 
 	                //satisfy constraints
 	                for (var _i2 = 0; _i2 < this.iterations; ++_i2) {
-	                    for (var _j2 = 0; _j2 < this.joints.length; ++_j2) {
-	                        joint = this.joints[_j2];
+	                    for (var _j = 0; _j < this.joints.length; ++_j) {
+	                        joint = this.joints[_j];
 	                        if (!joint.enabled) {
 	                            continue; //ignore this joint
 	                        }
@@ -14154,8 +14020,8 @@
 	                }
 
 	                //apply new positions
-	                for (i = 0; i < this.bodies.length; ++i) {
-	                    body = this.bodies[i];
+	                for (var _i3 = 0; _i3 < this.bodies.length; ++_i3) {
+	                    body = this.bodies[_i3];
 	                    if (body.object !== undefined) {
 	                        //console.log("new pos=" , body.position);
 	                        body.object.transform.setLocalPosition(body.position);
@@ -14346,10 +14212,15 @@
 	            this.globalwind = vector;
 	        }
 	    }]);
+
 	    return PhysicsEngine;
 	}(Component);
 
 	// module exports
+
+	var _createClass$39 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$44(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Engine3D = function () {
 	    /**
@@ -14361,12 +14232,13 @@
 	     * @param {Context} context the Mobilizing.js context to use, if any.
 	     */
 	    function Engine3D(params) {
-	        classCallCheck(this, Engine3D);
-
+	        _classCallCheck$44(this, Engine3D);
 
 	        //we try to use the canvas
 	        //try
 	        if (params.canvas) {
+	            var canvas = params.canvas;
+
 	            debug.log("try to attach the Canvas...", canvas);
 	            //Mobilizing.renderer = new THREE.WebGLRenderer({canvas: document.getElementById('canvas')}); //FIXME : Ejecta
 	            //this.renderer = new THREE.WebGLRenderer({canvas: document.getElementById(canvas)});
@@ -14427,23 +14299,32 @@
 	    */
 
 
-	    createClass(Engine3D, [{
-	        key: "getCanvas",
+	    _createClass$39(Engine3D, [{
+	        key: 'getCanvas',
 	        value: function getCanvas() {
 	            return this.canvas;
 	        }
 	    }]);
+
 	    return Engine3D;
 	}();
 
 	// module exports
 
-	exports.Renderer3D = function (_Component) {
-	    inherits(Renderer3D, _Component);
+	var _createClass$40 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$45(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$24(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$24(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Renderer3D = function (_Component) {
+	    _inherits$24(Renderer3D, _Component);
 
 	    /**
 	     * Renderer3D is a Three js based renderer.
-	     * 
+	     *
 	     *
 	     * @example
 	     *     //to do
@@ -14455,9 +14336,9 @@
 	     * @param {Context} params.context The Mobilizing context
 	    */
 	    function Renderer3D(params) {
-	        classCallCheck(this, Renderer3D);
+	        _classCallCheck$45(this, Renderer3D);
 
-	        var _this = possibleConstructorReturn(this, (Renderer3D.__proto__ || Object.getPrototypeOf(Renderer3D)).call(this, params));
+	        var _this = _possibleConstructorReturn$24(this, (Renderer3D.__proto__ || Object.getPrototypeOf(Renderer3D)).call(this, params));
 
 	        _this.canvas = getOrDefault(params, "canvas", undefined);
 	        _this.scenes = [];
@@ -14514,7 +14395,7 @@
 	     */
 
 
-	    createClass(Renderer3D, [{
+	    _createClass$40(Renderer3D, [{
 	        key: 'update',
 	        value: function update() {
 	            this.render();
@@ -14585,7 +14466,7 @@
 
 	        /**
 	         * Clears this renderer : remove all cameras and scene objects
-	         * 
+	         *
 	         * @method addCamera
 	         * @param {Camera} cam the camera to add
 	         */
@@ -14593,14 +14474,15 @@
 	    }, {
 	        key: 'clear',
 	        value: function clear() {
+	            var _this2 = this;
+
 	            console.log("scene=", this.scene);
-	            for (var obj in this.scene) {
-	                var o = this.scene[obj];
-	                console.log("key ", obj);
-	                console.log("removing ", o);
-	                //this.removeFromCurrentScene(o);
-	                this.scene.remove(o);
-	            }
+
+	            this.scene.children.forEach(function (child) {
+	                console.log("removing ", child);
+	                _this2.scene.remove(child);
+	            });
+
 	            this.scene.children = [];
 
 	            this.cameras = [];
@@ -14608,7 +14490,7 @@
 
 	        /**
 	         * Adds a camera to the current context
-	         * 
+	         *
 	         * @method addCamera
 	         * @param {Camera} cam the camera to add
 	         */
@@ -14621,7 +14503,7 @@
 
 	        /**
 	         * Removes the camera from the current context
-	         * 
+	         *
 	         * @method removeCamera
 	         * @param {Camera} cam
 	         */
@@ -14634,7 +14516,7 @@
 
 	        /**
 	         * Defines the type and color of the fog to be used for rendering the scene
-	         * 
+	         *
 	         * @method setFog
 	         * @param {String} type one of "linear", "exp"
 	         * @param {Color} color the fog color
@@ -14662,14 +14544,13 @@
 	                    this.fog = new THREE.Fog(color.getHex());
 	                    this.fog.type = "linear";
 	                    break;
-	                    break;
 	            }
 	            this.scene.fog = this.fog;
 	        }
 
 	        /**
 	         * Defines the near distance of the linear fog. Default is 1.
-	         * 
+	         *
 	         * @method setFogNear
 	         * @param {Number} near
 	         */
@@ -14684,7 +14565,7 @@
 
 	        /**
 	         * Defines the far distance of the linear fog. Default is 1000.
-	         * 
+	         *
 	         * @method setFogFar
 	         * @param {Number} far
 	         */
@@ -14699,7 +14580,7 @@
 
 	        /**
 	         * Defines the density of the exponential fog.  Default is 0.00025.
-	         * 
+	         *
 	         * @method setFogDensity
 	         * @param {Number} density
 	         */
@@ -14714,7 +14595,7 @@
 
 	        /**
 	         * Defines the fog color
-	         * 
+	         *
 	         * @method setFogColor
 	         * @param {Color} color
 	         */
@@ -14727,15 +14608,15 @@
 	    }, {
 	        key: 'onWindowResize',
 	        value: function onWindowResize() {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            if (this.fullscreen) {
 	                this.cameras.forEach(function (cam) {
 
 	                    if (cam.type === "perspective") {
 
-	                        var w = _this2.engine.renderer.domElement.width / _this2.engine.renderer.devicePixelRatio;
-	                        var h = _this2.engine.renderer.domElement.height / _this2.engine.renderer.devicePixelRatio;
+	                        var w = _this3.engine.renderer.domElement.width / _this3.engine.renderer.devicePixelRatio;
+	                        var h = _this3.engine.renderer.domElement.height / _this3.engine.renderer.devicePixelRatio;
 	                        cam.setAspect(w * cam.viewport.width / (h * cam.viewport.height));
 	                    } else if (cam.type === "ortho") {
 
@@ -14829,7 +14710,7 @@
 
 	        /**
 	        * Returns the current canvas
-	        * 
+	        *
 	        * @method getCanvas
 	        * @return {Object} the canvas
 	        */
@@ -14842,7 +14723,7 @@
 
 	        /**
 	        * Returns the current canvas'size as {width, height}
-	        * 
+	        *
 	        * @method getCanvasSize
 	        * @return {Object} the size of the canvas as {width, height}
 	        */
@@ -14856,9 +14737,9 @@
 
 	        /**
 	        * Get the canvas position as {x, y}
-	        * 
+	        *
 	        * @method getCanvasPosition
-	        * @return {Object} the position of the canvas as {x, y} 
+	        * @return {Object} the position of the canvas as {x, y}
 	        */
 
 	    }, {
@@ -14869,7 +14750,7 @@
 
 	        /**
 	        * Update the canvas position in screen
-	        * 
+	        *
 	        * @method updateCanvasPosition
 	        */
 
@@ -14879,15 +14760,26 @@
 	            this.canvasPosition = this.getCanvasPosition();
 	        }
 	    }]);
+
 	    return Renderer3D;
 	}(Component);
 
-	exports.Renderer3D = singletonize(exports.Renderer3D);
+	var Renderer3DSingleton = singletonize(Renderer3D);
 
 	// module exports
 
-	exports.RendererAudio = function (_Component) {
-	    inherits(RendererAudio, _Component);
+	var _createClass$41 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$10 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$46(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$25(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$25(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var RendererAudio = function (_Component) {
+	    _inherits$25(RendererAudio, _Component);
 
 	    /**
 	     * RendererAudio is a Web Audio API based renderer for playing sound.
@@ -14901,9 +14793,9 @@
 	     * @param {Object} params Config parameters
 	    */
 	    function RendererAudio(params) {
-	        classCallCheck(this, RendererAudio);
+	        _classCallCheck$46(this, RendererAudio);
 
-	        var _this = possibleConstructorReturn(this, (RendererAudio.__proto__ || Object.getPrototypeOf(RendererAudio)).call(this, params));
+	        var _this = _possibleConstructorReturn$25(this, (RendererAudio.__proto__ || Object.getPrototypeOf(RendererAudio)).call(this, params));
 
 	        _this.renderer = _this.getContext();
 	        _this.audioContext = undefined;
@@ -14955,7 +14847,7 @@
 	        return _this;
 	    }
 
-	    createClass(RendererAudio, [{
+	    _createClass$41(RendererAudio, [{
 	        key: 'beep',
 	        value: function beep(frequency) {
 	            var freq = frequency ? frequency : 440;
@@ -14988,7 +14880,7 @@
 	    }, {
 	        key: 'update',
 	        value: function update() {
-	            get(RendererAudio.prototype.__proto__ || Object.getPrototypeOf(RendererAudio.prototype), 'update', this).call(this);
+	            _get$10(RendererAudio.prototype.__proto__ || Object.getPrototypeOf(RendererAudio.prototype), 'update', this).call(this);
 
 	            if (this.listener.transform) {
 	                var pos = this.listener.transform.getLocalPosition();
@@ -14996,23 +14888,28 @@
 	            }
 	        }
 	    }]);
+
 	    return RendererAudio;
 	}(Component);
 
-	exports.RendererAudio = singletonize(exports.RendererAudio);
+	var RendererAudioSingleton = singletonize(RendererAudio);
 
 	// module exports
 
+	var _createClass$42 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$47(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	var Font$1 = function () {
 	    /**
-	     Font are not managed in Mobilizing.js like in a usual DOM context as we are using WebGL. To be able to use both bitmap rendered font and 3D vector rendering, we use openType.js (https://nodebox.github.io/opentype.js/ big thanks to Frederik!) to load any web compilant font and the use it in other classes (like {{#crossLink "Label"}}{{/crossLink}} or {{#crossLink "Mesh"}}{{/crossLink}})
+	     Font are not managed in Mobilizing.js like in a usual DOM context as we are using WebGL. To be able to use both bitmap rendered font and 3D vector rendering, we use openType.js (https://nodebox.github.io/opentype.js/ big thanks to Frederik!) to load any web compilant font and the use it in other classes.
 	     @class Font
 	     @constructor
 	     @param {Object} params
 	     @param {Mixed} params.fontFile the font file already loaded, must be loaded with response type setted to arraybuffer
 	    */
 	    function Font$$1(params) {
-	        classCallCheck(this, Font$$1);
+	        _classCallCheck$47(this, Font$$1);
 
 	        this._fontFile = getOrDefault(params, "fontFile", undefined);
 	        this._font = opentype.parse(this._fontFile);
@@ -15026,8 +14923,8 @@
 	    */
 
 
-	    createClass(Font$$1, [{
-	        key: 'getFont',
+	    _createClass$42(Font$$1, [{
+	        key: "getFont",
 	        value: function getFont() {
 	            return this._font;
 	        }
@@ -15041,8 +14938,12 @@
 	        */
 
 	    }, {
-	        key: 'getTextSize',
+	        key: "getTextSize",
 	        value: function getTextSize(text, fontSize) {
+	            if (!this._font.supported) {
+	                return null;
+	            }
+
 	            var kerning = void 0,
 	                fontScale = void 0,
 	                glyphs = void 0,
@@ -15051,12 +14952,8 @@
 	                options = void 0,
 	                kerningValue = void 0;
 	            var ymax = [];
-
-	            if (!this._font.supported) {
-	                return;
-	            }
 	            var x = 0;
-	            var y = 0;
+
 	            fontSize = fontSize !== undefined ? fontSize : 72;
 	            options = options || {};
 	            kerning = options.kerning === undefined ? true : options.kerning;
@@ -15065,7 +14962,7 @@
 
 	            for (i = 0; i < glyphs.length; i += 1) {
 	                glyph = glyphs[i];
-	                //callback(glyph, x, y, fontSize, options);
+
 	                ymax.push((glyph.getMetrics().yMax - glyph.getMetrics().yMin) * fontScale);
 	                if (glyph.advanceWidth) {
 	                    x += glyph.advanceWidth * fontScale;
@@ -15078,14 +14975,19 @@
 	            return { width: x, height: Math.max.apply(0, ymax) };
 	        }
 	    }]);
+
 	    return Font$$1;
 	}();
 
 	// module exports
 
+	var _createClass$43 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$48(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	var LODGroup = function () {
 	    function LODGroup() {
-	        classCallCheck(this, LODGroup);
+	        _classCallCheck$48(this, LODGroup);
 
 	        this.transform = new Transform(this /*.light*/);
 	        this.bias = 1;
@@ -15095,12 +14997,13 @@
 	    //process LOD
 
 
-	    createClass(LODGroup, [{
+	    _createClass$43(LODGroup, [{
 	        key: 'process',
-	        value: function process(position) {
-	            var thisposition = this.transform.getWorldPosition();
-	            var distance = this.getDistance(position, thisposition);
-	            var lod = this.bias + distance * this.factor;
+	        value: function process() /*position*/{
+	            // var thisposition = this.transform.getWorldPosition();
+	            // var distance = this.getDistance(position, thisposition);
+	            // var lod = this.bias+distance*this.factor;
+
 	        }
 	    }, {
 	        key: 'getDistance',
@@ -15110,22 +15013,27 @@
 	        }
 	    }, {
 	        key: 'applyLOD',
-	        value: function applyLOD(lod) {}
+	        value: function applyLOD() /*lod*/{}
 	    }]);
+
 	    return LODGroup;
 	}();
 
 	// module exports
 
+	var _createClass$44 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$49(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	var StyledLetter = function () {
 	    function StyledLetter(params) {
-	        classCallCheck(this, StyledLetter);
+	        _classCallCheck$49(this, StyledLetter);
 
 	        this.letter = getOrDefault(params, "letter", "");
 	        this.size = getOrDefault(params, "size", 40);
 	        this.font = getOrDefault(params, "font", undefined); //mobilizing font
-	        this.path; //openType Path
-	        this.boundingBox; //derived from path
+	        // this.path; //openType Path
+	        // this.boundingBox; //derived from path
 
 	        this.color = getOrDefault(params, "color", Color$1.black.clone());
 
@@ -15145,7 +15053,7 @@
 	    */
 
 
-	    createClass(StyledLetter, [{
+	    _createClass$44(StyledLetter, [{
 	        key: 'update',
 	        value: function update() {
 	            var size = this.font.getTextSize(this.letter, this.size);
@@ -15223,6 +15131,7 @@
 	            this.font = font;
 	        }
 	    }]);
+
 	    return StyledLetter;
 	}();
 
@@ -15240,15 +15149,15 @@
 
 	var StyledTextElement = function () {
 	    function StyledTextElement(params) {
-	        classCallCheck(this, StyledTextElement);
+	        _classCallCheck$49(this, StyledTextElement);
 
 	        this.text = getOrDefault(params, "text", "");
 	        this.font = getOrDefault(params, "font", undefined);
 	        this.size = getOrDefault(params, "size", 40);
 	        this.color = getOrDefault(params, "color", Color$1.black.clone());
 
-	        this.path;
-	        this.boundingBox;
+	        // this.path;
+	        // this.boundingBox;
 
 	        this.line = 0;
 
@@ -15269,7 +15178,7 @@
 	    */
 
 
-	    createClass(StyledTextElement, [{
+	    _createClass$44(StyledTextElement, [{
 	        key: 'update',
 	        value: function update() {
 	            var size = this.font.getTextSize(this.text, this.size);
@@ -15387,6 +15296,7 @@
 	            }
 	        }
 	    }]);
+
 	    return StyledTextElement;
 	}();
 
@@ -15397,11 +15307,19 @@
 	* @constructor
 	*/
 	function TextLine() {
-	    classCallCheck(this, TextLine);
+	    _classCallCheck$49(this, TextLine);
 
 	    this.styledTextElements = [];
 	    this.width = 0;
 	};
+
+	var _createClass$45 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$50(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$26(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$26(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var EVT_DRAWN = "drawn";
 
@@ -15410,7 +15328,7 @@
 	var TEXT_ALIGN_CENTER = "center";
 
 	var RichText = function (_Base) {
-	    inherits(RichText, _Base);
+	    _inherits$26(RichText, _Base);
 
 	    /**
 	    * RichText class uses standard HTML Text to format text drawn with a certain style in a Canvas. Supported HTML style tags are <b>, <strong>, <i>, <em>, <br>, <p>, <font> with attributes color and size. TODO : support of face attribute in <font>. Default font are predefined.
@@ -15422,7 +15340,7 @@
 	    * @param {Number} [params.width=512] width of the inner canvas
 	    * @param {Number} [params.height=512] height of the inner canvas
 	    * @param {Number} [params.lineHeight=1] line height for the text
-	    * @param {Number} [params.margins=10] white space (margin) in pixel on all left, top, right and bottom of the canvas. Text will be drawn within these boundaries with automatic newline management. 
+	    * @param {Number} [params.margins=10] white space (margin) in pixel on all left, top, right and bottom of the canvas. Text will be drawn within these boundaries with automatic newline management.
 	    * @param {Number} [params.marginLeft=10] white space (margin) in pixel on left side.
 	    * @param {Number} [params.marginTop=10] white space (margin) in pixel on top side.
 	    * @param {Number} [params.marginRight=10] white space (margin) in pixel on right side.
@@ -15437,12 +15355,12 @@
 	    * @param {URL} params.fontItalicURL url for the italic font file
 	    * @param {URL} params.fontBoldURL url for the bold font file
 	    * @param {URL} params.fontBoldItalicURL url for the bold-italic font file
-	    * 
+	    *
 	    */
 	    function RichText(params) {
-	        classCallCheck(this, RichText);
+	        _classCallCheck$50(this, RichText);
 
-	        var _this = possibleConstructorReturn(this, (RichText.__proto__ || Object.getPrototypeOf(RichText)).call(this, params));
+	        var _this = _possibleConstructorReturn$26(this, (RichText.__proto__ || Object.getPrototypeOf(RichText)).call(this, params));
 
 	        _this._width = getOrDefault(params, "width", 512);
 	        _this._height = getOrDefault(params, "height", 512);
@@ -15491,17 +15409,17 @@
 	        _this._lines = [];
 
 	        //loading font chain
-	        Loader.loadArrayBuffer(_this._fontURL, function (data) {
-	            _this._defaultFontFile = data;
+	        Loader.loadArrayBuffer(_this._fontURL, function (fotnData) {
+	            _this._defaultFontFile = fotnData;
 
-	            Loader.loadArrayBuffer(_this._fontItalicURL, function (data) {
-	                _this._defaultItalicFontFile = data;
+	            Loader.loadArrayBuffer(_this._fontItalicURL, function (fotnItalicData) {
+	                _this._defaultItalicFontFile = fotnItalicData;
 
-	                Loader.loadArrayBuffer(_this._fontBoldURL, function (data) {
-	                    _this._defaultBoldFontFile = data;
+	                Loader.loadArrayBuffer(_this._fontBoldURL, function (fontBoldData) {
+	                    _this._defaultBoldFontFile = fontBoldData;
 
-	                    Loader.loadArrayBuffer(_this._fontBoldItalicURL, function (data) {
-	                        _this._defaultBoldItalicFontFile = data;
+	                    Loader.loadArrayBuffer(_this._fontBoldItalicURL, function (fontBoldItalicData) {
+	                        _this._defaultBoldItalicFontFile = fontBoldItalicData;
 
 	                        _this.setup();
 	                    });
@@ -15519,7 +15437,7 @@
 	    */
 
 
-	    createClass(RichText, [{
+	    _createClass$45(RichText, [{
 	        key: 'setup',
 	        value: function setup() {
 	            this._defaultFont = new Font$1({ fontFile: this._defaultFontFile });
@@ -15782,15 +15700,11 @@
 	                //compute the x difference between current and desired align
 	                switch (this._textAlign) {
 	                    case TEXT_ALIGN_CENTER:
-	                        {
-	                            xDiff = this._width / 2 - (this._margins.left + line.width / 2);
-	                        }
+	                        xDiff = this._width / 2 - (this._margins.left + line.width / 2);
 	                        break;
 
 	                    case TEXT_ALIGN_RIGHT:
-	                        {
-	                            xDiff = this._width - this._margins.left - (this._margins.right + line.width);
-	                        }
+	                        xDiff = this._width - this._margins.left - (this._margins.right + line.width);
 	                        break;
 	                }
 
@@ -15825,10 +15739,15 @@
 	            this._canvas.events.trigger(EVT_DRAWN);
 	        }
 	    }]);
+
 	    return RichText;
 	}(Base);
 
 	// module exports
+
+	var _createClass$46 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$51(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var CanvasTexture = function () {
 	    /**
@@ -15855,7 +15774,7 @@
 	    function CanvasTexture(params) {
 	        var _this = this;
 
-	        classCallCheck(this, CanvasTexture);
+	        _classCallCheck$51(this, CanvasTexture);
 
 	        this._strokeWidth = getOrDefault(params, "strokeWidth", 1);
 	        this._strokeColor = getOrDefault(params, "strokeColor", undefined);
@@ -15873,11 +15792,11 @@
 	            return canvas;
 	        });
 
-	        this._texture = new THREE$1.Texture(this._canvas);
+	        this._texture = new THREE.Texture(this._canvas);
 	        this._texture.needsUpdate = true;
 	        //avoid smoothing of pixels
-	        this._texture.minFilter = THREE$1.NearestFilter;
-	        this._texture.magFilter = THREE$1.NearestFilter;
+	        this._texture.minFilter = THREE.NearestFilter;
+	        this._texture.magFilter = THREE.NearestFilter;
 	        this._texture.generateMipmaps = false;
 
 	        this._canvasContext = this._canvas.getContext("2d");
@@ -15892,7 +15811,7 @@
 	    */
 
 
-	    createClass(CanvasTexture, [{
+	    _createClass$46(CanvasTexture, [{
 	        key: 'getCanvas',
 	        value: function getCanvas() {
 	            return this._canvas;
@@ -16035,7 +15954,7 @@
 
 	        /**
 	        * Draw an Mobilizing StyledText or StyledLetter in the canvas object and updates it.
-	        * 
+	        *
 	        * @method drawStyledText
 	        * @param {StyledText || StyledLetter} text
 	        */
@@ -16049,7 +15968,7 @@
 
 	        /**
 	        * Draw an Image in the canvas object and updates it.
-	        * 
+	        *
 	        * @method drawImage
 	        * @param {Image} image
 	        * @param {Number} x x coordinate to start drawing (from upper-left corner)
@@ -16190,10 +16109,15 @@
 	            return obj;
 	        }
 	    }]);
+
 	    return CanvasTexture;
 	}();
 
 	// module exports
+
+	var _createClass$47 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$52(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var DOMNodeTexture = function () {
 	    /*
@@ -16205,7 +16129,9 @@
 	     * @param {DOM Node} node the HTML node to be rasterized
 	     */
 	    function DOMNodeTexture(node) {
-	        classCallCheck(this, DOMNodeTexture);
+	        var _this = this;
+
+	        _classCallCheck$52(this, DOMNodeTexture);
 
 	        //this.context = context;
 
@@ -16240,17 +16166,14 @@
 	        document.body.appendChild(node);
 
 	        //dom to image
-	        var self = this;
-
 	        domvas.toImage(node, function () {
+	            ctx.drawImage(_this, 0, 0);
 
-	            ctx.drawImage(this, 0, 0);
-
-	            img.src = self.canvas.toDataURL("image/png");
+	            img.src = _this.canvas.toDataURL("image/png");
 	            imgEl.src = img.src;
 
-	            //console.log(self, self.texture);
-	            self.update();
+	            //console.log(this, this.texture);
+	            _this.update();
 	        });
 
 	        //no need to keep the node in the document
@@ -16264,7 +16187,7 @@
 	    */
 
 
-	    createClass(DOMNodeTexture, [{
+	    _createClass$47(DOMNodeTexture, [{
 	        key: "update",
 	        value: function update() {
 	            var img = new Image();
@@ -16307,10 +16230,15 @@
 	            console.error("no css class of this name found. Remove the . if any in your argument");
 	        }
 	    }]);
+
 	    return DOMNodeTexture;
 	}();
 
 	// module exports
+
+	var _createClass$48 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$53(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var ImageSequenceTexture = function () {
 	    //var currentTime     = 0;
@@ -16321,7 +16249,7 @@
 	    @param {Object} context The Mobilizing Context.
 	    */
 	    function ImageSequenceTexture(context) {
-	        classCallCheck(this, ImageSequenceTexture);
+	        _classCallCheck$53(this, ImageSequenceTexture);
 
 	        this.currentTime = 0;
 	        this.playing = false;
@@ -16346,7 +16274,7 @@
 	    */
 
 
-	    createClass(ImageSequenceTexture, [{
+	    _createClass$48(ImageSequenceTexture, [{
 	        key: 'load',
 	        value: function load(urlbase, min, max) {
 	            for (var i = min; i <= max; ++i) {
@@ -16572,10 +16500,15 @@
 	            this.lapsToDo = count;
 	        }
 	    }]);
+
 	    return ImageSequenceTexture;
 	}();
 
 	// module exports
+
+	var _createClass$49 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$54(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var RenderTexture = function () {
 	    /**
@@ -16588,26 +16521,31 @@
 	     * @param {Number} params.height the height of this texture
 	     */
 	    function RenderTexture(params) {
-	        classCallCheck(this, RenderTexture);
+	        _classCallCheck$54(this, RenderTexture);
 
 	        this._width = getOrDefault(params, "width", 512);
 	        this._height = getOrDefault(params, "height", 512);
-	        this._engineTexture = new THREE$1.WebGLRenderTarget(this._width, this._height, { minFilter: THREE$1.LinearFilter,
-	            magFilter: THREE$1.NearestFilter,
-	            format: THREE$1.RGBFormat });
+	        this._engineTexture = new THREE.WebGLRenderTarget(this._width, this._height, { minFilter: THREE.LinearFilter,
+	            magFilter: THREE.NearestFilter,
+	            format: THREE.RGBFormat });
 	        this._texture = this._engineTexture.texture;
 	    }
 
-	    createClass(RenderTexture, [{
+	    _createClass$49(RenderTexture, [{
 	        key: "getTexture",
 	        value: function getTexture() {
 	            return this._engineTexture.texture;
 	        }
 	    }]);
+
 	    return RenderTexture;
 	}();
 
 	// module exports
+
+	var _createClass$50 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$55(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var VideoTexture = function () {
 	    /**
@@ -16620,12 +16558,12 @@
 	     * @param {Number} [params.fps = 30] the fps to use for this video playback, used only with iOS devices. NB : this parameter will not change the playback speed of the video, it will only affect it's picture update frequency.
 	     * @param {Boolean} [params.loop = false] whether the video should loop after playback end
 	     * @param {Boolean} [params.autoPlay = false] whether the video should play at construction
-	     * 
+	     *
 	     * @example
 	     *    //TODO
 	     */
 	    function VideoTexture(params) {
-	        classCallCheck(this, VideoTexture);
+	        _classCallCheck$55(this, VideoTexture);
 
 	        this._video = getOrDefault(params, "video", undefined);
 	        this._loop = getOrDefault(params, "loop", false);
@@ -16670,9 +16608,9 @@
 	    */
 
 
-	    createClass(VideoTexture, [{
+	    _createClass$50(VideoTexture, [{
 	        key: 'onLoadProgess',
-	        value: function onLoadProgess(e) {
+	        value: function onLoadProgess() {
 	            var timeRange = this.getBuffered();
 	            debug.log("progress", timeRange, this.getDuration());
 
@@ -16693,7 +16631,7 @@
 
 	    }, {
 	        key: 'onVideoEnded',
-	        value: function onVideoEnded(e) {
+	        value: function onVideoEnded() {
 	            if (this._loop) {
 	                this.play();
 	            } else {
@@ -16899,13 +16837,24 @@
 	            return this._video.videoHeight;
 	        }
 	    }]);
+
 	    return VideoTexture;
 	}();
 
 	// module exports
 
+	var _createClass$51 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$11 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$56(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$27(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$27(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Timer = function (_Component) {
-	    inherits(Timer, _Component);
+	    _inherits$27(Timer, _Component);
 
 	    /**
 	    *A timer is a time manager that gives the possibily to schedule a function every <i>n</i> ms.
@@ -16922,9 +16871,9 @@
 	    *    myTimer.start();
 	    */
 	    function Timer(params) {
-	        classCallCheck(this, Timer);
+	        _classCallCheck$56(this, Timer);
 
-	        var _this = possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, params));
+	        var _this = _possibleConstructorReturn$27(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, params));
 
 	        debug.log("constructor post super");
 
@@ -16935,12 +16884,12 @@
 
 	    /**
 	    * Setup the timer with the current time
-	    * 
+	    *
 	    * @method setup
 	    */
 
 
-	    createClass(Timer, [{
+	    _createClass$51(Timer, [{
 	        key: 'setup',
 	        value: function setup() {
 	            this.startTime = new Date().getTime();
@@ -16954,8 +16903,7 @@
 	        */
 	        /*on(){
 	            super.on();
-	            
-	        }*/
+	         }*/
 
 	        /**
 	        * Deactivate the component
@@ -16966,14 +16914,14 @@
 	    }, {
 	        key: 'off',
 	        value: function off() {
-	            get(Timer.prototype.__proto__ || Object.getPrototypeOf(Timer.prototype), 'off', this).call(this);
+	            _get$11(Timer.prototype.__proto__ || Object.getPrototypeOf(Timer.prototype), 'off', this).call(this);
 
 	            this.stop();
 	        }
 
 	        /**
 	        * Starts the timer
-	        * 
+	        *
 	        * @method start
 	        */
 
@@ -16990,7 +16938,7 @@
 
 	        /**
 	        * Starts the timer
-	        * 
+	        *
 	        * @method stop
 	        */
 
@@ -17002,7 +16950,7 @@
 	        }
 	        /**
 	        * Updates the timer's state
-	        * 
+	        *
 	        * @method update
 	        */
 
@@ -17034,22 +16982,26 @@
 	            this.currentTime = new Date().getTime();
 	        }
 	    }]);
+
 	    return Timer;
 	}(Component);
 
-	/*window.requestAnimationFrame = window.requestAnimationFrame
-	                            || window.mozRequestAnimationFrame
-	                            || window.webkRequestAnimationFrame
-	                            || window.msRequestAnimationFrame;*/
-
 	// module exports
 
+	var _createClass$52 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$57(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$28(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$28(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var NTP = function (_Component) {
-	    inherits(NTP, _Component);
+	    _inherits$28(NTP, _Component);
 
 	    /*
 	    * The NTP class provides methods to control time synchronization related operations.
-	    * 
+	    *
 	    * @example
 	    *    //TODO
 	    *
@@ -17057,9 +17009,9 @@
 	    * @constructor
 	    */
 	    function NTP(params) {
-	        classCallCheck(this, NTP);
+	        _classCallCheck$57(this, NTP);
 
-	        var _this = possibleConstructorReturn(this, (NTP.__proto__ || Object.getPrototypeOf(NTP)).call(this, params));
+	        var _this = _possibleConstructorReturn$28(this, (NTP.__proto__ || Object.getPrototypeOf(NTP)).call(this, params));
 
 	        _this._startTime = getOrDefault(params, "startTime", 0);
 	        _this._timeScale = getOrDefault(params, "scale", 1);
@@ -17077,14 +17029,16 @@
 
 	    /**
 	    * Setup for this time instance
-	    * 
+	    *
 	    * @method setup
 	    */
 
 
-	    createClass(NTP, [{
+	    _createClass$52(NTP, [{
 	        key: 'setup',
 	        value: function setup() {
+	            var _this2 = this;
+
 	            this._lastTime = new Date().getTime();
 
 	            this._offset = this._lastTime - this._startTime;
@@ -17094,7 +17048,7 @@
 	                ntp_websockets.init(socket); //how to import this vendor ?
 	                //debug.log("WebSocket init");
 	                setInterval(function () {
-	                    this._offset = ntp_websockets.offset();
+	                    _this2._offset = ntp_websockets.offset();
 	                }, 1000);
 	            }
 	        }
@@ -17114,7 +17068,7 @@
 
 	        /**
 	        * updates this time instance
-	        * 
+	        *
 	        * @method update
 	        */
 
@@ -17131,7 +17085,7 @@
 
 	        /**
 	        * Set the current timeScale, useful to slower time down
-	        * 
+	        *
 	        * @method setTimeScale
 	        * @param {Number} scale
 	        */
@@ -17144,7 +17098,7 @@
 
 	        /**
 	        * Get the current timeScale
-	        * 
+	        *
 	        * @method getTimeScale
 	        * @return {Number} scale
 	        */
@@ -17157,7 +17111,7 @@
 
 	        /**
 	        * Get the current timeDelta (difference of time between 2 frames) at the current timeScale
-	        * 
+	        *
 	        * @method getDelta
 	        * @return {Number} the current timeDelta at the current timeScale
 	        */
@@ -17170,7 +17124,7 @@
 
 	        /**
 	        * Gets the current Time object's time
-	        * 
+	        *
 	        * @method getTime
 	        * @return {Number} the current time
 	        */
@@ -17183,7 +17137,7 @@
 
 	        /**
 	        * Gets a smoothed time, useful to avoid hard transitions when time passed faster than the computing time.
-	        * 
+	        *
 	        * @method getTimeSmooth
 	        * @return {Number} the current time smoothed with an offset
 	        */
@@ -17197,7 +17151,7 @@
 
 	        /**
 	        * Gets the current Time object underlying Date Object time
-	        * 
+	        *
 	        * @method getDateTime
 	        * @return {Number} the current Date Object raw getTime() result
 	        */
@@ -17210,7 +17164,7 @@
 
 	        /**
 	        * Resync the current Time object with the given ntp server
-	        * 
+	        *
 	        * @method resync
 	        */
 
@@ -17222,13 +17176,24 @@
 	            }
 	        }
 	    }]);
+
 	    return NTP;
 	}(Component);
 
 	// module exports
 
+	var _createClass$54 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$13 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$59(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$30(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$30(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Clickable = function (_Component) {
-	    inherits(Clickable, _Component);
+	    _inherits$30(Clickable, _Component);
 
 	    /**
 	    * Makes a Mesh clickable
@@ -17244,15 +17209,15 @@
 	    * @param {onLeave} params.onLeave
 	    */
 	    function Clickable(params) {
-	        classCallCheck(this, Clickable);
+	        _classCallCheck$59(this, Clickable);
 
-	        var _this = possibleConstructorReturn(this, (Clickable.__proto__ || Object.getPrototypeOf(Clickable)).call(this, params));
+	        var _this = _possibleConstructorReturn$30(this, (Clickable.__proto__ || Object.getPrototypeOf(Clickable)).call(this, params));
 
 	        _this.pointer = getOrDefault(params, "pointer", undefined);
-	        _this.onPress = getOrDefault(params, "onPress", function () {});
-	        _this.onRelease = getOrDefault(params, "onRelease", function () {});
-	        _this.onEnter = getOrDefault(params, "onEnter", function () {});
-	        _this.onLeave = getOrDefault(params, "onLeave", function () {});
+	        _this.onPress = getOrDefault(params, "onPress", noop);
+	        _this.onRelease = getOrDefault(params, "onRelease", noop);
+	        _this.onEnter = getOrDefault(params, "onEnter", noop);
+	        _this.onLeave = getOrDefault(params, "onLeave", noop);
 
 	        _this.camera = params.camera;
 	        _this.target = getOrDefault(params, "target", undefined);
@@ -17264,17 +17229,17 @@
 
 	    /**
 	    * Setup for this clickable instance
-	    * 
+	    *
 	    * @method setup
 	    */
 
 
-	    createClass(Clickable, [{
+	    _createClass$54(Clickable, [{
 	        key: 'setup',
 	        value: function setup() {
 	            var _this2 = this;
 
-	            get(Clickable.prototype.__proto__ || Object.getPrototypeOf(Clickable.prototype), 'setup', this).call(this);
+	            _get$13(Clickable.prototype.__proto__ || Object.getPrototypeOf(Clickable.prototype), 'setup', this).call(this);
 
 	            var context = this.getContext();
 
@@ -17304,9 +17269,9 @@
 	                }
 	            });
 
-	            this.pointer.events.on("off", function (event) {
+	            this.pointer.events.on("off", function () /*event*/{
 
-	                var pick = _this2.target.transform.pick(_this2.camera, event.x, event.y);
+	                // let pick = this.target.transform.pick(this.camera, event.x, event.y);
 
 	                if (_this2.picked === true) {
 	                    _this2.onRelease();
@@ -17334,17 +17299,28 @@
 	            });
 	        }
 	    }]);
+
 	    return Clickable;
 	}(Component);
 
 	// module exports
+
+	var _createClass$53 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$12 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$58(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$29(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$29(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var BT_STATE_PRESSED = "pressed";
 
 	var BT_STATE_RELEASED = "released";
 
 	var Button = function (_Component) {
-	    inherits(Button, _Component);
+	    _inherits$29(Button, _Component);
 
 	    /**
 	     * A Button is a special kind of 3D object that is clickable and that you can use to build Graphical User Interfaces (GUI).
@@ -17375,9 +17351,9 @@
 	     *     //TODO
 	     */
 	    function Button(params) {
-	        classCallCheck(this, Button);
+	        _classCallCheck$58(this, Button);
 
-	        var _this = possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, params));
+	        var _this = _possibleConstructorReturn$29(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, params));
 
 	        _this.camera = params.camera; // requiered
 	        _this.pointer = getOrDefault(params, "pointer", undefined);
@@ -17395,10 +17371,10 @@
 	        _this.pressFillColor = getOrDefault(params, "pressFillColor", Color$1.mobilizing.clone());
 	        _this.hoverFillColor = getOrDefault(params, "hoverFillColor", Color$1.mobilizingAlternate.clone());
 
-	        _this.onPress = getOrDefault(params, "onPress", function () {});
-	        _this.onRelease = getOrDefault(params, "onRelease", function () {});
-	        _this.onEnter = getOrDefault(params, "onEnter", function () {});
-	        _this.onLeave = getOrDefault(params, "onLeave", function () {});
+	        _this.onPress = getOrDefault(params, "onPress", noop);
+	        _this.onRelease = getOrDefault(params, "onRelease", noop);
+	        _this.onEnter = getOrDefault(params, "onEnter", noop);
+	        _this.onLeave = getOrDefault(params, "onLeave", noop);
 
 	        _this._fontURL = getOrDefault(params, "fontURL", "fonts/Raleway-Regular.ttf");
 	        _this._fontItalicURL = getOrDefault(params, "fontItalicURL", "fonts/Raleway-Regular-Italic.ttf");
@@ -17481,12 +17457,12 @@
 	        return _this;
 	    }
 
-	    createClass(Button, [{
+	    _createClass$53(Button, [{
 	        key: 'setup',
 	        value: function setup() {
 	            var _this2 = this;
 
-	            get(Button.prototype.__proto__ || Object.getPrototypeOf(Button.prototype), 'setup', this).call(this);
+	            _get$12(Button.prototype.__proto__ || Object.getPrototypeOf(Button.prototype), 'setup', this).call(this);
 	            var context = this.getContext();
 
 	            this.clickable = new Clickable({ camera: this.camera,
@@ -17544,7 +17520,7 @@
 	    }, {
 	        key: 'on',
 	        value: function on() {
-	            get(Button.prototype.__proto__ || Object.getPrototypeOf(Button.prototype), 'on', this).call(this);
+	            _get$12(Button.prototype.__proto__ || Object.getPrototypeOf(Button.prototype), 'on', this).call(this);
 	            this.mesh.material.setOpacity(1);
 	            this.strokeMesh.material.setOpacity(1);
 	            if (this.text) {
@@ -17559,11 +17535,11 @@
 	    }, {
 	        key: 'off',
 	        value: function off() {
-	            get(Button.prototype.__proto__ || Object.getPrototypeOf(Button.prototype), 'off', this).call(this);
-	            this.mesh.material.setOpacity(.3);
-	            this.strokeMesh.material.setOpacity(.3);
+	            _get$12(Button.prototype.__proto__ || Object.getPrototypeOf(Button.prototype), 'off', this).call(this);
+	            this.mesh.material.setOpacity(0.3);
+	            this.strokeMesh.material.setOpacity(0.3);
 	            if (this.text) {
-	                this.texturedMesh.material.setOpacity(.3);
+	                this.texturedMesh.material.setOpacity(0.3);
 	            }
 	        }
 	    }, {
@@ -17645,10 +17621,12 @@
 	        key: 'adaptCorner',
 	        value: function adaptCorner(mode, corner) {
 	            if (this.width !== this.height) {
+	                var vertex = null;
+
 	                switch (corner) {
 	                    case "topLeft":
+	                        vertex = this.mesh._geometry.vertices[this.topLeftIndex];
 
-	                        var vertex = this.mesh._geometry.vertices[this.topLeftIndex];
 	                        if (mode === "straight") {
 	                            vertex.x = -this.width / 2;
 	                        } else if (mode === "cutOff") {
@@ -17660,8 +17638,8 @@
 	                        break;
 
 	                    case "topRight":
+	                        vertex = this.mesh._geometry.vertices[this.topRightIndex];
 
-	                        var vertex = this.mesh._geometry.vertices[this.topRightIndex];
 	                        if (mode === "straight") {
 	                            vertex.x = this.width / 2;
 	                        } else if (mode === "cutOff") {
@@ -17673,8 +17651,8 @@
 	                        break;
 
 	                    case "bottomRight":
+	                        vertex = this.mesh._geometry.vertices[this.bottomRightIndex];
 
-	                        var vertex = this.mesh._geometry.vertices[this.bottomRightIndex];
 	                        if (mode === "straight") {
 	                            vertex.x = this.width / 2;
 	                        } else if (mode === "cutOff") {
@@ -17686,8 +17664,8 @@
 	                        break;
 
 	                    case "bottomLeft":
+	                        vertex = this.mesh._geometry.vertices[this.bottomLeftIndex];
 
-	                        var vertex = this.mesh._geometry.vertices[this.bottomLeftIndex];
 	                        if (mode === "straight") {
 	                            vertex.x = -this.width / 2;
 	                        } else if (mode === "cutOff") {
@@ -17706,7 +17684,7 @@
 	        * regenerate the geometry of the mesh for further update
 	        * @method regenerateStrokeGeometry
 	        * @private
-	        * @param {Mesh} the mesh to regenerate the stroke for 
+	        * @param {Mesh} the mesh to regenerate the stroke for
 	        */
 
 	    }, {
@@ -17732,13 +17710,22 @@
 	         }*/
 
 	    }]);
+
 	    return Button;
 	}(Component);
 
 	// module exports
 
+	var _createClass$55 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$60(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$31(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$31(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var ButtonGroup = function (_Component) {
-	    inherits(ButtonGroup, _Component);
+	    _inherits$31(ButtonGroup, _Component);
 
 	    /**
 	     * ButtonGroup organize an array of Buttons with different layout patterns. Make it easier to build menu.
@@ -17750,14 +17737,15 @@
 	     * @param {Number} params.columns for grid based layout, the maximum nb of columns
 	     * @param {String} params.mode layout mode. One of grid, honeycomb
 	     * @param {Array} params.buttons The list of buttons to layout.
-	     * 
+	     *
 	     * @example
 	     *     //TODO
 	     */
 	    function ButtonGroup(params) {
-	        classCallCheck(this, ButtonGroup);
+	        _classCallCheck$60(this, ButtonGroup);
 
-	        var _this = possibleConstructorReturn(this, (ButtonGroup.__proto__ || Object.getPrototypeOf(ButtonGroup)).call(this, params));
+	        // let rows = getOrDefault(params, "rows", 3);
+	        var _this = _possibleConstructorReturn$31(this, (ButtonGroup.__proto__ || Object.getPrototypeOf(ButtonGroup)).call(this, params));
 	        /*
 	         * index d'élement => position
 	         * plusieurs implémentations de positionement
@@ -17768,7 +17756,6 @@
 	         */
 
 
-	        var rows = getOrDefault(params, "rows", 3);
 	        var columns = getOrDefault(params, "columns", 2);
 	        var mode = getOrDefault(params, "mode", "grid");
 	        var offsetType = getOrDefault(params, "offsetType", "even");
@@ -17813,7 +17800,7 @@
 	    */
 
 
-	    createClass(ButtonGroup, [{
+	    _createClass$55(ButtonGroup, [{
 	        key: 'organize',
 	        value: function organize(mode, columns, offsetType) {
 	            /*let mode = getOrDefault(params, "mode", "grid");
@@ -17822,17 +17809,15 @@
 
 	            //console.log(mode, columns, offsetType);
 
+	            var indices = this.organizeGrid(columns);
+
 	            switch (mode) {
 	                case "grid":
-	                    var indices = this.organizeGrid(columns);
 	                    this.positionGrid(indices);
 	                    break;
-	            }
-	            switch (mode) {
 	                case "honeycomb":
 	                    // bee honeycomb!
-	                    var _indices = this.organizeGrid(columns);
-	                    this.positionHoneyComb(_indices, offsetType);
+	                    this.positionHoneyComb(indices, offsetType);
 	                    break;
 	            }
 	        }
@@ -17841,7 +17826,7 @@
 	        * Organize the buttons to place in the grid. Each button is associated to an index.
 	        * @private
 	        * @method organizeGrid
-	        * @param {Number} columns 
+	        * @param {Number} columns
 	        * @return {Array} indices List of objects like this: {index:i,position: new Vector3(), isTop: false, isBottom: false, isLeft: false, isRight: false}, that will help to compute positions and Mesh deformations
 	        */
 
@@ -18000,8 +17985,6 @@
 	    }, {
 	        key: 'positionHoneyComb',
 	        value: function positionHoneyComb(indices, offsetType) {
-	            var index = 0;
-
 	            for (var i = 0; i < indices.length; i++) //line nb
 	            {
 	                var line = indices[i];
@@ -18028,7 +18011,6 @@
 	                        }
 	                    }
 	                    this.orderedIndices.push(line[j]);
-	                    index++;
 	                }
 	            }
 	            this.renderHoneyComb();
@@ -18058,15 +18040,24 @@
 	        //TODO : flower menu with cube coordinates (http://www.redblobgames.com/grids/hexagons)
 
 	    }]);
+
 	    return ButtonGroup;
 	}(Component);
 
 	// module exports
 
+	var _createClass$56 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$61(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$32(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$32(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var EVT_DRAWN$1 = "drawn";
 
 	var TextField = function (_Base) {
-	    inherits(TextField, _Base);
+	    _inherits$32(TextField, _Base);
 
 	    /**
 	    * TextField.
@@ -18082,14 +18073,14 @@
 	    * @param {Color} params.backgroundColor backgroundColor backgroundColor of the text
 	    * @param {Number} [params.width = 300] width of the label
 	    * @param {Number} [params.height = 100] height of the label
-	    * 
+	    *
 	    * @example
 	    *    //TODO
 	    */
 	    function TextField(params) {
-	        classCallCheck(this, TextField);
+	        _classCallCheck$61(this, TextField);
 
-	        var _this = possibleConstructorReturn(this, (TextField.__proto__ || Object.getPrototypeOf(TextField)).call(this, params));
+	        var _this = _possibleConstructorReturn$32(this, (TextField.__proto__ || Object.getPrototypeOf(TextField)).call(this, params));
 
 	        _this.setName(getOrDefault(params, "name", undefined));
 	        _this._ready = false;
@@ -18141,14 +18132,14 @@
 	        Loader.loadArrayBuffer(_this._fontURL, function (data) {
 	            _this._defaultFontFile = data;
 
-	            Loader.loadArrayBuffer(_this._fontItalicURL, function (data) {
-	                _this._defaultItalicFontFile = data;
+	            Loader.loadArrayBuffer(_this._fontItalicURL, function (fotnItalicData) {
+	                _this._defaultItalicFontFile = fotnItalicData;
 
-	                Loader.loadArrayBuffer(_this._fontBoldURL, function (data) {
-	                    _this._defaultBoldFontFile = data;
+	                Loader.loadArrayBuffer(_this._fontBoldURL, function (fontBoldData) {
+	                    _this._defaultBoldFontFile = fontBoldData;
 
-	                    Loader.loadArrayBuffer(_this._fontBoldItalicURL, function (data) {
-	                        _this._defaultBoldItalicFontFile = data;
+	                    Loader.loadArrayBuffer(_this._fontBoldItalicURL, function (fontBoldItalicData) {
+	                        _this._defaultBoldItalicFontFile = fontBoldItalicData;
 
 	                        _this.setup();
 	                    });
@@ -18165,7 +18156,7 @@
 	    */
 
 
-	    createClass(TextField, [{
+	    _createClass$56(TextField, [{
 	        key: 'setup',
 	        value: function setup() {
 	            this._defaultFont = new Font$1({ fontFile: this._defaultFontFile });
@@ -18336,6 +18327,8 @@
 	                    return { index: i, letter: this._styledLetters[i] };
 	                }
 	            }
+
+	            return null;
 	        }
 
 	        /**
@@ -18461,47 +18454,285 @@
 	            return this._canvas;
 	        }
 	    }]);
+
 	    return TextField;
 	}(Base);
 
 	// module exports
 
-	var EasyContext = function (_Context) {
-	    inherits(EasyContext, _Context);
+	var _createClass$58 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	    /*
-	    * @class EasyContext
-	    * @param {Object} scriptinstance the user's script instance that should be used by this context
-	    * @constructor
+	function _classCallCheck$63(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$34(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$34(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ComponentProxy = function (_Component) {
+	    _inherits$34(ComponentProxy, _Component);
+
+	    /**
+	     * ComponentProxy is a proxy that converts (like a kind of casting) scripts into Mobilizing Components. It was designed specifically to convert users script to regular Components, so they can be used besides all the other Components used by the program. The script should implement the methods preLoad(), setup(), update(). Users can define their own Component using this class for converting their script to a regular Mobilizing Component, we call it custom behavior.
+	     *
+	     * @example
+	     *     //to do
+	     *
+	     * @class ComponentProxy
+	     * @constructor
+	     * @extends Component
+	     *
+	     * @param {Object} params Config parameters
+	     * @param {Script} params.targetScript The Mobilizing user's script to convert in a Component
 	    */
-	    function EasyContext(params) {
-	        classCallCheck(this, EasyContext);
-	        return possibleConstructorReturn(this, (EasyContext.__proto__ || Object.getPrototypeOf(EasyContext)).call(this, params));
+	    function ComponentProxy(params) {
+	        _classCallCheck$63(this, ComponentProxy);
+
+	        var _this = _possibleConstructorReturn$34(this, (ComponentProxy.__proto__ || Object.getPrototypeOf(ComponentProxy)).call(this, params));
+
+	        _this.targetScript = params.targetScript;
+	        _this.targetScript.context = params.context;
+
+	        _this.targetScript.getContext = function () {
+	            return this.context;
+	        };
+	        return _this;
 	    }
 
-	    /*
-	    * Initiate the context by instanciating objects needed for the Mobilizing lib to work well! That is :
+	    /**
+	     * @method preLoad
+	     */
+
+
+	    _createClass$58(ComponentProxy, [{
+	        key: "preLoad",
+	        value: function preLoad() {
+	            if (typeof this.targetScript.preLoad === "function") {
+	                var _targetScript;
+
+	                (_targetScript = this.targetScript).preLoad.apply(_targetScript, arguments);
+	            }
+	        }
+
+	        /**
+	        * Initialization method
+	        * @method setup Setup
+	        */
+
+	    }, {
+	        key: "setup",
+	        value: function setup() {
+	            this.targetScript.setup();
+	        }
+	        /**
+	         * @method update
+	         */
+
+	    }, {
+	        key: "update",
+	        value: function update() {
+	            this.targetScript.update();
+	        }
+	    }]);
+
+	    return ComponentProxy;
+	}(Component);
+
+	// module exports
+
+	var _createClass$57 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck$62(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$33(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$33(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Context = function (_Component) {
+	    _inherits$33(Context, _Component);
+
+	    /**
+	    * Mobilizing.js defines a context to enable the use of multiple Mobilizing.js instances in the same webpage.
 	    *
-	    *     static Time Object
-	    *     Scenes array (context.scenes)
-	    *     Cameras array (context.cameras)
-	    *     Engine object
-	    *     device object (context.device)
-	    *     Canvas for rendering (context.canvas)
-	    *     Input object (context.input)
+	    * @class Context
+	    * @constructor
+	    */
+	    function Context(params) {
+	        _classCallCheck$62(this, Context);
+
+	        var _this = _possibleConstructorReturn$33(this, (Context.__proto__ || Object.getPrototypeOf(Context)).call(this, params));
+
+	        _this._components = []; //list of components
+	        _this.loader = new Loader(); //default loader
+	        return _this;
+	    }
+
+	    /**
+	    * Context initialization. Instanciates a Loader.
 	    *
 	    * @method init
-	    * @param {Canvas} canvas The canvas to use as a rendering surface
-	    * @param {JSON object} params inputDisabled to disable input
 	    */
 
 
-	    createClass(EasyContext, [{
+	    _createClass$57(Context, [{
 	        key: 'init',
-	        value: function init(params) {
-	            if (params === undefined) params = {};
-	            get(EasyContext.prototype.__proto__ || Object.getPrototypeOf(EasyContext.prototype), 'init', this).call(this, params);
+	        value: function init() {}
+
+	        /**
+	         * Setup for this Context instance (setup all components)
+	         *
+	         * @method setup
+	         */
+
+	    }, {
+	        key: 'setup',
+	        value: function setup() {
+	            var _this2 = this;
+
+	            this._components.forEach(function (component) {
+	                //component.setup();
+	                _this2.chainedCall(component, "setup");
+	            });
+	        }
+
+	        /**
+	        * preLoad all components
+	        *
+	        * @method setup
+	        */
+
+	    }, {
+	        key: 'preLoad',
+	        value: function preLoad() {
+	            var _this3 = this;
+
+	            this._components.forEach(function (component) {
+	                component.preLoad(_this3.loader);
+	                //this.chainedCall(component, "preLoad", this.loader);
+	            });
+	        }
+
+	        /**
+	        * Update
+	        * @method update
+	        */
+
+	    }, {
+	        key: 'update',
+	        value: function update() {
+	            var _this4 = this;
+
+	            //new components pre-update-post
+	            this._components.forEach(function (component) {
+	                //component.preUpdate();
+	                _this4.chainedCall(component, "preUpdate");
+	            });
+
+	            this._components.forEach(function (component) {
+	                _this4.chainedCall(component, "update");
+	            });
+
+	            this._components.forEach(function (component) {
+	                //component.postUpdate();
+	                _this4.chainedCall(component, "postUpdate");
+	            });
+	        }
+	    }, {
+	        key: 'chainedCall',
+	        value: function chainedCall(component, method, arg) {
+	            var _this5 = this;
+
+	            component[method](arg); //execute first
+	            var chained = component.getChainedComponents();
+	            //recurse then
+	            if (chained.length > 0) {
+	                chained.forEach(function (chainedComponent) {
+	                    _this5.chainedCall(chainedComponent, method, arg);
+	                });
+	            }
+	        }
+
+	        /**
+	        * Add a Component to this context
+	        * @method addComponent
+	        * @param {Component} component
+	        */
+
+	    }, {
+	        key: 'addComponent',
+	        value: function addComponent(component) {
+	            //encapsulate class in a component : useful for user script
+	            if (!(component instanceof Component)) {
+	                component = new ComponentProxy({ targetScript: component, context: this });
+	            }
+
+	            this._components.push(component);
+	            component.setContext(this); //add the context to the component
+	            //component.setup(); //no
+	            //component.preLoad(this.loader);
+	            return component;
+	        }
+	        /*
+	         addBehaviour(target, component)
+	        {
+	            component.context = this;
+	            component.getContext = function(){return this.context;};
+	            component.target = target;
+	            component.getTarget = function(){return this.target;};
+	            this.components.push(component);
+	            component.setup();
+	        }
+	          */
+
+	    }]);
+
+	    return Context;
+	}(Component);
+	// module exports
+
+	var _createClass$59 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get$14 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	function _classCallCheck$64(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn$35(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits$35(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EasyContext = function (_Context) {
+	    _inherits$35(EasyContext, _Context);
+
+	    function EasyContext() {
+	        _classCallCheck$64(this, EasyContext);
+
+	        return _possibleConstructorReturn$35(this, (EasyContext.__proto__ || Object.getPrototypeOf(EasyContext)).apply(this, arguments));
+	    }
+
+	    _createClass$59(EasyContext, [{
+	        key: 'init',
+
+	        /*
+	        * Initiate the context by instanciating objects needed for the Mobilizing lib to work well! That is :
+	        *
+	        *     static Time Object
+	        *     Scenes array (context.scenes)
+	        *     Cameras array (context.cameras)
+	        *     Engine object
+	        *     device object (context.device)
+	        *     Canvas for rendering (context.canvas)
+	        *     Input object (context.input)
+	        *
+	        * @method init
+	        * @param {Canvas} canvas The canvas to use as a rendering surface
+	        * @param {JSON object} params inputDisabled to disable input
+	        */
+	        value: function init() {
+	            var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	            _get$14(EasyContext.prototype.__proto__ || Object.getPrototypeOf(EasyContext.prototype), 'init', this).call(this, params);
+
 	            params.context = this;
+
 	            this.audio = this.addComponent(new Mobilizing.RendererAudio(params));
 	            this.renderer = this.addComponent(new Mobilizing.Renderer3D(params));
 	            this.physics = this.addComponent(new Mobilizing.PhysicsEngine(params));
@@ -18518,7 +18749,7 @@
 	    }, {
 	        key: 'update',
 	        value: function update(canvas) {
-	            get(EasyContext.prototype.__proto__ || Object.getPrototypeOf(EasyContext.prototype), 'update', this).call(this, canvas);
+	            _get$14(EasyContext.prototype.__proto__ || Object.getPrototypeOf(EasyContext.prototype), 'update', this).call(this, canvas);
 	        }
 	    }, {
 	        key: 'getMainRenderer',
@@ -18675,7 +18906,7 @@
 
 	    }, {
 	        key: 'createPlane',
-	        value: function createPlane(width, height) {
+	        value: function createPlane() /*width, height*/{
 	            //var plane = Mobilizing.Mesh.CreatePlane(width, height);
 	            var plane = new Mobilizing.Mesh({ primitive: "plane" });
 	            this.addToCurrentScene(plane);
@@ -18777,7 +19008,7 @@
 
 	    }, {
 	        key: 'createTextLabel',
-	        value: function createTextLabel(text, font, fontSize, width, height, color, backgroundColor, texture, hasBackground) {
+	        value: function createTextLabel(text, font, fontSize, width, height, color, backgroundColor, texture /*, hasBackground*/) {
 	            var labelTest = new Mobilizing.Label(text, font, width, height);
 	            labelTest.style.fontSize = fontSize;
 	            labelTest.style.color = color;
@@ -18871,7 +19102,7 @@
 	        }
 	    }, {
 	        key: 'onBufferLoaded',
-	        value: function onBufferLoaded(source, buffer) {}
+	        value: function onBufferLoaded() /*source, buffer*/{}
 	        //source.setBuffer(sound);
 	        //source.play();
 
@@ -18900,7 +19131,7 @@
 	        value: function createTextureFromCubeCamera(camera) {
 	            var texture = new Mobilizing.Texture({ context: this });
 	            texture.cube = camera._camera.renderTarget; //FIXME
-	            texture.cube.minFilter = THREE$1.LinearMipMapLinearFilter;
+	            texture.cube.minFilter = THREE.LinearMipMapLinearFilter;
 	            return texture;
 	        }
 
@@ -18933,13 +19164,14 @@
 	            return button;
 	        }
 	    }]);
+
 	    return EasyContext;
 	}(Context);
 
 	// module exports
 
 	var version = "0.0.1";
-	var revision = "ccb0c7a";
+	var revision = "90078b7";
 
 	var input = {
 	    'Keyboard': Keyboard,
@@ -18972,6 +19204,7 @@
 	exports.Rect = Rect;
 	exports.Vector2 = Vector2$1;
 	exports.Vector3 = Vector3$1;
+	exports.Ray = Ray$1;
 	exports.Animation = Animation;
 	exports.Csg = Csg;
 	exports.Debug = Debug;
@@ -18988,13 +19221,14 @@
 	exports._DOM = _DOM;
 	exports.PhysicsEngine = PhysicsEngine;
 	exports.Engine3D = Engine3D;
+	exports.Renderer3D = Renderer3DSingleton;
+	exports.RendererAudio = RendererAudioSingleton;
 	exports.Camera = Camera;
 	exports.Font = Font$1;
 	exports.Light = Light;
 	exports.LODGroup = LODGroup;
 	exports.Material = Material;
 	exports.Transform = Transform;
-	exports.Label = Label;
 	exports.Mesh = Mesh$1;
 	exports.EdgesMesh = EdgesMesh;
 	exports.StyledLetter = StyledLetter;
