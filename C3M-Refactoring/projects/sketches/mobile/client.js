@@ -25,6 +25,7 @@ function client()
         M = this.getContext();
         EasyContext.SetContext(M);
         EasyContext.CreateScene(); //mobile scene
+        R = EasyContext._renderer;
         this.camera = EasyContext._camera;
         this.camera.transform.setLocalPositionZ(50);
         M.addComponent(this.genericClient);
@@ -58,9 +59,12 @@ function client()
             if (sketch.sketch.category === "mobile")
             {
                 sketch.sketch.pubsub = this.genericClient.pubsub; //connect pubsub
+                sketch.sketch.root = new Mobilizing.Mesh({ primitive: "node" }); 
+                R.addToCurrentScene(sketch.sketch.root);
                 
                 M.addComponent(sketch);
                 sketch.setup();
+                sketch.sketch.on();
             } 
         }
     };

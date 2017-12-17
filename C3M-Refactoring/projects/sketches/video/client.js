@@ -62,7 +62,7 @@ function client()
 
         
         
-        //add all video sketches
+        //add all video sketches that are of category "video"
         var sketches = SketchManager.GetSketches();
         for (var s in sketches)
         {
@@ -70,6 +70,7 @@ function client()
             if (sketch.sketch.category === "video")
             {
                 sketch.sketch.pubsub = this.genericClient.pubsub; //connect pubsub
+                //sketch.sketch.init();
                 //create root : this will be used to show/hide the sketch
                 sketch.sketch.root = new Mobilizing.Mesh({ primitive: "node" }); 
                 R.addToCurrentScene(sketch.sketch.root);
@@ -85,11 +86,34 @@ function client()
         //listen to the server
         console.log("video client onConnect");
         this.genericClient.pubsub.subscribe("/next", this.onNext.bind(this));
+
+        //we activate all sketches
+        var sketches = SketchManager.GetSketches();
+        for (var s in sketches)
+        {
+            var sketch = sketches[s];
+            if (sketch.sketch.category === "video")
+            {
+                sketch.sketch.on(); //by default all sketches are on
+            }
+        }
     };
 
     this.update = function()
     {
-        
+        //test : make all the sketches turn in the space
+        /*var sketches = SketchManager.GetSketches();
+        for (var s in sketches)
+        {
+            var sketch = sketches[s];
+            if (sketch.sketch.category === "video")
+            {
+                var angle = sketch.sketch.root.transform.getLocalRotation();
+                angle.y += 1;
+                sketch.sketch.root.transform.setLocalRotation(angle);
+            }
+        }
+        */
     };
 
     this.onNext = function()
