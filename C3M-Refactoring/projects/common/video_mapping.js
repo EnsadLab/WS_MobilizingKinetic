@@ -624,7 +624,7 @@ function VideoMapping(params){
             {
                 this.videoOrder = 0;
             }
-            this.videoOrder = 1;
+            //this.videoOrder = 1;
             //makes 6 cameras for the whole system
             for(var i=0; i<6; i++)
             {
