@@ -78,8 +78,6 @@ function client()
                 sketch.setup();
             } 
         }
-
-        
     };
 
     this.onConnect = function(){
