@@ -65,11 +65,12 @@ function VideoMapping(params){
     };
     this.preLoad = function(loader)
     {
-
+        /*
         for (var i = 0; i < 6; i++) {
             var maskurl = "../../common/3D/mask" + i + ".png";
             projectordata[i].imgMask = loader.loadImage({ url: maskurl });
         }
+        */
         imgSoft = loader.loadImage({ url: "../../common/3D/soft.png" });
         finalImg = loader.loadImage({ url: "../3d/petite_salle_d1_50k_t1/petite_salle_d1_50k_t1_u1_v1.jpg" });
 
@@ -782,7 +783,7 @@ function VideoMapping(params){
                 //var c3 = Mobilizing.Color.red.clone();
                 //var c4 = Mobilizing.Color.red.clone();
 
-                let i = projector.mesh_warping._geometry.vertices.length;
+                  i = projector.mesh_warping._geometry.vertices.length;
                 
                 projector.mesh_warping._geometry.vertices.push(v1, v2, v3, v4);
                 //projector.mesh_warping._geometry.colors.push(c1, c2, c3, c4);

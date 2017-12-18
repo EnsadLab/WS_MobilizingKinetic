@@ -66,9 +66,11 @@ function client()
         var sketches = SketchManager.GetSketches();
         for (var s in sketches)
         {
+            console.log("sketch=" + s);
             var sketch = sketches[s];
             if (sketch.sketch.category === "video")
             {
+                sketch.sketch.enabled = true;
                 sketch.sketch.pubsub = this.genericClient.pubsub; //connect pubsub
                 //sketch.sketch.init();
                 //create root : this will be used to show/hide the sketch
@@ -76,6 +78,7 @@ function client()
                 R.addToCurrentScene(sketch.sketch.root);
                 M.addComponent(sketch);
                 sketch.setup();
+                sketch.sketch.off(); //off by default
             } 
         }
 
@@ -86,17 +89,14 @@ function client()
         //listen to the server
         console.log("video client onConnect");
         this.genericClient.pubsub.subscribe("/next", this.onNext.bind(this));
-
+        this.genericClient.pubsub.subscribe("/sketch/state", this.onSketchState.bind(this));
+        
         //we activate all sketches
         var sketches = SketchManager.GetSketches();
         
         for (var s in sketches)
         {
             var sketch = sketches[s];
-            if (sketch.sketch.category === "video")
-            {
-                sketch.sketch.on(); //by default all sketches are on
-            }
 
             if(sketch.onConnect){
                 console.log("forward onConnect to", sketch);
@@ -126,7 +126,14 @@ function client()
     this.onNext = function()
     {
 
-    }
+    };
+
+    this.onSketchState = function(params)
+    {
+        SketchManager.SetSketchState(params.name, params.state);
+    };
+
+    
 
 
 

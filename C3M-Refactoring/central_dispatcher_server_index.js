@@ -83,20 +83,47 @@ function centralDispatcherServerIndex()
         cam.transform.setLocalPosition(0,0,1000);
         R.addCamera(cam);
 
-        espaceBt = this.createButton("Sketches",
-                                     new Mobilizing.Vector3(0, R.getCanvasSize().height/2 - 100, 0),
-                                     function(){
-            if(this.centralServer)
-            {
-                this.centralServer.switchToProject("sketches");
-            }
-            else
-            {
-                this.pubsub.publish('/index/remote/client/switchproject', "sketches");
-            }
-        }.bind(this));
+        //liste des commandes (toutes commandes pubsub):
+        //contenus C3M
+        this.addCommandButton("Switch to Sketches", "/index/remote/client/switchproject", "Sketches");
+        this.addCommandButton("Switch to Mire", "/index/remote/client/switchproject", "Mire");
+        //sketches
+        this.addCommandButton("Sk Empty video ON", "/sketch/state", {name:"SketchEmptyVideo",state:true});
+        this.addCommandButton("Sk Empty video OFF", "/sketch/state", {name:"SketchEmptyVideo",state:false});
+        this.addCommandButton("Sk Empty mobile ON", "/sketch/state", {name:"SketchEmptyMobile",state:true});
+        this.addCommandButton("Sk Empty mobile OFF", "/sketch/state", {name:"SketchEmptyMobile",state:false});
+        
+        this.addCommandButton("Sk Lines video ON", "/sketch/state", {name:"SketchLinesVideo",state:true});
+        this.addCommandButton("Sk Lines video OFF", "/sketch/state", {name:"SketchLinesVideo",state:false});
+        this.addCommandButton("Sk Lines mobile ON", "/sketch/state", {name:"SketchLinesMobile",state:true});
+        this.addCommandButton("Sk Lines mobile OFF", "/sketch/state", {name:"SketchLinesMobile",state:false});
 
-        this.build_ui(projects);
+        //test de remplissage :
+        for (var i=0;i<10;++i)
+        {
+            this.addCommandButton("sample", "/tag/position", {id:50,x:0,y:0,z:0});
+        }
+        
+    };
+    
+    this.addCommandButton = function(caption, message, params)
+    {
+        if (this.buttony === undefined)
+        {
+            this.buttony =   R.getCanvasSize().height / 2-45; 
+            this.buttonx =   -R.getCanvasSize().width / 2+150;
+        }
+        var bt = this.createButton(caption,
+        new Mobilizing.Vector3(this.buttonx, this.buttony, 0),
+        function(){
+           this.pubsub.publish(message, params);
+        }.bind(this));
+        this.buttony -= 90;
+        if (this.buttony < -R.getCanvasSize().height/2+45)
+        {
+            this.buttony =   R.getCanvasSize().height / 2-45; 
+            this.buttonx += 310;
+        }
 
     };
 
@@ -170,6 +197,29 @@ function centralDispatcherServerIndex()
         }.bind(this));
 
         this.ready = true;
+    };
+
+    this.build_ui_sketches = function(sketches)
+    {
+
+
+        sketches.forEach( function(sketch){
+
+            var y = 0;
+                var bt = this.createButton(sketch.sketch.name,
+                    new Mobilizing.Vector3(200, y, 0),
+                    function(){
+                        this.pubsub.publish('/sketch/state', {name:sketch.sketch.name,state:true});
+
+                    }.bind(this));
+
+                    y+=100;
+
+            
+            
+
+        }.bind(this));
+
     };
 
     this.onConnect = function()
