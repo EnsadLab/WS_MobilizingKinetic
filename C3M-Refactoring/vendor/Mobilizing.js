@@ -6085,6 +6085,7 @@
 	        * Compute the intersection points between a plane and a mesh !Works ONLY is this mesh is "plane" primitive made!
 	        * @method getIntersectionsPoints
 	        * @param {Mesh} mesh the mesh to use for the intersections computation
+	        * @return {Array} an array of object as {vertex: Vector3, uv: Vector2};
 	        */
 
 	    }, {
@@ -6539,11 +6540,6 @@
 
 	function _inherits$9(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	/**
-	 * A ray that emits from an origin in a certain direction.
-	 * @class Ray
-	 */
-
 	var Ray$1 = function (_THREE$Ray) {
 	    _inherits$9(Ray$$1, _THREE$Ray);
 
@@ -6573,6 +6569,8 @@
 
 	    return Ray$$1;
 	}(THREE.Ray);
+
+	// module exports
 
 	var _createClass$17 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -17334,6 +17332,8 @@
 	     * @param {Object} params.font font to use.
 	     * @param {Number} params.width width in pixels.
 	     * @param {Number} params.height height in pixels.
+	     * @param {Number} params.canvasWidth canvasWidth in pixels.
+	     * @param {Number} params.canvasHeight canvasHeight in pixels.
 	     * @param {Number} params.cutOff the size of the cutOff
 	     * @param {Color} params.strokeColor
 	     * @param {Color} params.fillColor
@@ -17360,6 +17360,8 @@
 	        _this.mesh = getOrDefault(params, "mesh", undefined);
 	        _this.width = getOrDefault(params, "width", 3);
 	        _this.height = getOrDefault(params, "height", 1);
+	        _this.canvasWidth = getOrDefault(params, "canvasWidth", 100);
+	        _this.canvasHeight = getOrDefault(params, "canvasHeight", 100 / (_this.width / _this.height));
 	        _this.radius = getOrDefault(params, "radius", undefined);
 	        _this.sideCount = getOrDefault(params, "sideCount", 6);
 
@@ -17394,19 +17396,26 @@
 	        //create the texture from text
 	        if (_this.text) {
 	            //FIXME -> quand on a un radius pour le poly faire une texture carré
-	            var canvasWidth = void 0;
-	            if (_this.width < 100) {
+	            /*let canvasWidth;
+	            if(this.width < 100)
+	            {
 	                canvasWidth = 512;
-	            } else {
-	                canvasWidth = _this.width;
 	            }
-
-	            var canvasHeight = void 0;
-	            if (_this.height < 100) {
-	                canvasHeight = canvasWidth / (_this.width / _this.height);
-	            } else {
-	                canvasHeight = _this.height;
+	            else
+	            {
+	                canvasWidth = this.width;
 	            }
+	             let canvasHeight;
+	            if(this.height < 100)
+	            {
+	                canvasHeight = canvasWidth / (this.width / this.height);
+	            }
+	            else
+	            {
+	                canvasHeight = this.height;
+	            }*/
+	            var canvasWidth = _this.canvasWidth;
+	            var canvasHeight = _this.canvasHeight;
 
 	            if (_this.radius) {
 	                var twoSquareThree = 2 / Math.sqrt(3);
@@ -17713,8 +17722,6 @@
 
 	    return Button;
 	}(Component);
-
-	// module exports
 
 	var _createClass$55 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19171,7 +19178,7 @@
 	// module exports
 
 	var version = "0.0.1";
-	var revision = "90078b7";
+	var revision = "e1dee72";
 
 	var input = {
 	    'Keyboard': Keyboard,

@@ -1,9 +1,9 @@
-function SketchLinesVideo()
+function SketchLinesMobile()
 {
     var M;
 
     this.sketch = new Sketch(this);
-    this.sketch.name = "SketchLinesVideo"; 
+    this.sketch.name = this.constructor.name; 
     this.sketch.category = "mobile";
 
     var sendTimer;
@@ -56,4 +56,4 @@ function SketchLinesVideo()
     };
 };
 
-SketchManager.RegisterSketch(new SketchLinesVideo());
+SketchManager.RegisterSketch(new SketchLinesMobile());

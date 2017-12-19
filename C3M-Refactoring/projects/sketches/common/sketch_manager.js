@@ -1,5 +1,6 @@
 var SketchManager = {};
 SketchManager._sketches = [];
+
 SketchManager.SetContext = function(context)
 {
     SketchManager._context = context;
@@ -15,6 +16,7 @@ SketchManager.GetSketches = function()
 {
     return SketchManager._sketches;
 };
+
 SketchManager.SetSketchState = function(name, state)
 {
     for (var s in SketchManager._sketches)
