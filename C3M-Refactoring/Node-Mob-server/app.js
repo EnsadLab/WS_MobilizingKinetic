@@ -15,6 +15,10 @@
         flat = require('flat'),
         moment = require('moment');
 
+        //bridge OSC
+        var OSC = require('osc-js')   
+        const osc = new OSC({ plugin: new OSC.DatagramPlugin() })
+
     /**
      * @class MobilizingServer
      * @constructor
@@ -93,10 +97,10 @@
 
         router.on((function (socket, args, next) {
             var evt;
-
+            
             args = Array.prototype.slice.call(args);
             evt = args.shift();
-
+            //console.log("router on ", args);
             this.log(socket, evt, args);
             next();
         }).bind(this));
@@ -106,6 +110,22 @@
         //settings
         this.settings = this.loadSetting("settings.json");
         console.log("loaded", this.settings);
+
+        //osc bridge
+        osc.on('/t/p', (message) => {
+            
+            //console.log(message.args)
+            var args = {};
+            args.id = message.args[0];
+            args.x = message.args[1];
+            args.y = message.args[2];
+            args.z = message.args[3];
+            console.log("/tag/position ", args);
+            this.io.to("/tag/position").emit("/tag/position", args);
+            //this.log(socket, evt, args);
+            //console.log("");
+          });
+          osc.open({ port: 9000 });
     }
 
     /**
@@ -121,7 +141,7 @@
         socket.on('subscribe', this.onSubscribe.bind(this, socket));
         socket.on('unsubscribe', this.onUnsubscribe.bind(this, socket));
         socket.on('disconnect', this.onDisconnect.bind(this, socket));
-
+ 
         this.io.to('/connect').emit('/connect', socket.client.id);
 
         this.log(socket, 'connection');      
@@ -137,7 +157,7 @@
     {
         var channel = data.channel,
             message = data.message;
-
+        
         //manage img file writing
         if(channel === "/saveImage")
         {
