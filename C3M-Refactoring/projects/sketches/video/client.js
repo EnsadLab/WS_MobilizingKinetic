@@ -60,8 +60,6 @@ function client()
         light.setIntensity(2);
         EasyContext._renderer.addToCurrentScene(light);
 
-
-
         //add all video sketches that are of category "video"
         var sketches = SketchManager.GetSketches();
         for (var s in sketches)
@@ -81,8 +79,6 @@ function client()
                 sketch.sketch.off(); //off by default
             } 
         }
-
-
     };
 
     this.onConnect = function(){

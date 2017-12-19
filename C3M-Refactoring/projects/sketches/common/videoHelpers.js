@@ -112,6 +112,93 @@ function UserLine(width, depth){
     }
 };
 
+/*
+THREE.NoBlending
+THREE.NormalBlending
+THREE.AdditiveBlending
+THREE.SubtractiveBlending
+THREE.MultiplyBlending
+THREE.CustomBlending
+*/
+function UserSphere(radius, colorTop, colorBottom){
+
+    this.blending = THREE.AdditiveBlending;
+
+    this.root = new Mobilizing.Mesh({primitive: "node"});
+
+    this.sphereTop = new Mobilizing.Mesh({primitive: "sphere",
+                                          segments: 16,
+                                          radius: radius,
+                                          phiStart: Math.PI*2,
+                                          phiLength: Math.PI,
+                                          material: "basic"});
+
+    this.sphereTop.material.setTransparent(true);
+    this.sphereTop.material.setColor(colorTop || Mobilizing.Color.blue);
+    this.sphereTop.material.setBlending(this.blending);
+    this.sphereTop.material.setDepthWrite(false);
+
+    this.sphereBottom = new Mobilizing.Mesh({primitive: "sphere",
+                                             segments: 16,
+                                             radius: radius,
+                                             phiStart: Math.PI,
+                                             phiLength: Math.PI,
+                                             material: "basic"});
+
+    this.sphereBottom.material.setTransparent(true);
+    this.sphereBottom.material.setColor(colorBottom || Mobilizing.Color.red);
+    this.sphereBottom.material.setBlending(this.blending);
+    this.sphereBottom.material.setDepthWrite(false);
+
+    //node
+    this.root.transform.addChild(this.sphereTop.transform);
+    this.root.transform.addChild(this.sphereBottom.transform);
+
+    this.transform = this.root.transform;
+
+    /**
+    * change the top color
+    * @method setTopColor 
+    * @param {Color} color css color
+    */
+    this.setTopColor = function(color){
+        this.sphereTop.material.setColor(new Mobilizing.Color().setStyle(color));
+    }
+    /**
+    * change the bottom color
+    * @method setBottomColor 
+    * @param {Color} color css color
+    */
+    this.setBottomColor = function(color){
+        this.sphereBottom.material.setColor(new Mobilizing.Color().setStyle(color));
+    }
+    /**
+    * change the top opacity
+    * @method setTopOpacity
+    * @param {Color} opacity
+    */
+    this.setTopOpacity = function(val){
+        this.sphereTop.material.setOpacity(val);
+    }
+    /**
+    * change the bottom opacity
+    * @method setBottomOpacity 
+    * @param {Color} opacity
+    */
+    this.setBottomOpacity = function(val){
+        this.sphereBottom.material.setOpacity(val);
+    }
+    /**
+    * change the blending of both top and bottom spheres
+    * @method setBlending 
+    * @param {String} blending
+    */
+    this.setBlending = function(val){
+        this.sphereTop.material.setBlending(val);
+        this.sphereBottom.material.setBlending(val);
+    }
+}
+
 /**
 * Get the 3 direction vectors of the given quaternion
 * @method getDirectionsFromQuaternion

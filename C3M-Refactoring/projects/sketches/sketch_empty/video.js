@@ -7,11 +7,14 @@ function SketchEmptyVideo()
     this.sketch = new Sketch(this);
     this.sketch.name = "SketchEmptyVideo";
     this.sketch.category = "video";
+    
     this.setup = function()
     {
         //put here all your sketch scene and logic creation 
         console.log("SketchEmptyVideo setup ");
+        
         this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
+        
         var R = EasyContext._renderer;
         
         //color cubes scene

@@ -43,10 +43,6 @@ function Sketch(params)
         }
     };
     
-    
-
-
-
 }
 
 

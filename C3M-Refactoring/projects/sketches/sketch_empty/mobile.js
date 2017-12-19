@@ -1,11 +1,9 @@
-//==============================================================
-//sketch2.js
-//==============================================================
 function SketchEmptyMobile()
 {
     this.sketch = new Sketch(this);
     this.sketch.name = "SketchEmptyMobile"; 
     this.sketch.category = "mobile";
+    
     this.setup = function()
     {
          

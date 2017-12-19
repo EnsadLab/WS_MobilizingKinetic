@@ -92,7 +92,7 @@ function centralDispatcherServerIndex()
         this.addCommandButton("Sk Empty video OFF", "/sketch/state", {name:"SketchEmptyVideo",state:false});
         this.addCommandButton("Sk Empty mobile ON", "/sketch/state", {name:"SketchEmptyMobile",state:true});
         this.addCommandButton("Sk Empty mobile OFF", "/sketch/state", {name:"SketchEmptyMobile",state:false});
-        
+
         this.addCommandButton("Sk Lines video ON", "/sketch/state", {name:"SketchLinesVideo",state:true});
         this.addCommandButton("Sk Lines video OFF", "/sketch/state", {name:"SketchLinesVideo",state:false});
         this.addCommandButton("Sk Lines mobile ON", "/sketch/state", {name:"SketchLinesMobile",state:true});
@@ -103,9 +103,9 @@ function centralDispatcherServerIndex()
         {
             this.addCommandButton("sample", "/tag/position", {id:50,x:0,y:0,z:0});
         }
-        
+
     };
-    
+
     this.addCommandButton = function(caption, message, params)
     {
         if (this.buttony === undefined)
@@ -114,11 +114,13 @@ function centralDispatcherServerIndex()
             this.buttonx =   -R.getCanvasSize().width / 2+150;
         }
         var bt = this.createButton(caption,
-        new Mobilizing.Vector3(this.buttonx, this.buttony, 0),
-        function(){
-           this.pubsub.publish(message, params);
+                                   new Mobilizing.Vector3(this.buttonx, this.buttony, 0),
+                                   function(){
+            this.pubsub.publish(message, params);
         }.bind(this));
+
         this.buttony -= 90;
+
         if (this.buttony < -R.getCanvasSize().height/2+45)
         {
             this.buttony =   R.getCanvasSize().height / 2-45; 
@@ -152,6 +154,8 @@ function centralDispatcherServerIndex()
             pointer: pointer,
             width: 300,
             height: 80,
+            canvasWidth: 300,
+            canvasHeight: 80,
             strokeWidth: .01,
             text: text,
             textSize: 20,
@@ -202,21 +206,16 @@ function centralDispatcherServerIndex()
     this.build_ui_sketches = function(sketches)
     {
 
-
         sketches.forEach( function(sketch){
 
             var y = 0;
-                var bt = this.createButton(sketch.sketch.name,
-                    new Mobilizing.Vector3(200, y, 0),
-                    function(){
-                        this.pubsub.publish('/sketch/state', {name:sketch.sketch.name,state:true});
+            var bt = this.createButton(sketch.sketch.name,
+                                       new Mobilizing.Vector3(200, y, 0),
+                                       function(){
+                this.pubsub.publish('/sketch/state', {name:sketch.sketch.name, state:true});
+            }.bind(this));
 
-                    }.bind(this));
-
-                    y+=100;
-
-            
-            
+            y+=100;
 
         }.bind(this));
 
