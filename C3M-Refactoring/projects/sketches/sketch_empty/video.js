@@ -37,7 +37,7 @@ function SketchEmptyVideo()
     //add your callbacks below
     this.onTagPosition = function(params)
     {
-       console.log("tag position received ", params);
+       //console.log("tag position received ", params);
         //do something based on the tag position received
         //params.id
         //params.x
