@@ -97,12 +97,16 @@ function centralDispatcherServerIndex()
         this.addCommandButton("Sk Lines video OFF", "/sketch/state", {name:"SketchLinesVideo",state:false});
         this.addCommandButton("Sk Lines mobile ON", "/sketch/state", {name:"SketchLinesMobile",state:true});
         this.addCommandButton("Sk Lines mobile OFF", "/sketch/state", {name:"SketchLinesMobile",state:false});
-
+        
+        this.addCommandButton("Sk Lights video ON", "/sketch/state", {name:"SketchLightsVideo",state:true});
+        this.addCommandButton("Sk Lights video OFF", "/sketch/state", {name:"SketchLightsVideo",state:false});
+        this.addCommandButton("Sk Lights mobile ON", "/sketch/state", {name:"SketchLightsMobile",state:true});
+        this.addCommandButton("Sk Lights mobile OFF", "/sketch/state", {name:"SketchLightsMobile",state:false});
         //test de remplissage :
-        for (var i=0;i<10;++i)
-        {
-            this.addCommandButton("sample", "/tag/position", {id:50,x:0,y:0,z:0});
-        }
+//        for (var i=0;i<10;++i)
+//        {
+//            this.addCommandButton("sample", "/tag/position", {id:50,x:0,y:0,z:0});
+//        }
 
     };
 

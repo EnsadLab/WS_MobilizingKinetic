@@ -79,22 +79,9 @@
 	    };
 	}
 
-	/**
-	 * Method to convert a string to Base64. Used internally to convert loaded raw data to img. Wrote by  phil@philten.com - http://www.philten.com
-	 * @private
-	 * @method encode64
-	 * @param {String} inputStr
-	 * @author phil@philten.com - http://www.philten.com
-	 * Date: 2010/12/15
-	 * version: 1.0
-	 * url french: http://www.philten.com/fr-xmlhttprequest-image
-	 * url english: http://www.philten.com/us-xmlhttprequest-image
-	 */
 	function noop() {
 	    return null;
 	}
-
-	// module exports
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -144,8 +131,6 @@
 
 	    return AudioBuffer;
 	}();
-
-	// module exports
 
 	var _createClass$3 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -246,8 +231,6 @@
 
 	    return Base;
 	}();
-
-	// module exports
 
 	var _createClass$4 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -357,8 +340,6 @@
 
 	    return EventEmitter;
 	}();
-
-	// module exports
 
 	var _createClass$2 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -583,8 +564,6 @@
 
 	    return Component;
 	}(Base);
-
-	// module exports
 
 	var _createClass$1 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -815,8 +794,6 @@
 	    return AudioSource;
 	}(Component);
 
-	// module exports
-
 	var _createClass$5 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$1 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -826,6 +803,13 @@
 	function _possibleConstructorReturn$2(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$2(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * Represents a RGB color to be used in materials applied on Meshes.
+	 *
+	 * This class extends the one from Three.js, API available here : http://threejs.org/docs/#Reference/Math/Color
+	 * @class Color
+	 */
 
 	var Color$1 = function (_THREE$Color) {
 	  _inherits$2(Color$$1, _THREE$Color);
@@ -1183,13 +1167,18 @@
 	*/
 	Color$1.transparent = new Color$1(new Color$1().makeRGBAStringWithAlpha(0));
 
-	//module exports
-
 	function _classCallCheck$6(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn$3(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$3(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * Euler class (deprecated ?)
+	 *
+	 * This class extends the one from Three.js, API available here : http://threejs.org/docs/#Reference/Math/Euler
+	 * @class Euler
+	 */
 
 	var Euler$1 = function (_THREE$Euler) {
 	  _inherits$3(Euler$$1, _THREE$Euler);
@@ -1203,13 +1192,18 @@
 	  return Euler$$1;
 	}(THREE.Euler);
 
-	// module exports
-
 	function _classCallCheck$7(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn$4(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$4(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * Matrix3 class
+	 *
+	 * This class extends the one from Three.js, API available here : http://threejs.org/docs/#Reference/Math/Matrix3
+	 * @class Matrix3
+	**/
 
 	var Matrix3$1 = function (_THREE$Matrix) {
 	  _inherits$4(Matrix3$$1, _THREE$Matrix);
@@ -1223,86 +1217,18 @@
 	  return Matrix3$$1;
 	}(THREE.Matrix3);
 
-	/**
-	@method transpose
-	@return Matrix3
-	*/
-
-	/**
-	 Transposes this matrix into the supplied array, and returns itself unchanged.
-	@method transposeIntoArray
-	@return Matrix3
-	@param array {Array}
-	*/
-
-	/**
-	@method determinant
-	@return Float
-	*/
-
-	/**
-	 Sets the 3x3 matrix values to the given row-major sequence of values.
-	@method set
-	@return Matrix3
-	@param n11 {Float}
-	@param n12 {Float}
-	@param n13 {Float}
-	@param n21 {Float}
-	@param n22 {Float}
-	@param n23 {Float}
-	@param n31 {Float}
-	@param n32 {Float}
-	@param n33 {Float}
-	*/
-
-	/**
-	 Multiplies every component of the matrix by the scalar value *s*.
-	@method multiplyScalar
-	@return Matrix3
-	@param s {Float}
-	*/
-
-	/**
-	 Multiplies (applies) this matrix to every vector3 in the array.
-	@method applyToVector3Array
-	@return Array
-	@param array {Array}
-	*/
-
-	/**
-	 Sets this matrix as the normal matrix (upper left 3x3)of the passed Matrix4 matrix4. The normal matrix is the inverse transpose of the matrix *m*.
-	@method getNormalMatrix
-	@return Matrix3
-	@param m {Matrix4}
-	*/
-
-	/**
-	 Set this matrix to the inverse of the passed matrix.
-	@method getInverse
-	@return Matrix3
-	@param m {Matrix4}
-	@param throwOnDegenerate {Boolean}
-	*/
-
-	/**
-	 Copies the values of matrix *m* into this matrix.
-	@method copy
-	@return Matrix3
-	@param m {Matrix3}
-	*/
-
-	/**
-	@method clone
-	@return Matrix3
-	*/
-
-	// module exports
-
 	function _classCallCheck$8(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn$5(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$5(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * Matrix4 class
+	 *
+	 * This class extends the one from Three.js, API available here : http://threejs.org/docs/#Reference/Math/Matrix4
+	 * @class Matrix4
+	**/
 
 	var Matrix4$1 = function (_THREE$Matrix) {
 	  _inherits$5(Matrix4$$1, _THREE$Matrix);
@@ -1316,260 +1242,18 @@
 	  return Matrix4$$1;
 	}(THREE.Matrix4);
 
-	/**
-	@method set
-	@return Matrix4
-	@param n11 {Float}
-	@param n12 {Float}
-	@param n13 {Float}
-	@param n14 {Float}
-	@param n21 {Float}
-	@param n22 {Float}
-	@param n23 {Float}
-	@param n24 {Float}
-	@param n31 {Float}
-	@param n32 {Float}
-	@param n33 {Float}
-	@param n34 {Float}
-	@param n41 {Float}
-	@param n42 {Float}
-	@param n43 {Float}
-	@param n44 {Float}
-	*/
-
-	/**
-	@method identity
-	@return Matrix4
-	*/
-
-	/**
-	@method copy
-	@return Matrix4
-	@param m {Matrix4}
-	*/
-
-	/**
-	@method copyPosition
-	@return Matrix4
-	@param m {Matrix4}
-	*/
-
-	/**
-	@method makeBasis
-	@return Matrix4
-	@param xAxis {Vector3}
-	@param yAxis {Vector3}
-	@param zAxis {Vector3}
-	*/
-
-	/**
-	@method extractBasis
-	@return Matrix4
-	@param xAxis {Vector3}
-	@param yAxis {Vector3}
-	@param zAxis {Vector3}
-	*/
-
-	/**
-	@method extractRotation
-	@return Matrix4
-	@param m {Matrix4}
-	*/
-
-	/**
-	@method lookAt
-	@return Matrix4
-	@param eye {Vector3}
-	@param center {Vector3}
-	@param up {Vector3}
-	*/
-
-	/**
-	@method multiply
-	@return Matrix4
-	@param m {Matrix4}
-	*/
-
-	/**
-	@method multiplyMatrices
-	@return Matrix4
-	@param a {Matrix4}
-	@param b {Matrix4}
-	*/
-
-	/**
-	@method multiplyToArray
-	@return Matrix4
-	@param a {Matrix4}
-	@param b {Matrix4}
-	@param r {Array}
-	*/
-
-	/**
-	@method multiplyScalar
-	@return Matrix4
-	@param s {Float}
-	*/
-
-	/**
-	@method determinant
-	@return Float
-	*/
-
-	/**
-	@method transpose
-	@return Matrix4
-	*/
-
-	/**
-	@method flattenToArrayOffset
-	@return Array
-	@param flat {Array}
-	@param offset {Integer}
-	*/
-
-	/**
-	@method setPosition
-	@return Matrix4
-	@param v {Vector3}
-	*/
-
-	/**
-	@method getInverse
-	@return Matrix4
-	@param m {Matrix4}
-	*/
-
-	/**
-	 Sets the rotation submatrix of this matrix to the rotation specified by Euler angles, the rest of the matrix is identity. Default order is *"XYZ"*.
-	@method makeRotationFromEuler
-	@return Matrix4
-	@param euler {Euler}
-	*/
-
-	/**
-	@method makeRotationFromQuaternion
-	@return Matrix4
-	@param q {Quaternion}
-	*/
-
-	/**
-	@method scale
-	@return Matrix4
-	@param v {Vector3}
-	*/
-
-	/**
-	@method compose
-	@return Matrix4
-	@param translation {Vector3}
-	@param quaternion {Quaternion}
-	@param scale {Vector3}
-	*/
-
-	/**
-	@method decompose
-	@return Array
-	@param translation {Vector3}
-	@param quaternion {Quaternion}
-	@param scale {Vector3}
-	*/
-
-	/**
-	@method makeTranslation
-	@return Matrix4
-	@param x {Float}
-	@param y {Float}
-	@param z {Float}
-	*/
-
-	/**
-	 Sets this matrix as rotation transform around x axis by *theta* radians.
-	@method makeRotationX
-	@return Matrix4
-	@param theta {Float}
-	*/
-
-	/**
-	 Sets this matrix as rotation transform around y axis by *theta* radians.
-	@method makeRotationY
-	@return Matrix4
-	@param theta {Float}
-	*/
-
-	/**
-	 Sets this matrix as rotation transform around z axis by *theta* radians.
-	@method makeRotationZ
-	@return Matrix4
-	@param theta {Float}
-	*/
-
-	/**
-	 Sets this matrix as rotation transform around *axis* by *angle* radians. Based on [link:http://www.gamedev.net/reference/articles/article1199.asp.
-	@method makeRotationAxis
-	@return Matrix4
-	@param axis {Vector3}
-	@param theta {Float}
-	*/
-
-	/**
-	@method makeScale
-	@return Matrix4
-	@param x {Float}
-	@param y {Float}
-	@param z {Float}
-	*/
-
-	/**
-	@method makeFrustum
-	@return Matrix4
-	@param left {Float}
-	@param right {Float}
-	@param bottom {Float}
-	@param top {Float}
-	@param near {Float}
-	@param far {Float}
-	*/
-
-	/**
-	@method makePerspective
-	@return Matrix4
-	@param fov {Float}
-	@param aspect {Float}
-	@param near {Float}
-	@param far {Float}
-	*/
-
-	/**
-	@method makeOrthographic
-	@return Matrix4
-	@param left {Float}
-	@param right {Float}
-	@param top {Float}
-	@param bottom {Float}
-	@param near {Float}
-	@param far {Float}
-	*/
-
-	/**
-	@method clone
-	@return Matrix4
-	*/
-
-	/**
-	 Multiplies (applies) this matrix to every vector3 in the array.
-	@method applyToVector3Array
-	@return Array
-	@param a {Array}
-	*/
-
-	// module exports
-
 	function _classCallCheck$9(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn$6(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$6(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * Represents a Quaternion, a way to describe a spatial rotation that is less susceptible to gimbal lock.
+	 *
+	 * This class extends the one from Three.js, API available here : http://threejs.org/docs/#Reference/Math/Quaternion
+	 * @class Quaternion
+	 */
 
 	var Quaternion$1 = function (_THREE$Quaternion) {
 	  _inherits$6(Quaternion$$1, _THREE$Quaternion);
@@ -1582,128 +1266,6 @@
 
 	  return Quaternion$$1;
 	}(THREE.Quaternion);
-
-	/**
-	@method set
-	@return Quaternion
-	@param x {Float}
-	@param y {Float}
-	@param z {Float}
-	@param w {Float}
-	*/
-
-	/**
-	@method copy
-	@return Quaternion
-	@param q {Quaternion}
-	*/
-
-	/**
-	@method setFromEuler
-	@return Quaternion
-	@param euler {Euler}
-	*/
-
-	/**
-	@method setFromAxisAngle
-	@return Quaternion
-	@param axis {Vector3}
-	@param angle {Float}
-	*/
-
-	/**
-	@method setFromRotationMatrix
-	@return Quaternion
-	@param m {Matrix4}
-	*/
-
-	/**
-	@method setFromUnitVectors
-	@return Quaternion
-	@param vFrom {Vector3}
-	@param vTo {Vector3}
-	*/
-
-	/**
-	@method inverse
-	@return Quaternion
-	*/
-
-	/**
-	@method length
-	@return Float
-	*/
-
-	/**
-	@method normalize
-	@return Quaternion
-	*/
-
-	/**
-	@method multiply
-	@return Quaternion
-	@param b {Quaternion}
-	*/
-
-	/**
-	@method multiplyQuaternions
-	@return Quaternion
-	@param a {Quaternion}
-	@param b {Quaternion}
-	*/
-
-	/**
-	@method multiplyVector3
-	@return Quaternion
-	@param vector {Vector3}
-	@param dest {Vector3}
-	*/
-
-	/**
-	@method clone
-	@return Quaternion
-	*/
-
-	/**
-	 Returns the numerical elements of this quaternion in an array of format (x, y, z, w).
-	@method toArray
-	@return Array
-	@param array {Array}
-	*/
-
-	/**
-	 Compares each component of *v* to each component of this quaternion to determine if they represent the same rotation.
-	@method equals
-	@return Boolean
-	@param v {Quaternion}
-	*/
-
-	/**
-	@method lengthSq
-	@return Float
-	*/
-
-	/**
-	 Sets this quaternion's component values from an array.
-	@method fromArray
-	@return Quaternion
-	@param array {Array}
-	*/
-
-	/**
-	@method conjugate
-	@return Quaternion
-	*/
-
-	/**
-	 Handles the spherical linear interpolation between quaternions. *t* represents the amount of rotation between this quaternion (where *t* is 0) and quaternionB (where *t* is 1). This quaternion is set to the result. Also see the static version of the *slerp* below.
-	@method slerp
-	@return Quaternion
-	@param quaternionB {Quaternion}
-	@param t {float}
-	*/
-
-	// module exports
 
 	var _createClass$6 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -1761,8 +1323,6 @@
 	    return Rect;
 	}();
 
-	// module exports
-
 	var _createClass$7 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$11(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1770,6 +1330,13 @@
 	function _possibleConstructorReturn$7(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$7(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * Represents a 2 dimensionnal Euclidean Vector, to be used as 2D positions, 2D directions or 2D Euler angles (rotation).
+	 *
+	 * This class extends the one from Three.js, API available here : http://threejs.org/docs/#Reference/Math/Vector2
+	 * @class Vector2
+	 */
 
 	var Vector2$1 = function (_THREE$Vector) {
 	  _inherits$7(Vector2$$1, _THREE$Vector);
@@ -1817,246 +1384,18 @@
 	*/
 	Vector2$1.zero = new Vector2$1(0, 0);
 
-	/**
-	@method set
-	@return Vector2
-	@param x {Float}
-	@param y {Float}
-	*/
-
-	/**
-	@method copy
-	@return Vector2
-	@param v {Vector2}
-	*/
-
-	/**
-	@method add
-	@return Vector2
-	@param v {Vector2}
-	*/
-
-	/**
-	@method addVectors
-	@return Vector2
-	@param a {Vector2}
-	@param b {Vector2}
-	*/
-
-	/**
-	@method addScaledVector
-	@return Vector2
-	@param v {Vector2}
-	@param s {Float}
-	*/
-
-	/**
-	@method sub
-	@return Vector2
-	@param v {Vector2}
-	*/
-
-	/**
-	@method subVectors
-	@return Vector2
-	@param a {Vector2}
-	@param b {Vector2}
-	*/
-
-	/**
-	@method multiplyScalar
-	@return Vector2
-	@param s {Float}
-	*/
-
-	/**
-	@method divideScalar
-	@return Vector2
-	@param s {Float}
-	*/
-
-	/**
-	@method negate
-	@return Vector2
-	*/
-
-	/**
-	@method dot
-	@return Float
-	@param v {Vector2}
-	*/
-
-	/**
-	@method lengthSq
-	@return Float
-	*/
-
-	/**
-	@method length
-	@return Float
-	*/
-
-	/**
-	@method lengthManhattan
-	@return Float
-	*/
-
-	/**
-	@method normalize
-	@return Vector2
-	*/
-
-	/**
-	@method angle
-	@return Float
-	*/
-
-	/**
-	@method distanceTo
-	@return Float
-	@param v {Vector2}
-	*/
-
-	/**
-	@method distanceToSquared
-	@return Float
-	@param v {Vector2}
-	*/
-
-	/**
-	@method setLength
-	@return Vector2
-	@param l {Float}
-	*/
-
-	/**
-	@method equals
-	@return Boolean
-	@param v {Vector2}
-	*/
-
-	/**
-	@method clone
-	@return Vector2
-	*/
-
-	/**
-	 If this vector's x or y value is greater than the max vector's x or y value, it is replaced by the corresponding value. If this vector's x or y value is less than the min vector's x or y value, it is replaced by the corresponding value.
-	@method clamp
-	@return Vector2
-	@param min {Vector2}
-	@param max {Vector2}
-	*/
-
-	/**
-	 If this vector's x or y values are greater than the max value, they are replaced by the max value. If this vector's x or y values are less than the min value, they are replaced by the min value.
-	@method clampScalar
-	@return Vector2
-	@param min {Float}
-	@param max {Float}
-	*/
-
-	/**
-	@method floor
-	@return Vector2
-	*/
-
-	/**
-	@method ceil
-	@return Vector2
-	*/
-
-	/**
-	@method round
-	@return Vector2
-	*/
-
-	/**
-	@method roundToZero
-	@return Vector2
-	*/
-
-	/**
-	 Linear interpolation between this vector and v, where alpha is the percent along the line.
-	@method lerp
-	@return Vector2
-	@param v {Vector2}
-	@param alpha {Float}
-	*/
-
-	/**
-	 Sets this vector to be the vector linearly interpolated between *v1* and *v2* with *alpha* factor.
-	@method lerpVectors
-	@return Vector2
-	@param v1 {Vector2}
-	@param v2 {Vector2}
-	@param alpha {Float}
-	*/
-
-	/**
-	 if index equals 0 method replaces this.x with value. if index equals 1 method replaces this.y with value.
-	@method setComponent
-	@return undefined
-	@param index {Integer}
-	@param value {Float}
-	*/
-
-	/**
-	 Add the scalar value s to this vector's x and y values.
-	@method addScalar
-	@return Vector2
-	@param s {Float}
-	*/
-
-	/**
-	 if index equals 0 returns the x value. if index equals 1 returns the y value.
-	@method getComponent
-	@return Float
-	@param index {Integer}
-	*/
-
-	/**
-	 Sets this vector's x value to be array[0 and y value to be array[1].
-	@method fromArray
-	@return Vector2
-	@param array {Array}
-	*/
-
-	/**
-	 Returns an array [x, y]
-	@method toArray
-	@return Array
-	@param array {Array}
-	*/
-
-	/**
-	 If this vector's x or y value is greater than v's x or y value, replace that value with the corresponding min value.
-	@method min
-	@return Vector2
-	@param v {Vector2}
-	*/
-
-	/**
-	 If this vector's x or y value is less than v's x or y value, replace that value with the corresponding max value.
-	@method max
-	@return Vector2
-	@param v {Vector2}
-	*/
-
-	/**
-	 replace this vector's x value with x.
-	@method setX
-	@return Vector2
-	@param x {Float}
-	*/
-
-	// module exports
-
 	function _classCallCheck$12(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn$8(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$8(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * Represents a 3 dimensionnal Euclidean Vector, to be used as positions, directions or Euler angles (rotation).
+	 *
+	 * This class extends the one from Three.js, API available here : http://threejs.org/docs/#Reference/Math/Vector3
+	 * @class Vector3
+	 */
 
 	var Vector3$1 = function (_THREE$Vector) {
 	  _inherits$8(Vector3$$1, _THREE$Vector);
@@ -2085,386 +1424,6 @@
 	* @static
 	*/
 	Vector3$1.zero = new Vector3$1(0, 0, 0);
-
-	/**
-	@method set
-	@return Vector3
-	@param x {Float}
-	@param y {Float}
-	@param z {Float}
-	*/
-
-	/**
-	@method setX
-	@return Vector3
-	@param x {Float}
-	*/
-
-	/**
-	@method setY
-	@return Vector3
-	@param y {Float}
-	*/
-
-	/**
-	@method setZ
-	@return Vector3
-	@param z {Float}
-	*/
-
-	/**
-	@method copy
-	@return Vector3
-	@param v {Vector3}
-	*/
-
-	/**
-	@method add
-	@return Vector3
-	@param v {Vector3}
-	*/
-
-	/**
-	@method addVectors
-	@return Vector3
-	@param a {Vector3}
-	@param b {Vector3}
-	*/
-
-	/**
-	@method addScaledVector
-	@return Vector3
-	@param v {Vector3}
-	@param s {Float}
-	*/
-
-	/**
-	@method sub
-	@return Vector3
-	@param v {Vector3}
-	*/
-
-	/**
-	@method subVectors
-	@return Vector3
-	@param a {Vector3}
-	@param b {Vector3}
-	*/
-
-	/**
-	@method multiplyScalar
-	@return Vector3
-	@param s {Float}
-	*/
-
-	/**
-	@method divideScalar
-	@return Vector3
-	@param s {Float}
-	*/
-
-	/**
-	@method negate
-	@return Vector3
-	*/
-
-	/**
-	@method dot
-	@return Float
-	@param v {Vector3}
-	*/
-
-	/**
-	@method lengthSq
-	@return Float
-	*/
-
-	/**
-	@method length
-	@return Float
-	*/
-
-	/**
-	@method lengthManhattan
-	@return Float
-	*/
-
-	/**
-	@method normalize
-	@return Vector3
-	*/
-
-	/**
-	@method distanceTo
-	@return Float
-	@param v {Vector3}
-	*/
-
-	/**
-	@method distanceToSquared
-	@return Float
-	@param v {Vector3}
-	*/
-
-	/**
-	@method setLength
-	@return Vector3
-	@param l {Float}
-	*/
-
-	/**
-	@method cross
-	@return Vector3
-	@param v {Vector3}
-	*/
-
-	/**
-	@method crossVectors
-	@return Vector3
-	@param a {Vector3}
-	@param b {Vector3}
-	*/
-
-	/**
-	@method setFromMatrixPosition
-	@return Vector3
-	@param m {Matrix4}
-	*/
-
-	/**
-	@method setFromMatrixScale
-	@return Vector3
-	@param m {Matrix4}
-	*/
-
-	/**
-	@method equals
-	@return Boolean
-	@param v {Vector3}
-	*/
-
-	/**
-	@method clone
-	@return Vector3
-	*/
-
-	/**
-	 If this vector's x, y or z value is greater than the max vector's x, y or z value, it is replaced by the corresponding value. If this vector's x, y or z value is less than the min vector's x, y or z value, it is replaced by the corresponding value.
-	@method clamp
-	@return Vector3
-	@param min {Vector3}
-	@param max {Vector3}
-	*/
-
-	/**
-	 If this vector's x, y or z values are greater than the max value, they are replaced by the max value. If this vector's x, y or z values are less than the min value, they are replaced by the min value.
-	@method clampScalar
-	@return Vector3
-	@param min {Float}
-	@param max {Float}
-	*/
-
-	/**
-	@method floor
-	@return Vector3
-	*/
-
-	/**
-	@method ceil
-	@return Vector3
-	*/
-
-	/**
-	@method round
-	@return Vector3
-	*/
-
-	/**
-	@method roundToZero
-	@return Vector3
-	*/
-
-	/**
-	 Multiplies this vector times a 3 x 3 matrix.
-	@method applyMatrix3
-	@return Vector3
-	@param m {Matrix3}
-	*/
-
-	/**
-	 Multiplies this vector by 4 x 3 subset of a Matrix4.
-	@method applyMatrix4
-	@return Vector3
-	@param m {Matrix3}
-	*/
-
-	/**
-	 Projects this vector onto a plane by subtracting this vector projected onto the plane's normal from this vector.
-	@method projectOnPlane
-	@return Vector3
-	@param planeNormal {Vector3}
-	*/
-
-	/**
-	 Projects this vector onto another vector.
-	@method projectOnVector
-	@return Vector3
-	*/
-
-	/**
-	 Adds a s to this vector.
-	@method addScalar
-	@return Vector3
-	*/
-
-	/**
-	 Divides this vector by vector v.
-	@method divide
-	@return Vector3
-	@param v {Vector3}
-	*/
-
-	/**
-	 If this vector's x, y, or z value is greater than vector v's x, y, or z value, that value is replaced by the corresponding vector v value.
-	@method min
-	@return Vector3
-	@param v {Vector3}
-	*/
-
-	/**
-	 If this vector's x, y, or z value is less than vector v's x, y, or z value, that value is replaced by the corresponding vector v value.
-	@method max
-	@return Vector3
-	@param v {Vector3}
-	*/
-
-	/**
-	 If index equals 0 the method sets this vector's x value to value If index equals 1 the method sets this vector's y value to value If index equals 2 the method sets this vector's z value to value
-	@method setComponent
-	@return Vector3
-	@param index {Integer}
-	@param value {Float}
-	*/
-
-	/**
-	 Transforms the direction of this vector by a matrix (a 3 x 3 subset of a Matrix4) and then normalizes the result.
-	@method transformDirection
-	@return Vector3
-	@param m {Matrix4}
-	*/
-
-	/**
-	 Sets this vector equal to the result of multiplying vector a by vector b.
-	@method multiplyVectors
-	@return Vector3
-	@param a {Vector3}
-	@param b {Vector3}
-	*/
-
-	/**
-	 Returns the value of the vector component x, y, or z by an index. Index 0: x Index 1: y Index 2: z
-	@method getComponent
-	@return Float
-	@param index {Integer}
-	*/
-
-	/**
-	 Applies a rotation specified by an axis and an angle to this vector.
-	@method applyAxisAngle
-	@return Vector3
-	@param axis {Vector3}
-	@param angle {Float}
-	*/
-
-	/**
-	 Linear Interpolation between this vector and vector v, where alpha is the percent along the line.
-	@method lerp
-	@return Vector3
-	@param v {Vector3}
-	@param alpha {Float}
-	*/
-
-	/**
-	 Sets this vector to be the vector linearly interpolated between *v1* and *v2* with *alpha* factor.
-	@method lerpVectors
-	@return Vector3
-	@param v1 {Vector3}
-	@param v2 {Vector3}
-	@param alpha {Float}
-	*/
-
-	/**
-	 Returns the angle between this vector and vector v in radians.
-	@method angleTo
-	@return Float
-	@param v {Vector3}
-	*/
-
-	/**
-	 Sets this vector's x, y, and z equal to the column of the matrix specified by the index.
-	@method setFromMatrixColumn
-	@return Vector3
-	@param index {Integer}
-	@param matrix {Matrix4}
-	*/
-
-	/**
-	 Reflect incident vector off of plane orthogonal to normal. normal is assumed to have unit length.
-	@method reflect
-	@return Vector3
-	@param normal {Vector3}
-	*/
-
-	/**
-	 Sets the vector's components based on an array formatted like [x, y, z
-	@method fromArray
-	@return Vector3
-	@param array {Array}
-	*/
-
-	/**
-	 Multipies this vector by vector v.
-	@method multiply
-	@return Vector3
-	@param v {Vector3}
-	*/
-
-	/**
-	 Multiplies this vector and m, and divides by perspective.
-	@method applyProjection
-	@return Vector3
-	@param m {Matrix4}
-	*/
-
-	/**
-	 Assigns this vector's x value to array[0. Assigns this vector's y value to array[1]. Assigns this vector's z value to array[2]. Returns the created array.
-	@method toArray
-	@return Array
-	@param array {Array}
-	*/
-
-	/**
-	 Applies euler transform to this vector by converting the Euler obect to a [page:Quaternion] and applying.
-	@method applyEuler
-	@return Vector3
-	@param euler {Euler}
-	*/
-
-	/**
-	 Applies a Quaternion transform to this vector.
-	@method applyQuaternion
-	@return Vector3
-	@param quaternion {Quaternion}
-	*/
-
-	/**
-	 Projects the vector with the camera.
-	@method project
-	@return Vector3
-	@param camera {Camera}
-	*/
-
-	// module exports
 
 	var _createClass$10 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -2923,8 +1882,6 @@
 	    return Material;
 	}();
 
-	// module exports
-
 	var _createClass$13 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$18(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3104,8 +2061,6 @@
 	    return _Math;
 	}();
 
-	// module exports
-
 	var _createClass$14 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$19(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3167,8 +2122,6 @@
 	}();
 
 	var debug = new Debug();
-
-	// module exports
 
 	var _createClass$12 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -3677,8 +2630,6 @@
 	    return Camera;
 	}();
 
-	// module exports
-
 	var _createClass$15 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$20(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3908,8 +2859,6 @@
 
 	    return Light;
 	}();
-
-	// module exports
 
 	var _createClass$11 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4608,8 +3557,6 @@
 	    return Transform;
 	}();
 
-	// module exports
-
 	var _createClass$9 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _possibleConstructorReturn$10(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -4617,6 +3564,30 @@
 	function _inherits$10(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	function _classCallCheck$14(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/**
+	 A Mesh is the aggregation of a geomtery, made of vertices (Vector3 Array), texture coordinates (or uv, Vector2 Array), vertexColor (Color Array) and various methods to create and modify 3D objects that have a material (see {{#crossLink "Material"}}{{/crossLink}}) and a transform (see {{#crossLink "Transform"}}{{/crossLink}}).
+
+	Primitive types are documented in their respective private construction methods :
+	<ul>
+	<li>plane : a 4 points defined rectangular plane, see <a href="#method_constructPlane">constructPlane</a></li>
+	<li>quad  : a 4 points defined quadrilateral shape, see <a href="#method_constructQuad">constructQuad</a></li>
+	<li>box : a 6 faces defined 3D box with width, height and depth, see <a href="#method_constructBox">constructBox</a></li>
+	<li>cube : a 3D cube, see <a href="#method_constructCube">constructCube</a></li>
+	<li>sphere : a 3D sphere, see <a href="#method_constructSphere">constructSphere</a></li>
+	<li>circle : a flat circle, see <a href="#method_constructCircle">constructCircle</a></li>
+	<li>cylinder : a 3D cylinder, see <a href="#method_constructCylinder">constructCylinder</a></li>
+	<li>icosahedron : a 3D icosahedron, see <a href="#method_constructIcosahedron">constructIcosahedron</a></li>
+	<li>octahedron : a 3D octahedron, see <a href="#method_constructOctahedron">constructOctahedron</a></li>
+	<li>text : a 3D text extruded frome a typeface, see <a href="#method_constructText">constructText</a></li>
+	<li>node : a 3D node, to create parent/child hierarchy structure, see <a href="#method_constructNode">constructNode</a></li>
+	<li>line : a 2 points defined line, see <a href="#method_constructLine">constructLine</a></li>
+	<li>sprite : a billboard textured plane, see <a href="#method_constructSprite">constructSprite</a></li>
+	<li>arc : a flat coordinates generated arc, see <a href="#method_constructArc">constructArc</a></li>
+	</u>
+
+	  @class Mesh
+	 */
 
 	var Mesh$1 = function () {
 	    /**
@@ -6530,8 +5501,6 @@
 	    return EdgesMesh;
 	}(Mesh$1);
 
-	// module exports
-
 	var _createClass$8 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$13(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -6539,6 +5508,11 @@
 	function _possibleConstructorReturn$9(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$9(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * A ray that emits from an origin in a certain direction.
+	 * @class Ray
+	 */
 
 	var Ray$1 = function (_THREE$Ray) {
 	    _inherits$9(Ray$$1, _THREE$Ray);
@@ -6569,8 +5543,6 @@
 
 	    return Ray$$1;
 	}(THREE.Ray);
-
-	// module exports
 
 	var _createClass$17 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -6731,8 +5703,6 @@
 	    return Time;
 	}(Component);
 
-	// module exports
-
 	var _createClass$16 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$21(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -6741,6 +5711,11 @@
 
 	function _inherits$11(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * Fired when the animation starts
+	 * @event start
+	 * @param {Object} target The target object
+	 */
 	var EVT_START = 'start';
 
 	/**
@@ -7100,8 +6075,6 @@
 
 	};
 
-	// module exports
-
 	var _createClass$18 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$23(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7197,8 +6170,6 @@
 
 	    return Csg;
 	}();
-
-	// module exports
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -7575,8 +6546,6 @@
 	    return Device;
 	}();
 
-	// module exports
-
 	var _createClass$20 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$3 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -7587,6 +6556,10 @@
 
 	function _inherits$13(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * Fired when charging state changed
+	 * @event chargingchange
+	 */
 	var EVT_CHARGING_CHANGED = 'chargingchange';
 
 	/**
@@ -7845,8 +6818,6 @@
 	    return BatteryStatus;
 	}(Component);
 
-	// module exports
-
 	var _createClass$21 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$4 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -7857,6 +6828,10 @@
 
 	function _inherits$14(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * Fired when a new keydown event occures
+	 * @event keydown
+	 */
 	var EVT_KEY_DOWN = "keydown";
 
 	/**
@@ -8013,8 +6988,6 @@
 	    return Keyboard;
 	}(Component);
 
-	// module exports
-
 	var _createClass$23 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$28(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8066,8 +7039,6 @@
 	    return _DOM;
 	}();
 
-	// module exports
-
 	var _createClass$22 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$5 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -8078,6 +7049,12 @@
 
 	function _inherits$15(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	// Events
+
+	/**
+	 * Fired when the mouse postupdate is called
+	 * @event mouseupdate
+	 */
 	var EVT_MOUSE_UPDATE = "mouseupdate";
 
 	/**
@@ -8697,8 +7674,6 @@
 
 	    return Mouse;
 	}(Component);
-
-	// module exports
 
 	var _get$6 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
@@ -9522,8 +8497,6 @@
 	    return Touch;
 	}(Component);
 
-	// module exports
-
 	var _createClass$25 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$7 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -9534,6 +8507,10 @@
 
 	function _inherits$17(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * Fired when a new acceleration is available
+	 * @event acceleration
+	 */
 	var EVT_ACC = 'acceleration';
 
 	/**
@@ -9771,8 +8748,6 @@
 	    return Motion;
 	}(Component);
 
-	// module exports
-
 	var _createClass$26 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$8 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -9783,6 +8758,10 @@
 
 	function _inherits$18(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * Fired when a new orientation is available
+	 * @event deviceorientation
+	 */
 	var EVT_DEVICE_ORIENTATION = "deviceorientation";
 
 	/**
@@ -9964,8 +8943,6 @@
 	    return Orientation;
 	}(Component);
 
-	// module exports
-
 	var _createClass$27 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$9 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -9976,6 +8953,10 @@
 
 	function _inherits$19(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * Fired when the location has been updated
+	 * @event locationupdated
+	 */
 	var EVT_LOC_UPDATED = "locationupdated";
 
 	/**
@@ -10386,11 +9367,15 @@
 	    return GPSUtils;
 	}();
 
-	// module exports
-
 	var _createClass$28 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$33(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/*
+	 * MeshFX provides a set of static methods to work on 3D models verticies and to apply various effects on it.
+	 *
+	 * @class MeshFX
+	 */
 
 	var MeshFX = function () {
 	    function MeshFX() {
@@ -10465,8 +9450,6 @@
 
 	    return MeshFX;
 	}();
-
-	// module exports
 
 	var _createClass$29 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -10713,8 +9696,6 @@
 	 */
 	Midi.ProgramChange = 192;
 
-	// module exports
-
 	var _createClass$30 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$35(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10722,6 +9703,13 @@
 	function _possibleConstructorReturn$21(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$21(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/*
+	 * Profiler class should not be used by users
+	 *
+	 * @class Profiler
+	 * @private
+	 */
 
 	var Profiler = function (_Component) {
 	    _inherits$21(Profiler, _Component);
@@ -10793,8 +9781,6 @@
 
 	    return Profiler;
 	}(Component);
-
-	// module exports
 
 	var _createClass$31 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -10947,12 +9933,16 @@
 	    return Runner;
 	}();
 
-	// module exports
-
 	var _createClass$33 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$38(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	// Events
+	/**
+	 * Fired when the readystate of the request changes
+	 * @event readystatechange
+	 * @param {Ajax} ajax The Ajax instance
+	 */
 	var EVT_READYSTATE_CHANGE = 'readystatechange';
 
 	/**
@@ -11396,8 +10386,6 @@
 	    return Ajax;
 	}();
 
-	// module exports
-
 	var _createClass$34 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$39(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11579,11 +10567,15 @@
 	Texture$1.CubeUVReflectionMapping = THREE.CubeUVReflectionMapping;
 	Texture$1.CubeUVRefractionMapping = THREE.CubeUVRefractionMapping;
 
-	// module exports
-
 	var _createClass$35 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$40(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/**
+	 * OBJ class gives easy access to some calculations specific to OBJs. It is used to load an external .obj model file.
+	 *
+	 * @class OBJ
+	 */
 
 	var OBJ = function () {
 	    function OBJ() {
@@ -11753,10 +10745,10 @@
 	                    case "mtllib":
 	                        //chargement de la lib
 	                        debug.log("mtllib " + words[1]);
-	                        OBJ.resultmtl = loader.loadText({
-	                            url: words[1],
-	                            onLoad: OBJ.parseMTL.bind(null, loader, p)
-	                        });
+	                        /*OBJ.resultmtl = loader.loadText({
+	                            url:words[1],
+	                            onLoad:OBJ.parseMTL.bind(null,loader, p)
+	                        });*/
 	                        break;
 
 	                    case "usemtl":
@@ -11834,12 +10826,14 @@
 	    return OBJ;
 	}();
 
-	// module exports
-
 	var _createClass$32 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$37(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	/**
+	 * Fired by a LoadRequest when it has started loading
+	 * @event start
+	 */
 	var EVT_REQUEST_START = 'start';
 
 	/**
@@ -12877,8 +11871,6 @@
 
 	Loader.Cache = new Cache();
 
-	// module exports
-
 	var _createClass$36 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _possibleConstructorReturn$22(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -13573,12 +12565,14 @@
 	    return Pointer;
 	}(Component);
 
-	// module exports
-
 	var _createClass$37 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$42(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	/**
+	 * Fired when the client successfully connects to the server
+	 * @event connect
+	 */
 	var EVT_CONNECT = 'connect';
 
 	/**
@@ -13740,8 +12734,6 @@
 
 	    return PubSub;
 	}();
-
-	// module exports
 
 	var _createClass$38 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -14214,8 +13206,6 @@
 	    return PhysicsEngine;
 	}(Component);
 
-	// module exports
-
 	var _createClass$39 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$44(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14306,8 +13296,6 @@
 
 	    return Engine3D;
 	}();
-
-	// module exports
 
 	var _createClass$40 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -14764,8 +13752,6 @@
 
 	var Renderer3DSingleton = singletonize(Renderer3D);
 
-	// module exports
-
 	var _createClass$41 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$10 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -14892,8 +13878,6 @@
 
 	var RendererAudioSingleton = singletonize(RendererAudio);
 
-	// module exports
-
 	var _createClass$42 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$47(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14977,11 +13961,15 @@
 	    return Font$$1;
 	}();
 
-	// module exports
-
 	var _createClass$43 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$48(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/*
+	 * LODGroup Class
+	 *
+	 * @class LODGroup
+	 */
 
 	var LODGroup = function () {
 	    function LODGroup() {
@@ -15017,11 +14005,20 @@
 	    return LODGroup;
 	}();
 
-	// module exports
-
 	var _createClass$44 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$49(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/**
+	 * StyledLetter is a class that helps to represents a letter with its style for later drawing.
+	 * @class StyledLetter
+	 * @constructor
+	 * @param {Object} params Parameters Object
+	 * @param {String} params.letter the letter's string (character)
+	 * @param {Number} params.size the size of the font
+	 * @param {Font} params.font a Mobilizing font reference
+	 * @param {Color} params.color a Mobilizing Color
+	 */
 
 	var StyledLetter = function () {
 	    function StyledLetter(params) {
@@ -15319,6 +14316,10 @@
 
 	function _inherits$26(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	* Triggered when the canvas has been redrawn, useful to synchronise Texture update and canvas refresh
+	* @event drawn
+	*/
 	var EVT_DRAWN = "drawn";
 
 	var TEXT_ALIGN_LEFT = "left";
@@ -15741,8 +14742,6 @@
 	    return RichText;
 	}(Base);
 
-	// module exports
-
 	var _createClass$46 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$51(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16111,8 +15110,6 @@
 	    return CanvasTexture;
 	}();
 
-	// module exports
-
 	var _createClass$47 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$52(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16232,11 +15229,15 @@
 	    return DOMNodeTexture;
 	}();
 
-	// module exports
-
 	var _createClass$48 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$53(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/**
+	 * The ImageSequenceTexture represents a special kind of 2D Texture that is built from a sequence of pictures that you can play at a given rate and with a given play mode.
+	 *
+	 * @class ImageSequenceTexture
+	 */
 
 	var ImageSequenceTexture = function () {
 	    //var currentTime     = 0;
@@ -16502,8 +15503,6 @@
 	    return ImageSequenceTexture;
 	}();
 
-	// module exports
-
 	var _createClass$49 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$54(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16538,8 +15537,6 @@
 
 	    return RenderTexture;
 	}();
-
-	// module exports
 
 	var _createClass$50 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -16839,8 +15836,6 @@
 	    return VideoTexture;
 	}();
 
-	// module exports
-
 	var _createClass$51 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$11 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -16983,8 +15978,6 @@
 
 	    return Timer;
 	}(Component);
-
-	// module exports
 
 	var _createClass$52 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -17178,8 +16171,6 @@
 	    return NTP;
 	}(Component);
 
-	// module exports
-
 	var _createClass$54 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get$13 = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -17300,8 +16291,6 @@
 
 	    return Clickable;
 	}(Component);
-
-	// module exports
 
 	var _createClass$53 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18051,8 +17040,6 @@
 	    return ButtonGroup;
 	}(Component);
 
-	// module exports
-
 	var _createClass$56 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$61(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18061,6 +17048,10 @@
 
 	function _inherits$32(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	* Triggered when the canvas has been redrawn, useful to synchronise Texture update and canvas refresh
+	* @event drawn
+	*/
 	var EVT_DRAWN$1 = "drawn";
 
 	var TextField = function (_Base) {
@@ -18465,8 +17456,6 @@
 	    return TextField;
 	}(Base);
 
-	// module exports
-
 	var _createClass$58 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck$63(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18543,8 +17532,6 @@
 
 	    return ComponentProxy;
 	}(Component);
-
-	// module exports
 
 	var _createClass$57 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18694,7 +17681,6 @@
 
 	    return Context;
 	}(Component);
-	// module exports
 
 	var _createClass$59 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18705,6 +17691,11 @@
 	function _possibleConstructorReturn$35(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits$35(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/*
+	 * @class EasyContext
+	 * @extends Context
+	 */
 
 	var EasyContext = function (_Context) {
 	    _inherits$35(EasyContext, _Context);
@@ -19174,8 +18165,6 @@
 
 	    return EasyContext;
 	}(Context);
-
-	// module exports
 
 	var version = "0.0.1";
 	var revision = "e1dee72";
