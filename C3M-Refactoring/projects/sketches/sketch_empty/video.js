@@ -8,7 +8,7 @@ function SketchEmptyVideo()
     this.sketch.name = this.constructor.name;
     this.sketch.category = "video";
 
-    var cubes = [];
+    var cubes = {};
     this.setup = function()
     {
         //put here all your sketch scene and logic creation 
@@ -35,7 +35,7 @@ function SketchEmptyVideo()
             cube.material.setColor(Mobilizing.Color.random());
             cube.transform.setLocalScale(20); //set scale
             this.sketch.root.transform.addChild(cube.transform);
-            cubes.push(cube);
+            cubes[params.id] = cube;
         }
 
         //we have to invert y and z
