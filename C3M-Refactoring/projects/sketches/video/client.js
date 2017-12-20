@@ -53,7 +53,7 @@ function client()
         //your stuff here
         EasyContext._renderer.setCurrentScene("virtual");
 
-        EasyContext._renderer.setClearColor(Mobilizing.Color.red.clone());
+        //EasyContext._renderer.setClearColor(Mobilizing.Color.red.clone());
 
         var light = new Mobilizing.Light();
         light.setDistance(20000);

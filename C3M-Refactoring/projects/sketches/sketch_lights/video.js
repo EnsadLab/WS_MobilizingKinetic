@@ -9,7 +9,9 @@ function SketchLightsVideo()
     var worldSize = {width: 150, height: 60, depth: 80};//in meters
     
     var R;
-    var gaite;
+    
+    var gaiteModel;
+    var gaiteModelGhost;
     
     this.setup = function()
     {
@@ -24,13 +26,33 @@ function SketchLightsVideo()
         var loader = new Mobilizing.Loader();
         loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
         loader.consumeAll();
-        console.log("loading",loader);
+        
+        R.setFog("exp");
+        R.setFogDensity(.001);
     };
     
     this.gaiteLoaded = function(model){
-        gaite = model;
-        this.sketch.root.transform.addChild(gaite.transform);
-        console.log("model loaded", gaite);
+        
+        gaiteModelGhost = model;
+        var mat = new Mobilizing.Material({type:"phong"});
+        gaiteModelGhost.setMaterial(mat);
+        gaiteModelGhost.material.setTransparent(true);
+        gaiteModelGhost.material.setOpacity(.5);
+        gaiteModelGhost.material.setShading("flat");
+        gaiteModelGhost.material.setShininess(0);
+        gaiteModelGhost.material.setDepthWrite(false);
+        
+        gaiteModelGhost.transform.setLocalScale(100);
+        gaiteModelGhost.transform.setLocalRotationY(90);
+
+        gaiteModel = new Mobilizing.EdgesMesh({mesh: gaiteModelGhost});
+        gaiteModel.transform.setLocalScale(100);
+        gaiteModel.transform.setLocalRotationY(90);
+        
+        this.sketch.root.transform.addChild(gaiteModelGhost.transform);
+        this.sketch.root.transform.addChild(gaiteModel.transform);
+        
+        console.log("model loaded", model);
     }
 
     this.update = function()
