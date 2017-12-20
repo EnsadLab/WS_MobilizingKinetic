@@ -1,0 +1,89 @@
+body, html{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#log{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	overflow: hidden;
+	z-index: 1;
+	background-color: rgba(255,255,255,0.5);
+	pointer-events: none;
+}
+#log div{
+	position: relative;
+	display: table;
+	padding: 5px;
+	width: calc(100% - 10px);
+	height: auto;
+	text-align: left;
+	border-bottom: 1px solid black;
+	cursor: default;
+}
+#journal{
+}
+#xlogpos{
+	background-color: lightgreen;
+}
+#ylogpos{
+	background-color: yellow;
+}
+#zlogpos{
+	background-color: lightpink;
+}
+
+#map{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background-color: lightblue;
+	z-index: 0;
+}
+.blobs{
+	position: absolute;
+	top: 0px;
+	left: 0px; 
+	height: 20px;
+	width: 20px;
+	background-color: black;
+	font-size: 9px;
+	color: white;
+	text-align: center;
+	cursor: default;
+	z-index: 0;
+
+	user-drag: none; 
+	-webkit-user-drag: none;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.guidelines{
+	position: absolute;
+	left: 50%;
+	background-color: black;
+}
+#verticalGuide{
+	top: 0px;
+	left: calc(50% - 1px);
+	width: 1px;
+	height: 100%;
+}
+#horizontalGuide{
+	top: calc(50% - 1px);
+	left: 0px;
+	height: 1px;
+	width: 100%;
+}
