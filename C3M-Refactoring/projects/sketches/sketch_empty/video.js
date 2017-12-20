@@ -7,7 +7,7 @@ function SketchEmptyVideo()
     this.sketch = new Sketch(this);
     this.sketch.name = "SketchEmptyVideo";
     this.sketch.category = "video";
-    
+    var cubes = [];
     this.setup = function()
     {
         //put here all your sketch scene and logic creation 
@@ -18,7 +18,7 @@ function SketchEmptyVideo()
         var R = EasyContext._renderer;
         
         //color cubes scene
-        for (var x = -10; x <= 10; x += 1) {
+        /*for (var x = -10; x <= 10; x += 1) {
             for (var y = -10; y <= 10; y += 1) {
                 //the default cube has a size of 100 units (for now), and then the scale is applied
                 var c = new Mobilizing.Mesh({ primitive: "cube" });
@@ -29,6 +29,7 @@ function SketchEmptyVideo()
                 this.sketch.root.transform.addChild(c.transform);
             }
         }
+        */
 
     };
     
@@ -40,14 +41,21 @@ function SketchEmptyVideo()
     //add your callbacks below
     this.onTagPosition = function(params)
     {
-       //console.log("tag position received ", params);
-        //do something based on the tag position received
-        //params.id
-        //params.x
-        //params.y
-        //params.z
+        //we update the tag cube
+        var cube = cubes[params.id];
+        if (cube === undefined)
+        {
+            cube = new Mobilizing.Mesh({ primitive: "cube" });
+            cube.material.setColor(Mobilizing.Color.random());
+            cube.transform.setLocalScale(20); //set scale
+            this.sketch.root.transform.addChild(cube.transform);
+            cubes.push(cube);
+        }
 
-        //create and move a cube
+        //we have to invert y and z
+        //we could use an animation to smooth out the positions
+        cube.transform.setLocalPosition(params.x*100, params.z*100, params.y*100); 
+       //console.log("tag position received ", params);
     };
 };
 
