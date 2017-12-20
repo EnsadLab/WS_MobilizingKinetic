@@ -204,7 +204,7 @@ EasyContext.CreateTrackpad = function (position, size, message, multiplier) {
             {
                 var x = EasyContext._pointer.getX();
                 var y = EasyContext._pointer.getY();
-                let pick = trackpad.clickable.target.transform.pick(trackpad.clickable.camera, x, y);
+                var pick = trackpad.clickable.target.transform.pick(trackpad.clickable.camera, x, y);
                 if (pick !== null)
                 {
                     if (!trackpad.ignore)

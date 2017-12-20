@@ -20,17 +20,18 @@
         <script src="../common/sketch_manager.js"></script>
         <script src="../common/sketch.js"></script>
         <script src="../common/videoHelpers.js"></script>
-        
+
         <!-- add all the sketches here -->
         <!--<script src="tagviewer.js"></script>-->
         <script src="../sketch_empty/video.js"></script>
         <script src="../sketch_lines/video.js"></script>
+        <script src="../sketch_lights/video.js"></script>
 
         <script src="client.js"></script>
 
         <script>
             //run it
-             var c = new Mobilizing.Context();
+            var c = new Mobilizing.Context();
             var s = new client()
             c.addComponent(s);
             var runner = new Mobilizing.Runner( {context:c} );

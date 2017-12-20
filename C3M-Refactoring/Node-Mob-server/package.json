@@ -16,7 +16,8 @@
     "serve-index": "^1.7.3",
     "serve-static": "^1.10.2",
     "socket.io": "^1.4.5",
-    "socket.io-events": "^0.4.6"
+    "socket.io-events": "^0.4.6",
+    "osc-js": "^1.2.0"
   },
   "devDependencies": {}
 }
