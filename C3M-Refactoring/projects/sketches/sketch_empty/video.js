@@ -41,7 +41,7 @@ function SketchEmptyVideo()
         //we have to invert y and z
         //we could use an animation to smooth out the positions
         cube.transform.setLocalPosition(params.x*100, params.z*100, params.y*100); 
-        console.log("tag position received ", params);
+        //console.log("tag position received ", params);
     };
 };
 
