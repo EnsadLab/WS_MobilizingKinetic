@@ -137,7 +137,7 @@ function SketchRayVideo()
 
     this.onClientDisconnect = function(data)
     {
-        va id = data.id;
+        var id = data.id;
 
         clients[id].setPlaneVisible(false);
         clients[id].setLineAlwaysVisible(false);
