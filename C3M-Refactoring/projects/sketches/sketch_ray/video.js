@@ -26,8 +26,8 @@ function SketchRayVideo()
 
             var box = new Mobilizing.Mesh({primitive: "cube",
                                            size : 1.2});
-            var x =  10 * Math.cos((Mobilizing.math.degToRad(step)*i));
-            var z =  10 * Math.sin((Mobilizing.math.degToRad(step)*i));
+            var x =  10000 * Math.cos((Mobilizing.math.degToRad(step)*i));
+            var z =  10000 * Math.sin((Mobilizing.math.degToRad(step)*i));
             box.transform.setLocalPosition(x, i/40 - 10, z);
             box.transform.lookAt(new Mobilizing.Vector3());
             box.material.setTransparent(true);
@@ -35,7 +35,7 @@ function SketchRayVideo()
             this.sketch.root.transform.addChild(box.transform);
         }
 
-    }; 
+    };
 
     this.update = function()
     {
