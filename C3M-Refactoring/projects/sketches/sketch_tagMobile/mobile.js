@@ -13,12 +13,16 @@ function SketchTabMobMobile()
 
     var posX, poxY;
 
+    var cubes = {};
+
     this.setup = function()
     {
         console.log(this);
         M = this.getContext();
         R = EasyContext.GetRenderer();// new Mobilizing.Renderer3D();
         M.addComponent(R);
+
+        this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
 
         /*R.removeCamera(EasyContext._camera);
 
@@ -56,6 +60,31 @@ function SketchTabMobMobile()
         orientation.on();
     };
 
+    this.onTagPosition = function(params)
+    {
+        //console.log("tag position received ", params);
+        //do something based on the tag position received
+        //params.id
+        //params.x
+        //params.y
+        //params.z
+
+        var cube = cubes[params.id];
+        if (cube === undefined)
+        {
+            cube = new Mobilizing.Mesh({ primitive: "cube" });
+            cube.material.setColor(Mobilizing.Color.random());
+            cube.transform.setLocalScale(20); //set scale
+            this.sketch.root.transform.addChild(cube.transform);
+            cubes[params.id] = cube;
+        }
+
+        //we have to invert y and z
+        //we could use an animation to smooth out the positions
+        cube.transform.setLocalPosition(params.x*100, params.z*100, params.y*100); 
+        //console.log("tag position received ", params);
+    };
+
     //what to send to the others
     this.updateNetwork = function(){
 
@@ -90,11 +119,11 @@ function SketchTabMobMobile()
     {
         sendTimer.update();
 
-//        if(this.pointer.getState()){
-//            posX = this.pointer.getX();
-//            posY = this.pointer.getY();
-//            //console.log(posX, posY);
-//        }
+        //        if(this.pointer.getState()){
+        //            posX = this.pointer.getX();
+        //            posY = this.pointer.getY();
+        //            //console.log(posX, posY);
+        //        }
 
         //this.sketch.publish("/tag/position",{x:0,y:0,z:0});
     };

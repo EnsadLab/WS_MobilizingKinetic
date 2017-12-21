@@ -9,6 +9,7 @@ function SketchEmptyVideo()
     this.sketch.category = "video";
 
     var cubes = {};
+    
     this.setup = function()
     {
         //put here all your sketch scene and logic creation 
