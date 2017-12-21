@@ -112,7 +112,7 @@ function SketchRayVideo()
                 //console.log(i, this.target[i]);
                 this.target[i].setVisible(true);
             }else{
-                this.target[i].setVisible(false);
+                //this.target[i].setVisible(false);
             }
         }
 
