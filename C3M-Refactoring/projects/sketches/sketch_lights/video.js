@@ -6,7 +6,7 @@ function SketchLightsVideo()
     this.sketch.category = "video";
 
     var clients = {};
-    var worldSize = {width: 150, height: 60, depth: 80};//in meters
+    var worldSize = {width: 15, height: 60, depth: 8};//in meters
 
     var R;
 
