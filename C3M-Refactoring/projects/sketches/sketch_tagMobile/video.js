@@ -53,7 +53,7 @@ function SketchTabMobVideo()
 
                 var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*-100);
                 clients[i].transform.setLocalPosition(pos);
-                console.log(clients[i].transform.getLocalPosition());
+                //console.log(clients[i].transform.getLocalPosition());
             }
 
         }
