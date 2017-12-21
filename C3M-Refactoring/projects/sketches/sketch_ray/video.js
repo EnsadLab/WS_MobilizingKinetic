@@ -38,6 +38,12 @@ function SketchRayVideo()
         var testCube = new Mobilizing.Mesh({primitive: "cube",
                                             size : 100});
 
+        var light = new Mobilizing.Light();
+        light.setIntensity(20000);
+        light.setIntensity(2);
+        light.transform.setLocalPositionY(170);
+        R.addToCurrentScene(light);
+        
         var x =  1000;
         var z =  1000;
         testCube.transform.setLocalPosition(x, 0, z);
