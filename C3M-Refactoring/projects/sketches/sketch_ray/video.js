@@ -35,6 +35,12 @@ function SketchRayVideo()
             this.sketch.root.transform.addChild(box.transform);
         }
 
+        var testCube = new Mobilizing.Mesh({primitive: "cube",
+                                            size : 100});
+
+        var x =  10000;
+        var z =  10000;
+        testCube.transform.setLocalPosition(x, 0, z);
     };
 
     this.update = function()
