@@ -5,7 +5,7 @@ function SketchTabMobVideo()
     this.sketch.name = this.constructor.name;
     this.sketch.category = "video";
 
-   var clients = {};
+    var clients = {};
 
     this.setup = function()
     {
@@ -47,12 +47,17 @@ function SketchTabMobVideo()
         //params.y
         //params.z
 
+        if(params.id === 4){
+            console.log(params);
+        }
+
         for(var i in clients){
 
             if(clients[i].tagID === params.id){
 
                 var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*100);
                 clients[i].transform.setLocalPosition(pos);
+                console.log(clients[i].transform.getLocalPosition());
             }
 
         }
@@ -90,7 +95,6 @@ function SketchTabMobVideo()
         clients[id].tagID = data.tagID;
         // update the client's cube position
         //clients[id].transform.setLocalPosition(pos);
-        console.log(clients[id]);
     };
 };
 
