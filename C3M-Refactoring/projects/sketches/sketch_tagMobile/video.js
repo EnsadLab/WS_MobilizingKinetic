@@ -49,10 +49,10 @@ function SketchTabMobVideo()
 
         for(var i in clients){
 
-            if(clients.tagID === params.id){
+            if(clients[i].tagID === params.id){
 
                 var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*100);
-                clients[id].transform.setLocalPosition(pos);
+                clients[i].transform.setLocalPosition(pos);
             }
 
         }
