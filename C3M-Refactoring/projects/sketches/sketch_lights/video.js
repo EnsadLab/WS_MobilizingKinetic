@@ -38,7 +38,7 @@ function SketchLightsVideo()
         var mat = new Mobilizing.Material({type:"phong"});
         gaiteModelGhost.setMaterial(mat);
         gaiteModelGhost.material.setTransparent(true);
-        gaiteModelGhost.material.setOpacity(.5);
+        gaiteModelGhost.material.setOpacity(.2);
         gaiteModelGhost.material.setShading("flat");
         gaiteModelGhost.material.setShininess(0);
         gaiteModelGhost.material.setDepthWrite(false);
@@ -70,15 +70,24 @@ function SketchLightsVideo()
         //params.x
         //params.y
         //params.z
+        
+        for(var i in clients){
 
-        //create and move a cube
+            if(clients[i].tagID === Number(params.id)){
+
+                var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*100);
+                clients[i].transform.setLocalPosition(pos);
+                console.log(clients[i].transform.getLocalPosition());
+            }
+
+        }
     };
 
     this.onConnect = function(id)
     {
         // create a shape for the new connected client
         clients[id] = new UserLine(worldSize.width, worldSize.depth);
-        clients[id].setPlaneVisible(true);
+        clients[id].setPlaneVisible(false);
         clients[id].setLineAlwaysVisible(true);
         clients[id].transform.setLocalPositionY(170);
 
@@ -88,7 +97,7 @@ function SketchLightsVideo()
         light.setIntensity(.5);
         light.setPenumbra(.5);
         light.setAngle(Math.PI/10);
-        
+
         clients[id].spot = light;
         clients[id].transform.addChild(light.transform);
 
@@ -112,9 +121,9 @@ function SketchLightsVideo()
 
         // update the client's cube position
         clients[id].transform.setLocalQuaternion(rot);
-        
+
         var up = getDirectionsFromQuaternion(rot);
-        clients[id].spotsetTargetPosition(up.x, up.y, up.z);
+        clients[id].spot.setTargetPosition(up.x, up.y, up.z);
     };
 
 };
