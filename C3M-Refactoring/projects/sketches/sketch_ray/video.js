@@ -30,7 +30,7 @@ function SketchRayVideo()
             var z =  1500 * Math.sin((Mobilizing.math.degToRad(step)*i));
             box.transform.setLocalPosition(x, i - 100, z);
             box.transform.lookAt(new Mobilizing.Vector3());
-            //box.material.setTransparent(true);
+            box.material.setTransparent(true);
             this.target.push(box);
             this.sketch.root.transform.addChild(box.transform);
         }
@@ -125,9 +125,9 @@ function SketchRayVideo()
 
             if(clients[id].ray.intersectsMeshBox(this.target[i])){
                 //console.log(i, this.target[i]);
-                this.target[i].setVisible(true);
+                this.target[i]..material.setOpacity(1);
             }else{
-                //this.target[i].setVisible(false);
+                this.target[i].material.setOpacity(.2);
             }
         }
 
