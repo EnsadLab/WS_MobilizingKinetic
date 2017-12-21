@@ -1,4 +1,4 @@
-function SketchLightsVideo()
+function SketchGaiteVideo()
 {
     //declare sketch
     this.sketch = new Sketch(this);
@@ -10,6 +10,7 @@ function SketchLightsVideo()
 
     var R;
 
+    var gaite;
     var gaiteModel;
     var gaiteModelGhost;
 
@@ -20,6 +21,7 @@ function SketchLightsVideo()
 
         this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
         this.sketch.subscribe('/mobile/rot', this.onClientRotation.bind(this));
+        this.sketch.subscribe('/mobile/pressed', this.onClientPressed.bind(this));
 
         R = EasyContext._renderer;
 
@@ -34,6 +36,8 @@ function SketchLightsVideo()
 
     this.gaiteLoaded = function(model){
 
+        gaite = new Mobilizing.Mesh({primitive: "ndoe"});
+
         gaiteModelGhost = model;
         var mat = new Mobilizing.Material({type:"phong"});
         gaiteModelGhost.setMaterial(mat);
@@ -43,17 +47,16 @@ function SketchLightsVideo()
         gaiteModelGhost.material.setShininess(0);
         gaiteModelGhost.material.setDepthWrite(false);
 
-        gaiteModelGhost.transform.setLocalScale(100);
-        gaiteModelGhost.transform.setLocalRotationY(-90);
-        gaiteModelGhost.transform.setLocalPositionZ(-100);
-
         gaiteModel = new Mobilizing.EdgesMesh({mesh: gaiteModelGhost});
-        gaiteModel.transform.setLocalScale(100);
-        gaiteModel.transform.setLocalRotationY(-90);
-        gaiteModel.transform.setLocalPositionZ(-100);
 
-        this.sketch.root.transform.addChild(gaiteModelGhost.transform);
-        this.sketch.root.transform.addChild(gaiteModel.transform);
+        gaite.transform.addChild(gaiteModelGhost.transform);
+        gaite.transform.addChild(gaiteModel.transform);
+
+        gaite.transform.setLocalScale(100);
+        gaite.transform.setLocalRotationY(-90);
+        gaite.transform.setLocalPositionZ(-100);
+
+        this.sketch.root.transform.addChild(gaite.transform);
 
         console.log("model loaded", model);
     }
@@ -96,7 +99,7 @@ function SketchLightsVideo()
         var light = new Mobilizing.Light({type:"spot"});
         light.transform.setLocalPosition(0,0,0);
         light.setTargetPosition(light.transform.getLocalPosition().x, light.transform.getLocalPosition().y, -100);
-        light.setIntensity(1);
+        light.setIntensity(10);
         light.setPenumbra(.5);
         light.setAngle(Math.PI/10);
 
@@ -108,26 +111,38 @@ function SketchLightsVideo()
 
     };
 
+    this.onClientPressed = function(data){
+
+        this.id = data.id;
+
+    }
+
     this.onClientRotation = function(data)
     {
         var id = data.id;
-        var rot = new Mobilizing.Quaternion().fromArray(data.rot);
 
-        if(!(id in clients)){
-            if(id){
-                this.onConnect(id);
-            }else{
-                return;
+        if(this.id === id){
+            
+            var rot = new Mobilizing.Quaternion().fromArray(data.rot);
+
+            if(!(id in clients)){
+                if(id){
+                    this.onConnect(id);
+                }else{
+                    return;
+                }
             }
+
+            // update the client's cube position
+            //clients[id].transform.setLocalQuaternion(rot);
+
+            //var up = getDirectionsFromQuaternion(rot);
+            //clients[id].spot.setTargetPosition(up.x, up.y, up.z);
+
+            gaite.transform.setLocalQuaternion(rot);
         }
-
-        // update the client's cube position
-        clients[id].transform.setLocalQuaternion(rot);
-
-        var up = getDirectionsFromQuaternion(rot);
-        clients[id].spot.setTargetPosition(up.x, up.y, up.z);
     };
 
 };
 
-SketchManager.RegisterSketch(new SketchLightsVideo()); //register so the system is able to use this sketch
+SketchManager.RegisterSketch(new SketchGaiteVideo()); //register so the system is able to use this sketch

@@ -40,7 +40,7 @@ function SketchLinesVideo()
             
             if(clients.tagID === params.id){
                 
-                var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*100);
+                var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*-100);
                 clients[id].transform.setLocalPosition(pos);
             }
             
@@ -53,7 +53,6 @@ function SketchLinesVideo()
         clients[id] = new UserLine(worldSize.width, worldSize.depth);
         clients[id].setPlaneVisible(true);
         clients[id].setLineAlwaysVisible(true);
-        clients[id].transform.setLocalPositionY(170);
         
         this.sketch.root.transform.addChild(clients[id].transform);
         console.log("added client", id, this.sketch.root.getBoundingBox() ) ;

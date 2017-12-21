@@ -88,35 +88,25 @@ function centralDispatcherServerIndex()
         this.addCommandButton("Switch to Sketches", "/index/remote/client/switchproject", "Sketches");
         this.addCommandButton("Switch to Mire", "/index/remote/client/switchproject", "Mire");
         //sketches
-        this.addCommandButton("Sk Empty video ON", "/sketch/state", {name:"SketchEmptyVideo",state:true});
-        this.addCommandButton("Sk Empty video OFF", "/sketch/state", {name:"SketchEmptyVideo",state:false});
-        this.addCommandButton("Sk Empty mobile ON", "/sketch/state", {name:"SketchEmptyMobile",state:true});
-        this.addCommandButton("Sk Empty mobile OFF", "/sketch/state", {name:"SketchEmptyMobile",state:false});
+        this.addCommandButton("Empty video ON", "/sketch/state", {name:"SketchEmptyVideo",state:true});
+        this.addCommandButton("Empty video OFF", "/sketch/state", {name:"SketchEmptyVideo",state:false});
+        this.addCommandButton("Empty mobile ON", "/sketch/state", {name:"SketchEmptyMobile",state:true});
+        this.addCommandButton("Empty mobile OFF", "/sketch/state", {name:"SketchEmptyMobile",state:false});
 
-        this.addCommandButton("Sk Lines video ON", "/sketch/state", {name:"SketchLinesVideo",state:true});
-        this.addCommandButton("Sk Lines video OFF", "/sketch/state", {name:"SketchLinesVideo",state:false});
-        this.addCommandButton("Sk Lines mobile ON", "/sketch/state", {name:"SketchLinesMobile",state:true});
-        this.addCommandButton("Sk Lines mobile OFF", "/sketch/state", {name:"SketchLinesMobile",state:false});
+        this.addCommandButton("Lines video ON", "/sketch/state", {name:"SketchLinesVideo",state:true});
+        this.addCommandButton("Lines video OFF", "/sketch/state", {name:"SketchLinesVideo",state:false});
+        this.addCommandButton("Lines mobile ON", "/sketch/state", {name:"SketchLinesMobile",state:true});
+        this.addCommandButton("Lines mobile OFF", "/sketch/state", {name:"SketchLinesMobile",state:false});
         
-        this.addCommandButton("Sk Lights video ON", "/sketch/state", {name:"SketchLightsVideo",state:true});
-        this.addCommandButton("Sk Lights video OFF", "/sketch/state", {name:"SketchLightsVideo",state:false});
-        this.addCommandButton("Sk Lights mobile ON", "/sketch/state", {name:"SketchLightsMobile",state:true});
-        this.addCommandButton("Sk Lights mobile OFF", "/sketch/state", {name:"SketchLightsMobile",state:false});
+        this.addCommandButton("Gaité video ON", "/sketch/state", {name:"SketchGaiteVideo",state:true});
+        this.addCommandButton("Gaité video OFF", "/sketch/state", {name:"SketchGaiteVideo",state:false});
+        this.addCommandButton("Gaité mobile ON", "/sketch/state", {name:"SketchGaiteMobile",state:true});
+        this.addCommandButton("Gaité mobile OFF", "/sketch/state", {name:"SketchGaiteMobile",state:false});
         
-        this.addCommandButton("Sk TabMob video ON", "/sketch/state", {name:"SketchTabMobVideo",state:true});
-        this.addCommandButton("Sk TabMob video OFF", "/sketch/state", {name:"SketchTabMobVideo",state:false});
-        this.addCommandButton("Sk TabMob mobile ON", "/sketch/state", {name:"SketchTabMobMobile",state:true});
-        this.addCommandButton("Sk TabMob mobile OFF", "/sketch/state", {name:"SketchTabMobMobile",state:false});
-        
-        this.addCommandButton("Sk Ray video ON", "/sketch/state", {name:"SketchRayVideo",state:true});
-        this.addCommandButton("Sk Ray video OFF", "/sketch/state", {name:"SketchRayVideo",state:false});
-        this.addCommandButton("Sk Ray mobile ON", "/sketch/state", {name:"SketchRayMobile",state:true});
-        this.addCommandButton("Sk Ray mobile OFF", "/sketch/state", {name:"SketchRayMobile",state:false});
-        //test de remplissage :
-//        for (var i=0;i<10;++i)
-//        {
-//            this.addCommandButton("sample", "/tag/position", {id:50,x:0,y:0,z:0});
-//        }
+        this.addCommandButton("Ray video ON", "/sketch/state", {name:"SketchRayVideo",state:true});
+        this.addCommandButton("Ray video OFF", "/sketch/state", {name:"SketchRayVideo",state:false});
+        this.addCommandButton("Ray mobile ON", "/sketch/state", {name:"SketchRayMobile",state:true});
+        this.addCommandButton("Ray mobile OFF", "/sketch/state", {name:"SketchRayMobile",state:false});
 
     };
 
@@ -170,7 +160,7 @@ function centralDispatcherServerIndex()
             height: 80,
             canvasWidth: 300,
             canvasHeight: 80,
-            strokeWidth: .01,
+            strokeWidth: 3,
             text: text,
             textSize: 20,
             onPress: callback

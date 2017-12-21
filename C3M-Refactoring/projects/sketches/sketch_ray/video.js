@@ -6,6 +6,8 @@ function SketchRayVideo()
     this.sketch.category = "video";
 
     this.target = [];
+    this.allTarget = {};
+    this.targetToLit = [];
 
     var clients = {};
 
@@ -43,7 +45,7 @@ function SketchRayVideo()
         light.setIntensity(2);
         light.transform.setLocalPositionY(170);
         R.addToCurrentScene(light);
-        
+
         var x =  1000;
         var z =  1000;
         testCube.transform.setLocalPosition(x, 0, z);
@@ -52,7 +54,29 @@ function SketchRayVideo()
 
     this.update = function()
     {
-        //put your process in there
+        this.targetToLit = [];
+
+        for(var id in this.allTarget){
+
+            var list = this.allTarget[id];
+
+            for(var i in list){
+
+                if(this.targetToLit[i] === undefined){
+                    this.targetToLit[i] = list[i];
+                }
+            }
+        }
+
+        for(var i in this.targetToLit){
+
+            if(this.targetToLit[i]){
+                this.target[i].material.setOpacity(1);
+            }else{
+                this.target[i].material.setOpacity(.2);
+            }
+        }
+        //console.log(this.targetToLit);
     };
 
     this.onConnect = function(id)
@@ -62,13 +86,14 @@ function SketchRayVideo()
             clients[id] = new UserLine(100, 100);
             //clients[id].transform.setLocalPositionY(170);
             this.sketch.root.transform.addChild(clients[id].transform);
+        }else{
+            clients[id].setVisible(true);
         }
-
         clients[id].setPlaneVisible(false);
         clients[id].setLineAlwaysVisible(true);
         clients[id].setLineWidth(5);
         clients[id].setRayWidth(5);
-        
+
         console.log("added client", id, this.sketch.root.getBoundingBox() ) ;
 
     };
@@ -123,14 +148,17 @@ function SketchRayVideo()
 
         for(var i in this.target){
 
+            if(! (id in this.allTarget)){
+                this.allTarget[id] = [];
+            }
+
             if(clients[id].ray.intersectsMeshBox(this.target[i])){
                 //console.log(i, this.target[i]);
-                this.target[i].material.setOpacity(1);
+                this.allTarget[id][i] = this.target[i];
             }else{
-                this.target[i].material.setOpacity(.2);
+                this.allTarget[id][i] = undefined;
             }
         }
-
     };
 
     this.onClientPosition = function(data)
@@ -154,8 +182,10 @@ function SketchRayVideo()
     {
         var id = data.id;
 
-        clients[id].setPlaneVisible(false);
-        clients[id].setLineAlwaysVisible(false);
+        console.log(data);
+        clients[id].setVisible(false);
+
+        this.allTarget[id] = undefined;
     }
 };
 

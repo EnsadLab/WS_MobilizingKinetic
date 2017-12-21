@@ -6,7 +6,6 @@ function client()
     var M, R;
     var finalObject;
 
-
     this.preLoad = function(loader)
     {
         this.videoMapping.preLoad(loader);
@@ -86,10 +85,10 @@ function client()
         console.log("video client onConnect");
         this.genericClient.pubsub.subscribe("/next", this.onNext.bind(this));
         this.genericClient.pubsub.subscribe("/sketch/state", this.onSketchState.bind(this));
-        
+
         //we activate all sketches
         var sketches = SketchManager.GetSketches();
-        
+
         for (var s in sketches)
         {
             var sketch = sketches[s];
@@ -128,9 +127,4 @@ function client()
     {
         SketchManager.SetSketchState(params.name, params.state);
     };
-
-    
-
-
-
 }
