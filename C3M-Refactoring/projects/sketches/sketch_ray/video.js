@@ -125,7 +125,7 @@ function SketchRayVideo()
 
             if(clients[id].ray.intersectsMeshBox(this.target[i])){
                 //console.log(i, this.target[i]);
-                this.target[i]..material.setOpacity(1);
+                this.target[i].material.setOpacity(1);
             }else{
                 this.target[i].material.setOpacity(.2);
             }
