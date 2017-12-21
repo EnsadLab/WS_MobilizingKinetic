@@ -20,7 +20,7 @@ function SketchRayVideo()
 
         var R = EasyContext._renderer;
 
-        var step = 360 / 200;
+        var step = 360 / 100;
 
         for(var i=0; i<360*4; i += step){
 
@@ -28,7 +28,7 @@ function SketchRayVideo()
                                            size : 100});
             var x =  1500 * Math.cos((Mobilizing.math.degToRad(step)*i));
             var z =  1500 * Math.sin((Mobilizing.math.degToRad(step)*i));
-            box.transform.setLocalPosition(x, i*2 - 100, z);
+            box.transform.setLocalPosition(x, i - 100, z);
             box.transform.lookAt(new Mobilizing.Vector3());
             //box.material.setTransparent(true);
             this.target.push(box);
