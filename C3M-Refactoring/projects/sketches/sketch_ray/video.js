@@ -41,6 +41,7 @@ function SketchRayVideo()
         var x =  1000;
         var z =  1000;
         testCube.transform.setLocalPosition(x, 0, z);
+        this.sketch.root.transform.addChild(testCube.transform);
     };
 
     this.update = function()
