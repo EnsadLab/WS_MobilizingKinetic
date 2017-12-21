@@ -87,7 +87,7 @@ function SketchLightsVideo()
     {
         // create a shape for the new connected client
         clients[id] = new UserLine(worldSize.width, worldSize.depth);
-        clients[id].setPlaneVisible(false);
+        clients[id].setPlaneVisible(true);
         clients[id].setLineAlwaysVisible(true);
         clients[id].transform.setLocalPositionY(170);
 
