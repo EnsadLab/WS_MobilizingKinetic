@@ -47,10 +47,6 @@ function SketchTabMobVideo()
         //params.y
         //params.z
 
-        if(params.id === "4"){
-            console.log(params);
-        }
-
         for(var i in clients){
 
             if(clients[i].tagID === Number(params.id)){
