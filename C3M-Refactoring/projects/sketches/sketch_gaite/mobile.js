@@ -49,7 +49,8 @@ function SketchGaiteMobile()
                                                   onRelease:  function(){
                                                       plate.material.setColor(Mobilizing.Color.white.clone());
                                                       pressed = false;
-                                                  }
+                                                      this.sketch.pubsub.publish("/mobile/released",{id: this.sketch.pubsub.getID()})
+                                                  }.bind(this)
                                                  });
         M.addComponent(clickable);
         clickable.setup();
@@ -59,7 +60,8 @@ function SketchGaiteMobile()
     this.updateNetwork = function(){
 
         if(pressed){
-            this.sendRotation( plate.transform.getLocalQuaternion() );
+            var deviceQuat = orientation.getGyroQuaternion();
+            this.sendRotation(deviceQuat/* plate.transform.getLocalQuaternion() */);
         }
 
     }

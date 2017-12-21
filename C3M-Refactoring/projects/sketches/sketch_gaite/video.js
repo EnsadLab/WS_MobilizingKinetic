@@ -13,6 +13,11 @@ function SketchGaiteVideo()
     var gaite;
     var gaiteModel;
     var gaiteModelGhost;
+    
+    var startQuaternion;
+    var startPosition;
+
+    this.state = "released"; //model is pressed or released
 
     this.setup = function()
     {
@@ -22,6 +27,7 @@ function SketchGaiteVideo()
         this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
         this.sketch.subscribe('/mobile/rot', this.onClientRotation.bind(this));
         this.sketch.subscribe('/mobile/pressed', this.onClientPressed.bind(this));
+        this.sketch.subscribe('/mobile/released', this.onClientReleased.bind(this));
 
         R = EasyContext._renderer;
 
@@ -31,7 +37,9 @@ function SketchGaiteVideo()
 
         R.setFog("exp");
         R.setFogDensity(.001);
-
+        
+        startQuaternion = new Mobilizing.Quaternion();
+        startPosition = new Mobilizing.Vector3();
     };
 
     this.gaiteLoaded = function(model){
@@ -47,14 +55,18 @@ function SketchGaiteVideo()
         gaiteModelGhost.material.setShininess(0);
         gaiteModelGhost.material.setDepthWrite(false);
 
+        gaiteModelGhost.setScale(100);
+        gaiteModelGhost.setRotationY(-90);
+        gaiteModelGhost.setTranslation(0,0,-100);
+
         gaiteModel = new Mobilizing.EdgesMesh({mesh: gaiteModelGhost});
 
-        gaite.transform.addChild(gaiteModelGhost.transform);
+        //gaite.transform.addChild(gaiteModelGhost.transform);
         gaite.transform.addChild(gaiteModel.transform);
-
-        gaite.transform.setLocalScale(100);
+        
+        /*gaite.transform.setLocalScale(100);
         gaite.transform.setLocalRotationY(-90);
-        gaite.transform.setLocalPositionZ(-100);
+        gaite.transform.setLocalPositionZ(-100);*/
 
         this.sketch.root.transform.addChild(gaite.transform);
 
@@ -64,6 +76,14 @@ function SketchGaiteVideo()
     this.update = function()
     {
         //put your process in there
+        if(this.state === "released" && gaite){
+            //back to 0 
+            var q = gaite.transform.getLocalQuaternion().slerp(startQuaternion, .01);
+            gaite.transform.setLocalQuaternion(q);
+            
+            var p = gaite.transform.getLocalPosition().lerp(startPosition, .01);
+            gaite.transform.setLocalPosition(p);
+        }
     };
 
     //add your callbacks below
@@ -81,8 +101,9 @@ function SketchGaiteVideo()
             if(clients[i].tagID === Number(params.id)){
 
                 var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*-100);
-                clients[i].transform.setLocalPosition(pos);
-                console.log(clients[i].transform.getLocalPosition());
+                //clients[i].transform.setLocalPosition(pos);
+                //console.log(clients[i].transform.getLocalPosition());
+                gaite.transform.setLocalPosition(pos);
             }
 
         }
@@ -113,7 +134,21 @@ function SketchGaiteVideo()
 
     this.onClientPressed = function(data){
 
-        this.id = data.id;
+        if(this.state === "released"){
+            this.id = data.id;
+            this.state = "pressed";
+        }
+
+    }
+
+    this.onClientReleased = function(data){
+
+        var id = data.id;
+
+        if(id === this.id){
+            this.state = "released";
+            this.id = undefined;
+        }
 
     }
 
@@ -121,8 +156,8 @@ function SketchGaiteVideo()
     {
         var id = data.id;
 
-        if(this.id === id){
-            
+        if(this.id === id && this.state === "pressed"){
+
             var rot = new Mobilizing.Quaternion().fromArray(data.rot);
 
             if(!(id in clients)){
@@ -132,14 +167,8 @@ function SketchGaiteVideo()
                     return;
                 }
             }
-
-            // update the client's cube position
-            //clients[id].transform.setLocalQuaternion(rot);
-
-            //var up = getDirectionsFromQuaternion(rot);
-            //clients[id].spot.setTargetPosition(up.x, up.y, up.z);
-
-            gaite.transform.setLocalQuaternion(rot);
+            var q = gaite.transform.getLocalQuaternion().slerp(rot, .5);
+            gaite.transform.setLocalQuaternion(q);
         }
     };
 

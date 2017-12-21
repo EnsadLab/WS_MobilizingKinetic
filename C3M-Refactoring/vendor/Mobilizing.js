@@ -4930,6 +4930,32 @@
 	        }
 
 	        /**
+	        * Set the translation along x axis of the vertices (not the transform!)
+	        *
+	        * @method setPositionX
+	        * @param {float} value Rotation value in degree
+	        */
+
+	    }, {
+	        key: 'setTranslation',
+	        value: function setTranslation(arg1, arg2, arg3) {
+	            //this._geometry.applyMatrix( new Matrix4().makeTranslation( _Math.degToRad(arg1)));
+	            if (arguments.length === 3) {
+	                this._geometry.applyMatrix(new Matrix4$1().makeTranslation(arg1, arg2, arg3));
+	            } else if (arguments.length === 2) {
+	                if (typeof arg1 === "number" && typeof arg2 === "number") {
+	                    this._geometry.applyMatrix(new Matrix4$1().makeTranslation(arg1, arg2, 0));
+	                }
+	            } else if (arguments.length === 1) {
+	                if (arg1 instanceof Vector3$1) {
+	                    this._geometry.applyMatrix(new Matrix4$1().makeTranslation(arg1.x, arg1.y, arg1.z));
+	                } else if (arg1 instanceof Vector2$1) {
+	                    this._geometry.applyMatrix(new Matrix4$1().makeTranslation(arg1.x, arg1.y, 0));
+	                }
+	            }
+	        }
+
+	        /**
 	        * Set the visibility of this mesh
 	        *
 	        * @method setVisible
