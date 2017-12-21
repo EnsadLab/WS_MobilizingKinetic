@@ -43,7 +43,8 @@ function SketchLightsMobile()
     {
         this.sketch.pubsub.publish('/mobile/rot', {
             id: this.sketch.pubsub.getID(),
-            rot: val.toArray()
+            rot: val.toArray(),
+            tagID: this.tagID
         });
     };
 

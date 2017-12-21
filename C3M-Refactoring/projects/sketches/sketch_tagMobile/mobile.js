@@ -11,7 +11,6 @@ function SketchTabMobMobile()
 
     var buttons = [];
 
-    var tagID;
     var posX, poxY;
 
     this.setup = function()

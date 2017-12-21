@@ -94,7 +94,7 @@ function SketchLightsVideo()
         var light = new Mobilizing.Light({type:"spot"});
         light.transform.setLocalPosition(0,0,0);
         light.setTargetPosition(light.transform.getLocalPosition().x, light.transform.getLocalPosition().y, -100);
-        light.setIntensity(.5);
+        light.setIntensity(1);
         light.setPenumbra(.5);
         light.setAngle(Math.PI/10);
 
