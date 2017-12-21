@@ -52,7 +52,7 @@ function GenericClient(clientType){
     this.disconnectOnUnload = function ()
     {
         if (this.pubsub != undefined) {
-            this.pubsub.publish("/disconnect");
+            this.pubsub.publish("/disconnect", {id : this.pubsub.id});
         }
     };
 

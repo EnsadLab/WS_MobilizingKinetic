@@ -15,6 +15,7 @@ function SketchTabMobVideo()
         this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
         this.sketch.subscribe('/mobile/rot', this.onClientRotation.bind(this));
         this.sketch.subscribe('/mobile/pos', this.onClientPosition.bind(this));
+        this.sketch.subscribe('/disconnect', this.onClientDisconnect.bind(this));
 
         var R = EasyContext._renderer;
 
@@ -27,12 +28,16 @@ function SketchTabMobVideo()
 
     this.onConnect = function(id)
     {
-        // create a shape for the new connected client
-        clients[id] = new UserLine(100, 100);
+        if (!clients.hasOwnProperty(id)) {    
+            // create a shape for the new connected client
+            clients[id] = new UserLine(100, 100);
+            //clients[id].transform.setLocalPositionY(170);
+            this.sketch.root.transform.addChild(clients[id].transform);
+        }
+
         clients[id].setPlaneVisible(true);
         clients[id].setLineAlwaysVisible(true);
-        //clients[id].transform.setLocalPositionY(170);
-        this.sketch.root.transform.addChild(clients[id].transform);
+        
         console.log("added client", id, this.sketch.root.getBoundingBox() ) ;
 
     };
@@ -93,6 +98,14 @@ function SketchTabMobVideo()
         // update the client's cube position
         //clients[id].transform.setLocalPosition(pos);
     };
+
+    this.onClientDisconnect = function(data)
+    {
+        va id = data.id;
+        
+        clients[id].setPlaneVisible(false);
+        clients[id].setLineAlwaysVisible(false);
+    }
 };
 
 SketchManager.RegisterSketch(new SketchTabMobVideo()); //register so the system is able to use this sketch
