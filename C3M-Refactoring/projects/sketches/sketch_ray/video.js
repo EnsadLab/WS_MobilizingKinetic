@@ -28,7 +28,7 @@ function SketchRayVideo()
                                            size : 100});
             var x =  1500 * Math.cos((Mobilizing.math.degToRad(step)*i));
             var z =  1500 * Math.sin((Mobilizing.math.degToRad(step)*i));
-            box.transform.setLocalPosition(x, i*10 - 100, z);
+            box.transform.setLocalPosition(x, i*5 - 100, z);
             box.transform.lookAt(new Mobilizing.Vector3());
             //box.material.setTransparent(true);
             this.target.push(box);
@@ -60,7 +60,9 @@ function SketchRayVideo()
 
         clients[id].setPlaneVisible(false);
         clients[id].setLineAlwaysVisible(true);
-
+        clients[id].setLineWidth(5);
+        clients[id].setRayWidth(5);
+        
         console.log("added client", id, this.sketch.root.getBoundingBox() ) ;
 
     };
