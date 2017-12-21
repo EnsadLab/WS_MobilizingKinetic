@@ -25,7 +25,7 @@ function SketchRayVideo()
         for(var i=0; i<360*2; i += step){
 
             var box = new Mobilizing.Mesh({primitive: "cube",
-                                           size : 1.2});
+                                           size : 100});
             var x =  10000 * Math.cos((Mobilizing.math.degToRad(step)*i));
             var z =  10000 * Math.sin((Mobilizing.math.degToRad(step)*i));
             box.transform.setLocalPosition(x, i/40 - 10, z);
