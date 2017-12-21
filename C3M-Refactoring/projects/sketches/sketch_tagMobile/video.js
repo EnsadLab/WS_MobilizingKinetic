@@ -28,10 +28,10 @@ function SketchTabMobVideo()
     this.onConnect = function(id)
     {
         // create a shape for the new connected client
-        clients[id] = new UserLine(1000, 1000);
+        clients[id] = new UserLine(100, 100);
         clients[id].setPlaneVisible(true);
         clients[id].setLineAlwaysVisible(true);
-        clients[id].transform.setLocalPositionY(170);
+        //clients[id].transform.setLocalPositionY(170);
         this.sketch.root.transform.addChild(clients[id].transform);
         console.log("added client", id, this.sketch.root.getBoundingBox() ) ;
 
@@ -74,6 +74,7 @@ function SketchTabMobVideo()
 
         // update the client's cube position
         clients[id].transform.setLocalQuaternion(rot);
+        clients[id].tagID = data.tagID;
     };
 
     this.onClientPosition = function(data)

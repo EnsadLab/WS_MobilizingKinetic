@@ -108,6 +108,7 @@ function client()
     };
 
     this.onPress = function(){
+        
         tagID = this.tagID;
         console.log(tagID);
         
