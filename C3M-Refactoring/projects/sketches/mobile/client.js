@@ -14,7 +14,7 @@ function client()
     var pointer;
     var mouse;
  
-    var tagNb = [3,4,70,21,56];
+    var tagNb = [3,4,70,21,56, 150, 106, 122];
 
     var buttons = [];
 
