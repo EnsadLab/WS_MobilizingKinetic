@@ -32,7 +32,6 @@ function SketchLightsMobile()
     //what to send to the others
     this.updateNetwork = function(){
 
-        console.log("updateNetwork");
         var deviceQuat = orientation.getGyroQuaternion();
         if(deviceQuat)
         {

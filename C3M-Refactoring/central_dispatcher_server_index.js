@@ -102,6 +102,11 @@ function centralDispatcherServerIndex()
         this.addCommandButton("Sk Lights video OFF", "/sketch/state", {name:"SketchLightsVideo",state:false});
         this.addCommandButton("Sk Lights mobile ON", "/sketch/state", {name:"SketchLightsMobile",state:true});
         this.addCommandButton("Sk Lights mobile OFF", "/sketch/state", {name:"SketchLightsMobile",state:false});
+        
+        this.addCommandButton("Sk TabMob video ON", "/sketch/state", {name:"SketchTabMobVideo",state:true});
+        this.addCommandButton("Sk TabMob video OFF", "/sketch/state", {name:"SketchTabMobVideo",state:false});
+        this.addCommandButton("Sk TabMob mobile ON", "/sketch/state", {name:"SketchTabMobMobile",state:true});
+        this.addCommandButton("Sk TabMob mobile OFF", "/sketch/state", {name:"SketchTabMobMobile",state:false});
         //test de remplissage :
 //        for (var i=0;i<10;++i)
 //        {

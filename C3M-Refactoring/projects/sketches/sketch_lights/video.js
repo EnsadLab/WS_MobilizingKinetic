@@ -43,11 +43,11 @@ function SketchLightsVideo()
         gaiteModelGhost.material.setDepthWrite(false);
         
         gaiteModelGhost.transform.setLocalScale(100);
-        gaiteModelGhost.transform.setLocalRotationY(90);
+        gaiteModelGhost.transform.setLocalRotationY(-90);
 
         gaiteModel = new Mobilizing.EdgesMesh({mesh: gaiteModelGhost});
         gaiteModel.transform.setLocalScale(100);
-        gaiteModel.transform.setLocalRotationY(90);
+        gaiteModel.transform.setLocalRotationY(-90);
         
         this.sketch.root.transform.addChild(gaiteModelGhost.transform);
         this.sketch.root.transform.addChild(gaiteModel.transform);
