@@ -77,7 +77,7 @@ function SketchLightsVideo()
 
             if(clients[i].tagID === Number(params.id)){
 
-                var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*100);
+                var pos = new Mobilizing.Vector3(params.x*-100, params.z*100, params.y*100);
                 clients[i].transform.setLocalPosition(pos);
                 console.log(clients[i].transform.getLocalPosition());
             }
