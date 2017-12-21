@@ -20,7 +20,7 @@ function SketchRayVideo()
 
         var R = EasyContext._renderer;
 
-        var step = 360 / 100;
+        var step = 360 / 150;
 
         for(var i=0; i<360*2; i += step){
 
