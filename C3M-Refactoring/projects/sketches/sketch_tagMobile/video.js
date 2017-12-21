@@ -73,7 +73,7 @@ function SketchTabMobVideo()
         }
 
         // update the client's cube position
-        clients[id].transform.setLocalQuaternion(rot);
+        clients[id].rotationRoot.transform.setLocalQuaternion(rot);
         clients[id].tagID = data.tagID;
     };
 

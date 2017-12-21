@@ -12,6 +12,8 @@ function UserLine(width, depth){
     var diag = Math.sqrt( Math.pow(width,2) +  Math.pow(depth,2));
     diag *= 2;
 
+    this.rotationRoot = new Mobilizing.Mesh({primitive: "node"});
+
     //plane
     this.plane = new Mobilizing.Mesh({primitive: "plane",
                                       width: diag,
@@ -31,9 +33,11 @@ function UserLine(width, depth){
     this.rayLine.material.setLineWidth(2);
     this.ray = new Mobilizing.Ray();;
 
-    this.root.transform.addChild(this.plane.transform);
-    this.root.transform.addChild(this.line.transform);
-    this.root.transform.addChild(this.rayLine.transform);
+    this.rotationRoot.transform.addChild(this.plane.transform);
+    this.rotationRoot.transform.addChild(this.line.transform);
+    this.rotationRoot.transform.addChild(this.rayLine.transform);
+    
+    this.root.transform.addChild(this.rotationRoot.transform);
 
     //make a shortcut for transform
     this.transform = this.root.transform;
