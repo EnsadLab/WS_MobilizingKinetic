@@ -74,7 +74,7 @@ function SketchTabMobMobile()
         this.sketch.pubsub.publish('/mobile/rot', {
             id: this.sketch.pubsub.getID(),
             rot: val.toArray(),
-            tagID: tagID
+            tagID: this.tagID
         });
     };
 
@@ -83,7 +83,7 @@ function SketchTabMobMobile()
         this.sketch.pubsub.publish('/mobile/pos', {
             id: this.sketch.pubsub.getID(),
             pos: val.toArray(),
-            tagID: tagID
+            tagID: this.tagID
         });
     };
 
