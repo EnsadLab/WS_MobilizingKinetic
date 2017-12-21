@@ -45,12 +45,12 @@ function SketchLightsVideo()
 
         gaiteModelGhost.transform.setLocalScale(100);
         gaiteModelGhost.transform.setLocalRotationY(-90);
-        gaiteModelGhost.transform.setLocalPositionX(-10);
+        gaiteModelGhost.transform.setLocalPositionZ(-10);
 
         gaiteModel = new Mobilizing.EdgesMesh({mesh: gaiteModelGhost});
         gaiteModel.transform.setLocalScale(100);
         gaiteModel.transform.setLocalRotationY(-90);
-        gaiteModel.transform.setLocalPositionX(-10/2);
+        gaiteModel.transform.setLocalPositionZ(-10);
 
         this.sketch.root.transform.addChild(gaiteModelGhost.transform);
         this.sketch.root.transform.addChild(gaiteModel.transform);
@@ -77,7 +77,7 @@ function SketchLightsVideo()
 
             if(clients[i].tagID === Number(params.id)){
 
-                var pos = new Mobilizing.Vector3(params.x*-100, params.z*100, params.y*100);
+                var pos = new Mobilizing.Vector3(params.x*100, params.z*100, params.y*-100);
                 clients[i].transform.setLocalPosition(pos);
                 console.log(clients[i].transform.getLocalPosition());
             }
