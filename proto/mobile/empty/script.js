@@ -57,17 +57,17 @@ function script()
         light = new Mobilizing.Light();
         R.addToCurrentScene(light);
 
-        // initialize a pubsub instance
-        pubsub = new Mobilizing.net.PubSub();
-        pubsub.events.on('connect', this.onConnect.bind(this));
 
-
-        sendTimer = new Mobilizing.Timer({interval: 100,
-                                          callback: this.updateNetwork.bind(this)});
+        sendTimer = new Mobilizing.Timer({interval: 100,callback: this.updateNetwork.bind(this)});
         M.addComponent(sendTimer);
         sendTimer.setup();
         sendTimer.on();
         sendTimer.start();
+        
+        // initialize a pubsub instance
+        pubsub = new Mobilizing.net.PubSub();
+        pubsub.events.on('connect', this.onConnect.bind(this));
+
 
         //specific client
         this.deltaVector = new Mobilizing.Vector3();

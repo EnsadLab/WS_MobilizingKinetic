@@ -6,7 +6,7 @@
 */
 function UserLine(width, depth){
 
-    //root node
+    //root node+
     this.root = new Mobilizing.Mesh({primitive: "node"});
 
     var diag = Math.sqrt( Math.pow(width,2) +  Math.pow(depth,2));
@@ -29,7 +29,7 @@ function UserLine(width, depth){
                                         point1: new Mobilizing.Vector3(0,0,0),
                                         point2: new Mobilizing.Vector3(0,width,0) });
     this.rayLine.material.setLineWidth(2);
-    this.ray = new Mobilizing.Ray();;
+    this.ray = new Mobilizing.Ray();
 
     this.root.transform.addChild(this.plane.transform);
     this.root.transform.addChild(this.line.transform);

@@ -86,7 +86,7 @@ window.addEventListener("keydown", checkKey);
 window.oncontextmenu = function(e){e.preventDefault();}
 
 function checkIfElement(e){
-    //console.log(e.target);
+    console.log(e);
     //logprint(e.target.id);
     if(e.target.classList.contains("blobs")){
         iselement = e.target;
