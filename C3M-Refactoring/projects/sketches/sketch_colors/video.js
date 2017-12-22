@@ -69,13 +69,6 @@ function SketchColorsVideo()
         var id = data.id;
         var rot = new Mobilizing.Quaternion().fromArray(data.rot);
 
-        if(!(id in clients)){
-            if(id){
-                this.onConnect(id);
-            }else{
-                return;
-            }
-        }
 
         // update the client's cube position
         clients[id].transform.setLocalQuaternion(rot);
@@ -86,14 +79,6 @@ function SketchColorsVideo()
         var id = data.id;
         var pos = new Mobilizing.Vector3().fromArray(data.pos);
 
-        if(!(id in clients)){
-            if(id){
-                this.onConnect(id);
-            }else{
-                return;
-            }
-        }
-
         // update the client's cube position
         //clients[id].transform.setLocalPosition(pos);
     };
@@ -103,14 +88,6 @@ function SketchColorsVideo()
         var id = data.id;
         var color = data.color;
 
-        if(!(id in clients)){
-            if(id){
-                this.onConnect(id);
-            }else{
-                return;
-            }
-        }
-
         var up = clients[id].sphere;
         up.setTopColor(color);
     }
@@ -119,14 +96,6 @@ function SketchColorsVideo()
 
         var id = data.id;
         var color = data.color;
-
-        if(!(id in clients)){
-            if(id){
-                this.onConnect(id);
-            }else{
-                return;
-            }
-        }
 
         var down = clients[id].sphere;
         down.setBottomColor(color);
