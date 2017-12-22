@@ -57,7 +57,7 @@ function SketchRayVideo()
     this.eyeLoaded = function(img){
 
         console.log(img);
-        var texture = new Mobilizing.Texture({img: img});
+        var texture = new Mobilizing.Texture({image: img});
 
         for(var i in this.target){
             this.target[i].material.setTexture(texture);
