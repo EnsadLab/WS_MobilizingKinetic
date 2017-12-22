@@ -9,7 +9,9 @@ function client()
     this.preLoad = function(loader)
     {
         this.videoMapping.preLoad(loader);
+        
         loader.loadOBJ({url:"../3d/petite_salle_d1_50k_t1/petite_salle_d1_50k_t1.obj", onLoad: this.onObjLoaded.bind(this)});
+        
         var sketches = SketchManager.GetSketches();
         /*for (var s in sketches)
         {

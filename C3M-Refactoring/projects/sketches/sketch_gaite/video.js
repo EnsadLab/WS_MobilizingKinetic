@@ -13,7 +13,7 @@ function SketchGaiteVideo()
     var gaite;
     var gaiteModel;
     var gaiteModelGhost;
-    
+
     var startQuaternion;
     var startPosition;
 
@@ -35,19 +35,23 @@ function SketchGaiteVideo()
         this.light.setDistance(5000);
         this.light.setIntensity(5);
         this.sketch.root.transform.addChild(this.light.transform);
-        
-        var loader = new Mobilizing.Loader();
-        loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
-        loader.consumeAll();
 
         R.setFog("exp");
         R.setFogDensity(.001);
-        
+
         startQuaternion = new Mobilizing.Quaternion();
         startPosition = new Mobilizing.Vector3();
+
+        console.log("::::start gaiteLoaded");
+        var loader = new Mobilizing.Loader();
+        loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
+        loader.consumeAll();
+        console.log("::::end gaiteLoaded");
     };
 
     this.gaiteLoaded = function(model){
+
+        console.log("::::gaiteLoaded loaded", model);
 
         gaite = new Mobilizing.Mesh({primitive: "node"});
 
@@ -68,14 +72,13 @@ function SketchGaiteVideo()
 
         gaite.transform.addChild(gaiteModelGhost.transform);
         gaite.transform.addChild(gaiteModel.transform);
-        
+
         /*gaite.transform.setLocalScale(100);
         gaite.transform.setLocalRotationY(-90);
         gaite.transform.setLocalPositionZ(-100);*/
 
         this.sketch.root.transform.addChild(gaite.transform);
 
-        console.log("::::gaiteLoaded loaded", model);
     }
 
     this.update = function()
@@ -85,7 +88,7 @@ function SketchGaiteVideo()
             //back to 0 
             var q = gaite.transform.getLocalQuaternion().slerp(startQuaternion, .01);
             gaite.transform.setLocalQuaternion(q);
-            
+
             var p = gaite.transform.getLocalPosition().lerp(startPosition, .01);
             gaite.transform.setLocalPosition(p);
         }
@@ -100,7 +103,7 @@ function SketchGaiteVideo()
         //params.x
         //params.y
         //params.z
-        
+
         var factor = 100;
 
         for(var i in clients){
