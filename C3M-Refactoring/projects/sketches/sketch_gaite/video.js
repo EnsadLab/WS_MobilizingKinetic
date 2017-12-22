@@ -31,6 +31,11 @@ function SketchGaiteVideo()
 
         R = EasyContext._renderer;
 
+        this.light = new Mobilizing.Light();
+        this.light.setDistance(5000);
+        this.light.setIntenity(2);
+        this.sketch.root.transform.addChild(this.light.root);
+        
         var loader = new Mobilizing.Loader();
         loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
         loader.consumeAll();
