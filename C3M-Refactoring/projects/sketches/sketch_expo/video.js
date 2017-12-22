@@ -60,16 +60,18 @@ function SketchExpoVideo()
             console.log("add image cube");
             var img = images[i].getValue();
             
-            var cube = new Mobilizing.Mesh({ primitive: "cube", material : "basic"});
+            var cube = new Mobilizing.Mesh({ primitive: "plane"});//, material : "basic"});
             //cube.material.setColor(Mobilizing.Color.random());
             cube.material.setColor(Mobilizing.Color.white);
-            cube.transform.setLocalScale(100); //set scale
+            cube.transform.setLocalScale(200,100,1); //set scale
             this.sketch.root.transform.addChild(cube.transform);
             cubes[i] = cube;
             //x = Math.random()*1000-500;
             y = Math.random()*400;
             //z = Math.random()*1000-500;
-    
+            //cube.transform.lookAt(0,0,0);
+            cube.transform.setLocalRotation(Math.random()*360, Math.random()*360,Math.random()*360);
+            //cube.transform.lookAt(new Mobilizing.Vector3(0,170,0));
             //we have to invert y and z
             //we could use an animation to smooth out the positions
             cube.transform.setLocalPosition(x, y, z); 
@@ -86,10 +88,10 @@ function SketchExpoVideo()
 
         var light = new Mobilizing.Light();
         light.setIntensity(20000);
-        light.setIntensity(2);
+        light.setIntensity(0.2);
         light.transform.setLocalPositionY(170);
         R.addToCurrentScene(light);
-
+        
         var x =  1000;
         var z =  1000;
         testCube.transform.setLocalPosition(x, 0, z);
@@ -138,6 +140,19 @@ function SketchExpoVideo()
         clients[id].setLineWidth(5);
         clients[id].setRayWidth(5);
 
+
+
+        var light = new Mobilizing.Light({type:"spot"});
+        light.transform.setLocalPosition(0,0,0);
+        light.setTargetPosition(light.transform.getLocalPosition().x, light.transform.getLocalPosition().y, -100);
+        light.setIntensity(10);
+        light.setDistance(1000);
+        light.setPenumbra(.5);
+        light.setAngle(Math.PI/5);
+
+        clients[id].spot = light;
+        clients[id].transform.addChild(light.transform);
+
         console.log("added client", id, this.sketch.root.getBoundingBox() ) ;
 
     };
@@ -162,6 +177,9 @@ function SketchExpoVideo()
             }
 
         }
+
+
+
     };
 
     this.onClientRotation = function(data)
