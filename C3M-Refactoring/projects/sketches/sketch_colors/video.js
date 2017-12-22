@@ -57,7 +57,10 @@ function SketchColorsVideo()
 
         clients[id].sphere = new UserSphere(worldSize.width*2);
         clients[id].transform.addChild(clients[id].sphere.transform);
-
+        
+        clients[id].sphere.setTopColor("black");
+        clients[id].sphere.setBottomColor("black");
+        
         this.sketch.root.transform.addChild(clients[id].transform);
         console.log("added client", id, this.sketch.root.getBoundingBox() ) ;
 
