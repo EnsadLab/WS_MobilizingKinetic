@@ -19,6 +19,12 @@ function SketchGaiteVideo()
 
     this.state = "released"; //model is pressed or released
 
+    this.preload = function(loader){
+
+        loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
+        
+    }
+
     this.setup = function()
     {
         //put here all your sketch scene and logic creation 
@@ -36,9 +42,9 @@ function SketchGaiteVideo()
         this.light.setIntensity(5);
         this.sketch.root.transform.addChild(this.light.transform);
 
-        var loader = new Mobilizing.Loader();
+       /* var loader = new Mobilizing.Loader();
         loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
-        loader.consumeAll();
+        loader.consumeAll();*/
 
         R.setFog("exp");
         R.setFogDensity(.001);
@@ -50,7 +56,7 @@ function SketchGaiteVideo()
     this.gaiteLoaded = function(model){
 
         gaite = new Mobilizing.Mesh({primitive: "node"});
-        
+
         gaiteModelGhost = model;
         var mat = new Mobilizing.Material({type:"phong"});
         gaiteModelGhost.setMaterial(mat);
