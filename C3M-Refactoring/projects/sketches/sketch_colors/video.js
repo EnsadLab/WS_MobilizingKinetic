@@ -69,18 +69,10 @@ function SketchColorsVideo()
         var id = data.id;
         var rot = new Mobilizing.Quaternion().fromArray(data.rot);
 
-
-        // update the client's cube position
-        clients[id].transform.setLocalQuaternion(rot);
-    };
-
-    this.onClientPosition = function(data)
-    {
-        var id = data.id;
-        var pos = new Mobilizing.Vector3().fromArray(data.pos);
-
-        // update the client's cube position
-        //clients[id].transform.setLocalPosition(pos);
+        if(id){
+            // update the client's cube position
+            clients[id].transform.setLocalQuaternion(rot);
+        }
     };
 
     this.onClientUpColor = function(data){
@@ -88,8 +80,10 @@ function SketchColorsVideo()
         var id = data.id;
         var color = data.color;
 
-        var up = clients[id].sphere;
-        up.setTopColor(color);
+        if(id){
+            var up = clients[id].sphere;
+            up.setTopColor(color);
+        }
     }
 
     this.onClientDownColor = function(data){
@@ -97,16 +91,19 @@ function SketchColorsVideo()
         var id = data.id;
         var color = data.color;
 
-        var down = clients[id].sphere;
-        down.setBottomColor(color);
+        if(id){
+            var down = clients[id].sphere;
+            down.setBottomColor(color);
+        }
     }
-    
+
     this.onClientDisconnect = function(data)
     {
         var id = data.id;
-
-        console.log(data);
-        clients[id].transform.setVisible(false);
+        if(id){
+            console.log(data);
+            clients[id].transform.setVisible(false);
+        }
     }
 
 };
