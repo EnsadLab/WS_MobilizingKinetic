@@ -108,6 +108,11 @@ function centralDispatcherServerIndex()
         this.addCommandButton("Ray mobile ON", "/sketch/state", {name:"SketchRayMobile",state:true});
         this.addCommandButton("Ray mobile OFF", "/sketch/state", {name:"SketchRayMobile",state:false});
 
+        this.addCommandButton("Expo video ON", "/sketch/state", {name:"SketchExpoVideo",state:true});
+        this.addCommandButton("Expo video OFF", "/sketch/state", {name:"SketchExpoVideo",state:false});
+        this.addCommandButton("Expo mobile ON", "/sketch/state", {name:"SketchExpoMobile",state:true});
+        this.addCommandButton("Expo mobile OFF", "/sketch/state", {name:"SketchExpoMobile",state:false});
+
     };
 
     this.addCommandButton = function(caption, message, params)
