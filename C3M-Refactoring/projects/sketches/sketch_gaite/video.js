@@ -75,7 +75,7 @@ function SketchGaiteVideo()
 
         this.sketch.root.transform.addChild(gaite.transform);
 
-        console.log("gaiteLoaded loaded", model);
+        console.log(":::gaiteLoaded loaded", model);
     }
 
     this.update = function()

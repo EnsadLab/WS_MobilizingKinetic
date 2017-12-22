@@ -1,4 +1,4 @@
-function SketchRayMobile()
+function SketchOlivainMobile()
 {
     this.sketch = new Sketch(this);
     this.sketch.name = this.constructor.name; 
@@ -72,4 +72,4 @@ function SketchRayMobile()
     };
 };
 
-SketchManager.RegisterSketch(new SketchRayMobile());
+SketchManager.RegisterSketch(new SketchOlivainMobile());
