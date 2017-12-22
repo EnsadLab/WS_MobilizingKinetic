@@ -11,7 +11,7 @@ function client()
         this.videoMapping.preLoad(loader);
         loader.loadOBJ({url:"../3d/petite_salle_d1_50k_t1/petite_salle_d1_50k_t1.obj", onLoad: this.onObjLoaded.bind(this)});
         var sketches = SketchManager.GetSketches();
-        for (var s in sketches)
+        /*for (var s in sketches)
         {
             var sketch = sketches[s];
             if (sketch.sketch.category === "video")
@@ -20,7 +20,7 @@ function client()
                     sketch.preLoad(loader);
             }
 
-        }
+        }*/
     };
 
     this.onObjLoaded = function(model)
