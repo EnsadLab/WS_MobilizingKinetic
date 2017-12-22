@@ -189,8 +189,6 @@ function SketchOlivainVideo()
 
         console.log(data);
         clients[id].setVisible(false);
-
-        this.allTarget[id] = undefined;
     }
 };
 
