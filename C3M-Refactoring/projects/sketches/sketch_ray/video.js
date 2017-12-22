@@ -51,13 +51,12 @@ function SketchRayVideo()
         testCube.transform.setLocalPosition(x, 0, z);
         //this.sketch.root.transform.addChild(testCube.transform);
 
-        var loader = new Mobilizing.Loader();
-        loader.loadImage({url: "../common/eye.jpg", onLoad: this.eyeLoaded.bind(this) });
-        loader.consumeAll();
+        Mobilizing.Loader.loadImage({url: "../common/eye.jpg", onLoad: this.eyeLoaded.bind(this) });
     };
 
     this.eyeLoaded = function(img){
 
+        console.log(img);
         var texture = new Mobilizing.Texture({img: img});
 
         for(var i in this.target){
