@@ -15,7 +15,6 @@ function SketchColorsVideo()
 
         this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
         this.sketch.subscribe('/mobile/rot', this.onClientRotation.bind(this));
-        this.sketch.subscribe('/mobile/pos', this.onClientPosition.bind(this));
         this.sketch.subscribe('/mobile/upColor', this.onClientUpColor.bind(this));
         this.sketch.subscribe('/mobile/downColor', this.onClientDownColor.bind(this));
 
