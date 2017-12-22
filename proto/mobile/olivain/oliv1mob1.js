@@ -14,7 +14,7 @@ function script() {
     var pubsub;
     var sendTimer;
 
-         this.preLoad = function(loader) {
+    this.preLoad = function(loader) {
 
         loader.loadOBJ({url:"../../models/salleBox.obj", onLoad:this.loadedRoom.bind(this)});
 
@@ -30,13 +30,13 @@ function script() {
         room.transform.setLocalPositionY(-1.7); // ???
         var mat = new Mobilizing.Material({type: "basic"});
         mat.setColor(Mobilizing.Color.red);
-       // mat.setWireframe(true);
+        // mat.setWireframe(true);
         room.setMaterial(mat);
     }
 
 
     this.setup = function() {
-       //console.log("setup");
+        //console.log("setup");
         M = this.getContext();
 
         R = new Mobilizing.Renderer3D();
@@ -57,7 +57,7 @@ function script() {
         light = new Mobilizing.Light();
         light.transform.setLocalPosition(-2, 5, 2);
         R.addToCurrentScene(light);
-        
+
         var light2 = new Mobilizing.Light();
         light2.transform.setLocalPosition(0, 5, 0);
         light2.transform.setLocalRotation(-45,0,0);
@@ -65,7 +65,7 @@ function script() {
 
 
 
-//// INPUTS
+        //// INPUTS
 
         touch = new Mobilizing.input.Touch({"target": R.canvas});
         M.addComponent(touch);
@@ -90,7 +90,7 @@ function script() {
         orientation.on();
 
 
-// NETWORK
+        // NETWORK
 
         // initialize a pubsub instance
         pubsub = new Mobilizing.net.PubSub();
@@ -102,9 +102,9 @@ function script() {
         sendTimer.setup();
         sendTimer.on();
         sendTimer.start();
-       
 
- // Canvas for text rendering
+
+        // Canvas for text rendering
         txt_canvas = document.createElement('canvas');
         txt_canvas.width = 512;
         txt_canvas.height = 512;
@@ -122,8 +122,8 @@ function script() {
         context.fillText("SHOOT 'EM ALL !!", 0, 150);
 
         room.material.setTexture(texture);
-        
-  };
+
+    };
 
     this.update = function() {
         sendTimer.update();
@@ -132,7 +132,7 @@ function script() {
             var factor = 1000;
             this.deltaVector.x = pointer.getDeltaX()/factor;
             this.deltaVector.z = pointer.getDeltaY()/factor;
-            
+
             this.sendPosition(this.deltaVector);
         }
 
@@ -149,7 +149,7 @@ function script() {
             this.sendRotation( deviceQuat );  
 
         }
-       
+
     }
 
     this.onConnect = function() {

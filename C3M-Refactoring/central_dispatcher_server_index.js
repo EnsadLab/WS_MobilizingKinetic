@@ -112,6 +112,11 @@ function centralDispatcherServerIndex()
         this.addCommandButton("Expo video OFF", "/sketch/state", {name:"SketchExpoVideo",state:false});
         this.addCommandButton("Expo mobile ON", "/sketch/state", {name:"SketchExpoMobile",state:true});
         this.addCommandButton("Expo mobile OFF", "/sketch/state", {name:"SketchExpoMobile",state:false});
+        
+        this.addCommandButton("Olivain video ON", "/sketch/state", {name:"SketchOlivainVideo",state:true});
+        this.addCommandButton("Olivain video OFF", "/sketch/state", {name:"SketchOlivainVideo",state:false});
+        this.addCommandButton("Olivain mobile ON", "/sketch/state", {name:"SketchOlivainMobile",state:true});
+        this.addCommandButton("Olivain mobile OFF", "/sketch/state", {name:"SketchOlivainMobile",state:false});
 
     };
 
