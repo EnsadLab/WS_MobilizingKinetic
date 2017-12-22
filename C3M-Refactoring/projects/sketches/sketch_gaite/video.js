@@ -28,6 +28,8 @@ function SketchGaiteVideo()
 
     this.setup = function()
     {
+        this.sketch.root.transform.addChild(gaite.transform);
+        
         //put here all your sketch scene and logic creation 
         console.log(this.sketch.name + " setup");
 
@@ -80,13 +82,14 @@ function SketchGaiteVideo()
         gaite.transform.setLocalRotationY(-90);
         gaite.transform.setLocalPositionZ(-100);*/
 
-        this.sketch.root.transform.addChild(gaite.transform);
-
         console.log(":::gaiteLoaded loaded", model);
     }
 
     this.update = function()
     {
+        
+        
+        
         //put your process in there
         if(this.state === "released" && gaite){
             //back to 0 
