@@ -10,6 +10,8 @@ function SketchColorsMobile()
     var orientation;
 
     var ColorPicker;
+    
+    this.id = this.sketch.pubsub.getID();
 
     this.setup = function()
     {
@@ -29,6 +31,8 @@ function SketchColorsMobile()
         M.addComponent(orientation);
         orientation.setup();
         orientation.on();
+        
+        this.id = 
 
         this.upPicker = new CanvasColorPicker(window.innerWidth - 20,window.innerHeight/2);
         this.upPicker.setup();
@@ -145,7 +149,7 @@ function SketchColorsMobile()
     this.sendRotation = function(val)
     {
         this.sketch.pubsub.publish('/mobile/rot', {
-            id: this.sketch.pubsub.getID(),
+            id: this.id,
             rot: val.toArray()
         });
     };
@@ -155,7 +159,7 @@ function SketchColorsMobile()
         if(this.upColor){
 
             this.sketch.pubsub.publish('/mobile/upColor', {
-                id: this.sketch.pubsub.getID(),
+                id: this.id,
                 color: this.upColor
             });
         }
@@ -166,7 +170,7 @@ function SketchColorsMobile()
         if(this.downColor){
 
             this.sketch.pubsub.publish('/mobile/downColor', {
-                id: this.sketch.pubsub.getID(),
+                id: this.id,
                 color: this.downColor
             });
         }

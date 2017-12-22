@@ -61,7 +61,7 @@ function SketchGaiteVideo()
 
         gaiteModel = new Mobilizing.EdgesMesh({mesh: gaiteModelGhost});
 
-        //gaite.transform.addChild(gaiteModelGhost.transform);
+        gaite.transform.addChild(gaiteModelGhost.transform);
         gaite.transform.addChild(gaiteModel.transform);
         
         /*gaite.transform.setLocalScale(100);
