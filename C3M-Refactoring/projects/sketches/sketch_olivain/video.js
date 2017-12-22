@@ -45,9 +45,9 @@ function SketchOlivainVideo()
         context.fillText("SHOOT 'EM ALL !!", 0, 150);
     };
 
-    this.loadedRoom = function(img){
+    this.loadedRoom = function(model){
 
-        room = m;
+        room = model;
         room.transform.setLocalScale(100)
         room.transform.setLocalPositionY(-170); // ???
         var mat = new Mobilizing.Material({type: "basic"});
