@@ -15,7 +15,6 @@ function SketchColorsVideo()
 
         this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
         this.sketch.subscribe('/mobile/rot', this.onClientRotation.bind(this));
-        this.sketch.subscribe('/mobile/pos', this.onClientPosition.bind(this));
         this.sketch.subscribe('/mobile/upColor', this.onClientUpColor.bind(this));
         this.sketch.subscribe('/mobile/downColor', this.onClientDownColor.bind(this));
 
@@ -69,18 +68,10 @@ function SketchColorsVideo()
         var id = data.id;
         var rot = new Mobilizing.Quaternion().fromArray(data.rot);
 
-
-        // update the client's cube position
-        clients[id].transform.setLocalQuaternion(rot);
-    };
-
-    this.onClientPosition = function(data)
-    {
-        var id = data.id;
-        var pos = new Mobilizing.Vector3().fromArray(data.pos);
-
-        // update the client's cube position
-        //clients[id].transform.setLocalPosition(pos);
+        if(clients[id]){
+            // update the client's cube position
+            clients[id].transform.setLocalQuaternion(rot);
+        }
     };
 
     this.onClientUpColor = function(data){
@@ -88,8 +79,10 @@ function SketchColorsVideo()
         var id = data.id;
         var color = data.color;
 
-        var up = clients[id].sphere;
-        up.setTopColor(color);
+        if(clients[id]){
+            var up = clients[id].sphere;
+            up.setTopColor(color);
+        }
     }
 
     this.onClientDownColor = function(data){
@@ -97,16 +90,19 @@ function SketchColorsVideo()
         var id = data.id;
         var color = data.color;
 
-        var down = clients[id].sphere;
-        down.setBottomColor(color);
+        if(clients[id]){
+            var down = clients[id].sphere;
+            down.setBottomColor(color);
+        }
     }
-    
+
     this.onClientDisconnect = function(data)
     {
         var id = data.id;
-
-        console.log(data);
-        clients[id].transform.setVisible(false);
+        if(clients[id]){
+            console.log(data);
+            clients[id].transform.setVisible(false);
+        }
     }
 
 };
