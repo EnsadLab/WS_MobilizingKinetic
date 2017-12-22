@@ -34,7 +34,7 @@ function SketchGaiteVideo()
         this.light = new Mobilizing.Light();
         this.light.setDistance(5000);
         this.light.setIntensity(5);
-        this.sketch.root.transform.addChild(this.light.root);
+        this.sketch.root.transform.addChild(this.light.transform);
         
         var loader = new Mobilizing.Loader();
         loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
