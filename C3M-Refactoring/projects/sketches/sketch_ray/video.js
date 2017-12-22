@@ -52,7 +52,7 @@ function SketchRayVideo()
         //this.sketch.root.transform.addChild(testCube.transform);
 
         var loader = new Mobilizing.Loader();
-        loader.loadOBJ({url: "../common/eye.jpg", onLoad: this.eyeLoaded.bind(this) });
+        loader.loadImage({url: "../common/eye.jpg", onLoad: this.eyeLoaded.bind(this) });
         loader.consumeAll();
     };
 
