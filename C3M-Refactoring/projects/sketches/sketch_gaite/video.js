@@ -44,7 +44,7 @@ function SketchGaiteVideo()
 
         console.log("::::start gaiteLoaded");
         var loader = new Mobilizing.Loader();
-        OBJ.loadOBJ(loader, {url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
+        Mobilizing.OBJ.loadOBJ(loader, {url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
         //loader.consumeAll();
         console.log("::::end gaiteLoaded",loader);
     };
