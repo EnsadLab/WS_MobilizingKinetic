@@ -93,10 +93,10 @@ function centralDispatcherServerIndex()
         this.addCommandButton("Empty mobile ON", "/sketch/state", {name:"SketchEmptyMobile",state:true});
         this.addCommandButton("Empty mobile OFF", "/sketch/state", {name:"SketchEmptyMobile",state:false});
 
-        this.addCommandButton("Lines video ON", "/sketch/state", {name:"SketchLinesVideo",state:true});
-        this.addCommandButton("Lines video OFF", "/sketch/state", {name:"SketchLinesVideo",state:false});
-        this.addCommandButton("Lines mobile ON", "/sketch/state", {name:"SketchLinesMobile",state:true});
-        this.addCommandButton("Lines mobile OFF", "/sketch/state", {name:"SketchLinesMobile",state:false});
+        this.addCommandButton("Colors video ON", "/sketch/state", {name:"SketchColorsVideo",state:true});
+        this.addCommandButton("Colors video OFF", "/sketch/state", {name:"SketchColorsVideo",state:false});
+        this.addCommandButton("Colors mobile ON", "/sketch/state", {name:"SketchColorsMobile",state:true});
+        this.addCommandButton("Colors mobile OFF", "/sketch/state", {name:"SketchColorsMobile",state:false});
         
         this.addCommandButton("Gaité video ON", "/sketch/state", {name:"SketchGaiteVideo",state:true});
         this.addCommandButton("Gaité video OFF", "/sketch/state", {name:"SketchGaiteVideo",state:false});

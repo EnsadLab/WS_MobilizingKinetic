@@ -23,8 +23,6 @@ function script()
     var canvasContext;
     var roomTexture;
 
-    var pointsOfIntersection = [];
-
     var gaiteModel;
     var room; 
     var roomTexture;
