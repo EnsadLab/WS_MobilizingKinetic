@@ -48,7 +48,7 @@ function SketchOlivainVideo()
     this.loadedRoom = function(model){
 
         room = model;
-        room.transform.setLocalScale(100)
+        room.transform.setLocalScale(100);
         //room.transform.setLocalPositionY(-170); // ???
         var mat = new Mobilizing.Material({type: "basic"});
         mat.setColor(Mobilizing.Color.red.clone());
@@ -56,6 +56,8 @@ function SketchOlivainVideo()
         room.setMaterial(mat);
 
         room.material.setTexture(texture);
+        
+        console.log(room);
     }
 
     this.update = function()
@@ -78,7 +80,8 @@ function SketchOlivainVideo()
         clients[id].setRayWidth(5);
 
         clients[id].box = new Mobilizing.Mesh({primitive:"box", width:1, height: 2, depth: 0.75 });
-
+        clients[id].box.transform.setLocalScale(100);
+        
         clients[id].box.transform.setLocalPosition(0,0,0);
         clients[id].transform.addChild(clients[id].box.transform);
 
