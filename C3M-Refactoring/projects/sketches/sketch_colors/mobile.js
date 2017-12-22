@@ -10,15 +10,15 @@ function SketchColorsMobile()
     var orientation;
 
     var ColorPicker;
-    
-    this.id = this.sketch.pubsub.getID();
+
+    this.id;
 
     this.setup = function()
     {
         console.log("SketchLinesVideo");
 
         M = this.getContext();
-        R =  EasyContext.GetRenderer();
+        R = EasyContext.GetRenderer();
 
         sendTimer = new Mobilizing.Timer({interval: 100,
                                           callback: this.updateNetwork.bind(this)});
@@ -31,10 +31,10 @@ function SketchColorsMobile()
         M.addComponent(orientation);
         orientation.setup();
         orientation.on();
-        
+
         this.id = 
 
-        this.upPicker = new CanvasColorPicker(window.innerWidth - 20,window.innerHeight/2);
+            this.upPicker = new CanvasColorPicker(window.innerWidth - 20,window.innerHeight/2);
         this.upPicker.setup();
 
         var pickedColorWidth = 200;
@@ -93,6 +93,7 @@ function SketchColorsMobile()
                                                        pickerPos.z);
         this.sketch.root.transform.addChild(this.downColorPlane.transform);
 
+        this.id = this.sketch.pubsub.getID();
 
     };
 
