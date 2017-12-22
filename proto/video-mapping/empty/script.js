@@ -37,7 +37,6 @@ function script()
     }
 
     this.loadedRoom = function(m){
-
         room = m;
         room.transform.setLocalPositionY(-1.7);
         var mat = new Mobilizing.Material({type: "basic"});
@@ -46,8 +45,7 @@ function script()
         room.setMaterial(mat);
     }
 
-    this.setup = function()
-    {
+    this.setup = function() {
         console.log("setup");
 
         M = this.getContext();
@@ -135,7 +133,6 @@ function script()
 
     //Enter key
     this.onKeyup = function(e){
-
         if(e.keyIdentifier === "Enter"){
             this.resetWorlView();
         }

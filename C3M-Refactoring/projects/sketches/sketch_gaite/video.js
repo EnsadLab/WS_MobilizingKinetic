@@ -13,11 +13,17 @@ function SketchGaiteVideo()
     var gaite;
     var gaiteModel;
     var gaiteModelGhost;
-    
+
     var startQuaternion;
     var startPosition;
 
     this.state = "released"; //model is pressed or released
+
+    this.preload = function(loader){
+
+        loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
+        
+    }
 
     this.setup = function()
     {
@@ -31,13 +37,18 @@ function SketchGaiteVideo()
 
         R = EasyContext._renderer;
 
-        var loader = new Mobilizing.Loader();
+        this.light = new Mobilizing.Light();
+        this.light.setDistance(5000);
+        this.light.setIntensity(5);
+        this.sketch.root.transform.addChild(this.light.transform);
+
+       /* var loader = new Mobilizing.Loader();
         loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
-        loader.consumeAll();
+        loader.consumeAll();*/
 
         R.setFog("exp");
         R.setFogDensity(.001);
-        
+
         startQuaternion = new Mobilizing.Quaternion();
         startPosition = new Mobilizing.Vector3();
     };
@@ -63,14 +74,14 @@ function SketchGaiteVideo()
 
         gaite.transform.addChild(gaiteModelGhost.transform);
         gaite.transform.addChild(gaiteModel.transform);
-        
+
         /*gaite.transform.setLocalScale(100);
         gaite.transform.setLocalRotationY(-90);
         gaite.transform.setLocalPositionZ(-100);*/
 
         this.sketch.root.transform.addChild(gaite.transform);
 
-        console.log("model loaded", model);
+        console.log(":::gaiteLoaded loaded", model);
     }
 
     this.update = function()
@@ -80,7 +91,7 @@ function SketchGaiteVideo()
             //back to 0 
             var q = gaite.transform.getLocalQuaternion().slerp(startQuaternion, .01);
             gaite.transform.setLocalQuaternion(q);
-            
+
             var p = gaite.transform.getLocalPosition().lerp(startPosition, .01);
             gaite.transform.setLocalPosition(p);
         }
@@ -96,11 +107,13 @@ function SketchGaiteVideo()
         //params.y
         //params.z
 
+        var factor = 100;
+
         for(var i in clients){
 
             if(clients[i].tagID === Number(params.id)){
 
-                var pos = new Mobilizing.Vector3((params.x*100)*3, params.z*100, (params.y*-100)*3);
+                var pos = new Mobilizing.Vector3((params.x*100)*factor, params.z*100, (params.y*-100)*factor);
                 //clients[i].transform.setLocalPosition(pos);
                 //console.log(clients[i].transform.getLocalPosition());
                 gaite.transform.setLocalPosition(pos);
