@@ -51,7 +51,7 @@ function SketchRayVideo()
         testCube.transform.setLocalPosition(x, 0, z);
         //this.sketch.root.transform.addChild(testCube.transform);
 
-        Mobilizing.Loader.loadImage({url: "../common/eye.jpg", this.eyeLoaded.bind(this) });
+        Mobilizing.Loader.loadImage("../common/eye.jpg", this.eyeLoaded.bind(this));
     };
 
     this.eyeLoaded = function(img){
