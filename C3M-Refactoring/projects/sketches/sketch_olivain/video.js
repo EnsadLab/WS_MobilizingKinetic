@@ -49,10 +49,10 @@ function SketchOlivainVideo()
 
         room = model;
         room.transform.setLocalScale(100)
-        room.transform.setLocalPositionY(-170); // ???
+        //room.transform.setLocalPositionY(-170); // ???
         var mat = new Mobilizing.Material({type: "basic"});
-        mat.setColor(Mobilizing.Color.red);
-        // mat.setWireframe(true);
+        mat.setColor(Mobilizing.Color.red.clone());
+        //mat.setWireframe(true);
         room.setMaterial(mat);
 
         room.material.setTexture(texture);
@@ -60,29 +60,6 @@ function SketchOlivainVideo()
 
     this.update = function()
     {
-        this.targetToLit = [];
-
-        for(var id in this.allTarget){
-
-            var list = this.allTarget[id];
-
-            for(var i in list){
-
-                if(this.targetToLit[i] === undefined){
-                    this.targetToLit[i] = list[i];
-                }
-            }
-        }
-
-        for(var i in this.targetToLit){
-
-            if(this.targetToLit[i]){
-                this.target[i].material.setOpacity(1);
-            }else{
-                this.target[i].material.setOpacity(.2);
-            }
-        }
-        //console.log(this.targetToLit);
     };
 
     this.onConnect = function(id)
@@ -161,10 +138,10 @@ function SketchOlivainVideo()
 
         clients[id].box.transform.setLocalRotation(data.rot);
 
-        for(var v in clients) {
+        /*for(var v in clients) {
             if(v != id) { // check everyone beeing touched except ourself
                 var intersection = clients[id].ray.intersectsMeshBox(clients[v].box);
-                
+
                 if(intersection) {
                     console.log(id+" touch "+v);
 
@@ -183,7 +160,7 @@ function SketchOlivainVideo()
 
                 }
             }
-        }
+        }*/
     };
 
     this.onClientPosition = function(data)
