@@ -43,12 +43,13 @@ function SketchOlivainVideo()
         //create a Mobilizing texture out of it
         texture = new Mobilizing.Texture({canvas:txt_canvas});
         context.fillText("SHOOT 'EM ALL !!", 0, 150);
+        texture.setNeedsUpdate();
     };
 
     this.loadedRoom = function(model){
 
         room = model;
-        room.transform.setLocalScale(100);
+        room.transform.setLocalScale(10);
         //room.transform.setLocalPositionY(-170); // ???
         var mat = new Mobilizing.Material({type: "basic"});
         mat.setColor(Mobilizing.Color.red.clone());
@@ -56,8 +57,11 @@ function SketchOlivainVideo()
         room.setMaterial(mat);
 
         room.material.setTexture(texture);
-        
-        console.log(room);
+
+        var x =  1000;
+        var z =  1000;
+        room.transform.setLocalPosition(x,0,z);
+        console.log(room.getBoundingBox().getSize());
     }
 
     this.update = function()
@@ -82,7 +86,7 @@ function SketchOlivainVideo()
 
         clients[id].box = new Mobilizing.Mesh({primitive:"box", width:1, height: 2, depth: 0.75 });
         clients[id].box.transform.setLocalScale(100);
-        
+
         clients[id].box.transform.setLocalPosition(0,0,0);
         clients[id].transform.addChild(clients[id].box.transform);
 
