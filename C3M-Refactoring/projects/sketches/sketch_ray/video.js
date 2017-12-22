@@ -42,7 +42,7 @@ function SketchRayVideo()
 
         var light = new Mobilizing.Light();
         light.setIntensity(20000);
-        light.setIntensity(2);
+        light.setIntensity(5);
         light.transform.setLocalPositionY(170);
         R.addToCurrentScene(light);
 
@@ -50,7 +50,21 @@ function SketchRayVideo()
         var z =  1000;
         testCube.transform.setLocalPosition(x, 0, z);
         //this.sketch.root.transform.addChild(testCube.transform);
+
+        var loader = new Mobilizing.Loader();
+        loader.loadOBJ({url: "../common/eye.jpg", onLoad: this.eyeLoaded.bind(this) });
+        loader.consumeAll();
     };
+
+    this.eyeLoaded = function(img){
+
+        var texture = new Mobilizing.Texture({img: img});
+
+        for(var i in this.target){
+            this.target[i].material.setTexture(texture);
+        }
+
+    }
 
     this.update = function()
     {
