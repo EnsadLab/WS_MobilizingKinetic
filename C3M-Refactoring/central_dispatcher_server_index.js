@@ -112,6 +112,8 @@ function centralDispatcherServerIndex()
         this.addCommandButton("Expo video OFF", "/sketch/state", {name:"SketchExpoVideo",state:false});
         this.addCommandButton("Expo mobile ON", "/sketch/state", {name:"SketchExpoMobile",state:true});
         this.addCommandButton("Expo mobile OFF", "/sketch/state", {name:"SketchExpoMobile",state:false});
+        this.addCommandButton("light ON", "/light/on", {});
+        this.addCommandButton("light OFF", "/light/off", {});
 
     };
 
