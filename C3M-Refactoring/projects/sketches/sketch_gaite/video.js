@@ -33,7 +33,7 @@ function SketchGaiteVideo()
 
         this.light = new Mobilizing.Light();
         this.light.setDistance(5000);
-        this.light.setIntenity(2);
+        this.light.setIntensity(5);
         this.sketch.root.transform.addChild(this.light.root);
         
         var loader = new Mobilizing.Loader();
