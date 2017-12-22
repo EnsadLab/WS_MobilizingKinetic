@@ -62,6 +62,7 @@ function SketchOlivainVideo()
 
     this.update = function()
     {
+        texture.setNeedsUpdate();
     };
 
     this.onConnect = function(id)
