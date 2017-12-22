@@ -19,7 +19,7 @@ function SketchGaiteVideo()
 
     this.state = "released"; //model is pressed or released
 
-    this.preload = function(loader){
+    this.preLoad = function(loader){
 
         console.log("SketchGaiteVideo");
         loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
