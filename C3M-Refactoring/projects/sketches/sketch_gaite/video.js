@@ -21,6 +21,7 @@ function SketchGaiteVideo()
 
     this.preload = function(loader){
 
+        console.log("SketchGaiteVideo");
         loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
         
     }
