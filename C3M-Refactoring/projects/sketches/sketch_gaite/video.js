@@ -95,12 +95,14 @@ function SketchGaiteVideo()
         //params.x
         //params.y
         //params.z
+        
+        var factor = 100;
 
         for(var i in clients){
 
             if(clients[i].tagID === Number(params.id)){
 
-                var pos = new Mobilizing.Vector3((params.x*100)*3, params.z*100, (params.y*-100)*3);
+                var pos = new Mobilizing.Vector3((params.x*100)*factor, params.z*100, (params.y*-100)*factor);
                 //clients[i].transform.setLocalPosition(pos);
                 //console.log(clients[i].transform.getLocalPosition());
                 gaite.transform.setLocalPosition(pos);
