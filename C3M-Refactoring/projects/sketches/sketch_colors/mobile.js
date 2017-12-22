@@ -150,7 +150,7 @@ function SketchColorsMobile()
     this.sendRotation = function(val)
     {
         this.sketch.pubsub.publish('/mobile/rot', {
-            id: this.id,
+            id: this.sketch.pubsub.getID(),
             rot: val.toArray()
         });
     };
@@ -160,7 +160,7 @@ function SketchColorsMobile()
         if(this.upColor){
 
             this.sketch.pubsub.publish('/mobile/upColor', {
-                id: this.id,
+                id: this.sketch.pubsub.getID(),
                 color: this.upColor
             });
         }
@@ -171,7 +171,7 @@ function SketchColorsMobile()
         if(this.downColor){
 
             this.sketch.pubsub.publish('/mobile/downColor', {
-                id: this.id,
+                id: this.sketch.pubsub.getID(),
                 color: this.downColor
             });
         }
