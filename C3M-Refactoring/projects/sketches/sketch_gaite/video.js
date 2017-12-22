@@ -44,7 +44,7 @@ function SketchGaiteVideo()
 
     this.gaiteLoaded = function(model){
 
-        gaite = new Mobilizing.Mesh({primitive: "ndoe"});
+        gaite = new Mobilizing.Mesh({primitive: "node"});
 
         gaiteModelGhost = model;
         var mat = new Mobilizing.Material({type:"phong"});
@@ -100,7 +100,7 @@ function SketchGaiteVideo()
 
             if(clients[i].tagID === Number(params.id)){
 
-                var pos = new Mobilizing.Vector3(params.x*100, params.z*100, (params.y*-100));
+                var pos = new Mobilizing.Vector3((params.x*100)*3, params.z*100, (params.y*-100)*3);
                 //clients[i].transform.setLocalPosition(pos);
                 //console.log(clients[i].transform.getLocalPosition());
                 gaite.transform.setLocalPosition(pos);
