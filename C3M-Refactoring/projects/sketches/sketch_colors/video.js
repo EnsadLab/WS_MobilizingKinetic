@@ -68,7 +68,7 @@ function SketchColorsVideo()
         var id = data.id;
         var rot = new Mobilizing.Quaternion().fromArray(data.rot);
 
-        if(id){
+        if(clients[id]){
             // update the client's cube position
             clients[id].transform.setLocalQuaternion(rot);
         }
@@ -79,7 +79,7 @@ function SketchColorsVideo()
         var id = data.id;
         var color = data.color;
 
-        if(id){
+        if(clients[id]){
             var up = clients[id].sphere;
             up.setTopColor(color);
         }
@@ -90,7 +90,7 @@ function SketchColorsVideo()
         var id = data.id;
         var color = data.color;
 
-        if(id){
+        if(clients[id]){
             var down = clients[id].sphere;
             down.setBottomColor(color);
         }
@@ -99,7 +99,7 @@ function SketchColorsVideo()
     this.onClientDisconnect = function(data)
     {
         var id = data.id;
-        if(id){
+        if(clients[id]){
             console.log(data);
             clients[id].transform.setVisible(false);
         }
