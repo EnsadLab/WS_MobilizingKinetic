@@ -88,7 +88,7 @@ function SketchColorsVideo()
 
         if(!(id in clients)){
             if(id){
-                this.onClientConnect(id);
+                this.onConnect(id);
             }else{
                 return;
             }
@@ -105,7 +105,7 @@ function SketchColorsVideo()
 
         if(!(id in clients)){
             if(id){
-                this.onClientConnect(id);
+                this.onConnect(id);
             }else{
                 return;
             }
