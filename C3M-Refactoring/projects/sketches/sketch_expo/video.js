@@ -33,7 +33,10 @@ function SketchExpoVideo()
         this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
         this.sketch.subscribe('/mobile/rot', this.onClientRotation.bind(this));
         this.sketch.subscribe('/disconnect', this.onClientDisconnect.bind(this));
-
+        this.sketch.subscribe("/light/on",this.onLightOn.bind(this));
+        this.sketch.subscribe("/light/off",this.onLightOff.bind(this));
+        this.sketch.subscribe("/picture/control",this.onPictureControl.bind(this));
+        
         var R = EasyContext._renderer;
 
         /*var step = 360 / 100;
@@ -59,18 +62,21 @@ function SketchExpoVideo()
         {
             console.log("add image cube");
             var img = images[i].getValue();
-            
+            console.log("img = ", img);
             var cube = new Mobilizing.Mesh({ primitive: "plane"});//, material : "basic"});
             //cube.material.setColor(Mobilizing.Color.random());
             cube.material.setColor(Mobilizing.Color.white);
-            cube.transform.setLocalScale(200,100,1); //set scale
+            cube.transform.setLocalScale(100,50,1); //set scale
             this.sketch.root.transform.addChild(cube.transform);
             cubes[i] = cube;
+            //cube.imageindex = i+1;
             //x = Math.random()*1000-500;
-            y = Math.random()*400;
+            y = Math.random()*200;
             //z = Math.random()*1000-500;
             //cube.transform.lookAt(0,0,0);
-            cube.transform.setLocalRotation(Math.random()*360, Math.random()*360,Math.random()*360);
+            //cube.transform.setLocalRotation(Math.random()*360, Math.random()*360,Math.random()*360);
+            cube.transform.setLocalRotation(0, 90,0);
+
             //cube.transform.lookAt(new Mobilizing.Vector3(0,170,0));
             //we have to invert y and z
             //we could use an animation to smooth out the positions
@@ -79,19 +85,24 @@ function SketchExpoVideo()
             cube.material.setTexture(new Mobilizing.Texture({ image: img }));
             cube.updateMaterial();
 
-            z += 100;
+            cube.transform.setVisible(false);
+
+            z += 120;
 
         }
 
         var testCube = new Mobilizing.Mesh({primitive: "cube",
                                             size : 100});
 
-        var light = new Mobilizing.Light();
+        /*var light = new Mobilizing.Light();
         light.setIntensity(20000);
         light.setIntensity(0.2);
         light.transform.setLocalPositionY(170);
         R.addToCurrentScene(light);
-        
+        */
+
+        //EasyContext._light.setIntensity(0);
+        //EasyContext._light2.setIntensity(0.1);
         var x =  1000;
         var z =  1000;
         testCube.transform.setLocalPosition(x, 0, z);
@@ -140,7 +151,7 @@ function SketchExpoVideo()
         clients[id].setLineWidth(5);
         clients[id].setRayWidth(5);
 
-
+        
 
         var light = new Mobilizing.Light({type:"spot"});
         light.transform.setLocalPosition(0,0,0);
@@ -156,7 +167,32 @@ function SketchExpoVideo()
         console.log("added client", id, this.sketch.root.getBoundingBox() ) ;
 
     };
+    this.onLightOn = function(params)
+    {
+        //EasyContext._light2.transform.setVisible(false);
+        EasyContext._light2.setIntensity(1.0);
+    };
 
+    this.onLightOff = function(params)
+    {
+        EasyContext._light2.setIntensity(0);
+    };
+
+    this.onPictureControl = function(params)
+    {
+        //params.index;
+        //params.visible
+        //console.log("cubes=", cubes);
+        var cube = cubes[params.picture];
+        cube.transform.setVisible(true);
+        var pos = cube.transform.getLocalPosition();
+        pos.x += params.movex;
+        pos.y += params.movey;
+        pos.z += params.movez;
+        cube.transform.getLocalPosition(pos);
+    };
+
+    
     //add your callbacks below
     this.onTagPosition = function(params)
     {

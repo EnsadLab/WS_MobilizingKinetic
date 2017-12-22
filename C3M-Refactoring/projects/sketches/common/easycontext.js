@@ -19,10 +19,10 @@ EasyContext.CreateScene = function()
     EasyContext._camera.transform.setLocalPosition(0,0,0);
     EasyContext._renderer.addCamera(EasyContext._camera);
     //light
-    light = new Mobilizing.Light();
-    light.transform.setLocalPosition(0,0,40);
-    EasyContext._renderer.addToCurrentScene(light);
-    light.setDistance(200);
+    EasyContext._light = new Mobilizing.Light();
+    EasyContext._light.transform.setLocalPosition(0,0,40);
+    EasyContext._renderer.addToCurrentScene(EasyContext._light);
+    EasyContext._light.setDistance(200);
     //time component
     EasyContext._time = new Mobilizing.Time();
     EasyContext._context.addComponent(EasyContext._time);

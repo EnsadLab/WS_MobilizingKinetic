@@ -20,6 +20,21 @@ function client()
 
     var tagID;
 
+    this.preLoad = function(loader)
+    {
+        var sketches = SketchManager.GetSketches();
+        for (var s in sketches)
+        {
+            var sketch = sketches[s];
+            if (sketch.sketch.category === "mobile")
+            {
+                if (sketch.preLoad)
+                    sketch.preLoad(loader);
+            }
+
+        }
+    };
+
     this.setup = function()
     {
         M = this.getContext();
@@ -59,7 +74,7 @@ function client()
         this.selectGrid = new Mobilizing.ButtonGroup({buttons: buttons, columns: 8, mode:"honeycomb"});
 
         this.selectGrid.root.transform.setLocalScale(60);
-        this.selectGrid.root.transform.setLocalPosition(100, -500, 0);
+        this.selectGrid.root.transform.setLocalPosition(300, -100, 0);
         R.addToCurrentScene(this.selectGrid.root);        
 
         var bt = new Mobilizing.Button({camera: this.camera,

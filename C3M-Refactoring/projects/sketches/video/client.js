@@ -69,7 +69,7 @@ function client()
         light.setDistance(20000);
         light.setIntensity(2);
         EasyContext._renderer.addToCurrentScene(light);
-
+        EasyContext._light2 = light;
         //add all video sketches that are of category "video"
         var sketches = SketchManager.GetSketches();
         for (var s in sketches)
