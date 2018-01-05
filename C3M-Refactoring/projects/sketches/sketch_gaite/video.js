@@ -19,11 +19,18 @@ function SketchGaiteVideo()
 
     this.state = "released"; //model is pressed or released
 
+    this.preLoad = function(loader){
+    
+        console.log("::::start gaiteLoaded", loader);
+        loader.loadOBJ({url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this), onError: function(err){console.log(err)} });
+        console.log("::::end gaiteLoaded",loader);
+    }
+    
     this.setup = function()
     {
         //put here all your sketch scene and logic creation 
         console.log(this.sketch.name + " setup");
-
+        
         this.sketch.subscribe("/tag/position",this.onTagPosition.bind(this));
         this.sketch.subscribe('/mobile/rot', this.onClientRotation.bind(this));
         this.sketch.subscribe('/mobile/pressed', this.onClientPressed.bind(this));
@@ -42,11 +49,8 @@ function SketchGaiteVideo()
         startQuaternion = new Mobilizing.Quaternion();
         startPosition = new Mobilizing.Vector3();
 
-        console.log("::::start gaiteLoaded");
-        var loader = new Mobilizing.Loader();
-        Mobilizing.OBJ.loadOBJ(loader, {url: "../3d/gaite.obj", onLoad: this.gaiteLoaded.bind(this) });
-        //loader.consumeAll();
-        console.log("::::end gaiteLoaded",loader);
+        this.sketch.root.transform.addChild(gaite.transform);
+        
     };
 
     this.gaiteLoaded = function(model){
@@ -76,9 +80,6 @@ function SketchGaiteVideo()
         /*gaite.transform.setLocalScale(100);
         gaite.transform.setLocalRotationY(-90);
         gaite.transform.setLocalPositionZ(-100);*/
-
-        this.sketch.root.transform.addChild(gaite.transform);
-
     }
 
     this.update = function()
